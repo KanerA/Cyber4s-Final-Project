@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.stands, {
+        foreignKey: "restaurant_name",
+        targetKey: "name",
+      });
     }
   }
   orders.init(
@@ -17,11 +21,14 @@ module.exports = (sequelize, DataTypes) => {
       dish: DataTypes.STRING,
       drink: DataTypes.STRING,
       restaurant_name: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
     {
       sequelize,
-      modelName: "orders",
-      underscored: true,
+      modelName: "Orders",
+      tableName: "orders",
+      // underscored: true,
     },
   );
   return orders;

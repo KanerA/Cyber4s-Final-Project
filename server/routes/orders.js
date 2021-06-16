@@ -1,8 +1,35 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const orders = Router();
+const models = require("../models");
 
-orders.get('/', (req, res) => {
-    res.json({});
+orders.get("/:restaurantName", async (req, res) => {
+  const { restaurantName } = req.params;
+  const ordersTable = await models.Orders.findAll({
+    where: { restaurant_name: restaurantName },
+  });
+  console.log("here");
+  const toSend = ordersTable.map((order) => {
+    return {
+      customerName: order.customer,
+      dish: order.dish,
+      drink: order.drink,
+      restaurantName: order.restaurant_name,
+      orderAt: new Date(order.createdAt).toLocaleString(),
+    };
+  });
+  res.send(toSend);
+});
+
+orders.post("/", async (req, res) => {
+  const { body } = req;
+  const orderToSave = {
+    customer: body.customer,
+    dish: body.dish,
+    drink: body.drink,
+    restaurant_name: body.restaurantName,
+  };
+  models.Orders.create(orderToSave);
+  res.send("posted");
 });
 
 module.exports = orders;
