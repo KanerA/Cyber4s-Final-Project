@@ -7,8 +7,7 @@ orders.get("/:restaurantName", async (req, res) => {
   const ordersTable = await models.Orders.findAll({
     where: { restaurant_name: restaurantName },
   });
-  console.log("here");
-  const toSend = ordersTable.map((order) => {
+  const restaurantOrders = ordersTable.map((order) => {
     return {
       customerName: order.customer,
       dish: order.dish,
@@ -17,7 +16,7 @@ orders.get("/:restaurantName", async (req, res) => {
       orderAt: new Date(order.createdAt).toLocaleString(),
     };
   });
-  res.send(toSend);
+  res.send(restaurantOrders);
 });
 
 orders.post("/", async (req, res) => {
