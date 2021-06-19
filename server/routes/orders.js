@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const orders = Router();
 const models = require("../models");
+const { getOrderHistory } = require('../utils/orders-utils');
 
 orders.get("/:restaurantName", async (req, res) => {
   const { restaurantName } = req.params;
@@ -30,5 +31,7 @@ orders.post("/", async (req, res) => {
   models.Orders.create(orderToSave);
   res.send("posted");
 });
+
+orders.get('/', getOrderHistory);
 
 module.exports = orders;
