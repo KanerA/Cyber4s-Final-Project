@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const orders = Router();
+const routeOrders = Router();
 const models = require("../models");
 const { getOrderHistory } = require('../utils/orders-utils');
 
-orders.get("/:restaurantName", async (req, res) => {
+routeOrders.get("/:restaurantName", async (req, res) => {
   const { restaurantName } = req.params;
   const ordersTable = await models.Orders.findAll({
     where: { restaurant_name: restaurantName },
@@ -20,7 +20,7 @@ orders.get("/:restaurantName", async (req, res) => {
   res.send(restaurantOrders);
 });
 
-orders.post("/", async (req, res) => {
+routeOrders.post("/", async (req, res) => {
   const { body } = req;
   const orderToSave = {
     customer: body.customer,
@@ -32,6 +32,6 @@ orders.post("/", async (req, res) => {
   res.send("posted");
 });
 
-orders.get('/', getOrderHistory);
+routeOrders.get('/', getOrderHistory);
 
-module.exports = orders;
+module.exports = routeOrders;

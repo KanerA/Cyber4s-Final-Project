@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const drinks = Router();
+const routeDrinks = Router();
 
-drinks.get('/', (req, res) => {
+routeDrinks.get('/', (req, res) => {
     res.json({});
 });
 
-module.exports = drinks;
+module.exports = routeDrinks;

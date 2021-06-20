@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const dishes = Router();
+const routeDishes = Router();
 
-dishes.get('/', (req, res) => {
+routeDishes.get('/', (req, res) => {
     res.json({});
 });
 
-module.exports = dishes;
+module.exports = routeDishes;
