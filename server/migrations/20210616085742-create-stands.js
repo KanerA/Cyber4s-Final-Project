@@ -15,11 +15,11 @@ module.exports = {
         type: Sequelize.STRING,
         primaryKey: true,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
