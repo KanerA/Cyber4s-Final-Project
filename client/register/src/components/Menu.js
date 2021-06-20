@@ -13,11 +13,11 @@ function Menu(props) {
 
   useEffect(() => {
     axios
-      .get("/dishes")
+      .get("http://localhost:8080/dishes")
       .then((newDishes) => setDishes(newDishes))
       .catch(() => console.log("no new dishes!"));
     axios
-      .get("/drinks")
+      .get("http://localhost:8080/drinks")
       .then((newDrinks) => setDrinks(newDrinks))
       .catch(() => console.log("no new drinks!"));
   }, []);
@@ -30,19 +30,20 @@ function Menu(props) {
       createdAt: Date.now(),
     });
   };
+  console.log("dish" + dishes, "drink" + drinks);
 
   return (
     <div>
       <h1>my menu</h1>
       <div id="dishes">
-        {dishes.map((dish) => {
+        {dishes?.map((dish) => {
           return <Dish dish={dish} />;
         })}
       </div>
       <div id="drinks">
-        {drinks.map((drink) => {
+        {/* {drinks?.map((drink) => {
           return <Drink drink={drink} />;
-        })}
+        })} */}
       </div>
       <div className="place-order">
         <input onChange={(e) => (customerName.current = e.target.value)} />
