@@ -19,7 +19,9 @@ const OrderSchema = new mongoose.Schema({
   dish: String,
   drink: String,
   restaurantName: String,
+  done: { type: Boolean, default: false },
   createdAt: { type: Date, default: new Date() },
+  _id: Number,
 });
 
 const OrderModel = new mongoose.model("order", OrderSchema);

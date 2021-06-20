@@ -48,21 +48,27 @@ orders.get("/:restaurantName", async (req, res) => {
   });
 });
 
-orders.post("/:restaurantName", (req, res) => {
+orders.post("/:restaurantName", async (req, res) => {
   const { body } = req;
   const newOrder = new OrderModel({
     customerName: body.customerName,
     dish: body.dish,
     drink: body.drink,
     restaurantName: body.restaurantName,
+    _id: body.id,
   });
+
   newOrder.save().then((data, err) => {
     if (!err) {
-      res.send(data.customerName + "s order accepted!");
+      res.send(
+        data.customerName + "s order accepted! order ID: " + counter + 1
+      );
     } else {
       console.log(err);
     }
   });
 });
+
+// orders.patch(:/)
 
 module.exports = orders;

@@ -8,6 +8,7 @@ function Menu(props) {
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, SetDishOrders] = useState([{}]);
   const [drinkOrders, SetDrinkOrders] = useState([{}]);
+  const [counter, setCounter] = useState(1);
 
   const customerName = useRef();
 
@@ -28,7 +29,9 @@ function Menu(props) {
       dishes: dishOrders,
       drinks: drinkOrders,
       createdAt: Date.now(),
+      id: counter,
     });
+    setCounter((prev) => prev + 1);
   };
   // console.log("dish" + dishes, "drink" + drinks);
   console.log(dishes);
