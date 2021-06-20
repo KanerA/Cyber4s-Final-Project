@@ -19,7 +19,7 @@ module.exports = {
       },
       restaurant_name: {
         type: Sequelize.STRING,
-        primaryKey: true,
+        foreignKey: true,
       },
       createdAt: {
         allowNull: false,

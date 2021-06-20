@@ -10,7 +10,7 @@ module.exports = {
       },
       restaurant_name: {
         type: Sequelize.STRING,
-        primaryKey: true,
+        foreignKey: true,
       },
       price: {
         type: Sequelize.INTEGER,
