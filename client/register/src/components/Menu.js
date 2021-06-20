@@ -27,6 +27,7 @@ function Menu(props) {
       customerName: customerName,
       dishes: dishOrders,
       drinks: drinkOrders,
+      createdAt: Date.now(),
     });
   };
 
