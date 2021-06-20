@@ -1,8 +1,12 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const routeDrinks = Router();
+const {
+  getAllRestaurantDrinks,
+  createNewDrink,
+} = require("../utils/drinks-utils");
 
-routeDrinks.get('/', (req, res) => {
-    res.json({});
-});
+routeDrinks.get("/:restaurantName", getAllRestaurantDrinks);
+
+routeDrinks.post("/", createNewDrink);
 
 module.exports = routeDrinks;
