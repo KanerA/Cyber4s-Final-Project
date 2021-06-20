@@ -1,8 +1,11 @@
 const { Router } = require("express");
 const dishes = Router();
-const { Dishes } = require("../models");
-const { getAllDishes } = require("../utils/dishes-utils");
+const {
+  getAllDishes,
+  getAllRestaurantDishes,
+} = require("../utils/dishes-utils");
 
 dishes.get("/", getAllDishes);
+dishes.get("/:restaurantName", getAllRestaurantDishes);
 
 module.exports = dishes;
