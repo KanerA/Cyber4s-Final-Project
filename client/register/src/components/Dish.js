@@ -1,6 +1,6 @@
 import React from "react";
 
-function Dish(dish) {
+function Dish({ dish }) {
   return (
     <div>
       <p className="name">{dish.name}</p>

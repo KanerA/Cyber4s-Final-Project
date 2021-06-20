@@ -13,8 +13,8 @@ function Menu(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/dishes")
-      .then((newDishes) => setDishes(newDishes))
+      .get("/dishes")
+      .then((newDishes) => setDishes(newDishes.data))
       .catch(() => console.log("no new dishes!"));
     axios
       .get("http://localhost:8080/drinks")
@@ -30,7 +30,8 @@ function Menu(props) {
       createdAt: Date.now(),
     });
   };
-  console.log("dish" + dishes, "drink" + drinks);
+  // console.log("dish" + dishes, "drink" + drinks);
+  console.log(dishes);
 
   return (
     <div>

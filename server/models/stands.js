@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "name",
         foreignKey: "restaurant_name",
       });
-      this.hasMany(models.dishes, {
+      this.hasMany(models.Dishes, {
         sourceKey: "name",
         foreignKey: "restaurant_name",
       });
