@@ -15,18 +15,18 @@ function MenuCreator({ restaurant }) {
   const saveItem = async (item) => {
     if (item === "dish") {
       await axios.post("/dishes", {
-        name: itemRef.current.dishName,
-        price: itemRef.current.dishName,
-        description: itemRef.current.dishDescription,
-        restaurantName: itemRef.current.restaurantName,
+        name: itemRef.current.name,
+        price: itemRef.current.price,
+        description: itemRef.current.description,
+        restaurant_name: itemRef.current.restaurantName,
       });
     } else if (item === "drink") {
-      await axios.post("drinks", {
-        name: itemRef.current.drinkName,
-        price: itemRef.current.drinkPrice,
-        description: itemRef.current.drinkDescription,
+      await axios.post("/drinks", {
+        name: itemRef.current.name,
+        price: itemRef.current.price,
+        description: itemRef.current.description,
         alcoholic: itemRef.current.alcoholic,
-        restaurantName: itemRef.current.restaurantName,
+        restaurant_name: itemRef.current.restaurantName,
       });
     }
   };
@@ -83,7 +83,7 @@ function MenuCreator({ restaurant }) {
             <span className="slider round"></span>
           </label>
         )}
-        <button id="save-new-item" onClick={() => saveItem(itemRef.current)}>
+        <button id="save-new-item" onClick={() => saveItem(item)}>
           save {item}
         </button>
       </form>
