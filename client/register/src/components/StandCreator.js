@@ -39,7 +39,6 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
             stand={stand}
             setRestaurant={setRestaurant}
             setRedirect={setRedirect}
-            openStand={openStand}
             key={i}
           ></Stand>
         );

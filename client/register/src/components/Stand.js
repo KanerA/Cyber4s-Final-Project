@@ -6,7 +6,6 @@ function Stand({ stand, setRedirect, setRestaurant, openStand, deleteStand }) {
     <div>
       <p
         onClick={() => {
-          openStand(stand.name);
           setRestaurant(stand.name);
           setRedirect(true);
         }}

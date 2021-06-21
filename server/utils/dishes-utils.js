@@ -39,7 +39,6 @@ const getAllRestaurantDishes = async (req, res) => {
 
 const createNewDish = async (req, res) => {
   const { body } = req;
-  console.log(body);
   Dishes.create(body).then(() => res.send("new dish created"));
 };
 
