@@ -44,9 +44,7 @@ function Menu({ restaurant }) {
       <h1>my menu</h1>
       <div id="dishes">
         {dishes?.map((dish, i) => {
-          return (
-            <Staga dish={dish} key={`dish ${i}`} addToOrder={addToOrder} />
-          );
+          return <Dish dish={dish} key={`dish ${i}`} addToOrder={addToOrder} />;
         })}
       </div>
       <div id="drinks">
