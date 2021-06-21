@@ -9,7 +9,7 @@ export default function Stand({ user, setRestaurant, restaurant }) {
   useEffect(() => {
     const { uid } = user;
     axios
-      .get(`http://localhost:8080/stands/${uid}`)
+      .get(`stands/${uid}`)
       .then((res) => {
         setStands(res.data);
         console.log(res.data);
