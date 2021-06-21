@@ -49,4 +49,10 @@ const getDone = async (req, res) => {
   res.json(orderList);
 };
 
-module.exports = { newOrder, getOrders, getOrderHistory, getDone };
+const orderDone = async (req, res) => {
+  const {d, id} = req.query;
+  const updated = await orderModel.findByIdAndUpdate(id, { done: d },{ new: true, lean: true });
+  res.json(updated);
+};
+
+module.exports = { newOrder, getOrders, getOrderHistory, getDone, orderDone };
