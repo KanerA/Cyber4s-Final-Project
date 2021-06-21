@@ -20,7 +20,6 @@ const getAllRestaurantDrinks = async (req, res) => {
 
 const createNewDrink = async (req, res) => {
   const { body } = req;
-  console.log(body);
   Drinks.create(body).then(() => res.send("new drink created"));
 };
 

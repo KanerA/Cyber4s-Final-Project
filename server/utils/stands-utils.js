@@ -18,17 +18,17 @@ const deleteStand = async (req, res) => {
   Stands.destroy({
     where: {
       owner: o,
-      name: n
-    }
+      name: n,
+    },
   })
-  .then(_ => {
-    console.log(_)
-    res.json({ message: 'Stand deleted successfully'});
-  })
-  .catch(err => {
-    console.log(err.message);
-    res.status(500).json(err.message);
-  })
+    .then((_) => {
+      console.log(_);
+      res.json({ message: "Stand deleted successfully" });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.status(500).json(err.message);
+    });
 };
 
 module.exports = { createNewStand, getAllStands, deleteStand };
