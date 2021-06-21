@@ -9,8 +9,11 @@ export default function Stand({ user, setRestaurant, restaurant }) {
   useEffect(() => {
     const { uid } = user;
     axios
-      .get(`/stands/${uid}`)
-      .then((res) => setStands(res.data))
+      .get(`http://localhost:8080/stands/${uid}`)
+      .then((res) => {
+        setStands(res.data);
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
   const openRestaurant = async (name) => {
@@ -19,16 +22,21 @@ export default function Stand({ user, setRestaurant, restaurant }) {
       owner: user.uid,
     });
     setRestaurant(name);
+    setStands();
     setRedirect(true);
-    console.log(restaurant);
     //not elegant!
+    console.log(restaurant);
   };
   return (
     <div>
       {redirect && <Redirect to="/create" />}
       {stands?.map((stand, i) => {
         return (
-          <button onClick={() => setRestaurant(stand.name)} className="stand">
+          <button
+            onClick={() => setRestaurant(stand.name)}
+            key={i}
+            className="stand"
+          >
             {stand.name}
           </button>
         );

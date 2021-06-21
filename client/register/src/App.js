@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        <Navbar restaurant={restaurant} />
         <Switch>
           {restaurant && (
             <Route exact path="/create">
