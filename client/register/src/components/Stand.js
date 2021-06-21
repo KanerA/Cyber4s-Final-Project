@@ -1,56 +1,24 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
 
-export default function Stand({ user, setRestaurant, restaurant }) {
-  const [stands, setStands] = useState([]);
-  const [redirect, setRedirect] = useState(false);
-  const nameRef = useRef();
-  useEffect(() => {
-    const { uid } = user;
-    axios
-      .get(`stands/${uid}`)
-      .then((res) => {
-        setStands(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  const openRestaurant = async (name) => {
-    await axios.post("/stands", {
-      name: nameRef.current,
-      owner: user.uid,
-    });
-    setRestaurant(name);
-    setStands();
-    setRedirect(true);
-    //not elegant!
-    console.log(restaurant);
+function Stand({ stand, setRedirect, setRestaurant, openStand }) {
+  const deleteStand = async () => {
+    await axios.delete(`/stands/remove/${stand.owner}/${stand.name}`);
   };
   return (
     <div>
-      {redirect && <Redirect to="/create" />}
-      {stands?.map((stand, i) => {
-        return (
-          <button
-            onClick={() => setRestaurant(stand.name)}
-            key={i}
-            className="stand"
-          >
-            {stand.name}
-          </button>
-        );
-      })}
-      <form>
-        <label>Create new stand</label>
-        <input
-          placeholder="stand name"
-          onChange={(e) => (nameRef.current = e.target.value)}
-        />
-        <button onClick={() => openRestaurant(nameRef.current)}>
-          open a new stand
-        </button>
-      </form>
+      <p
+        onClick={() => {
+          openStand(stand.name);
+          setRestaurant(stand.name);
+          setRedirect(true);
+        }}
+      >
+        {stand.name}
+      </p>
+      <button onClick={() => deleteStand()}> delete stand</button>
     </div>
   );
 }
+
+export default Stand;

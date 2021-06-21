@@ -2,28 +2,30 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 
 function MenuCreator() {
-  const itemRef = useRef();
+  const itemRef = useRef({
+    name: "name",
+    price: "price",
+    description: "description",
+    alcoholic: false,
+  });
+  console.log(itemRef.current);
 
   const [item, setItem] = useState("");
-
+  console.log(item);
   const saveItem = (item) => {
-    if (item.dishName && item.dishName && item.dishDescription) {
-      if (item === "dish") {
-        axios.post("/dishes", {
-          name: item.dishName,
-          price: item.dishName,
-          description: item.dishDescription,
-        });
-      } else if (item === "drink") {
-        axios.post("drinks", {
-          name: item.drinkName,
-          price: item.drinkPrice,
-          description: item.drinkDescription,
-          alcoholic: item.alcoholic,
-        });
-      }
-    } else {
-      alert("no item has been chosen!");
+    if (item === "dish") {
+      axios.post("/dishes", {
+        name: item.dishName,
+        price: item.dishName,
+        description: item.dishDescription,
+      });
+    } else if (item === "drink") {
+      axios.post("drinks", {
+        name: item.drinkName,
+        price: item.drinkPrice,
+        description: item.drinkDescription,
+        alcoholic: item.alcoholic,
+      });
     }
   };
   const dishOrDrink = (e) => {
@@ -53,19 +55,22 @@ function MenuCreator() {
           id="dish-name"
           className="dish-property"
           placeholder="enter dish name"
-          onChange={(e) => (itemRef.current.dishName = e.target.value)}
+          onChange={(e) => (itemRef.current.name = e.target.value)}
         />
         <input
           id="dish-price"
           className="dish-property"
           placeholder="enter dish price"
-          onChange={(e) => (itemRef.current.dishPrice = e.target.value)}
+          onChange={(e) => (itemRef.current.price = e.target.value)}
         />
         <input
           id="dish-description"
           className="dish-property"
           placeholder="enter dish description"
-          onChange={(e) => (itemRef.current.dishDescription = e.target.value)}
+          onChange={(e) => {
+            itemRef.current.description = e.target.value;
+            console.log(itemRef);
+          }}
         />
         {item === "drink" && (
           <label className="switch">
@@ -78,34 +83,9 @@ function MenuCreator() {
           </label>
         )}
         <button id="save-new-item" onClick={() => saveItem(itemRef.current)}>
-          save dish
+          save {item}
         </button>
       </form>
-      {/* <form id="create-drink">
-        <h2>create drink</h2>
-        <input
-          id="drink-name"
-          className="drink-property"
-          placeholder="enter drink name"
-          onChange={(e) => (itemRef.current.drinkName = e.target.value)}
-        />
-        <input
-          id="drink-price"
-          className="drink-property"
-          placeholder="enter drink price"
-          onChange={(e) => (itemRef.current.drinkPrice = e.target.value)}
-        />
-        <input
-          id="drink-description"
-          className="drink-property"
-          placeholder="enter drink description"
-          onChange={(e) => (itemRef.current.drinkDescription = e.target.value)}
-        />
-
-        <button id="save-new-drink" onClick={() => saveItem(itemRef.current)}>
-          save drink
-        </button>
-      </form> */}
     </div>
   );
 }
