@@ -5,13 +5,13 @@ const {
   getOrders,
   getOrderHistory,
   getDone,
-  orderDone
+  orderDoneCancel
 } = require("../utils/orders-utils");
 
 orders.get("/:restaurantName", getOrders);
 orders.post("/:restaurantName", newOrder);  
 orders.get('/', getOrderHistory);
 orders.get('/done', getDone);
-orders.patch('/done', orderDone);
+orders.patch('/done', orderDoneCancel);
   
   module.exports = orders;

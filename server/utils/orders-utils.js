@@ -49,10 +49,14 @@ const getDone = async (req, res) => {
   res.json(orderList);
 };
 
-const orderDone = async (req, res) => {
-  const {d, id} = req.query;
-  const updated = await orderModel.findByIdAndUpdate(id, { done: d },{ new: true, lean: true });
+const orderDoneCancel = async (req, res) => {
+  const { d, c, id } = req.query;
+  const isDone = (d === 'true');
+  const isCanceled = (c === 'true');
+  let updated;
+  if(d) updated = await orderModel.findByIdAndUpdate(id, { done: isDone },{ new: true, lean: true });
+  if(c) updated = await orderModel.findByIdAndUpdate(id, { canceled: isCanceled },{ new: true, lean: true });
   res.json(updated);
 };
 
-module.exports = { newOrder, getOrders, getOrderHistory, getDone, orderDone };
+module.exports = { newOrder, getOrders, getOrderHistory, getDone, orderDoneCancel };
