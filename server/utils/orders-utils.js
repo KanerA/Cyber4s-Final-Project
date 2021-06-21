@@ -1,5 +1,37 @@
 const orderModel = require("../mongoModel/mongoModel");
 
+const newOrder = async (req, res) => {
+  const { body } = req;
+  const newOrder = new OrderModel({
+    customerName: body.customerName,
+    dish: body.dish,
+    drink: body.drink,
+    restaurantName: body.restaurantName,
+    _id: body.id,
+  });
+  
+  newOrder.save().then((data, err) => {
+    if (!err) {
+      res.send(
+        data.customerName + "s order accepted! order ID: " + counter + 1
+        );
+      } else {
+        console.log(err);
+      }
+    });
+  };
+
+const getOrders = async (req, res) => {
+  const { restaurantName } = req.params;
+  OrderModel.find({ restaurantName: restaurantName }, (err, ordersArr) => {
+    if (!err) {
+      res.json(ordersArr);
+    } else {
+      console.log(err);
+    }
+  });
+};
+
 const getOrderHistory = async (req, res) => {
   const limit = +req.query.h; // turn to Number
   const orderHistory = await orderModel.find({});
@@ -17,4 +49,4 @@ const getDone = async (req, res) => {
   res.json(orderList);
 };
 
-module.exports = { getOrderHistory, getDone };
+module.exports = { newOrder, getOrders, getOrderHistory, getDone };
