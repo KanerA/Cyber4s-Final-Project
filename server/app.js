@@ -8,7 +8,7 @@ const stands = require("./routes/stands");
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Fuck U");
+  res.send("TEST");
 });
 
 app.use("/dishes", dishes);
