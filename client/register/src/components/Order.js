@@ -1,15 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-function Order({ user, restaurant }) {
-  const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`/orders?res_name=${restaurant}&done=false`)
-      .then((res) => setOrders(res.data))
-      .catch((err) => console.log(err));
-  });
-  return <div>data.map()</div>;
+export default function Order({ order }) {
+  const cancelOrder = (e) => {
+    // patch {cancel: true}
+  };
+  return (
+    <div>
+      <h2> {order.customerName}</h2>
+      <p>{order.dish}</p>
+      <p>{order.drink}</p>
+      <p>{order.createdAt}</p>
+    </div>
+  );
 }
-
-export default Order;
+// customerName: body.customerName,
+// dish: body.dish,
+// drink: body.drink,
