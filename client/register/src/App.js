@@ -6,7 +6,7 @@ import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import { useState } from "react";
-import Stand from "./components/Stand";
+import Stand from "./components/StandCreator";
 function App() {
   const [user] = useAuthState(auth);
   const [restaurant, setRestaurant] = useState();
@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar restaurant={restaurant} />
+        <Navbar restaurant={restaurant} setRestaurant={setRestaurant} />
         <Switch>
           {restaurant && (
             <Route exact path="/create">
