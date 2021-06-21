@@ -33,19 +33,27 @@ function Menu({ restaurant }) {
     });
     setCounter((prev) => prev + 1);
   };
-  // console.log("dish" + dishes, "drink" + drinks);
+
+  const addToOrder = () => {
+    // onclick on item div to add the order
+    // POST
+  };
 
   return (
     <div>
       <h1>my menu</h1>
       <div id="dishes">
-        {dishes?.map((dish) => {
-          return <Dish dish={dish} />;
+        {dishes?.map((dish, i) => {
+          return (
+            <Staga dish={dish} key={`dish ${i}`} addToOrder={addToOrder} />
+          );
         })}
       </div>
       <div id="drinks">
-        {drinks?.map((drink) => {
-          return <Drink drink={drink} />;
+        {drinks?.map((drink, i) => {
+          return (
+            <Drink drink={drink} key={`drink ${i}`} addToOrder={addToOrder} />
+          );
         })}
       </div>
       <div className="place-order">

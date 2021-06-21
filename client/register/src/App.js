@@ -10,7 +10,6 @@ import Stand from "./components/StandCreator";
 function App() {
   const [user] = useAuthState(auth);
   const [restaurant, setRestaurant] = useState();
-  console.log(restaurant);
   return (
     <div className="App">
       <Router>
