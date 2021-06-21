@@ -18,7 +18,7 @@ function Menu(props) {
       .then((newDishes) => setDishes(newDishes.data))
       .catch(() => console.log("no new dishes!"));
     axios
-      .get("http://localhost:8080/drinks")
+      .get("/drinks")
       .then((newDrinks) => setDrinks(newDrinks))
       .catch(() => console.log("no new drinks!"));
   }, []);
@@ -45,9 +45,9 @@ function Menu(props) {
         })}
       </div>
       <div id="drinks">
-        {/* {drinks?.map((drink) => {
+        {drinks?.map((drink) => {
           return <Drink drink={drink} />;
-        })} */}
+        })}
       </div>
       <div className="place-order">
         <input onChange={(e) => (customerName.current = e.target.value)} />

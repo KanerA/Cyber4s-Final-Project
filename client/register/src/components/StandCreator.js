@@ -23,12 +23,19 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
       owner: user.uid,
     });
   };
+  const deleteStand = async () => {
+    await axios.delete(`/stands/remove?o=${user.uid}&n=${restaurant}`);
+    const filtered = stands.filter((stand) => stand.name !== restaurant);
+    setStands(filtered);
+    setRestaurant();
+  };
   return (
     <div>
       {redirect && <Redirect to="/create" />}
       {stands?.map((stand, i) => {
         return (
           <Stand
+            deleteStand={deleteStand}
             stand={stand}
             setRestaurant={setRestaurant}
             setRedirect={setRedirect}

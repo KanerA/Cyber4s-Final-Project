@@ -1,10 +1,7 @@
 import axios from "axios";
 import React from "react";
 
-function Stand({ stand, setRedirect, setRestaurant, openStand }) {
-  const deleteStand = async () => {
-    await axios.delete(`/stands/remove/${stand.owner}/${stand.name}`);
-  };
+function Stand({ stand, setRedirect, setRestaurant, openStand, deleteStand }) {
   return (
     <div>
       <p
