@@ -22,7 +22,6 @@ const deleteStand = async (req, res) => {
     },
   })
     .then((_) => {
-      console.log(_);
       res.json({ message: "Stand deleted successfully" });
     })
     .catch((err) => {
