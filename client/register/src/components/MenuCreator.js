@@ -1,30 +1,32 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
-function MenuCreator() {
+function MenuCreator({ restaurant }) {
   const itemRef = useRef({
     name: "name",
     price: "price",
     description: "description",
     alcoholic: false,
+    restaurantName: restaurant,
   });
-  console.log(itemRef.current);
 
   const [item, setItem] = useState("");
-  console.log(item);
-  const saveItem = (item) => {
+
+  const saveItem = async (item) => {
     if (item === "dish") {
-      axios.post("/dishes", {
-        name: item.dishName,
-        price: item.dishName,
-        description: item.dishDescription,
+      await axios.post("/dishes", {
+        name: itemRef.current.dishName,
+        price: itemRef.current.dishName,
+        description: itemRef.current.dishDescription,
+        restaurantName: itemRef.current.restaurantName,
       });
     } else if (item === "drink") {
-      axios.post("drinks", {
-        name: item.drinkName,
-        price: item.drinkPrice,
-        description: item.drinkDescription,
-        alcoholic: item.alcoholic,
+      await axios.post("drinks", {
+        name: itemRef.current.drinkName,
+        price: itemRef.current.drinkPrice,
+        description: itemRef.current.drinkDescription,
+        alcoholic: itemRef.current.alcoholic,
+        restaurantName: itemRef.current.restaurantName,
       });
     }
   };
@@ -69,7 +71,6 @@ function MenuCreator() {
           placeholder="enter dish description"
           onChange={(e) => {
             itemRef.current.description = e.target.value;
-            console.log(itemRef);
           }}
         />
         {item === "drink" && (
