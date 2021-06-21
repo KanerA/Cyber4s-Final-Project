@@ -20,6 +20,7 @@ const OrderSchema = new mongoose.Schema({
   drink: String,
   restaurantName: String,
   done: { type: Boolean, default: false },
+  canceled: { type: Boolean, default: false },
   createdAt: { type: Date, default: new Date() },
   _id: Number,
 });
