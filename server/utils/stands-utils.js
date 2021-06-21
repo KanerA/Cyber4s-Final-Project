@@ -4,6 +4,7 @@ const createNewStand = async (req, res) => {
   const { body } = req;
   Stands.create(body).then(() => res.send("new stand created!"));
 };
+
 const getAllStands = async (req, res) => {
   const { uid } = req.params;
   const allStands = await Stands.findAll({
