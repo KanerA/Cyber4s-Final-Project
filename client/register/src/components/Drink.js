@@ -1,6 +1,6 @@
 import React from "react";
 
-function Drink(drink) {
+function Drink({ drink }) {
   return (
     <div>
       <div>
