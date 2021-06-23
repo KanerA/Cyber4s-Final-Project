@@ -34,6 +34,7 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
       {stands?.map((stand, i) => {
         return (
           <Stand
+            user={user}
             deleteStand={deleteStand}
             stand={stand}
             setRestaurant={setRestaurant}

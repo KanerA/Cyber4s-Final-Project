@@ -10,13 +10,14 @@ const getAllStands = async (req, res) => {
   Stands.findAll({
     where: { owner: uid },
   }).then((result) => {
-    const allStands = result.map((stand) => stand.toJSON())
+    const allStands = result.map((stand) => stand.toJSON());
     res.json(allStands);
   });
 };
 
 const deleteStand = async (req, res) => {
   const { o, n } = req.query;
+  console.log(o, n);
   Stands.destroy({
     where: {
       owner: o,
