@@ -4,10 +4,13 @@ import Dish from "./Dish";
 import Drink from "./Drink";
 
 function Menu({ restaurant }) {
+  const [orderPrice, setOrderPrice] = useState(0);
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const [dishOrders, SetDishOrders] = useState([{}]);
-  const [drinkOrders, SetDrinkOrders] = useState([{}]);
+  // const [dishOrders, SetDishOrders] = useState([]);
+  // const [drinkOrders, SetDrinkOrders] = useState([]);
+  const drinkOrders = useRef([]);
+  const dishOrders = useRef([]);
   const [counter, setCounter] = useState(1);
 
   const customerName = useRef();
@@ -23,20 +26,18 @@ function Menu({ restaurant }) {
       .catch(() => console.log("no new drinks!"));
   }, []);
 
-  const placeOrder = (dishOrders, drinkOrders) => {
-    axios.post("/order", {
-      customerName: customerName,
-      dishes: dishOrders,
-      drinks: drinkOrders,
+  const placeOrder = () => {
+    axios.post(`/orders/${restaurant}`, {
+      customerName: customerName.current,
+      dishes: dishOrders.current,
+      drinks: drinkOrders.current,
       createdAt: Date.now(),
       id: counter,
+      restaurantName: restaurant,
     });
     setCounter((prev) => prev + 1);
-  };
-
-  const addToOrder = () => {
-    // onclick on item div to add the order
-    // POST
+    console.log(dishOrders.current);
+    console.log(drinkOrders.current);
   };
 
   return (
@@ -45,19 +46,34 @@ function Menu({ restaurant }) {
       <div id="dishes">
         <h2>Dishes</h2>
         {dishes?.map((dish, i) => {
-          return <Dish dish={dish} key={`dish ${i}`} addToOrder={addToOrder} />;
+          return (
+            <Dish
+              dish={dish}
+              key={`dish ${i}`}
+              // addToOrder={addToOrder}
+              dishOrders={dishOrders}
+              setOrderPrice={setOrderPrice}
+            />
+          );
         })}
       </div>
       <div id="drinks">
         <h2>Drinks</h2>
         {drinks?.map((drink, i) => {
           return (
-            <Drink drink={drink} key={`drink ${i}`} addToOrder={addToOrder} />
+            <Drink
+              drink={drink}
+              key={`drink ${i}`}
+              // addToOrder={addToOrder}
+              drinkOrders={drinkOrders}
+              setOrderPrice={setOrderPrice}
+            />
           );
         })}
       </div>
       <div className="place-order">
         <input onChange={(e) => (customerName.current = e.target.value)} />
+        <p>total pirce {orderPrice}</p>
         <button
           id="set-order"
           onClick={() => {

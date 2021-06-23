@@ -2,18 +2,20 @@ const OrderModel = require("../mongoModel/mongoModel");
 
 const newOrder = async (req, res) => {
   const { body } = req;
+  console.log(body);
   const newOrder = new OrderModel({
     customerName: body.customerName,
-    dish: body.dish,
-    drink: body.drink,
+    dish: body.dishes,
+    drink: body.drinks,
     restaurantName: body.restaurantName,
     _id: body.id,
   });
 
   newOrder.save().then((data, err) => {
     if (!err) {
+      console.log(data);
       res.send(
-        data.customerName + "s order accepted! order ID: " + counter + 1
+        data.customerName + "s order accepted! order ID: " + data.id + 1,
       );
     } else {
       console.log(err);
@@ -62,13 +64,13 @@ const orderDoneCancel = async (req, res) => {
     updated = await OrderModel.findByIdAndUpdate(
       id,
       { done: isDone },
-      { new: true, lean: true }
+      { new: true, lean: true },
     );
   if (c)
     updated = await OrderModel.findByIdAndUpdate(
       id,
       { canceled: isCanceled },
-      { new: true, lean: true }
+      { new: true, lean: true },
     );
   res.json(updated);
 };

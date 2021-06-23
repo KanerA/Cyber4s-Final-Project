@@ -6,6 +6,13 @@ import Stand from "./Stand";
 export default function StandCreator({ user, setRestaurant, restaurant }) {
   const [stands, setStands] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const [order, setOrder] = useState({
+    customerName: "",
+    dish: [],
+    drink: [],
+    restaurantName: "",
+    _id: "",
+  });
   const nameRef = useRef();
   useEffect(() => {
     const { uid } = user;
