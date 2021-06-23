@@ -13,7 +13,6 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
       .get(`stands/${uid}`)
       .then((res) => {
         setStands(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);

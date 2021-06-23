@@ -9,7 +9,6 @@ function OrderHandler({ restaurant }) {
       .get(`/orders?res_name=${restaurant}&done=false`)
       .then((res) => setOrders(res.data))
       .catch((err) => console.log(err));
-    console.log(orders);
   });
   return (
     <div>

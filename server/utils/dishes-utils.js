@@ -1,25 +1,5 @@
 const { Dishes } = require("../models");
 
-//   ---NO USE CURRENTLY---
-
-const getAllDishes = async (req, res) => {
-  const dishTable = await Dishes.findAll({}).then((result) =>
-    result.map((dish) => dish.toJSON()),
-  );
-  const allDishes = dishTable.map((dish) => {
-    return {
-      name: dish.name,
-      description: dish.description,
-      restaurantName: dish.restaurantName,
-      price: dish.price,
-    };
-  });
-  console.log("req");
-  res.send(allDishes);
-};
-
-///
-
 const getAllRestaurantDishes = async (req, res) => {
   const { restaurantName } = req.params;
   const allDishes = await Dishes.findAll({
@@ -33,7 +13,7 @@ const getAllRestaurantDishes = async (req, res) => {
         restaurantName: dish.restaurantName,
         price: dish.price,
       };
-    }),
+    })
   );
 };
 
@@ -42,4 +22,4 @@ const createNewDish = async (req, res) => {
   Dishes.create(body).then(() => res.send("new dish created"));
 };
 
-module.exports = { getAllDishes, getAllRestaurantDishes, createNewDish };
+module.exports = { getAllRestaurantDishes, createNewDish };

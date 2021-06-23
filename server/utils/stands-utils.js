@@ -7,10 +7,12 @@ const createNewStand = async (req, res) => {
 
 const getAllStands = async (req, res) => {
   const { uid } = req.params;
-  const allStands = await Stands.findAll({
+  Stands.findAll({
     where: { owner: uid },
-  }).then((res) => res.map((stand) => stand.toJSON()));
-  res.json(allStands);
+  }).then((result) => {
+    const allStands = result.map((stand) => stand.toJSON())
+    res.json(allStands);
+  });
 };
 
 const deleteStand = async (req, res) => {
@@ -22,7 +24,6 @@ const deleteStand = async (req, res) => {
     },
   })
     .then((_) => {
-      console.log(_);
       res.json({ message: "Stand deleted successfully" });
     })
     .catch((err) => {
