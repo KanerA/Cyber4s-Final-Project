@@ -3,7 +3,7 @@ import axios from "axios";
 import Dish from "./Dish";
 import Drink from "./Drink";
 
-function Menu(props) {
+function Menu({ restaurant }) {
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, SetDishOrders] = useState([{}]);
@@ -14,12 +14,12 @@ function Menu(props) {
 
   useEffect(() => {
     axios
-      .get("/dishes")
+      .get(`/dishes/${restaurant}`)
       .then((newDishes) => setDishes(newDishes.data))
       .catch(() => console.log("no new dishes!"));
     axios
-      .get("/drinks")
-      .then((newDrinks) => setDrinks(newDrinks))
+      .get(`/drinks/${restaurant}`)
+      .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
 
@@ -34,7 +34,6 @@ function Menu(props) {
     setCounter((prev) => prev + 1);
   };
   // console.log("dish" + dishes, "drink" + drinks);
-  console.log(dishes);
 
   return (
     <div>
@@ -46,6 +45,7 @@ function Menu(props) {
       </div>
       <div id="drinks">
         {drinks?.map((drink) => {
+          console.log(drink);
           return <Drink drink={drink} />;
         })}
       </div>

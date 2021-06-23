@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 
 function MenuCreator({ restaurant }) {
+  const dName = useRef();
   const itemRef = useRef({
     name: "name",
     price: "price",
@@ -33,6 +34,7 @@ function MenuCreator({ restaurant }) {
   const dishOrDrink = (e) => {
     setItem(e.target.value);
   };
+  console.log(dName);
   return (
     <div>
       <form id="create-dish">
@@ -54,6 +56,7 @@ function MenuCreator({ restaurant }) {
           Dish
         </span>
         <input
+          ref={dName}
           id="dish-name"
           className="dish-property"
           placeholder="enter dish name"
@@ -77,7 +80,11 @@ function MenuCreator({ restaurant }) {
           <label className="switch">
             <input
               type="checkbox"
-              onClick={(e) => (itemRef.current.alcoholic = (prev) => !prev)}
+              onChange={(e) =>
+                itemRef.current.alcoholic
+                  ? (itemRef.current.alcoholic = false)
+                  : (itemRef.current.alcoholic = true)
+              }
             />{" "}
             Alcoholic
             <span className="slider round"></span>
