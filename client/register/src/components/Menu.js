@@ -32,6 +32,7 @@ function Menu({ restaurant }) {
       dishes: dishOrders.current,
       drinks: drinkOrders.current,
       createdAt: Date.now(),
+      //  --- rest the counter when getting out and back into the restaurant  ***NEED TO FIX***
       id: counter,
       restaurantName: restaurant,
     });
