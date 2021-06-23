@@ -6,7 +6,7 @@ import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import { useState } from "react";
-import Stand from "./components/StandCreator";
+import StandCreator from "./components/StandCreator";
 function App() {
   const [user] = useAuthState(auth);
   const [restaurant, setRestaurant] = useState();
@@ -27,7 +27,7 @@ function App() {
           )}
           <Route exact path="/">
             {user ? (
-              <Stand
+              <StandCreator
                 user={user}
                 setRestaurant={setRestaurant}
                 restaurant={restaurant}

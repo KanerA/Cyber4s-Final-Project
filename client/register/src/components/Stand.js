@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Stand({ stand, setRedirect, setRestaurant, user, deleteStand }) {
+function Stand({ stand, setRedirect, setRestaurant, deleteStand }) {
   return (
     <div>
       <p

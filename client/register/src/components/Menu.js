@@ -43,11 +43,13 @@ function Menu({ restaurant }) {
     <div>
       <h1>my menu</h1>
       <div id="dishes">
+        <h2>Dishes</h2>
         {dishes?.map((dish, i) => {
           return <Dish dish={dish} key={`dish ${i}`} addToOrder={addToOrder} />;
         })}
       </div>
       <div id="drinks">
+        <h2>Drinks</h2>
         {drinks?.map((drink, i) => {
           return (
             <Drink drink={drink} key={`drink ${i}`} addToOrder={addToOrder} />

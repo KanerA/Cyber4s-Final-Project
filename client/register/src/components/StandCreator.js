@@ -23,8 +23,10 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
     });
   };
   const deleteStand = async (name) => {
-    await axios.delete(`/stands/remove?o=${user.uid}&n=${name}`);
-    const filtered = stands.filter((stand) => stand.name !== restaurant);
+    const { data } = await axios.delete(
+      `/stands/remove?o=${user.uid}&n=${name}`,
+    );
+    const filtered = data.filter((stand) => stand.name !== restaurant);
     setStands(filtered);
     setRestaurant();
   };

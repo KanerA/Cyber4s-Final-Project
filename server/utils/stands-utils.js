@@ -25,7 +25,12 @@ const deleteStand = async (req, res) => {
     },
   })
     .then((_) => {
-      res.json({ message: "Stand deleted successfully" });
+      Stands.findAll({
+        where: { owner: o },
+      }).then((result) => {
+        const allStands = result.map((stand) => stand.toJSON());
+        res.json(allStands);
+      });
     })
     .catch((err) => {
       console.log(err.message);

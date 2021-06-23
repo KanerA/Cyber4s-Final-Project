@@ -4,9 +4,9 @@ function Drink({ drink }) {
   return (
     <div>
       <div>
-        <p className="name">{drink.name}</p>
-        <p className="description">{drink.description}</p>
-        <p className="price">{drink.price}</p>
+        <p className="name">name: {drink.name}</p>
+        <p className="description">description: {drink.description}</p>
+        <p className="price">price {drink.price}</p>
       </div>
     </div>
   );

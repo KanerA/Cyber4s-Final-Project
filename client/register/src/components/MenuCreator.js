@@ -38,7 +38,7 @@ function MenuCreator({ restaurant }) {
   const dishOrDrink = (e) => {
     setItem(e.target.value);
   };
-  console.log(dName);
+  // console.log(dName);
   return (
     <div>
       <h2>create dish</h2>

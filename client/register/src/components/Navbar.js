@@ -6,9 +6,9 @@ function Navbar({ restaurant, setRestaurant }) {
     <div>
       <nav>
         <span>{restaurant ? restaurant : "no restaurant"}</span>
-        <Link to="/">Home Page</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/create">create menu</Link>
+        <Link to="/">Home Page </Link>
+        {restaurant && <Link to="/menu">Menu </Link>}
+        {restaurant && <Link to="/create">create menu </Link>}
         <button onClick={() => setRestaurant()}>log out of stand</button>
       </nav>
     </div>
