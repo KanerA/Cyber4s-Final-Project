@@ -1,13 +1,39 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
-function Drink({ drink }) {
+function Drink({ drink, drinkOrders, setDrinkOrders }) {
+  const [drinkCount, setDrinkCount] = useState(1);
+  const [drinkNotes, setDrinkNotes] = useState("");
+  const addDrink = (e) => {
+    e.target.parentElement.children[5].value = "";
+    drinkOrders.push({
+      name: drink.name,
+      price: drink.price,
+      notes: drinkNotes,
+      amount: drinkCount,
+    });
+    setDrinkOrders(drinkOrders);
+    setDrinkNotes("");
+    setDrinkCount(1);
+  };
   return (
     <div>
-      <div>
-        <p className="name">{drink.name}</p>
-        <p className="description">{drink.description}</p>
-        <p className="price">{drink.price}</p>
-      </div>
+      <span>
+        <button onClick={() => setDrinkCount(drinkCount + 1)}>+</button>
+        {drinkCount}
+        <button onClick={() => setDrinkCount(drinkCount - 1)}>-</button>
+      </span>
+      <p className="name">{drink.name}</p>
+      <p className="description">{drink.description}</p>
+      <p className="price">{drink.price}</p>
+      <p>{drink.alcoholic ? "alcoholic" : "non-alcoholic"}</p>
+      <input
+        placeholder="add notes"
+        onChange={(e) => {
+          setDrinkNotes(e.target.value);
+        }}
+      />
+      <button onClick={(e) => addDrink(e)}>order</button>
     </div>
   );
 }

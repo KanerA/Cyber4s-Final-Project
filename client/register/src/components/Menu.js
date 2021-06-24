@@ -6,8 +6,8 @@ import Drink from "./Drink";
 function Menu({ restaurant }) {
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const [dishOrders, SetDishOrders] = useState([{}]);
-  const [drinkOrders, SetDrinkOrders] = useState([{}]);
+  const [dishOrders, setDishOrders] = useState([]);
+  const [drinkOrders, setDrinkOrders] = useState([]);
   const [counter, setCounter] = useState(1);
 
   const customerName = useRef();
@@ -23,8 +23,8 @@ function Menu({ restaurant }) {
       .catch(() => console.log("no new drinks!"));
   }, []);
 
-  const placeOrder = (dishOrders, drinkOrders) => {
-    axios.post("/order", {
+  const placeOrder = (e) => {
+    axios.post(`/order/${restaurant}`, {
       customerName: customerName,
       dishes: dishOrders,
       drinks: drinkOrders,
@@ -32,34 +32,86 @@ function Menu({ restaurant }) {
       id: counter,
     });
     setCounter((prev) => prev + 1);
-  };
-
-  const addToOrder = () => {
-    // onclick on item div to add the order
-    // POST
+    setDrinkOrders([]);
+    setDishOrders([]);
+    e.target.parentElement.children[0].value = "";
   };
 
   return (
     <div>
-      <h1>my menu</h1>
-      <div id="dishes">
-        {dishes?.map((dish, i) => {
-          return <Dish dish={dish} key={`dish ${i}`} addToOrder={addToOrder} />;
-        })}
+      <div id="menu">
+        <h1>my menu</h1>
+        <div id="dishes">
+          <h2>Dishes</h2>
+          {dishes?.map((dish, i) => {
+            return (
+              <Dish
+                dish={dish}
+                key={`dish ${i}`}
+                dishOrders={dishOrders}
+                setDishOrders={setDishOrders}
+              />
+            );
+          })}
+        </div>
+        <div id="drinks">
+          <h2> Drinks</h2>
+          <h3>Alcohol</h3>
+          {drinks
+            ?.filter((drink) => drink.alcoholic)
+            .map((drink, i) => {
+              return (
+                <Drink
+                  drink={drink}
+                  key={`drink ${i}`}
+                  setDrinkOrders={setDrinkOrders}
+                  drinkOrders={drinkOrders}
+                />
+              );
+            })}
+          <h3>light Drinks</h3>
+          {drinks
+            ?.filter((drink) => !drink.alcoholic)
+            .map((drink, i) => {
+              return (
+                <Drink
+                  drink={drink}
+                  key={`drink ${i}`}
+                  setDrinkOrders={setDrinkOrders}
+                  drinkOrders={drinkOrders}
+                />
+              );
+            })}
+        </div>
       </div>
-      <div id="drinks">
-        {drinks?.map((drink, i) => {
+      <div className="order">
+        {dishOrders.map((dish) => {
           return (
-            <Drink drink={drink} key={`drink ${i}`} addToOrder={addToOrder} />
+            <div>
+              <p>
+                {dish.amount}X {dish.name}
+              </p>
+              <p>{dish.notes}</p>
+              <p>{dish.amount * dish.price}</p>
+            </div>
           );
         })}
-      </div>
-      <div className="place-order">
+        {drinkOrders.map((drink) => {
+          return (
+            <div>
+              <p>
+                {drink.amount}X {drink.name}
+              </p>
+              <p>{drink.notes}</p>
+              <p>{drink.amount * drink.price}</p>
+            </div>
+          );
+        })}
         <input onChange={(e) => (customerName.current = e.target.value)} />
         <button
           id="set-order"
-          onClick={() => {
-            placeOrder();
+          onClick={(e) => {
+            placeOrder(e);
           }}
         >
           set order
