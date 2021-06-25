@@ -22,6 +22,9 @@ function Menu({ restaurant }) {
       .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
+  useEffect(() => {
+    alert("added to order!");
+  }, [drinkOrders, dishOrders]);
 
   const placeOrder = (e) => {
     axios.post(`/order/${restaurant}`, {
@@ -85,6 +88,7 @@ function Menu({ restaurant }) {
         </div>
       </div>
       <div className="order">
+        <h3>this order</h3>
         {dishOrders.map((dish) => {
           return (
             <div>
@@ -107,15 +111,17 @@ function Menu({ restaurant }) {
             </div>
           );
         })}
-        <input onChange={(e) => (customerName.current = e.target.value)} />
-        <button
-          id="set-order"
-          onClick={(e) => {
-            placeOrder(e);
-          }}
-        >
-          set order
-        </button>
+        <div>
+          <input onChange={(e) => (customerName.current = e.target.value)} />
+          <button
+            id="set-order"
+            onClick={(e) => {
+              placeOrder(e);
+            }}
+          >
+            set order
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ function Drink({ drink, drinkOrders, setDrinkOrders }) {
   const [drinkCount, setDrinkCount] = useState(1);
   const [drinkNotes, setDrinkNotes] = useState("");
   const addDrink = (e) => {
-    e.target.parentElement.children[5].value = "";
+    e.target.parentElement.children[0].value = "";
     drinkOrders.push({
       name: drink.name,
       price: drink.price,
@@ -27,13 +27,15 @@ function Drink({ drink, drinkOrders, setDrinkOrders }) {
       <p className="description">{drink.description}</p>
       <p className="price">{drink.price}</p>
       <p>{drink.alcoholic ? "alcoholic" : "non-alcoholic"}</p>
-      <input
-        placeholder="add notes"
-        onChange={(e) => {
-          setDrinkNotes(e.target.value);
-        }}
-      />
-      <button onClick={(e) => addDrink(e)}>order</button>
+      <div>
+        <input
+          placeholder="add notes"
+          onChange={(e) => {
+            setDrinkNotes(e.target.value);
+          }}
+        />
+        <button onClick={(e) => addDrink(e)}>order</button>
+      </div>
     </div>
   );
 }
