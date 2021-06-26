@@ -10,18 +10,16 @@ import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRestaurant } from "./action";
+import "./components/styles/App/App.css";
 
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
   const [user] = useAuthState(auth);
-  // const [restaurant, setRestaurant] = useState();
+
   return (
     <div className="App">
       <Router>
-        <Navbar
-          restaurant={restaurant}
-          // setRestaurant={setRestaurant}
-        />
+        <Navbar user={user} restaurant={restaurant} />
         <Switch>
           {restaurant && (
             <Route exact path="/create">
@@ -39,15 +37,7 @@ function App() {
             </Route>
           )}
           <Route exact path="/">
-            {user ? (
-              <Stand
-                user={user}
-                // setRestaurant={setRestaurant}
-                restaurant={restaurant}
-              />
-            ) : (
-              <Login />
-            )}
+            {user ? <Stand user={user} restaurant={restaurant} /> : <Login />}
           </Route>
         </Switch>
       </Router>
