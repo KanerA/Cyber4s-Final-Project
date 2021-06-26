@@ -23,15 +23,12 @@ function Menu({ restaurant }) {
       .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
-  useEffect(() => {
-    alert("added to order!");
-  }, [drinkOrders, dishOrders]);
 
   const placeOrder = (e) => {
     axios.post(`/orders/${restaurant}`, {
       customerName: customerName.current,
-      dishes: dishOrders,
-      drinks: drinkOrders,
+      dish: dishOrders,
+      drink: drinkOrders,
       createdAt: Date.now(),
       restaurantName: restaurant,
     });
@@ -40,7 +37,7 @@ function Menu({ restaurant }) {
     setDishOrders([]);
     e.target.parentElement.children[0].value = "";
   };
-
+  console.log(drinkOrders, dishOrders);
   return (
     <div>
       <div id="menu">
