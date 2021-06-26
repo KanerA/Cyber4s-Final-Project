@@ -4,8 +4,8 @@ const getAllRestaurantDrinks = (req, res) => {
   const { restaurantName } = req.params;
   Drinks.findAll({
     where: { restaurant_name: restaurantName },
-  }).then((res) => {
-    const allDrinks = res.map((drink) => drink.toJSON());
+  }).then((drinks) => {
+    const allDrinks = drinks.map((drink) => drink.toJSON());
     res.send(
       allDrinks.map((drink) => {
         return {

@@ -89,25 +89,25 @@ function Menu({ restaurant }) {
       </div>
       <div className="order">
         <h3>this order</h3>
-        {dishOrders.map((dish) => {
+        {dishOrders.map((orderedDish) => {
           return (
             <div>
               <p>
-                {dish.amount}X {dish.name}
+                {orderedDish.amount}X {orderedDish.name}
               </p>
-              <p>{dish.notes}</p>
-              <p>{dish.amount * dish.price}</p>
+              <p>{orderedDish.notes}</p>
+              <p>{orderedDish.amount * orderedDish.price}</p>
             </div>
           );
         })}
-        {drinkOrders.map((drink) => {
+        {drinkOrders.map((orderedDrink) => {
           return (
             <div>
               <p>
-                {drink.amount}X {drink.name}
+                {orderedDrink.amount}X {orderedDrink.name}
               </p>
-              <p>{drink.notes}</p>
-              <p>{drink.amount * drink.price}</p>
+              <p>{orderedDrink.notes}</p>
+              <p>{orderedDrink.amount * orderedDrink.price}</p>
             </div>
           );
         })}

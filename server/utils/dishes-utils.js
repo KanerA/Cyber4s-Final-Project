@@ -4,8 +4,8 @@ const getAllRestaurantDishes = (req, res) => {
   const { restaurantName } = req.params;
   Dishes.findAll({
     where: { restaurant_name: restaurantName },
-  }).then((res) => {
-    const allDishes = res.map((dish) => dish.toJSON());
+  }).then((dishes) => {
+    const allDishes = dishes.map((dish) => dish.toJSON());
     res.send(
       allDishes.map((dish) => {
         return {

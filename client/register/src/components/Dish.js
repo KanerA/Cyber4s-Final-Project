@@ -11,6 +11,7 @@ function Dish({ dish, dishOrders, setDishOrders }) {
       notes: dishNotes,
       amount: dishCount,
     });
+    console.log(dishOrders);
     setDishOrders(dishOrders);
     setDishNotes("");
     setDishCount(1);
