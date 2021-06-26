@@ -10,7 +10,7 @@ function Navbar({ restaurant, setRestaurant }) {
         <Link to="/menu">Menu</Link>
         <Link to="/create">create menu</Link>
         <Link to="/orders">order handler</Link>
-        <button onClick={() => setRestaurant()}>log out of stand</button>
+        {/* <button onClick={() => setRestaurant()}>log out of stand</button> */}
       </nav>
     </div>
   );

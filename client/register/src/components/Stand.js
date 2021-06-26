@@ -1,11 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { changeRestaurant } from "../action";
 
 function Stand({ stand, setRedirect, setRestaurant, deleteStand }) {
+  const dispatch = useDispatch();
+  const choseRestaurant = (name) => {
+    dispatch(changeRestaurant(name));
+  };
   return (
     <div>
       <p
         onClick={() => {
-          setRestaurant(stand.name);
+          choseRestaurant(stand.name);
           setRedirect(true);
         }}
       >
