@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function Order({ order }) {
+  const [canceled, setCanceled] = useState(order.canceled);
   const cancelOrder = (e) => {
     // patch {cancel: true}
+    axios
+      .patch(`/orders/done/?c=true&id=${order.customerName}`)
+      .then((res) => setCanceled(res.data.canceled));
   };
   return (
     <div>
@@ -31,6 +36,15 @@ export default function Order({ order }) {
         })}
       </div>
       <p>{order.createdAt}</p>
+      <p>cancel:{canceled ? "true" : "false"}</p>
+      <p>done:{order.done ? "true" : "false"}</p>
+      <button
+        onClick={() => {
+          cancelOrder();
+        }}
+      >
+        cancel
+      </button>
     </div>
   );
 }

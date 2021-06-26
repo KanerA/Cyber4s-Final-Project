@@ -53,21 +53,23 @@ const getDone = async (req, res) => {
 
 const orderDoneCancel = async (req, res) => {
   const { d, c, id } = req.query;
+  console.log(d, c, id);
   const isDone = d === "true";
   const isCanceled = c === "true";
   let updated;
   if (d)
-    updated = await OrderModel.findByIdAndUpdate(
-      id,
+    updated = await OrderModel.findOneAndUpdate(
+      { customerName: id },
       { done: isDone },
-      { new: true, lean: true },
+      { new: true },
     );
   if (c)
-    updated = await OrderModel.findByIdAndUpdate(
-      id,
+    updated = await OrderModel.findOneAndUpdate(
+      { customerName: id },
       { canceled: isCanceled },
-      { new: true, lean: true },
+      { new: true },
     );
+  console.log(updated);
   res.json(updated);
 };
 
