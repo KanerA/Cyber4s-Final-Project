@@ -6,9 +6,10 @@ function OrderHandler({ restaurant }) {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     axios
-      .get(`/orders?restaurantName=${restaurant}&done=false`)
+      .get(`/orders?restaurantName=${restaurant}`)
       .then((res) => setOrders(res.data))
       .catch((err) => console.log(err));
+    console.log(restaurant);
   });
   return (
     <div>

@@ -25,6 +25,7 @@ const getOrders = async (req, res) => {
   const { restaurantName } = req.params;
   OrderModel.find({ restaurantName: restaurantName }, (err, ordersArr) => {
     if (!err) {
+      console.log(ordersArr);
       res.json(ordersArr);
     } else {
       console.log(err);

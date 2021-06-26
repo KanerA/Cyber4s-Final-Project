@@ -33,6 +33,7 @@ function Menu({ restaurant }) {
       dishes: dishOrders,
       drinks: drinkOrders,
       createdAt: Date.now(),
+      restaurantName: restaurant,
       id: counter,
     });
     setCounter((prev) => prev + 1);
