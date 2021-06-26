@@ -7,14 +7,11 @@ const newOrder = async (req, res) => {
     dish: body.dish,
     drink: body.drink,
     restaurantName: body.restaurantName,
-    _id: body.id,
   });
 
   newOrder.save().then((data, err) => {
     if (!err) {
-      res.send(
-        data.customerName + "s order accepted! order ID: " + counter + 1,
-      );
+      res.send(data.customerName + "s order accepted!");
     } else {
       console.log(err);
     }
@@ -63,13 +60,13 @@ const orderDoneCancel = async (req, res) => {
     updated = await OrderModel.findByIdAndUpdate(
       id,
       { done: isDone },
-      { new: true, lean: true },
+      { new: true, lean: true }
     );
   if (c)
     updated = await OrderModel.findByIdAndUpdate(
       id,
       { canceled: isCanceled },
-      { new: true, lean: true },
+      { new: true, lean: true }
     );
   res.json(updated);
 };

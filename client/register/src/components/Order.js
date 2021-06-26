@@ -7,8 +7,29 @@ export default function Order({ order }) {
   return (
     <div>
       <h2> {order.customerName}</h2>
-      <p>{order.dish}</p>
-      <p>{order.drink}</p>
+      <div>
+        {order.dish?.map((dish) => {
+          return (
+            <div>
+              <p>{dish.name}</p>
+              <p>{dish.description}</p>
+              <p>{dish.price}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div>
+        {order.drink?.map((drink) => {
+          return (
+            <div>
+              <p>{drink.name}</p>
+              <p>{drink.description}</p>
+              <p>{drink.price}</p>
+              <p>{drink.alcoholic}</p>
+            </div>
+          );
+        })}
+      </div>
       <p>{order.createdAt}</p>
     </div>
   );
