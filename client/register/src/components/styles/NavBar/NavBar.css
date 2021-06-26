@@ -1,0 +1,63 @@
+nav {
+  color: #ad5c1a;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  background-color: #75e7fa;
+  height: 2.5rem;
+  padding-top: 10px;
+}
+
+.link-button {
+  background-color: #ffa459;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 3px;
+  font-weight: 700;
+}
+
+.nav-link {
+  margin-right: 3px;
+  color: #fa923f;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+.nav-link::before,
+.nav-link::after {
+  content: "|";
+}
+
+.nav-link:hover {
+  -webkit-transform: scaleY(1.5);
+          transform: scaleY(1.5);
+  color: #ffa459;
+}
+
+#restaurant-name {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  position: absolute;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  left: 10px;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+#buttons {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  position: absolute;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  right: 10px;
+}
+/*# sourceMappingURL=NavBar.css.map */

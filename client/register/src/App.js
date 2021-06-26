@@ -10,8 +10,8 @@ import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRestaurant } from "./action";
-import "./components/styles/App/App.css";
 
+import "./components/styles/App/App.css";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
   const [user] = useAuthState(auth);

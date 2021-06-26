@@ -1,0 +1,51 @@
+$mainColor: #fa923f;
+$secondaryColor: #0995ad;
+$mainBrightColor: #ffa459;
+$mainDarkColor: #ad5c1a;
+$secondaryBrightColor: #75e7fa;
+
+nav {
+  color: $mainDarkColor;
+  justify-content: center;
+  position: relative;
+  background-color: $secondaryBrightColor;
+  height: 2.5rem;
+  padding-top: 10px;
+}
+.link-button {
+  background-color: $mainBrightColor;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 3px;
+  font-weight: 700;
+}
+.nav-link {
+  margin-right: 3px;
+  color: $mainColor;
+  font-size: 2rem;
+  text-decoration: none;
+}
+.nav-link::before,
+.nav-link::after {
+  content: "|";
+}
+.nav-link:hover {
+  transform: scaleY(1.5); //need to fix
+  color: $mainBrightColor;
+}
+#restaurant-name {
+  align-self: flex-start;
+  position: absolute;
+  align-content: flex-start;
+  display: inline-flex;
+  left: 10px;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+#buttons {
+  align-self: flex-start;
+  position: absolute;
+  align-content: flex-start;
+  display: inline-flex;
+  right: 10px;
+}
