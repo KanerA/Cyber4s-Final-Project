@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 
 function Drink({ drink, drinkOrders, setDrinkOrders }) {
@@ -6,13 +5,14 @@ function Drink({ drink, drinkOrders, setDrinkOrders }) {
   const [drinkNotes, setDrinkNotes] = useState("");
   const addDrink = (e) => {
     e.target.parentElement.children[0].value = "";
-    drinkOrders.push({
+    const orders = [...drinkOrders];
+    orders.push({
       name: drink.name,
       price: drink.price,
       notes: drinkNotes,
       amount: drinkCount,
     });
-    setDrinkOrders(drinkOrders);
+    setDrinkOrders(orders);
     setDrinkNotes("");
     setDrinkCount(1);
   };

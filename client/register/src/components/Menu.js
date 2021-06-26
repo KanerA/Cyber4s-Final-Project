@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Dish from "./Dish";
 import Drink from "./Drink";
+import CurrentOrder from "./CurrentOrder";
 
 function Menu({ restaurant }) {
   const [dishes, setDishes] = useState([]);
@@ -27,8 +28,8 @@ function Menu({ restaurant }) {
   }, [drinkOrders, dishOrders]);
 
   const placeOrder = (e) => {
-    axios.post(`/order/${restaurant}`, {
-      customerName: customerName,
+    axios.post(`/orders/${restaurant}`, {
+      customerName: customerName.current,
       dishes: dishOrders,
       drinks: drinkOrders,
       createdAt: Date.now(),
@@ -89,28 +90,7 @@ function Menu({ restaurant }) {
       </div>
       <div className="order">
         <h3>this order</h3>
-        {dishOrders.map((orderedDish) => {
-          return (
-            <div>
-              <p>
-                {orderedDish.amount}X {orderedDish.name}
-              </p>
-              <p>{orderedDish.notes}</p>
-              <p>{orderedDish.amount * orderedDish.price}</p>
-            </div>
-          );
-        })}
-        {drinkOrders.map((orderedDrink) => {
-          return (
-            <div>
-              <p>
-                {orderedDrink.amount}X {orderedDrink.name}
-              </p>
-              <p>{orderedDrink.notes}</p>
-              <p>{orderedDrink.amount * orderedDrink.price}</p>
-            </div>
-          );
-        })}
+        <CurrentOrder dishOrders={dishOrders} drinkOrders={drinkOrders} />
         <div>
           <input onChange={(e) => (customerName.current = e.target.value)} />
           <button

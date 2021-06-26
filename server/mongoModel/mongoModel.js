@@ -16,8 +16,8 @@ mongoose
 
 const OrderSchema = new mongoose.Schema({
   customerName: String,
-  dish: String,
-  drink: String,
+  dish: [{ type: Object }],
+  drink: [{ type: Object }],
   restaurantName: String,
   done: { type: Boolean, default: false },
   canceled: { type: Boolean, default: false },

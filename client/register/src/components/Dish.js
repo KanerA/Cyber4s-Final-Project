@@ -5,14 +5,16 @@ function Dish({ dish, dishOrders, setDishOrders }) {
   const [dishNotes, setDishNotes] = useState("");
   const addDish = (e) => {
     e.target.parentElement.children[0].value = "";
-    dishOrders.push({
+    const orders = [...dishOrders];
+    orders.push({
       name: dish.name,
       price: dish.price,
       notes: dishNotes,
       amount: dishCount,
     });
+
+    setDishOrders(orders);
     console.log(dishOrders);
-    setDishOrders(dishOrders);
     setDishNotes("");
     setDishCount(1);
   };
