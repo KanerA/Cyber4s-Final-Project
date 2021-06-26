@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { changeRestaurant } from "../action";
 import firebase from "firebase";
 import "./styles/NavBar/NavBar.css";
-function Navbar({ restaurant, setRestaurant, user }) {
+function Navbar({ restaurant, user }) {
   const dispatch = useDispatch();
   return (
     <div>
@@ -27,14 +27,17 @@ function Navbar({ restaurant, setRestaurant, user }) {
           </Link>
         </span>
         <span id="buttons">
-          <button className="link-button" onClick={() => setRestaurant()}>
+          <button
+            className="link-button"
+            onClick={() => dispatch(changeRestaurant(null))}
+          >
             log out of stand
           </button>
           {user && (
             <button
               className="link-button"
               onClick={() => {
-                setRestaurant();
+                dispatch(changeRestaurant(null));
                 firebase.auth().signOut();
               }}
             >

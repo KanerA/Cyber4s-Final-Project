@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { changeRestaurant } from "../action";
 
-function Stand({ stand, setRedirect, setRestaurant, deleteStand }) {
+function Stand({ stand, setRedirect, deleteStand }) {
   const dispatch = useDispatch();
   const choseRestaurant = (name) => {
     dispatch(changeRestaurant(name));

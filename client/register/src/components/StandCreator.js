@@ -2,8 +2,11 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Stand from "./Stand";
+import { useDispatch } from "react-redux";
+import { changeRestaurant } from "../action";
 
-export default function StandCreator({ user, setRestaurant, restaurant }) {
+export default function StandCreator({ user, restaurant }) {
+  const dispatch = useDispatch();
   const [stands, setStands] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const nameRef = useRef();
@@ -26,7 +29,7 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
     await axios.delete(`/stands/remove?o=${user.uid}&n=${restaurant}`);
     const filtered = stands.filter((stand) => stand.name !== restaurant);
     setStands(filtered);
-    setRestaurant();
+    dispatch(changeRestaurant());
   };
   return (
     <div>
@@ -36,7 +39,6 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
           <Stand
             deleteStand={deleteStand}
             stand={stand}
-            setRestaurant={setRestaurant}
             setRedirect={setRedirect}
             key={i}
           ></Stand>
@@ -51,7 +53,7 @@ export default function StandCreator({ user, setRestaurant, restaurant }) {
         <button
           onClick={() => {
             openStand(nameRef.current);
-            setRestaurant(nameRef.current);
+            dispatch(changeRestaurant(nameRef.current));
             setRedirect(true);
           }}
         >
