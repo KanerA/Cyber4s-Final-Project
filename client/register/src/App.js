@@ -5,6 +5,7 @@ import Menu from "./components/Menu";
 import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
+import OrderHandler from "./components/OrderHandler";
 import { useState } from "react";
 import Stand from "./components/StandCreator";
 function App() {
@@ -18,6 +19,11 @@ function App() {
           {restaurant && (
             <Route exact path="/create">
               <MenuCreator restaurant={restaurant} />
+            </Route>
+          )}
+          {restaurant && (
+            <Route exact path="/orders">
+              <OrderHandler restaurant={restaurant} />
             </Route>
           )}
           {restaurant && (
