@@ -3,6 +3,7 @@ import axios from "axios";
 import Dish from "./Dish";
 import Drink from "./Drink";
 import CurrentOrder from "./CurrentOrder";
+import "./styles/Menu/Menu.css";
 
 function Menu({ restaurant }) {
   const [dishes, setDishes] = useState([]);

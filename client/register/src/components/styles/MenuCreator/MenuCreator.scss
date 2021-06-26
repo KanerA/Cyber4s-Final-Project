@@ -1,0 +1,34 @@
+$mainColor: #fa923f;
+$secondaryColor: #0995ad;
+$mainBrightColor: #ffa459;
+$mainDarkColor: #ad5c1a;
+$secondaryBrightColor: #75e7fa;
+
+.menu-creator {
+  margin: 3px;
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  position: relative;
+}
+.item-property {
+  margin: 2px;
+  color: white;
+  background-color: $secondaryColor;
+  box-shadow: 1px 1px 1px $mainDarkColor;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+.item-property::placeholder {
+  color: rgba(255, 255, 255, 0.479);
+}
+#save-new-item {
+  background-color: $mainBrightColor;
+  margin-top: 10px;
+  font-size: 2rem;
+  padding: 10px;
+  box-shadow: 1px 1px 1px $mainDarkColor;
+  color: white;
+  border-radius: 0.5rem;
+}

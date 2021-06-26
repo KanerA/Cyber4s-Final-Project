@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import "./styles/MenuCreator/MenuCreator.css";
 
 function MenuCreator({ restaurant }) {
   const dName = useRef();
@@ -40,9 +41,9 @@ function MenuCreator({ restaurant }) {
   };
   console.log(dName);
   return (
-    <div>
-      <h2>create dish</h2>
-      <span>
+    <div className="menu-creator">
+      <h1>create dish</h1>
+      <div id="item-selector">
         <input
           type="radio"
           value="drink"
@@ -51,29 +52,30 @@ function MenuCreator({ restaurant }) {
         />
         Drink
         <input
+          defaultChecked
           type="radio"
           value="dish"
           name="item"
           onChange={(e) => dishOrDrink(e)}
         />
         Dish
-      </span>
+      </div>
       <input
-        id="dish-name"
-        className="dish-property"
-        placeholder="enter dish name"
+        id="item-name"
+        className="item-property"
+        placeholder={`enter ${item} name`}
         onChange={(e) => (itemRef.current.name = e.target.value)}
       />
       <input
-        id="dish-price"
-        className="dish-property"
-        placeholder="enter dish price"
+        id="item-price"
+        className="item-property"
+        placeholder={`enter ${item} price`}
         onChange={(e) => (itemRef.current.price = e.target.value)}
       />
       <input
-        id="dish-description"
-        className="dish-property"
-        placeholder="enter dish description"
+        id="item-description"
+        className="item-property"
+        placeholder={`enter ${item} description`}
         onChange={(e) => {
           itemRef.current.description = e.target.value;
         }}
@@ -88,10 +90,11 @@ function MenuCreator({ restaurant }) {
                 : (itemRef.current.alcoholic = true)
             }
           />{" "}
-          Alcoholic
+          <span>Alcoholic</span>
           <span className="slider round"></span>
         </label>
-      )}
+      )}{" "}
+      <br></br>
       <button id="save-new-item" onClick={(e) => saveItem(e)}>
         save {item}
       </button>

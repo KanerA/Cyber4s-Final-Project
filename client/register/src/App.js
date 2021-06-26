@@ -8,13 +8,18 @@ import Login from "./components/Login";
 import OrderHandler from "./components/OrderHandler";
 import { useState } from "react";
 import Stand from "./components/StandCreator";
+import "./components/styles/App/App.css";
 function App() {
   const [user] = useAuthState(auth);
   const [restaurant, setRestaurant] = useState();
   return (
     <div className="App">
       <Router>
-        <Navbar restaurant={restaurant} setRestaurant={setRestaurant} />
+        <Navbar
+          user={user}
+          restaurant={restaurant}
+          setRestaurant={setRestaurant}
+        />
         <Switch>
           {restaurant && (
             <Route exact path="/create">
