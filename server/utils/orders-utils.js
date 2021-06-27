@@ -54,9 +54,8 @@ const getDone = async (req, res) => {
 
 const orderDoneCancel = async (req, res) => {
   const { d, c, id } = req.query;
-  console.log(d, c, id);
-  const isDone = d === "true";
-  const isCanceled = c === "true";
+  const isDone = d ? d === "true": undefined;
+  const isCanceled = c ? c === "true": undefined;
   let updated;
   if (d)
     updated = await OrderModel.findOneAndUpdate(
