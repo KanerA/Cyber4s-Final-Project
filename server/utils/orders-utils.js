@@ -7,6 +7,7 @@ const newOrder = async (req, res) => {
     dish: body.dish,
     drink: body.drink,
     restaurantName: body.restaurantName,
+    totalPrice: body.totalPrice,
   });
 
   newOrder.save().then((data, err) => {
@@ -61,13 +62,13 @@ const orderDoneCancel = async (req, res) => {
     updated = await OrderModel.findOneAndUpdate(
       { customerName: id },
       { done: isDone },
-      { new: true },
+      { new: true }
     );
   if (c)
     updated = await OrderModel.findOneAndUpdate(
       { customerName: id },
       { canceled: isCanceled },
-      { new: true },
+      { new: true }
     );
   console.log(updated);
   res.json(updated);

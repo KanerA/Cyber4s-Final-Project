@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-function Drink({ drink, drinkOrders, setDrinkOrders }) {
+function Drink({
+  drink,
+  drinkOrders,
+  setDrinkOrders,
+  setTotalPrice,
+  totalPrice,
+}) {
   const [drinkCount, setDrinkCount] = useState(1);
   const [drinkNotes, setDrinkNotes] = useState("");
   const addDrink = (e) => {
@@ -12,6 +18,8 @@ function Drink({ drink, drinkOrders, setDrinkOrders }) {
       notes: drinkNotes,
       amount: drinkCount,
     });
+    console.log(typeof totalPrice, typeof drink.price, typeof drink.amount);
+    setTotalPrice(totalPrice + Number(drink.price) * Number(drink.amount));
     setDrinkOrders(orders);
     setDrinkNotes("");
     setDrinkCount(1);

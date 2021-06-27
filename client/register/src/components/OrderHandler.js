@@ -9,17 +9,21 @@ function OrderHandler({ restaurant }) {
     axios
       .get(`/orders/${restaurant}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setOrders(res.data);
       })
       .catch((err) => console.log(err));
-    console.log(orders);
+    // console.log(orders);
   }, []);
   return (
-    <div>
+    <div className="orders">
       {/* helloooo */}
       {orders?.map((order, i) => {
-        return <Order order={order} />;
+        if (order.canceled === false) {
+          return <Order order={order} key={i} />;
+        } else {
+          return <p id="no-orders">no orders!</p>;
+        }
       })}
     </div>
   );

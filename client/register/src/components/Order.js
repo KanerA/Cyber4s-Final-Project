@@ -9,36 +9,42 @@ export default function Order({ order }) {
       .patch(`/orders/done/?c=true&id=${order.customerName}`)
       .then((res) => setCanceled(res.data.canceled));
   };
+
   return (
     <div>
-      <h2> {order.customerName}</h2>
+      <h2 className="name"> {order.customerName}</h2>
       <div>
         {order.dish?.map((dish) => {
           return (
-            <div>
-              <p>{dish.name}</p>
-              <p>{dish.description}</p>
-              <p>{dish.price}</p>
+            <div className="dish-invites">
+              <aside className="item-amount">{dish.amount}</aside>
+              <p className="item-name">{dish.name}</p>
+              <p className="item-notes">{dish.notes}</p>
+              <p className="total-item-price">{dish.amount * dish.price}</p>
             </div>
           );
         })}
       </div>
-      <div>
+      <div className="drink-invites">
         {order.drink?.map((drink) => {
           return (
-            <div>
-              <p>{drink.name}</p>
-              <p>{drink.description}</p>
-              <p>{drink.price}</p>
-              <p>{drink.alcoholic}</p>
+            <div className="drink-invites">
+              <aside className="item-amount">{drink.amount}</aside>
+              <p className="item-name">{drink.name}</p>
+              <p className="item-notes">{drink.notes}</p>
+              <p className="total-item-price">{drink.amount * drink.price}</p>
             </div>
           );
         })}
       </div>
-      <p>{order.createdAt}</p>
-      <p>cancel:{canceled ? "true" : "false"}</p>
-      <p>done:{order.done ? "true" : "false"}</p>
+      <p className="order-time">
+        {new Date(order.createdAt).toLocaleString("en-gb").toString()}
+      </p>
+      {/* <p>cancel:{canceled ? "true" : "false"}</p>
+      <p>done:{order.done ? "true" : "false"}</p> */}
+      <p className="total-price">{order.totalPrice}</p>
       <button
+        className="cancel-button"
         onClick={() => {
           cancelOrder();
         }}

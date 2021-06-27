@@ -10,7 +10,7 @@ function Menu({ restaurant }) {
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, setDishOrders] = useState([]);
   const [drinkOrders, setDrinkOrders] = useState([]);
-  const [counter, setCounter] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const customerName = useRef();
 
@@ -24,6 +24,15 @@ function Menu({ restaurant }) {
       .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
+  // useEffect(() => {
+  //   totalPrice.current = 0;
+  //   dishOrders?.forEach((dish) => {
+  //     totalPrice.current += dish.price * dish.amount;
+  //   });
+  //   drinkOrders?.forEach((drink) => {
+  //     totalPrice.current += Number(drink.price) * Number(drink.amount);
+  //   });
+  // }, [dishOrders, drinkOrders]);
 
   const placeOrder = (e) => {
     axios.post(`/orders/${restaurant}`, {
@@ -32,13 +41,15 @@ function Menu({ restaurant }) {
       drink: drinkOrders,
       createdAt: Date.now(),
       restaurantName: restaurant,
+      totalPrice: totalPrice.current,
     });
-    setCounter((prev) => prev + 1);
+
     setDrinkOrders([]);
     setDishOrders([]);
+    totalPrice.current = 0;
     e.target.parentElement.children[0].value = "";
   };
-  console.log(drinkOrders, dishOrders);
+  // console.log(drinkOrders, dishOrders);
   return (
     <div>
       <div id="menu">
@@ -52,6 +63,7 @@ function Menu({ restaurant }) {
                 key={`dish ${i}`}
                 dishOrders={dishOrders}
                 setDishOrders={setDishOrders}
+                totalPrice={totalPrice}
               />
             );
           })}
@@ -68,6 +80,8 @@ function Menu({ restaurant }) {
                   key={`drink ${i}`}
                   setDrinkOrders={setDrinkOrders}
                   drinkOrders={drinkOrders}
+                  totalPrice={totalPrice}
+                  setTotalPrice={setTotalPrice}
                 />
               );
             })}
@@ -81,6 +95,8 @@ function Menu({ restaurant }) {
                   key={`drink ${i}`}
                   setDrinkOrders={setDrinkOrders}
                   drinkOrders={drinkOrders}
+                  totalPrice={totalPrice}
+                  setTotalPrice={setTotalPrice}
                 />
               );
             })}
@@ -90,6 +106,7 @@ function Menu({ restaurant }) {
         <h3>this order</h3>
         <CurrentOrder dishOrders={dishOrders} drinkOrders={drinkOrders} />
         <div>
+          <p>total price: {totalPrice}</p>
           <input onChange={(e) => (customerName.current = e.target.value)} />
           <button
             id="set-order"
