@@ -18,23 +18,39 @@ function Dish({ dish, dishOrders, setDishOrders, setTotalPrice, totalPrice }) {
     setDishCount(1);
   };
   return (
-    <div>
+    <div className="item">
       <span>
-        <button onClick={() => setDishCount(dishCount + 1)}>+</button>
+        <button
+          className="count-button"
+          onClick={() => setDishCount(dishCount + 1)}
+        >
+          +
+        </button>
         {dishCount}
-        <button onClick={() => setDishCount(dishCount - 1)}>-</button>
+        <button
+          className="count-button"
+          onClick={() => setDishCount(dishCount - 1)}
+        >
+          -
+        </button>
       </span>
-      <p className="name">{dish.name}</p>
-      <p className="description">{dish.description}</p>
-      <p className="price">{dish.price}</p>
-      <div>
+      <div className="item-info">
+        <p className="item-name">{dish.name}</p>
+        <p className="item-description">{dish.description}</p>
+        <p className="item-price">{dish.price}</p>
+      </div>
+      <div className="item-assign">
         <input
+          className="item-notes"
           placeholder="add notes"
           onChange={(e) => {
             setDishNotes(e.target.value);
           }}
-        />
-        <button onClick={(e) => addDish(e)}>order</button>
+        />{" "}
+        <br />
+        <button className="item-order" onClick={(e) => addDish(e)}>
+          order
+        </button>
       </div>
     </div>
   );

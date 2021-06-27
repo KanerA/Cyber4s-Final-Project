@@ -40,76 +40,88 @@ function Menu({ restaurant }) {
     e.target.parentElement.children[1].value = "";
     setTotalPrice(0);
   };
-  // console.log(drinkOrders, dishOrders);
+
   return (
     <div>
       <div id="menu">
-        <h1>my menu</h1>
-        <div id="dishes">
-          <h2>Dishes</h2>
-          {dishes?.map((dish, i) => {
-            return (
-              <Dish
-                dish={dish}
-                key={`dish ${i}`}
-                dishOrders={dishOrders}
-                setDishOrders={setDishOrders}
-                totalPrice={totalPrice}
-                setTotalPrice={setTotalPrice}
-              />
-            );
-          })}
-        </div>
-        <div id="drinks">
-          <h2> Drinks</h2>
-          <h3>Alcohol</h3>
-          {drinks
-            ?.filter((drink) => drink.alcoholic)
-            .map((drink, i) => {
+        <h1>{restaurant}'s menu</h1>
+        <div id="menu-items">
+          <div id="dishes">
+            <h2 className="main-header">Dishes</h2>
+            {dishes?.map((dish, i) => {
               return (
-                <Drink
-                  drink={drink}
-                  key={`drink ${i}`}
-                  setDrinkOrders={setDrinkOrders}
-                  drinkOrders={drinkOrders}
+                <Dish
+                  dish={dish}
+                  key={`dish ${i}`}
+                  dishOrders={dishOrders}
+                  setDishOrders={setDishOrders}
                   totalPrice={totalPrice}
                   setTotalPrice={setTotalPrice}
                 />
               );
             })}
-          <h3>light Drinks</h3>
-          {drinks
-            ?.filter((drink) => !drink.alcoholic)
-            .map((drink, i) => {
-              return (
-                <Drink
-                  drink={drink}
-                  key={`drink ${i}`}
-                  setDrinkOrders={setDrinkOrders}
-                  drinkOrders={drinkOrders}
-                  totalPrice={totalPrice}
-                  setTotalPrice={setTotalPrice}
-                />
-              );
-            })}
+          </div>
+          <div id="drinks">
+            <h2 className="main-header"> Drinks</h2>
+            <h3 className="secondary-header">Alcohol</h3>
+            {drinks
+              ?.filter((drink) => drink.alcoholic)
+              .map((drink, i) => {
+                return (
+                  <Drink
+                    drink={drink}
+                    key={`drink ${i}`}
+                    setDrinkOrders={setDrinkOrders}
+                    drinkOrders={drinkOrders}
+                    totalPrice={totalPrice}
+                    setTotalPrice={setTotalPrice}
+                  />
+                );
+              })}
+            <h3 className="secondary-header">light Drinks</h3>
+            {drinks
+              ?.filter((drink) => !drink.alcoholic)
+              .map((drink, i) => {
+                return (
+                  <Drink
+                    drink={drink}
+                    key={`drink ${i}`}
+                    setDrinkOrders={setDrinkOrders}
+                    drinkOrders={drinkOrders}
+                    totalPrice={totalPrice}
+                    setTotalPrice={setTotalPrice}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
-      <div className="order">
-        <h3>this order</h3>
-        <CurrentOrder dishOrders={dishOrders} drinkOrders={drinkOrders} />
-        <div>
-          <p>total price: {totalPrice}</p>
-          <input onChange={(e) => (customerName.current = e.target.value)} />
-          <button
-            id="set-order"
-            onClick={(e) => {
-              placeOrder(e);
-            }}
-          >
-            set order
-          </button>
+      {(drinkOrders.length > 0 || dishOrders.length > 0) && (
+        <div className="order">
+          <h3>this order</h3>
+          <CurrentOrder
+            dishOrders={dishOrders}
+            setDishOrders={setDishOrders}
+            setDrinkOrders={setDrinkOrders}
+            drinkOrders={drinkOrders}
+            totalPrice={totalPrice}
+            setTotalPrice={setTotalPrice}
+          />
+          <div>
+            <p>total price: {totalPrice}</p>
+            <input onChange={(e) => (customerName.current = e.target.value)} />
+            <button
+              id="set-order"
+              placeholder="enter customer name"
+              onClick={(e) => {
+                placeOrder(e);
+              }}
+            >
+              set order
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

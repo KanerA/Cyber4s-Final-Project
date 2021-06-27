@@ -1,3 +1,56 @@
-#menu {
+$mainColor: #fa923f;
+$secondaryColor: #0995ad;
+$mainBrightColor: #ffa459;
+$mainDarkColor: #ad5c1a;
+$secondaryBrightColor: #75e7fa;
+.item {
+  display: flexbox;
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  margin: 7px;
+  font-size: 2rem;
   color: white;
+}
+.item-info {
+  display: flexbox;
+}
+.item-notes {
+  margin: 2px;
+  color: white;
+  background-color: $secondaryColor;
+  box-shadow: 1px 1px 1px $mainDarkColor;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.item-notes::placeholder {
+  color: rgba(255, 255, 255, 0.438);
+}
+.item-order {
+  background-color: $mainBrightColor;
+  margin: 10px;
+  font-size: 1rem;
+  padding: 10px;
+  box-shadow: 1px 1px 1px $mainDarkColor;
+  color: white;
+  border-radius: 0.5rem;
+}
+.item-name {
+  font-weight: 800;
+}
+.item-price::after {
+  content: "₪";
+}
+.count-button {
+  font-size: 1.5rem;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.order {
+  position: fixed;
+  left: 5px;
+  top: 3rem;
+}
+#menu-items {
+  display: flex;
+  justify-content: center;
 }

@@ -24,24 +24,39 @@ function Drink({
     setDrinkCount(1);
   };
   return (
-    <div>
+    <div className="item">
       <span>
-        <button onClick={() => setDrinkCount(drinkCount + 1)}>+</button>
+        <button
+          className="count-button"
+          onClick={() => setDrinkCount(drinkCount + 1)}
+        >
+          +
+        </button>
         {drinkCount}
-        <button onClick={() => setDrinkCount(drinkCount - 1)}>-</button>
+        <button
+          className="count-button"
+          onClick={() => setDrinkCount(drinkCount - 1)}
+        >
+          -
+        </button>
       </span>
-      <p className="name">{drink.name}</p>
-      <p className="description">{drink.description}</p>
-      <p className="price">{drink.price}</p>
-      <p>{drink.alcoholic ? "alcoholic" : "non-alcoholic"}</p>
-      <div>
+      <div className="item-info">
+        <p className="item-name">{drink.name}</p>
+        <p className="item-description">{drink.description}</p>
+        <p className="item-price">{drink.price}</p>
+      </div>
+      <div className="item-assign">
         <input
+          className="item-notes"
           placeholder="add notes"
           onChange={(e) => {
             setDrinkNotes(e.target.value);
           }}
-        />
-        <button onClick={(e) => addDrink(e)}>order</button>
+        />{" "}
+        <br />
+        <button className="item-order" onClick={(e) => addDrink(e)}>
+          order
+        </button>
       </div>
     </div>
   );
