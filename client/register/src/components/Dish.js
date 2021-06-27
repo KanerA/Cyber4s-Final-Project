@@ -12,7 +12,7 @@ function Dish({ dish, dishOrders, setDishOrders, setTotalPrice, totalPrice }) {
       notes: dishNotes,
       amount: dishCount,
     });
-    setTotalPrice(totalPrice + Number(dish.price) * Number(dish.amount));
+    setTotalPrice(totalPrice + Number(dish.price) * Number(dishCount));
     setDishOrders(orders);
     setDishNotes("");
     setDishCount(1);

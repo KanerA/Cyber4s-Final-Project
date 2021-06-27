@@ -64,6 +64,7 @@ function Menu({ restaurant }) {
                 dishOrders={dishOrders}
                 setDishOrders={setDishOrders}
                 totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
               />
             );
           })}
