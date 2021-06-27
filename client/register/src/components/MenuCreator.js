@@ -12,7 +12,7 @@ function MenuCreator({ restaurant }) {
     restaurantName: restaurant,
   });
 
-  const [item, setItem] = useState("");
+  const [item, setItem] = useState("dish"); // default will be as UI -- dish
 
   const saveItem = async (e) => {
     // e.preventDefault();
