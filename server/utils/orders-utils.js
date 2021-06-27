@@ -73,10 +73,20 @@ const orderDoneCancel = async (req, res) => {
   res.json(updated);
 };
 
+const getNonCanceled = async (req, res) =>{
+  const { restaurantName } = req.params;
+  const nonCanceledOrders = await OrderModel.find({
+    restaurantName,
+    canceled: false,
+  });
+  res.json(nonCanceledOrders);
+};
+
 module.exports = {
   newOrder,
   getOrders,
   getOrderHistory,
   getDone,
   orderDoneCancel,
+  getNonCanceled
 };
