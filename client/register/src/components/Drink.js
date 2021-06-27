@@ -18,7 +18,6 @@ function Drink({
       notes: drinkNotes,
       amount: drinkCount,
     });
-    console.log(typeof totalPrice, typeof drink.price, typeof drink.amount);
     setTotalPrice(totalPrice + Number(drink.price) * Number(drinkCount));
     setDrinkOrders(orders);
     setDrinkNotes("");

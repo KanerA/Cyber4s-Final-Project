@@ -42,7 +42,9 @@ export default function Order({ order }) {
       </p>
       {/* <p>cancel:{canceled ? "true" : "false"}</p>
       <p>done:{order.done ? "true" : "false"}</p> */}
-      <p className="total-price">{order.totalPrice}</p>
+      <p className="total-price">
+        total price: <span>{order.totalPrice}</span>
+      </p>
       <button
         className="cancel-button"
         onClick={() => {

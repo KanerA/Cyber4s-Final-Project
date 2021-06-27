@@ -24,15 +24,6 @@ function Menu({ restaurant }) {
       .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
-  // useEffect(() => {
-  //   totalPrice.current = 0;
-  //   dishOrders?.forEach((dish) => {
-  //     totalPrice.current += dish.price * dish.amount;
-  //   });
-  //   drinkOrders?.forEach((drink) => {
-  //     totalPrice.current += Number(drink.price) * Number(drink.amount);
-  //   });
-  // }, [dishOrders, drinkOrders]);
 
   const placeOrder = (e) => {
     axios.post(`/orders/${restaurant}`, {
@@ -46,8 +37,8 @@ function Menu({ restaurant }) {
 
     setDrinkOrders([]);
     setDishOrders([]);
-    totalPrice.current = 0;
-    e.target.parentElement.children[0].value = "";
+    e.target.parentElement.children[1].value = "";
+    setTotalPrice(0);
   };
   // console.log(drinkOrders, dishOrders);
   return (
