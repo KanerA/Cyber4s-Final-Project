@@ -59,18 +59,36 @@ const orderDoneCancel = async (req, res) => {
   let updated;
   if (d)
     updated = await OrderModel.findOneAndUpdate(
-      { customerName: id },
+      id,
       { done: isDone },
       { new: true }
     );
   if (c)
     updated = await OrderModel.findOneAndUpdate(
-      { customerName: id },
+      id,
       { canceled: isCanceled },
       { new: true }
     );
   console.log(updated);
   res.json(updated);
+};
+
+const getNonCanceled = async (req, res) =>{
+  const { restaurantName } = req.params;
+  const nonCanceledOrders = await OrderModel.find({
+    restaurantName,
+    canceled: false,
+  });
+  res.json(nonCanceledOrders);
+};
+
+const getCanceled = async (req, res) => {
+  const { restaurantName } = req.params;
+  const canceledOrders = await OrderModel.find({
+    restaurantName,
+    canceled: true,
+  });
+  res.json(canceledOrders);
 };
 
 module.exports = {
@@ -79,4 +97,6 @@ module.exports = {
   getOrderHistory,
   getDone,
   orderDoneCancel,
+  getNonCanceled,
+  getCanceled,
 };
