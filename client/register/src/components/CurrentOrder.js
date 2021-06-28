@@ -10,10 +10,12 @@ function CurrentOrder({
 }) {
   const cancelItem = (itemBool, item) => {
     if (itemBool) {
-      const newDishes = dishOrders.filter((dish) => dish.name !== item.name);
+      const newDishes = dishOrders.filter((dish) => dish.count !== item.count);
       setDishOrders(newDishes);
     } else {
-      const newDrinks = drinkOrders.filter((drink) => drink.name !== item.name);
+      const newDrinks = drinkOrders.filter(
+        (drink) => drink.count !== item.count
+      );
       setDrinkOrders(newDrinks);
     }
     const newPrice = totalPrice - item.price * item.amount;

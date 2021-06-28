@@ -50,7 +50,21 @@ $secondaryBrightColor: #75e7fa;
   left: 5px;
   top: 3rem;
 }
+.main-header {
+  display: block;
+}
 #menu-items {
   display: flex;
+  flex-direction: row;
   justify-content: center;
+}
+#drinks {
+  display: flex;
+  flex-direction: row;
+}
+#breaker {
+  padding-bottom: 15px;
+}
+#dishes {
+  border-right: 2px solid black;
 }

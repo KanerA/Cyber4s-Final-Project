@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-function Dish({ dish, dishOrders, setDishOrders, setTotalPrice, totalPrice }) {
+function Dish({
+  dish,
+  dishOrders,
+  setDishOrders,
+  setTotalPrice,
+  totalPrice,
+  itemNumber,
+}) {
   const [dishCount, setDishCount] = useState(1);
   const [dishNotes, setDishNotes] = useState("");
   const addDish = (e) => {
@@ -11,11 +18,14 @@ function Dish({ dish, dishOrders, setDishOrders, setTotalPrice, totalPrice }) {
       price: dish.price,
       notes: dishNotes,
       amount: dishCount,
+      count: itemNumber.current,
     });
     setTotalPrice(totalPrice + Number(dish.price) * Number(dishCount));
     setDishOrders(orders);
     setDishNotes("");
     setDishCount(1);
+    itemNumber.current++;
+    console.log(itemNumber.current);
   };
   return (
     <div className="item">

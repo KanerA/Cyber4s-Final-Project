@@ -69,12 +69,38 @@
   top: 3rem;
 }
 
+.main-header {
+  display: block;
+}
+
 #menu-items {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+#drinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#breaker {
+  padding-bottom: 15px;
+}
+
+#dishes {
+  border-right: 2px solid black;
 }
 /*# sourceMappingURL=Menu.css.map */

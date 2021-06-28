@@ -6,6 +6,7 @@ function Drink({
   setDrinkOrders,
   setTotalPrice,
   totalPrice,
+  itemNumber,
 }) {
   const [drinkCount, setDrinkCount] = useState(1);
   const [drinkNotes, setDrinkNotes] = useState("");
@@ -17,11 +18,14 @@ function Drink({
       price: drink.price,
       notes: drinkNotes,
       amount: drinkCount,
+      count: itemNumber.current,
     });
     setTotalPrice(totalPrice + Number(drink.price) * Number(drinkCount));
     setDrinkOrders(orders);
     setDrinkNotes("");
     setDrinkCount(1);
+    itemNumber.current++;
+    console.log(itemNumber.current);
   };
   return (
     <div className="item">

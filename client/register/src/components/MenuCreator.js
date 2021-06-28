@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import "./styles/MenuCreator/MenuCreator.css";
 
 function MenuCreator({ restaurant }) {
-  const dName = useRef();
   const itemRef = useRef({
     name: "name",
     price: "price",
@@ -39,7 +38,6 @@ function MenuCreator({ restaurant }) {
   const dishOrDrink = (e) => {
     setItem(e.target.value);
   };
-  console.log(dName);
   return (
     <div className="menu-creator">
       <h1>create dish</h1>
@@ -60,6 +58,22 @@ function MenuCreator({ restaurant }) {
         />
         Dish
       </div>
+      {item === "drink" && (
+        <div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              onChange={(e) =>
+                itemRef.current.alcoholic
+                  ? (itemRef.current.alcoholic = false)
+                  : (itemRef.current.alcoholic = true)
+              }
+            />
+            <span className="slider round"></span>
+          </label>
+          <span>Alcoholic</span>
+        </div>
+      )}
       <input
         id="item-name"
         className="item-property"
@@ -80,20 +94,7 @@ function MenuCreator({ restaurant }) {
           itemRef.current.description = e.target.value;
         }}
       />
-      {item === "drink" && (
-        <label className="switch">
-          <input
-            type="checkbox"
-            onChange={(e) =>
-              itemRef.current.alcoholic
-                ? (itemRef.current.alcoholic = false)
-                : (itemRef.current.alcoholic = true)
-            }
-          />{" "}
-          <span>Alcoholic</span>
-          <span className="slider round"></span>
-        </label>
-      )}{" "}
+
       <br></br>
       <button id="save-new-item" onClick={(e) => saveItem(e)}>
         save {item}

@@ -13,6 +13,7 @@ function Menu({ restaurant }) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const customerName = useRef();
+  const itemNumber = useRef(0);
 
   useEffect(() => {
     axios
@@ -39,6 +40,7 @@ function Menu({ restaurant }) {
     setDishOrders([]);
     e.target.parentElement.children[1].value = "";
     setTotalPrice(0);
+    itemNumber.current = 0;
   };
 
   return (
@@ -46,53 +48,65 @@ function Menu({ restaurant }) {
       <div id="menu">
         <h1>{restaurant}'s menu</h1>
         <div id="menu-items">
-          <div id="dishes">
+          <div id="dish-container">
             <h2 className="main-header">Dishes</h2>
-            {dishes?.map((dish, i) => {
-              return (
-                <Dish
-                  dish={dish}
-                  key={`dish ${i}`}
-                  dishOrders={dishOrders}
-                  setDishOrders={setDishOrders}
-                  totalPrice={totalPrice}
-                  setTotalPrice={setTotalPrice}
-                />
-              );
-            })}
+            <br id="breaker" />
+            <div id="dishes">
+              {dishes?.map((dish, i) => {
+                return (
+                  <Dish
+                    dish={dish}
+                    key={`dish ${i}`}
+                    dishOrders={dishOrders}
+                    setDishOrders={setDishOrders}
+                    totalPrice={totalPrice}
+                    setTotalPrice={setTotalPrice}
+                    itemNumber={itemNumber}
+                  />
+                );
+              })}
+            </div>
           </div>
-          <div id="drinks">
+          <div>
             <h2 className="main-header"> Drinks</h2>
-            <h3 className="secondary-header">Alcohol</h3>
-            {drinks
-              ?.filter((drink) => drink.alcoholic)
-              .map((drink, i) => {
-                return (
-                  <Drink
-                    drink={drink}
-                    key={`drink ${i}`}
-                    setDrinkOrders={setDrinkOrders}
-                    drinkOrders={drinkOrders}
-                    totalPrice={totalPrice}
-                    setTotalPrice={setTotalPrice}
-                  />
-                );
-              })}
-            <h3 className="secondary-header">light Drinks</h3>
-            {drinks
-              ?.filter((drink) => !drink.alcoholic)
-              .map((drink, i) => {
-                return (
-                  <Drink
-                    drink={drink}
-                    key={`drink ${i}`}
-                    setDrinkOrders={setDrinkOrders}
-                    drinkOrders={drinkOrders}
-                    totalPrice={totalPrice}
-                    setTotalPrice={setTotalPrice}
-                  />
-                );
-              })}
+            <div id="drinks">
+              <div className="drinks-secondary">
+                <h3 className="secondary-header">Alcohol</h3>
+                {drinks
+                  ?.filter((drink) => drink.alcoholic)
+                  .map((drink, i) => {
+                    return (
+                      <Drink
+                        drink={drink}
+                        key={`drink ${i}`}
+                        setDrinkOrders={setDrinkOrders}
+                        drinkOrders={drinkOrders}
+                        totalPrice={totalPrice}
+                        setTotalPrice={setTotalPrice}
+                        itemNumber={itemNumber}
+                      />
+                    );
+                  })}
+              </div>
+              <div className="drinks-secondary">
+                <h3 className="secondary-header">light Drinks</h3>
+                {drinks
+                  ?.filter((drink) => !drink.alcoholic)
+                  .map((drink, i) => {
+                    return (
+                      <Drink
+                        drink={drink}
+                        key={`drink ${i}`}
+                        setDrinkOrders={setDrinkOrders}
+                        drinkOrders={drinkOrders}
+                        totalPrice={totalPrice}
+                        setTotalPrice={setTotalPrice}
+                        itemNumber={itemNumber}
+                      />
+                    );
+                  })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
