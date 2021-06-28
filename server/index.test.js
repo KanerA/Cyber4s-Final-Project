@@ -20,6 +20,10 @@ const newOrder = {
     totalPrice: 170,
   };
 
+  const mockParams = {
+      h: 10 // for get history test, change for other history length
+  }
+
 describe('Test orders routes', () => {
     it('Should GET all orders by the restaurant\'s name', async () => {
         const res = await request(app).get('/orders/Assaf\'s pizza');
@@ -30,5 +34,13 @@ describe('Test orders routes', () => {
         const res = await request(app).post('/orders/Assaf\'s pizza').send(newOrder)
         expect(res.status).toBe(200);
         expect(res.text).toBe('Assafs order accepted!');
+    });
+
+    test('Getting order history', async () => {
+        const res = await request(app)
+            .get('/orders/Assaf\'s pizza/history')
+            .query({ h: mockParams.h });
+        expect(res.status).toBe(200);
+        expect(res.body.length).toBe(mockParams.h)
     });
 });
