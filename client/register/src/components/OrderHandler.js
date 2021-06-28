@@ -9,7 +9,6 @@ function OrderHandler({ restaurant }) {
     axios
       .get(`/orders/${restaurant}`)
       .then((res) => {
-        // console.log(res.data);
         setOrders(res.data);
       })
       .catch((err) => console.log(err));
