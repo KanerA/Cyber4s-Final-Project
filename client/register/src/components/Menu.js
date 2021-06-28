@@ -33,7 +33,7 @@ function Menu({ restaurant }) {
       drink: drinkOrders,
       createdAt: Date.now(),
       restaurantName: restaurant,
-      totalPrice: totalPrice.current,
+      totalPrice: totalPrice,
     });
 
     setDrinkOrders([]);
