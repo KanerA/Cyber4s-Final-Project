@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import axios from "axios";
 
-export default function Order({ order }) {
+export default function Order({ order, restaurant }) {
+  const [isDone, setIsDone] = useState(order.done);
   const cancel = () => {
     // patch DONE
   };
+  const orderDone = () => {
+    axios.patch(`http://10.0.0.5:8080/orders/done/?id=${restaurant}&d=true`);
+    setIsDone("green"); // set background color of done orders to green (show it work)
+  };
   return (
-    <View>
+    <View style={{ backgroundColor: isDone ? "green" : null }}>
       <Text className="name"> {order.customerName}</Text>
       <View>
         {order.dish?.map((dish) => {
@@ -43,6 +49,12 @@ export default function Order({ order }) {
         <Text>total price: {order.totalPrice}</Text>
       </Text>
       <Button className="cancel-button" title="cancel" />
+      <Button
+        className="cancel-button"
+        title="done"
+        color={"green"}
+        onPress={orderDone}
+      />
     </View>
   );
 }

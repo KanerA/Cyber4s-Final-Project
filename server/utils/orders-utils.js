@@ -44,36 +44,37 @@ const getOrderHistory = async (req, res) => {
 };
 
 const getDone = async (req, res) => {
-  const { done, res_name } = req.query;
+  const { done, restaurantName } = req.query;
   const orderList = await OrderModel.find({
     done,
-    restaurantName: res_name,
+    restaurantName: restaurantName,
   });
+  console.log(orderList);
   res.json(orderList);
 };
 
 const orderDoneCancel = async (req, res) => {
   const { d, c, id } = req.query;
-  const isDone = d ? d === "true": undefined;
-  const isCanceled = c ? c === "true": undefined;
+  const isDone = d ? d === "true" : undefined;
+  const isCanceled = c ? c === "true" : undefined;
   let updated;
   if (d)
     updated = await OrderModel.findOneAndUpdate(
       id,
       { done: isDone },
-      { new: true }
+      { new: true },
     );
   if (c)
     updated = await OrderModel.findOneAndUpdate(
       id,
       { canceled: isCanceled },
-      { new: true }
+      { new: true },
     );
   console.log(updated);
   res.json(updated);
 };
 
-const getNonCanceled = async (req, res) =>{
+const getNonCanceled = async (req, res) => {
   const { restaurantName } = req.params;
   const nonCanceledOrders = await OrderModel.find({
     restaurantName,

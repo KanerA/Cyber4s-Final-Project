@@ -20,7 +20,7 @@ export default function Orders() {
     <View>
       <Text>Orders</Text>
       {orders.map((order, i) => {
-        return <Order order={order} />;
+        return <Order order={order} restaurant={restaurant} />;
       })}
     </View>
   );

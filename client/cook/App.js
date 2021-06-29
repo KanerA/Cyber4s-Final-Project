@@ -28,7 +28,7 @@ export default function App() {
           })}
         </Text> */}
         {restaurant ? null : <Login setRestaurant={setRestaurant} />}
-        {restaurant && <OrderHandler />}
+        {restaurant && <OrderHandler restaurant={restaurant} />}
         {/* <StatusBar style="auto" /> */}
       </View>
     </ScrollView>
