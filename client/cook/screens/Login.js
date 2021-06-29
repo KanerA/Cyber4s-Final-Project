@@ -18,7 +18,7 @@ export default function Login({ setRestaurant }) {
   const logIntoStandOrders = () => {
     // check the password and stand name input in the sql database
     // axios.get(`http://10.0.0.5:8080/stands/${standNameInput.current}`); // NEED TO CREATE ROUTE IN SERVER
-    const response = "vegan";
+    const response = "vegan"; // the axios response (standNameInput)
     setRestaurant(response);
   };
   return (
