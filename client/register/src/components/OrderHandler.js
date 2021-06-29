@@ -9,7 +9,6 @@ function OrderHandler({ restaurant }) {
     axios
       .get(`/orders/${restaurant}`)
       .then((res) => {
-        // console.log(res.data);
         setOrders(res.data);
       })
       .catch((err) => console.log(err));
@@ -17,7 +16,6 @@ function OrderHandler({ restaurant }) {
   }, []);
   return (
     <div className="orders">
-      {/* helloooo */}
       {orders?.map((order, i) => {
         if (order.canceled === false) {
           return <Order order={order} key={i} />;

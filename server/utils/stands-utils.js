@@ -15,6 +15,10 @@ const getAllStands = (req, res) => {
   });
 };
 
+const logIntoStand = (req, res) => {
+  // const { standName, password } = req.params;
+};
+
 const deleteStand = (req, res) => {
   const { o, n } = req.query;
   Stands.destroy({
