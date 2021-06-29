@@ -1,0 +1,52 @@
+.customer-name {
+  color: white;
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  margin: 7px;
+  font-size: 1rem;
+  color: white;
+  padding-bottom: 15px;
+}
+.drink-invites,
+.dish-invites {
+  display: flex;
+  flex-direction: column;
+}
+.orders {
+  display: flex;
+}
+.order-details {
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  margin: 7px;
+  margin-top: 0;
+  font-size: 1rem;
+  color: white;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-self: flex-end;
+  align-content: flex-end;
+  justify-items: flex-end;
+  justify-self: flex-end;
+
+  //   position: absolute;
+  //   display: inline-flex;
+}
+.register-order {
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+.cancel-button {
+  bottom: 0;
+
+  margin-top: 10px;
+  position: absolute;
+}
