@@ -7,9 +7,10 @@ export default function Order({ order }) {
   const cancelOrder = (e) => {
     // patch {cancel: true}
     axios
-      .patch(`/orders/done/?c=true&id=${order.customerName}`)
+      .patch(`/orders/done/?c=true&id=${order._id}`)
       .then((res) => setCanceled(res.data.canceled));
   };
+  console.log(order._id);
 
   return (
     <div className="register-order">

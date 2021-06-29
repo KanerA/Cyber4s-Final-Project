@@ -60,17 +60,17 @@ const orderDoneCancel = async (req, res) => {
   let updated;
   if (d)
     updated = await OrderModel.findOneAndUpdate(
-      id,
+      { _id: id },
       { done: isDone },
       { new: true },
     );
   if (c)
     updated = await OrderModel.findOneAndUpdate(
-      id,
+      { _id: id },
       { canceled: isCanceled },
       { new: true },
     );
-  console.log(updated);
+  console.log(d, c, id);
   res.json(updated);
 };
 
