@@ -21,16 +21,8 @@ export default function App() {
       contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
     >
       <View style={styles.container}>
-        {/* <Text>test!!</Text>
-        <Button title={"CLICK"} onPress={click} />
-        <Text>
-          {dishes?.map((dish, i) => {
-            return <Text key={i}>{dish.name}</Text>;
-          })}
-        </Text> */}
         {restaurant ? null : <Login setRestaurant={setRestaurant} />}
         {restaurant && <OrderHandler restaurant={restaurant} />}
-        {/* <StatusBar style="auto" /> */}
       </View>
     </ScrollView>
   );

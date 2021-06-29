@@ -13,7 +13,6 @@ export default function Order({ order }) {
       .then((res) => {
         // console.log(res.data); // set background color of done orders to green to show it work
       });
-    console.log(order._id);
   };
   return (
     <View style={{ backgroundColor: isDone ? "green" : "white" }}>
