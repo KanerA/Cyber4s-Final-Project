@@ -21,7 +21,7 @@ const newOrder = {
   };
 
   const mockParams = {
-      h: 10 // for get history test, change for other history length
+      h: 10, // for get history test, change for other history length
   }
 
 describe('Test orders routes', () => {
@@ -42,5 +42,13 @@ describe('Test orders routes', () => {
             .query({ h: mockParams.h });
         expect(res.status).toBe(200);
         expect(res.body.length).toBe(mockParams.h)
+    });
+});
+
+describe('Test dish routes', () => {
+    it('Should get all restaurant dishes', async () => {
+        const res = await request(app).get('/dishes/Pizza');
+        expect(res.status).toBe(200);
+        expect(res.body.length).toBe(2);
     });
 });
