@@ -16,7 +16,6 @@ function OrderHandler({ restaurant }) {
   }, []);
   return (
     <div className="orders">
-      {/* helloooo */}
       {orders?.map((order, i) => {
         if (order.canceled === false) {
           return <Order order={order} key={i} />;

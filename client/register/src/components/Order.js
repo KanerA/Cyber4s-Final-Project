@@ -19,7 +19,7 @@ export default function Order({ order }) {
             <div className="dish-invites">
               <aside className="item-amount">{dish.amount}</aside>
               <p className="item-name">{dish.name}</p>
-              <p className="item-notes">{dish.notes}</p>
+              <p className="item-note">{dish.notes}</p>
               <p className="total-item-price">{dish.amount * dish.price}</p>
             </div>
           );
@@ -31,7 +31,7 @@ export default function Order({ order }) {
             <div className="drink-invites">
               <aside className="item-amount">{drink.amount}</aside>
               <p className="item-name">{drink.name}</p>
-              <p className="item-notes">{drink.notes}</p>
+              <p className="item-note">{drink.notes}</p>
               <p className="total-item-price">{drink.amount * drink.price}</p>
             </div>
           );
