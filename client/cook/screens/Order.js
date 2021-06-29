@@ -8,12 +8,12 @@ export default function Order({ order }) {
     axios.patch(`http://10.0.0.5:8080/orders/done/?id=${order._id}&c=true`);
   };
   const orderDone = () => {
-    // axios
-    //   .patch(`http://10.0.0.5:8080/orders/done/?id=${order._id}&d=false`)
-    //   .then((res) => {
-    //     setIsDone("green");
-    //     console.log(res.data); // set background color of done orders to green to show it work
-    //   });
+    axios
+      .patch(`http://10.0.0.5:8080/orders/done/?id=${order._id}&d=true`)
+      .then((res) => {
+        setIsDone("green");
+        console.log(res.data); // set background color of done orders to green to show it work
+      });
     console.log(order._id);
   };
   return (
@@ -58,7 +58,7 @@ export default function Order({ order }) {
         className="cancel-button"
         title="done"
         color={"green"}
-        onPress={orderDone()}
+        onPress={orderDone}
       />
     </View>
   );
