@@ -6,27 +6,29 @@ import OrderHandler from "./screens/OrderHandler";
 import axios from "axios";
 
 export default function App() {
-  const [dishes, setDishes] = useState();
-  const click = () => {
-    axios
-      .get("http://10.0.0.5:8080/dishes/vegan")
-      .then((res) => setDishes(res.data))
-      .catch((e) => console.log(e.message));
-    console.log(dishes);
-  };
+  // const [dishes, setDishes] = useState();
+  // const click = () => {
+  //   axios
+  //     .get("http://10.0.0.5:8080/dishes/vegan")
+  //     .then((res) => setDishes(res.data))
+  //     .catch((e) => console.log(e.message));
+  //   console.log(dishes);
+  // };
+  const [restaurant, setRestaurant] = useState();
   return (
     <ScrollView
       contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
     >
       <View style={styles.container}>
-        <Text>test!!</Text>
+        {/* <Text>test!!</Text>
         <Button title={"CLICK"} onPress={click} />
         <Text>
           {dishes?.map((dish, i) => {
             return <Text key={i}>{dish.name}</Text>;
           })}
-        </Text>
-        <OrderHandler />
+        </Text> */}
+        <Login setRestaurant={setRestaurant} />
+        {restaurant && <OrderHandler />}
         <StatusBar style="auto" />
       </View>
     </ScrollView>
