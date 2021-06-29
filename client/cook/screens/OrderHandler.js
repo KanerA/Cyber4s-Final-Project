@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Order from "./Order";
 export default function Orders() {
   const [orders, setOrders] = useState([
@@ -58,22 +58,21 @@ export default function Orders() {
     //   restaurantName: "b",
     // },
   ]);
-  let restaurant = "vegan"; // to be- res_name
+  let restaurant = "b"; // to be- res_name
   useEffect(() => {
     axios
-      .get(`http://10.0.0.5:8080/orders/${restaurant}`)
+      .get(`/orders/${restaurant}`)
       .then((res) => {
         setOrders(res.data);
-        console.log(res.data);
+        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
-
-  // console.log(orders);
+  console.log(orders);
   return (
     <View>
-      <Text>Orders</Text>
-      {orders.map((order, i) => {
+      <Text>trse</Text>
+      {orders.map((order) => {
         return <Order order={order} />;
       })}
     </View>
