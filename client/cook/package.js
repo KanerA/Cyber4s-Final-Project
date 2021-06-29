@@ -1,4 +1,5 @@
-{
+
+moudle.ex{
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -7,7 +8,7 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
-  "proxy": "http://localhost:8080/",
+  "proxy": "http://10.0.0.5:8080/",
   "dependencies": {
     "axios": "^0.21.1",
     "expo": "~41.0.1",
