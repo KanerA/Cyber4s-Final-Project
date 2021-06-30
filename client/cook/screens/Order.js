@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import axios from "axios";
 
 export default function Order({ order }) {
+  const [isDone, setIsDone] = useState(order.done);
   const cancel = () => {
-    // patch DONE
+    axios.patch(`http://10.0.0.13:8080/orders/done/?id=${order._id}&c=true`);
+  };
+  const orderDone = () => {
+    axios
+      .patch(`http://10.0.0.13:8080/orders/done/?id=${order._id}&d=true`)
+      .then((res) => {
+        // console.log(res.data); // set background color of done orders to green to show it work
+      });
   };
   return (
-    <View>
+    <View style={{ backgroundColor: isDone ? "green" : "white" }}>
       <Text className="name"> {order.customerName}</Text>
       <View>
         {order.dish?.map((dish) => {
@@ -15,9 +24,6 @@ export default function Order({ order }) {
               <Text className="item-amount">{dish.amount}</Text>
               <Text className="item-name">{dish.name}</Text>
               <Text className="item-notes">{dish.notes}</Text>
-              <Text className="total-item-price">
-                {dish.amount * dish.price}
-              </Text>
             </View>
           );
         })}
@@ -29,9 +35,6 @@ export default function Order({ order }) {
               <Text className="item-amount">{drink.amount}</Text>
               <Text className="item-name">{drink.name}</Text>
               <Text className="item-notes">{drink.notes}</Text>
-              <Text className="total-item-price">
-                {drink.amount * drink.price}
-              </Text>
             </View>
           );
         })}
@@ -43,6 +46,12 @@ export default function Order({ order }) {
         <Text>total price: {order.totalPrice}</Text>
       </Text>
       <Button className="cancel-button" title="cancel" />
+      <Button
+        className="cancel-button"
+        title="done"
+        color={"green"}
+        onPress={orderDone}
+      />
     </View>
   );
 }
