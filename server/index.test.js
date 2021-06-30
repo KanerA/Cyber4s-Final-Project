@@ -199,6 +199,15 @@ const mockParams = {
     h: 10, // for get history test, change for other history length
 };
 
+beforeAll(async () => {
+    await OrderModel.insertMany(seedArr)
+    console.log('Seed Successful');
+});
+
+afterAll(async () => {
+    await OrderModel.remove({});
+});
+
 describe('Test orders routes', () => {
     it('Should GET all orders by the restaurant\'s name', async () => {
         const res = await request(app).get('/orders/Assaf\'s pizza');
