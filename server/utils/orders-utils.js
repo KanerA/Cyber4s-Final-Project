@@ -1,4 +1,7 @@
-const OrderModel = require("../mongoModel/mongoModel");
+const OrderModel = 
+  process.env.NODE_ENV === 'test' 
+  ? require('../mongoModel/testMongoModel') 
+  : require("../mongoModel/mongoModel");
 
 const newOrder = async (req, res) => {
   const { body } = req;
@@ -12,7 +15,7 @@ const newOrder = async (req, res) => {
 
   newOrder.save().then((data, err) => {
     if (!err) {
-      res.send(data.customerName + "s order accepted!");
+      res.send(data.customerName + "\'s order accepted!");
     } else {
       console.log(err);
     }
