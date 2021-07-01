@@ -5,15 +5,17 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "jest --verbose --coverage"
+    "test": "jest --verbose"
   },
   "keywords": [],
   "author": "Samuel Gasasa, Yuval Nakav, Assaf kaner",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.14",
     "mysql2": "^2.2.5",
