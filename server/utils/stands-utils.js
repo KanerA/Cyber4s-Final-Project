@@ -47,8 +47,32 @@ const getAllStands = (req, res) => {
   });
 };
 
+const standLogin = async (req, res) => {
+  const { body: { restaurant_name, password }} = req;
+  const stand = await Stands.findOne({
+    where: {
+      name: restaurant_name,
+    }
+  });
+  if(!stand) return res.status(201).json({message: 'Restaurant doesn\'t exist, please sign up'}); // check if the stand exists
+  const isPWCorrect = await compare(password, stand.password);
+  if(!isPWCorrect) return res.sendStatus(403); // check if the password matches
+  const payload = {
+    name: stand.name,
+    password: stand.password,
+    user_name: stand.user_name,
+  }
+  const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET);
+  const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
+    expiresIn: '10m'
+  });
+  const { id, user_name } = stand;
+  res.status(201).json({ accessToken, refreshToken, id, user_name });
+};
+
 const deleteStand = async (req, res) => {
   const { p, u } = req.query; // requires the password and the restaurant's user name from client to delete
+  console.log(u)
   const stand = await Stands.findOne({
     where: {
       user_name: u,
@@ -59,7 +83,7 @@ const deleteStand = async (req, res) => {
   if(!isPWCorrect) return res.sendStatus(403); // check if the password matches
   Stands.destroy({
     where: {
-      name: n,
+      user_name: u,
     },
   })
     .then((_) => {
@@ -72,4 +96,4 @@ const deleteStand = async (req, res) => {
     });
 };
 
-module.exports = { createNewStand, getAllStands, deleteStand };
+module.exports = { createNewStand, getAllStands, deleteStand, standLogin };
