@@ -1,22 +1,37 @@
 const { Stands } = require("../models");
+const jwt = require('jsonwebtoken');
+const { hashSync, compare } = require('bcrypt');
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
-const createNewStand = (req, res) => {
-  const { body } = req;
-  Stands.create(body).then(() => res.send("new stand created!"));
+const createNewStand = async (req, res) => {
+  const { body: { owner, restaurant_name, password} } = req;
+  const hashedPW = hashSync(password, 10);
+  const stand = await Stands.create({
+    owner,
+    name: restaurant_name,
+    password: hashedPW,
+  });
+  const payload = {
+    name: stand.name,
+    password: stand.password,
+}
+  const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET);
+  const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
+      expiresIn: '10m'
+  });
+  const id = stand.id;
+  res.status(201).json({accessToken, refreshToken, id});
 };
 
 const getAllStands = (req, res) => {
-  const { uid } = req.params;
+  const { body: { restaurant_name, password }} = req;
   Stands.findAll({
     where: { owner: uid },
   }).then((result) => {
     const allStands = result.map((stand) => stand.toJSON());
     res.json(allStands);
   });
-};
-
-const logIntoStand = (req, res) => {
-  // const { standName, password } = req.params;
 };
 
 const deleteStand = (req, res) => {
