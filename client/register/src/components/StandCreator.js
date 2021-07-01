@@ -11,6 +11,7 @@ export default function StandCreator({ user, restaurant }) {
   const [redirect, setRedirect] = useState(false);
   const nameRef = useRef();
   const passwordRef = useRef();
+
   useEffect(() => {
     const { uid } = user;
     axios
@@ -20,11 +21,13 @@ export default function StandCreator({ user, restaurant }) {
       })
       .catch((err) => console.log(err));
   }, []);
-  const openStand = async (name) => {
+  const openStand = async () => {
+    const { uid } = user;
     try {
       const res = await axios.post("/stands/create", {
         restaurant_name: nameRef.current,
         password: passwordRef.current,
+        owner: uid,
       });
       if (res.status === 200) return;
       localStorage.setItem("userId", res.data.id);
@@ -33,6 +36,30 @@ export default function StandCreator({ user, restaurant }) {
     } catch (err) {
       console.log(err);
     }
+  };
+  const loginToStand = async () => {
+    // try {
+    //   const res = await axios.post(
+    //     "/quiz/user/login",
+    //     {
+    //       name: userName.current,
+    //       password: userPassword.current,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: "Bearer " + localStorage.accessToken,
+    //       },
+    //     }
+    //   );
+    //   if (res.status === 201) return setLoginError(true);
+    //   localStorage.setItem("userId", res.data.id);
+    //   localStorage.setItem("accessToken", res.data.accessToken);
+    //   localStorage.setItem("refreshToken", res.data.refreshToken);
+    //   document.location.pathname = "/trivia";
+    // } catch (err) {
+    //   console.log(err);
+    //   setLoginError(true);
+    // }
   };
   const deleteStand = async () => {
     await axios.delete(`/stands/remove?o=${user.uid}&n=${restaurant}`);
