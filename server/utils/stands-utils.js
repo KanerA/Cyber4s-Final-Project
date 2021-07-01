@@ -72,7 +72,6 @@ const standLogin = async (req, res) => {
 
 const deleteStand = async (req, res) => {
   const { p, u } = req.query; // requires the password and the restaurant's user name from client to delete
-  console.log(u)
   const stand = await Stands.findOne({
     where: {
       user_name: u,
