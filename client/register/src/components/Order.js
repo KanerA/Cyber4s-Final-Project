@@ -27,7 +27,7 @@ export default function Order({ order }) {
         <div className="dish-invites">
           {order.dish?.map((dish) => {
             return (
-              <div className="dish-invites">
+              <div className="invite">
                 <aside className="item-amount">{dish.amount}</aside>
                 <p className="item-name">{dish.name}</p>
                 <p className="item-note">{dish.notes}</p>
@@ -39,7 +39,7 @@ export default function Order({ order }) {
         <div className="drink-invites">
           {order.drink?.map((drink) => {
             return (
-              <div className="drink-invites">
+              <div className="invite">
                 <aside className="item-amount">{drink.amount}</aside>
                 <p className="item-name">{drink.name}</p>
                 <p className="item-note">{drink.notes}</p>
