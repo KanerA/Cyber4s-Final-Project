@@ -22,15 +22,14 @@ export default function StandCreator({ user, restaurant }) {
   }, []);
   const openStand = async (name) => {
     try {
-      const res = await axios.post("/stands", {
-        name: nameRef.current,
+      const res = await axios.post("/stands/create", {
+        restaurant_name: nameRef.current,
         password: passwordRef.current,
       });
       if (res.status === 200) return;
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
-      document.location.pathname = "/trivia";
     } catch (err) {
       console.log(err);
     }
