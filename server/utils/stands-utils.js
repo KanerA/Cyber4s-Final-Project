@@ -48,10 +48,10 @@ const getAllStands = (req, res) => {
 };
 
 const deleteStand = async (req, res) => {
-  const { p, n } = req.query; // requires the password and the restaurant name from client to delete
+  const { p, u } = req.query; // requires the password and the restaurant's user name from client to delete
   const stand = await Stands.findOne({
     where: {
-      name: n
+      user_name: u,
     }
   })
   if(!stand) return res.status(201).json({message: 'Restaurant doesn\'t exist, please sign up'}); // check if the stand exists
