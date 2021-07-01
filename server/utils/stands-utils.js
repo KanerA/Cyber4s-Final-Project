@@ -1,29 +1,38 @@
 const { Stands } = require("../models");
-const jwt = require("jsonwebtoken");
-const { hashSync, compare } = require("bcrypt");
+const jwt = require('jsonwebtoken');
+const { hashSync, compare } = require('bcrypt');
+const randomString = require('randomString');
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
 const createNewStand = async (req, res) => {
-  const {
-    body: { owner, restaurant_name, password },
-  } = req;
-  const hashedPW = hashSync(password, 10);
+  const { body: { restaurant_name, password} } = req;
+  const isExist = await Stands.findOne({ // checking if the restaurant's name already registered in the DB
+    where: {
+      name: restaurant_name
+    }
+  })
+  if(isExist) return res.json({ message: 'Restaurant name is already registered'});
+  if(password.length < 6) return res.json({ message: 'Password is too short, please choose another'}); // validating length of password
+  const hashedPW = hashSync(password, 10); // hashing the password for DB
+  const user_name = randomString.generate(6); // creating the restaurant's user name
   const stand = await Stands.create({
-    owner,
+    user_name,
     name: restaurant_name,
     password: hashedPW,
   });
+
   const payload = {
     name: stand.name,
     password: stand.password,
-  };
+    user_name: stand.user_name,
+}
   const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET);
   const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
     expiresIn: "10m",
   });
   const id = stand.id;
-  res.status(201).json({ accessToken, refreshToken, id });
+  res.status(201).json({ accessToken, refreshToken, id, user_name });
 };
 
 const getAllStands = (req, res) => {
