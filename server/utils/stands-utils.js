@@ -47,16 +47,24 @@ const getAllStands = (req, res) => {
   });
 };
 
-const deleteStand = (req, res) => {
-  const { o, n } = req.query;
+const deleteStand = async (req, res) => {
+  const { p, n } = req.query; // requires the password and the restaurant name from client to delete
+  const stand = await Stands.findOne({
+    where: {
+      name: n
+    }
+  })
+  if(!stand) return res.status(201).json({message: 'Restaurant doesn\'t exist, please sign up'}); // check if the stand exists
+  const isPWCorrect = await compare(p, stand.password);
+  if(!isPWCorrect) return res.sendStatus(403); // check if the password matches
   Stands.destroy({
     where: {
-      owner: o,
       name: n,
     },
   })
     .then((_) => {
-      res.json({ message: "Stand deleted successfully" });
+      if(_ === 1) return res.json({ message: "Stand deleted successfully" });
+      res.sendStatus(500);
     })
     .catch((err) => {
       console.log(err.message);
