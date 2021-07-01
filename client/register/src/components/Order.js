@@ -10,7 +10,6 @@ export default function Order({ order }) {
       .patch(`/orders/done/?c=true&id=${order._id}`)
       .then((res) => setCanceled(res.data.canceled));
   };
-  console.log(order._id);
 
   return (
     <div className="register-order">

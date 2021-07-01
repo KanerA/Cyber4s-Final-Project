@@ -14,17 +14,19 @@ import axios from "axios";
 export default function Login({ setRestaurant }) {
   const standNameInput = useRef();
   const passwordInput = useRef();
-  // const Proxy =
 
   const logIntoStandOrders = async () => {
     // check the password and stand name input in the sql database
     // axios.get(`http://10.0.0.5:8080/stands/${standNameInput.current}`); // NEED TO CREATE ROUTE IN SERVER
     try {
+      const proxy = "http://10.0.0.13:8080";
       const res = await axios.post(
-        `${proxy}/stands/login/${username}`,
+        `${proxy}/stands/login/`,
         {
-          name: username.current,
-          password: passwordRef.current,
+          body: {
+            name: username.current,
+            password: passwordRef.current,
+          },
         },
         {
           headers: {
