@@ -4,9 +4,8 @@ import { useDispatch } from "react-redux";
 import { changeRestaurant } from "../action";
 import Login from "./Login";
 
-function Stand({ stand, setRedirect, deleteStand, loginToStand }) {
+function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
   const dispatch = useDispatch();
-  const passwordRef = useRef();
   const choseRestaurant = (name) => {
     dispatch(changeRestaurant(name));
   };
@@ -25,7 +24,7 @@ function Stand({ stand, setRedirect, deleteStand, loginToStand }) {
         placeholder="password"
         onChange={(e) => (passwordRef.current = e.target.value)}
       />
-      <button onClick={() => loginToStand()}>log in</button>
+      <button onClick={() => loginToStand(stand.userName)}>log in</button>
       <button onClick={() => deleteStand()}> delete stand</button>
     </div>
   );
