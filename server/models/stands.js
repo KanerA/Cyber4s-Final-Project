@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Stands.init({
-    owner: DataTypes.STRING,
+    user_name: DataTypes.STRING,
     name: DataTypes.STRING,
     password: DataTypes.STRING
   }, {
