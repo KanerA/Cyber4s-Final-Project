@@ -33,6 +33,8 @@ export default function StandCreator({ user, restaurant }) {
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
+      alert(`username: ${res.data.user_name}`);
+      dispatch(changeRestaurant(nameRef.current));
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +44,7 @@ export default function StandCreator({ user, restaurant }) {
       const res = await axios.post(
         `/stands/login/${username}`,
         {
-          name: username.current,
+          user_name: username.current,
           password: passwordRef.current,
         },
         {
@@ -55,7 +57,7 @@ export default function StandCreator({ user, restaurant }) {
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
-      document.location.pathname = "/trivia";
+      dispatch(changeRestaurant(nameRef.current));
     } catch (err) {
       console.log(err);
       // setLoginError(true);
@@ -78,6 +80,7 @@ export default function StandCreator({ user, restaurant }) {
             setRedirect={setRedirect}
             passwordRef={passwordRef}
             key={i}
+            loginToStand={loginToStand}
           ></Stand>
         );
       })}
@@ -94,7 +97,7 @@ export default function StandCreator({ user, restaurant }) {
         <button
           onClick={() => {
             openStand();
-            dispatch(changeRestaurant(nameRef.current));
+
             setRedirect(true);
           }}
         >

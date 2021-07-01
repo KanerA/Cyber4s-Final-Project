@@ -7,7 +7,7 @@ import {
   Button,
   TextInput,
 } from "react-native";
-// import firebase from "firebase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import auth from "../firebaseConfig";
 import axios from "axios";
 
@@ -19,28 +19,30 @@ export default function Login({ setRestaurant }) {
   const logIntoStandOrders = async () => {
     // check the password and stand name input in the sql database
     // axios.get(`http://10.0.0.5:8080/stands/${standNameInput.current}`); // NEED TO CREATE ROUTE IN SERVER
-    // try {
-    //   const res = await axios.post(
-    //     `${Proxy}/stands/login/${username}`,
-    //     {
-    //       name: username.current,
-    //       password: passwordRef.current,
-    //     },
-    //     {
-    //       headers: {
-    //         authorization: "Bearer " + localStorage.accessToken,
-    //       },
-    //     }
-    //   );
-    //   // if (res.status === 201) return setLoginError(true);
-    //   localStorage.setItem("userId", res.data.id);
-    //   localStorage.setItem("accessToken", res.data.accessToken);
-    //   localStorage.setItem("refreshToken", res.data.refreshToken);
-    //   document.location.pathname = "/trivia";
-    // } catch (err) {
-    //   console.log(err);
-    //   // setLoginError(true);
-    // }
+    try {
+      const res = await axios.post(
+        `${proxy}/stands/login/${username}`,
+        {
+          name: username.current,
+          password: passwordRef.current,
+        },
+        {
+          headers: {
+            authorization: "Bearer " + AsyncStorage.accessToken,
+          },
+        }
+      );
+
+      try {
+        await AsyncStorage.setItem("userId", res.data.id);
+        await AsyncStorage.setItem("accessToken", res.data.accessToken);
+        await AsyncStorage.setItem("refreshToken", res.data.refreshToken);
+      } catch (err) {
+        console.log(err);
+      }
+    } catch (err) {
+      console.log(err);
+    }
     const response = "b"; // the axios response (standNameInput)
     setRestaurant(response);
   };

@@ -75,11 +75,22 @@
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+  padding-bottom: 20px;
+  margin: 5px;
+  max-height: 50%;
 }
 
 .cancel-button {
   bottom: 0;
-  margin-top: 10px;
   position: absolute;
+  width: 100%;
+  font-weight: 800;
+  background-color: #ffa459;
+  font-size: 1rem;
+  padding: 5px;
+  -webkit-box-shadow: 1px 1px 1px #ad5c1a;
+          box-shadow: 1px 1px 1px #ad5c1a;
+  color: white;
+  border-radius: 0.5rem;
 }
 /*# sourceMappingURL=OrderHandler.css.map */
