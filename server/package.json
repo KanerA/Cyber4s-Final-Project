@@ -19,6 +19,7 @@
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.14",
     "mysql2": "^2.2.5",
+    "randomstring": "^1.2.1",
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
