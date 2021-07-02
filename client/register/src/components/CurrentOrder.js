@@ -25,13 +25,18 @@ function CurrentOrder({
     <div className="item">
       {dishOrders.map((orderedDish) => {
         return (
-          <div>
+          <div className="item-props">
             <p>
               {orderedDish.amount}X {orderedDish.name}
             </p>
             <p>{orderedDish.notes}</p>
-            <p>{orderedDish.amount * orderedDish.price}</p>
-            <button onClick={() => cancelItem(true, orderedDish)}>
+            <p className="item-price">
+              Total: {orderedDish.amount * orderedDish.price}
+            </p>
+            <button
+              className="cancel"
+              onClick={() => cancelItem(true, orderedDish)}
+            >
               cancel dish
             </button>
           </div>
@@ -44,8 +49,13 @@ function CurrentOrder({
               {orderedDrink.amount}X {orderedDrink.name}
             </p>
             <p>{orderedDrink.notes}</p>
-            <p>{orderedDrink.amount * orderedDrink.price}</p>
-            <button onClick={() => cancelItem(false, orderedDrink)}>
+            <p className="item-price">
+              Total: {orderedDrink.amount * orderedDrink.price}
+            </p>
+            <button
+              className="cancel"
+              onClick={() => cancelItem(false, orderedDrink)}
+            >
               cancel drink
             </button>
           </div>

@@ -1,5 +1,6 @@
+@charset "UTF-8";
 .customer-name {
-  color: white;
+  color: black;
 }
 
 .items {
@@ -12,7 +13,7 @@
           flex-direction: column;
   margin: 7px;
   font-size: 1rem;
-  color: white;
+  color: black;
   padding-bottom: 15px;
 }
 
@@ -46,19 +47,11 @@
   margin: 7px;
   margin-top: 0;
   font-size: 1rem;
-  color: white;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-  -ms-flex-line-pack: end;
-      align-content: flex-end;
-  justify-items: flex-end;
-  justify-self: flex-end;
+  color: black;
+}
+
+.order-details .total-price::after {
+  content: "₪";
 }
 
 .register-order {
@@ -85,12 +78,41 @@
   position: absolute;
   width: 100%;
   font-weight: 800;
-  background-color: #ffa459;
+  background-color: #f58c91;
   font-size: 1rem;
   padding: 5px;
-  -webkit-box-shadow: 1px 1px 1px #ad5c1a;
-          box-shadow: 1px 1px 1px #ad5c1a;
+  -webkit-box-shadow: 1px 1px 1px #f5b25b;
+          box-shadow: 1px 1px 1px #f5b25b;
   color: white;
   border-radius: 0.5rem;
+}
+
+.invite {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  border: 2px solid grey;
+  border-radius: 0.5rem;
+  margin-bottom: 5px;
+}
+
+.invite .item-details {
+  display: flexbox;
+}
+
+.invite .item-amount {
+  left: 0;
+  position: absolute;
+}
+
+.invite .total-item-price::after {
+  content: "₪";
 }
 /*# sourceMappingURL=OrderHandler.css.map */

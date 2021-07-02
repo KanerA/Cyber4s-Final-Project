@@ -6,6 +6,7 @@ import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import OrderHandler from "./components/OrderHandler";
+import StandCreator from "./components/StandCreator";
 import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";

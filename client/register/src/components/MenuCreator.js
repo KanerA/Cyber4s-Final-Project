@@ -43,23 +43,26 @@ function MenuCreator({ restaurant }) {
       <h1>create dish</h1>
       <div id="item-selector">
         <input
+          id="drink"
           type="radio"
           value="drink"
           name="item"
           onChange={(e) => dishOrDrink(e)}
         />
-        Drink
+        🥛Drink
         <input
           defaultChecked
+          id="dish"
           type="radio"
           value="dish"
           name="item"
           onChange={(e) => dishOrDrink(e)}
         />
-        Dish
+        🍽️Dish
       </div>
       {item === "drink" && (
-        <div>
+        <div id="alcoholic">
+          <p id="text">🍹Alcoholic</p>
           <label className="switch">
             <input
               type="checkbox"
@@ -71,29 +74,30 @@ function MenuCreator({ restaurant }) {
             />
             <span className="slider round"></span>
           </label>
-          <span>Alcoholic</span>
         </div>
       )}
-      <input
-        id="item-name"
-        className="item-property"
-        placeholder={`enter ${item} name`}
-        onChange={(e) => (itemRef.current.name = e.target.value)}
-      />
-      <input
-        id="item-price"
-        className="item-property"
-        placeholder={`enter ${item} price`}
-        onChange={(e) => (itemRef.current.price = e.target.value)}
-      />
-      <input
-        id="item-description"
-        className="item-property"
-        placeholder={`enter ${item} description`}
-        onChange={(e) => {
-          itemRef.current.description = e.target.value;
-        }}
-      />
+      <div id="props">
+        <input
+          id="item-name"
+          className="item-property"
+          placeholder={`enter ${item} name`}
+          onChange={(e) => (itemRef.current.name = e.target.value)}
+        />
+        <input
+          id="item-price"
+          className="item-property"
+          placeholder={`enter ${item} price`}
+          onChange={(e) => (itemRef.current.price = e.target.value)}
+        />
+        <input
+          id="item-description"
+          className="item-property"
+          placeholder={`enter ${item} description`}
+          onChange={(e) => {
+            itemRef.current.description = e.target.value;
+          }}
+        />
+      </div>
 
       <br></br>
       <button id="save-new-item" onClick={(e) => saveItem(e)}>

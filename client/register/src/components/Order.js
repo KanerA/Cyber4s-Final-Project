@@ -26,11 +26,13 @@ export default function Order({ order }) {
         <div className="dish-invites">
           {order.dish?.map((dish) => {
             return (
-              <div className="dish-invites">
-                <aside className="item-amount">{dish.amount}</aside>
-                <p className="item-name">{dish.name}</p>
-                <p className="item-note">{dish.notes}</p>
-                <p className="total-item-price">{dish.amount * dish.price}</p>
+              <div className="invite">
+                <p className="item-amount">{dish.amount}X</p>
+                <div className="item-details">
+                  <p className="item-name">{dish.name}</p>
+                  <p className="item-note">{dish.notes}</p>
+                  <p className="total-item-price">{dish.amount * dish.price}</p>
+                </div>
               </div>
             );
           })}
@@ -38,11 +40,15 @@ export default function Order({ order }) {
         <div className="drink-invites">
           {order.drink?.map((drink) => {
             return (
-              <div className="drink-invites">
-                <aside className="item-amount">{drink.amount}</aside>
-                <p className="item-name">{drink.name}</p>
-                <p className="item-note">{drink.notes}</p>
-                <p className="total-item-price">{drink.amount * drink.price}</p>
+              <div className="invite">
+                <p className="item-amount">{drink.amount}X</p>
+                <div className="item-details">
+                  <p className="item-name">{drink.name}</p>
+                  <p className="item-note">{drink.notes}</p>
+                  <p className="total-item-price">
+                    {drink.amount * drink.price}
+                  </p>
+                </div>
               </div>
             );
           })}
