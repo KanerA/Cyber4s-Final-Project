@@ -1,5 +1,21 @@
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const { Stands } = require('../models');
 const { compare } = require('bcrypt');
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+
+const validateToken = (req, res, next) => {
+    const bearerToken = req.headers['authorization']; // get the token from the request
+    if(!bearerToken) return res.sendStatus(403);
+    req.token = bearerToken.slice(7); // trim the 'bearer' from token
+    return jwt.verify(req.token, ACCESS_TOKEN_SECRET, (err, decoded) => { // verify the token with the SECRET
+        if(err){
+            return res.status(403).json({ message: 'Invalid Access Token' });
+        }
+        req.user = decoded;
+        next();
+    });
+};
 
 const validatePassword = async (req, res, next) => {
     const path = req.route.path;
@@ -27,4 +43,4 @@ const validatePassword = async (req, res, next) => {
       next();
 };
 
-module.exports = { validatePassword };
+module.exports = { validateToken, validatePassword };
