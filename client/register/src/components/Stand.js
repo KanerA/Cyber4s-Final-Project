@@ -6,8 +6,9 @@ import Login from "./Login";
 
 function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
   const dispatch = useDispatch();
+  const userNameRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
-  const choseRestaurant = (name) => {
+  const chooseRestaurant = (name) => {
     dispatch(changeRestaurant(name));
   };
 
@@ -16,12 +17,17 @@ function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
       <label
         className="stand-name"
         onClick={() => {
-          choseRestaurant(stand.name);
+          chooseRestaurant(stand.name);
           setRedirect(true);
         }}
       >
         {stand.name}
       </label>
+      <input
+        className="login-prop"
+        placeholder="user name"
+        onChange={(e) => (userNameRef.current = e.target.value)}
+      />
       <input
         style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
         className="login-prop password"
@@ -39,11 +45,14 @@ function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
       <div className="stand-controls">
         <button
           className="stand-login"
-          onClick={() => loginToStand(stand.userName)}
+          onClick={() => loginToStand(userNameRef)}
         >
           log in
         </button>
-        <button className="stand-delete" onClick={() => deleteStand()}>
+        <button
+          className="stand-delete"
+          onClick={() => deleteStand(userNameRef)}
+        >
           delete stand
         </button>
       </div>

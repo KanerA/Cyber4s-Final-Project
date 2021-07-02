@@ -24,12 +24,12 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
       .catch((err) => console.log(err));
   }, []);
   const openStand = async () => {
-    const { uid } = user;
+    const { email } = user;
     try {
       const res = await axios.post("/stands/create", {
         restaurant_name: nameRef.current,
         password: passwordRef.current,
-        owner: uid,
+        email,
       });
       if (res.status === 200) return;
       localStorage.setItem("userId", res.data.id);
@@ -43,20 +43,16 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
     }
   };
   const loginToStand = async (username) => {
+    const body = {
+      user_name: username.current,
+      password: passwordRef.current,
+    };
     try {
-      const res = await axios.post(
-        `/stands/login/${username}`,
-        {
-          user_name: username.current,
-          password: passwordRef.current,
+      const res = await axios.post(`/stands/login/${username.current}`, body, {
+        headers: {
+          authorization: "Bearer " + localStorage.accessToken,
         },
-        {
-          headers: {
-            authorization: "Bearer " + localStorage.accessToken,
-          },
-        },
-      );
-      // if (res.status === 201) return setLoginError(true);
+      });
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
@@ -66,11 +62,14 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
       // setLoginError(true);
     }
   };
-  const deleteStand = async () => {
-    await axios.delete(`/stands/remove?o=${user.uid}&n=${restaurant}`);
+  const deleteStand = async (username) => {
+    await axios.delete(
+      `/stands/remove?u=${username.current}&p=${passwordRef.current}`
+    );
     const filtered = stands.filter((stand) => stand.name !== restaurant);
     setStands(filtered);
     dispatch(changeRestaurant());
+    alert("deleted");
   };
   return (
     <div>
