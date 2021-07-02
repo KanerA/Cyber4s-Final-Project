@@ -3,13 +3,19 @@ $positiveColor: #66f28a;
 $negativeColor: #f58c91;
 $mainDarkColor: #f5b25b;
 $secondaryBrightColor: #7fcbf5;
-
+$mix: mix($backgroundColor, $secondaryBrightColor, 20%);
 * {
   margin: 0;
   padding: 0;
 }
 .App {
-  background-color: $backgroundColor;
+  // background-color: ;
+  background-image: linear-gradient(
+    0deg,
+    $secondaryBrightColor,
+    $mix,
+    $backgroundColor
+  );
   min-height: 100vh;
   align-items: center;
   text-align: center;
@@ -20,4 +26,10 @@ h1 {
   text-shadow: 1px 1px 1px black;
   font-family: cursive;
   color: tomato;
+}
+button {
+  cursor: pointer;
+}
+input[type="radio"] {
+  cursor: pointer;
 }
