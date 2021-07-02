@@ -1,16 +1,23 @@
-$mainColor: #fa923f;
-$secondaryColor: #0995ad;
-$mainBrightColor: #ffa459;
-$mainDarkColor: #ad5c1a;
-$secondaryBrightColor: #75e7fa;
+$backgroundColor: #5abdab;
+$positiveColor: #66f28a;
+$negativeColor: #f58c91;
+$mainDarkColor: #f5b25b;
+$secondaryBrightColor: #7fcbf5;
 
 * {
   margin: 0;
   padding: 0;
 }
 .App {
-  background-color: $mainColor;
+  background-color: $backgroundColor;
   min-height: 100vh;
   align-items: center;
   text-align: center;
+}
+h1 {
+  font-size: 3rem;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-family: cursive;
+  color: tomato;
 }

@@ -6,6 +6,7 @@ import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import OrderHandler from "./components/OrderHandler";
+import StandCreator from "./components/StandCreator";
 import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +15,7 @@ import { changeRestaurant } from "./action";
 import "./components/styles/App/App.css";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
+  const restaurantUser = useSelector((state) => state.restaurantUser);
   const [user] = useAuthState(auth);
 
   return (
@@ -37,7 +39,15 @@ function App() {
             </Route>
           )}
           <Route exact path="/">
-            {user ? <Stand user={user} restaurant={restaurant} /> : <Login />}
+            {user ? (
+              <Stand
+                user={user}
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+              />
+            ) : (
+              <Login />
+            )}
           </Route>
         </Switch>
       </Router>

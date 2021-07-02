@@ -1,16 +1,17 @@
 nav {
-  color: #ad5c1a;
+  background-color: #f5b25b;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  background-color: #75e7fa;
+  color: #7fcbf5;
   height: 2.5rem;
   padding-top: 10px;
+  top: 0;
 }
 
 .link-button {
-  background-color: #ffa459;
+  background-color: #f58c91;
   border-radius: 0.5rem;
   color: white;
   padding: 3px;
@@ -19,7 +20,7 @@ nav {
 
 .nav-link {
   margin-right: 3px;
-  color: #fa923f;
+  color: #7fcbf5;
   font-size: 2rem;
   text-decoration: none;
 }
@@ -32,7 +33,7 @@ nav {
 .nav-link:hover {
   -webkit-transform: scaleY(1.5);
           transform: scaleY(1.5);
-  color: #ffa459;
+  color: #198ac7;
 }
 
 #restaurant-name {
@@ -59,5 +60,11 @@ nav {
   display: -ms-inline-flexbox;
   display: inline-flex;
   right: 10px;
+}
+
+#stand-details {
+  background-color: #5abdab;
+  color: black;
+  border: 1px solid black;
 }
 /*# sourceMappingURL=NavBar.css.map */

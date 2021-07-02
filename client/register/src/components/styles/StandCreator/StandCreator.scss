@@ -1,0 +1,45 @@
+$backgroundColor: #5abdab;
+$positiveColor: #42da68;
+$negativeColor: #f58c91;
+$mainDarkColor: #f5b25b;
+$secondaryBrightColor: #7fcbf5;
+
+@mixin button-props {
+  border-radius: 0.5rem;
+  padding: 2px;
+  font-weight: 550;
+  color: white;
+}
+.login-prop {
+  margin: 2px;
+  padding: 2px;
+  color: black;
+  font-weight: 700;
+  background-color: $secondaryBrightColor;
+  box-shadow: 1px 1px 1px $mainDarkColor;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.stand-name {
+  color: black;
+  font-size: 2rem;
+  text-shadow: 1px 1px 1px white;
+}
+.show-password {
+  background-color: $mainDarkColor;
+  @include button-props();
+}
+.stand-login {
+  background-color: $positiveColor;
+  @include button-props();
+}
+.stand-delete {
+  background-color: $negativeColor;
+  @include button-props();
+}
+#open-stand {
+  @include button-props();
+  font-size: 1.5rem;
+  background-color: $positiveColor;
+  margin-top: 5px;
+}
