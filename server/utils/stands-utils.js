@@ -6,6 +6,7 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
 const createNewStand = async (req, res) => {
+  if(req.stand !== undefined) return res.json({ message: 'Restaurant already registered!' });
   const password = req.body.password;
     if(password.length < 6) return res.json({ message: 'Password is too short, please choose another' }); // validating length of password
     const hashedPW = hashSync(password, 10); // hashing the password for DB
