@@ -14,6 +14,7 @@ import { changeRestaurant } from "./action";
 import "./components/styles/App/App.css";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
+  const restaurantUser = useSelector((state) => state.restaurantUser);
   const [user] = useAuthState(auth);
 
   return (
@@ -37,7 +38,15 @@ function App() {
             </Route>
           )}
           <Route exact path="/">
-            {user ? <Stand user={user} restaurant={restaurant} /> : <Login />}
+            {user ? (
+              <Stand
+                user={user}
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+              />
+            ) : (
+              <Login />
+            )}
           </Route>
         </Switch>
       </Router>

@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Stand from "./Stand";
 import { useDispatch } from "react-redux";
-import { changeRestaurant } from "../action";
+import { changeRestaurant, changeRestaurantUser } from "../action";
 
-export default function StandCreator({ user, restaurant }) {
+export default function StandCreator({ user, restaurant, restaurantUser }) {
   const dispatch = useDispatch();
   const [stands, setStands] = useState([]);
   const [redirect, setRedirect] = useState(false);
@@ -34,6 +34,7 @@ export default function StandCreator({ user, restaurant }) {
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
       alert(`username: ${res.data.user_name}`);
+      dispatch(changeRestaurantUser(res.data.user_name));
       dispatch(changeRestaurant(nameRef.current));
     } catch (err) {
       console.log(err);
@@ -51,7 +52,7 @@ export default function StandCreator({ user, restaurant }) {
           headers: {
             authorization: "Bearer " + localStorage.accessToken,
           },
-        }
+        },
       );
       // if (res.status === 201) return setLoginError(true);
       localStorage.setItem("userId", res.data.id);

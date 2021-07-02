@@ -4,3 +4,10 @@ export const changeRestaurant = (restaurant) => {
     payload: restaurant,
   };
 };
+
+export const changeRestaurantUser = (restaurantUser) => {
+  return {
+    type: "Change",
+    payload: restaurantUser,
+  };
+};
