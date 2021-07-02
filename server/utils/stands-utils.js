@@ -61,19 +61,11 @@ const standLogin = async (req, res) => {
   res.status(201).json({ accessToken, refreshToken, id, user_name });
 };
 
-const deleteStand = async (req, res) => {
-  const { p, u } = req.query; // requires the password and the restaurant's user name from client to delete
-  const stand = await Stands.findOne({
-    where: {
-      user_name: u,
-    }
-  })
-  if(!stand) return res.status(201).json({message: 'Restaurant doesn\'t exist, please sign up'}); // check if the stand exists
-  const isPWCorrect = await compare(p, stand.password);
-  if(!isPWCorrect) return res.sendStatus(403); // check if the password matches
+const deleteStand = async (req, res) => { // only with JWT authentication
+  const stand = req.stand;
   Stands.destroy({
     where: {
-      user_name: u,
+      user_name: stand.user_name,
     },
   })
     .then((_) => {
