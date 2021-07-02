@@ -29,18 +29,6 @@ const createNewStand = async (req, res) => {
   res.status(201).json({ accessToken, refreshToken, id, user_name });
 };
 
-// const getAllStands = (req, res) => {
-//   const {
-//     body: { restaurant_name, password },
-//   } = req;
-//   Stands.findAll({
-//     // where: { owner: uid },
-//   }).then((result) => {
-//     const allStands = result.map((stand) => stand.toJSON());
-//     res.json(allStands);
-//   });
-// };
-
 const getAllStands = async (req, res) => { // only with JWT authentication
   const stands = await Stands.findAll({});
   res.json(stands);
