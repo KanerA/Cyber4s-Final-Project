@@ -1,0 +1,52 @@
+.login-prop {
+  margin: 2px;
+  padding: 2px;
+  color: black;
+  font-weight: 700;
+  background-color: #7fcbf5;
+  -webkit-box-shadow: 1px 1px 1px #f5b25b;
+          box-shadow: 1px 1px 1px #f5b25b;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.stand-name {
+  color: black;
+  font-size: 2rem;
+  text-shadow: 1px 1px 1px white;
+}
+
+.show-password {
+  background-color: #f5b25b;
+  border-radius: 0.5rem;
+  padding: 2px;
+  font-weight: 550;
+  color: white;
+}
+
+.stand-login {
+  background-color: #42da68;
+  border-radius: 0.5rem;
+  padding: 2px;
+  font-weight: 550;
+  color: white;
+}
+
+.stand-delete {
+  background-color: #f58c91;
+  border-radius: 0.5rem;
+  padding: 2px;
+  font-weight: 550;
+  color: white;
+}
+
+#open-stand {
+  border-radius: 0.5rem;
+  padding: 2px;
+  font-weight: 550;
+  color: white;
+  font-size: 1.5rem;
+  background-color: #42da68;
+  margin-top: 5px;
+}
+/*# sourceMappingURL=StandCreator.css.map */

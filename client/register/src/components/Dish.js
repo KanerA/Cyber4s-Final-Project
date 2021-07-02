@@ -31,15 +31,17 @@ function Dish({
     <div className="item">
       <span>
         <button
-          className="count-button"
+          className="count-button positive"
           onClick={() => setDishCount(dishCount + 1)}
         >
           +
         </button>
         {dishCount}
         <button
-          className="count-button"
-          onClick={() => setDishCount(dishCount - 1)}
+          className="count-button negative"
+          onClick={() => {
+            if (dishCount >= 2) setDishCount(dishCount - 1);
+          }}
         >
           -
         </button>

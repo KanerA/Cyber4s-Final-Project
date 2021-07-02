@@ -50,7 +50,7 @@ function Menu({ restaurant }) {
         <div id="menu-items">
           <div id="dish-container">
             <h2 className="main-header">Dishes</h2>
-            <br id="breaker" />
+            <h3 className="secondary-header">All Dishes</h3>
             <div id="dishes">
               {dishes?.map((dish, i) => {
                 return (
@@ -89,7 +89,7 @@ function Menu({ restaurant }) {
                   })}
               </div>
               <div className="drinks-secondary">
-                <h3 className="secondary-header">light Drinks</h3>
+                <h3 className="secondary-header">Light Drinks</h3>
                 {drinks
                   ?.filter((drink) => !drink.alcoholic)
                   .map((drink, i) => {
@@ -112,18 +112,14 @@ function Menu({ restaurant }) {
       </div>
       {(drinkOrders.length > 0 || dishOrders.length > 0) && (
         <div className="order">
-          <h3>this order</h3>
-          <CurrentOrder
-            dishOrders={dishOrders}
-            setDishOrders={setDishOrders}
-            setDrinkOrders={setDrinkOrders}
-            drinkOrders={drinkOrders}
-            totalPrice={totalPrice}
-            setTotalPrice={setTotalPrice}
-          />
-          <div>
-            <p>total price: {totalPrice}</p>
-            <input onChange={(e) => (customerName.current = e.target.value)} />
+          <div className="order-info">
+            <h3 className="secondary-header">this order</h3>
+            <p className="item-price">total price: {totalPrice}</p>
+            <input
+              onChange={(e) => (customerName.current = e.target.value)}
+              id="order-name"
+              placeholder="Enter Name"
+            />
             <button
               id="set-order"
               placeholder="enter customer name"
@@ -134,6 +130,15 @@ function Menu({ restaurant }) {
               set order
             </button>
           </div>
+          <CurrentOrder
+            dishOrders={dishOrders}
+            setDishOrders={setDishOrders}
+            setDrinkOrders={setDrinkOrders}
+            drinkOrders={drinkOrders}
+            totalPrice={totalPrice}
+            setTotalPrice={setTotalPrice}
+          />
+          <div></div>
         </div>
       )}
     </div>

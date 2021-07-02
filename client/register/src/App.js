@@ -6,6 +6,7 @@ import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import OrderHandler from "./components/OrderHandler";
+import StandCreator from "./components/StandCreator";
 import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";
@@ -37,7 +38,11 @@ function App() {
             </Route>
           )}
           <Route exact path="/">
-            {user ? <Stand user={user} restaurant={restaurant} /> : <Login />}
+            {user ? (
+              <StandCreator user={user} restaurant={restaurant} />
+            ) : (
+              <Login />
+            )}
           </Route>
         </Switch>
       </Router>

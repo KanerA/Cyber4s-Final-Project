@@ -1,19 +1,21 @@
-$mainColor: #fa923f;
-$secondaryColor: #0995ad;
-$mainBrightColor: #ffa459;
-$mainDarkColor: #ad5c1a;
-$secondaryBrightColor: #75e7fa;
+$backgroundColor: #5abdab;
+$positiveColor: #36c95b;
+$negativeColor: #f58c91;
+$mainDarkColor: #f5b25b;
+$secondaryBrightColor: #7fcbf5;
 
 nav {
-  color: $mainDarkColor;
+  background-color: $mainDarkColor;
   justify-content: center;
   position: relative;
-  background-color: $secondaryBrightColor;
+  color: $secondaryBrightColor;
   height: 2.5rem;
   padding-top: 10px;
+  top: 0;
+  // width: 100%;
 }
 .link-button {
-  background-color: $mainBrightColor;
+  background-color: $negativeColor;
   border-radius: 0.5rem;
   color: white;
   padding: 3px;
@@ -21,7 +23,7 @@ nav {
 }
 .nav-link {
   margin-right: 3px;
-  color: $mainColor;
+  color: $secondaryBrightColor;
   font-size: 2rem;
   text-decoration: none;
 }
@@ -31,7 +33,7 @@ nav {
 }
 .nav-link:hover {
   transform: scaleY(1.5); //need to fix
-  color: $mainBrightColor;
+  color: #198ac7;
 }
 #restaurant-name {
   align-self: flex-start;
@@ -48,4 +50,9 @@ nav {
   align-content: flex-start;
   display: inline-flex;
   right: 10px;
+}
+#stand-details {
+  background-color: $backgroundColor;
+  color: black;
+  border: 1px solid black;
 }

@@ -13,40 +13,55 @@
 }
 
 .item-notes {
-  margin: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
   color: white;
-  background-color: #0995ad;
-  -webkit-box-shadow: 1px 1px 1px #ad5c1a;
-          box-shadow: 1px 1px 1px #ad5c1a;
+  background-color: #7fcbf5;
+  -webkit-box-shadow: 1px 1px 1px #416d85;
+          box-shadow: 1px 1px 1px #416d85;
   border-radius: 0.5rem;
+  font-weight: 800;
+  width: 80%;
   font-size: 1rem;
 }
 
 .item-notes::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.438);
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
 }
 
 .item-notes:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.438);
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
 }
 
 .item-notes::-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.438);
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
 }
 
 .item-notes::placeholder {
-  color: rgba(255, 255, 255, 0.438);
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
 }
 
 .item-order {
-  background-color: #ffa459;
-  margin: 10px;
   font-size: 1rem;
+  margin: 10px;
   padding: 10px;
-  -webkit-box-shadow: 1px 1px 1px #ad5c1a;
-          box-shadow: 1px 1px 1px #ad5c1a;
-  color: white;
+  background-color: #36c95b;
+  font-weight: 600;
+  -webkit-box-shadow: 1px 1px 1px #f5b25b;
+          box-shadow: 1px 1px 1px #f5b25b;
+  color: black;
   border-radius: 0.5rem;
+  width: 80%;
+  padding: 3px;
+  font-size: 1rem;
 }
 
 .item-name {
@@ -57,20 +72,62 @@
   content: "₪";
 }
 
+.item-props {
+  display: flexbox;
+}
+
 .count-button {
   font-size: 1.5rem;
   width: 1.7rem;
   height: 1.7rem;
 }
 
+.positive {
+  background-color: #36c95b;
+}
+
+.negative {
+  background-color: #f58c91;
+}
+
 .order {
   position: fixed;
   left: 5px;
   top: 3rem;
+  overflow: auto;
+  height: 95%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.order .order-info {
+  color: white;
 }
 
 .main-header {
   display: block;
+  color: white;
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 1px salmon;
+}
+
+.secondary-header {
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-size: 2rem;
+}
+
+.cancel {
+  background-color: #f58c91;
+  font-weight: 600;
+  -webkit-box-shadow: 1px 1px 1px #f5b25b;
+          box-shadow: 1px 1px 1px #f5b25b;
+  color: black;
+  border-radius: 0.5rem;
+  width: 80%;
+  padding: 3px;
+  font-size: 1rem;
 }
 
 #menu-items {
@@ -100,7 +157,53 @@
   padding-bottom: 15px;
 }
 
-#dishes {
-  border-right: 2px solid black;
+#order-name {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  color: white;
+  background-color: #7fcbf5;
+  -webkit-box-shadow: 1px 1px 1px #416d85;
+          box-shadow: 1px 1px 1px #416d85;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  width: 80%;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+#order-name::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
+}
+
+#order-name:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
+}
+
+#order-name::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
+}
+
+#order-name::placeholder {
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
+}
+
+#set-order {
+  background-color: #36c95b;
+  font-weight: 600;
+  -webkit-box-shadow: 1px 1px 1px #f5b25b;
+          box-shadow: 1px 1px 1px #f5b25b;
+  color: black;
+  border-radius: 0.5rem;
+  width: 80%;
+  padding: 3px;
+  font-size: 1rem;
 }
 /*# sourceMappingURL=Menu.css.map */

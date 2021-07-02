@@ -1,8 +1,27 @@
-$mainColor: #fa923f;
-$secondaryColor: #0995ad;
-$mainBrightColor: #ffa459;
-$mainDarkColor: #ad5c1a;
-$secondaryBrightColor: #75e7fa;
+$backgroundColor: #5abdab;
+$positiveColor: #36c95b;
+$negativeColor: #f58c91;
+$mainDarkColor: #f5b25b;
+$secondaryBrightColor: #7fcbf5;
+@mixin inputs {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  color: white;
+  background-color: $secondaryBrightColor;
+  box-shadow: 1px 1px 1px #416d85;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  width: 80%;
+}
+@mixin buttons {
+  font-weight: 600;
+  box-shadow: 1px 1px 1px $mainDarkColor;
+  color: black;
+  border-radius: 0.5rem;
+  width: 80%;
+  padding: 3px;
+  font-size: 1rem;
+}
 .item {
   display: flexbox;
   border: 2px solid white;
@@ -15,24 +34,20 @@ $secondaryBrightColor: #75e7fa;
   display: flexbox;
 }
 .item-notes {
-  margin: 2px;
-  color: white;
-  background-color: $secondaryColor;
-  box-shadow: 1px 1px 1px $mainDarkColor;
-  border-radius: 0.5rem;
+  @include inputs();
   font-size: 1rem;
 }
 .item-notes::placeholder {
-  color: rgba(255, 255, 255, 0.438);
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
 }
 .item-order {
-  background-color: $mainBrightColor;
-  margin: 10px;
   font-size: 1rem;
+  margin: 10px;
   padding: 10px;
-  box-shadow: 1px 1px 1px $mainDarkColor;
-  color: white;
-  border-radius: 0.5rem;
+  background-color: $positiveColor;
+  @include buttons();
 }
 .item-name {
   font-weight: 800;
@@ -40,19 +55,48 @@ $secondaryBrightColor: #75e7fa;
 .item-price::after {
   content: "₪";
 }
+.item-props {
+  display: flexbox;
+}
 .count-button {
   font-size: 1.5rem;
   width: 1.7rem;
   height: 1.7rem;
 }
+.positive {
+  background-color: $positiveColor;
+}
+.negative {
+  background-color: $negativeColor;
+}
 .order {
   position: fixed;
   left: 5px;
   top: 3rem;
+  overflow: auto;
+  height: 95%;
+  width: fit-content;
+  .order-info {
+    color: white;
+  }
 }
 .main-header {
   display: block;
+  color: white;
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 1px salmon;
 }
+.secondary-header {
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-size: 2rem;
+}
+.cancel {
+  background-color: $negativeColor;
+
+  @include buttons();
+}
+
 #menu-items {
   display: flex;
   flex-direction: row;
@@ -65,6 +109,18 @@ $secondaryBrightColor: #75e7fa;
 #breaker {
   padding-bottom: 15px;
 }
-#dishes {
-  border-right: 2px solid black;
+#order-name {
+  @include inputs();
+  font-size: 1rem;
+  // padding: 5px;
+  margin-bottom: 5px;
+}
+#order-name::placeholder {
+  color: rgba(0, 0, 0, 0.438);
+  font-weight: 800;
+  text-align: center;
+}
+#set-order {
+  background-color: $positiveColor;
+  @include buttons();
 }

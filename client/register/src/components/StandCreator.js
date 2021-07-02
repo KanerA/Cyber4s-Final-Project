@@ -4,11 +4,13 @@ import { Redirect } from "react-router-dom";
 import Stand from "./Stand";
 import { useDispatch } from "react-redux";
 import { changeRestaurant } from "../action";
+import "./styles/StandCreator/StandCreator.css";
 
 export default function StandCreator({ user, restaurant }) {
   const dispatch = useDispatch();
   const [stands, setStands] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const nameRef = useRef();
   const passwordRef = useRef();
 
@@ -72,38 +74,53 @@ export default function StandCreator({ user, restaurant }) {
   return (
     <div>
       {redirect && <Redirect to="/create" />}
-      {stands?.map((stand, i) => {
-        return (
-          <Stand
-            deleteStand={deleteStand}
-            stand={stand}
-            setRedirect={setRedirect}
-            passwordRef={passwordRef}
-            key={i}
-            loginToStand={loginToStand}
-          ></Stand>
-        );
-      })}
-      <form>
-        <label>Create new stand</label>
+      <div className="stands">
+        <h1 className="header">Existing Stands</h1>
+        {stands?.map((stand, i) => {
+          return (
+            <Stand
+              deleteStand={deleteStand}
+              stand={stand}
+              setRedirect={setRedirect}
+              passwordRef={passwordRef}
+              key={i}
+              loginToStand={loginToStand}
+            ></Stand>
+          );
+        })}
+      </div>
+      <div className="create-stand">
+        <h1 className="header">Create new stand</h1>
         <input
+          className="create-stand login-prop"
           placeholder="stand name"
           onChange={(e) => (nameRef.current = e.target.value)}
         />
         <input
+          style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
+          className="create-stand login-prop password"
           placeholder="password"
           onChange={(e) => (passwordRef.current = e.target.value)}
         />
         <button
+          className="show-password"
+          onClick={(e) => {
+            setShowPassword(showPassword ? false : true);
+          }}
+        >
+          {showPassword ? "Hide" : "Show"} Password
+        </button>
+        <br />
+        <button
+          id="open-stand"
           onClick={() => {
             openStand();
-
             setRedirect(true);
           }}
         >
           open a new stand
         </button>
-      </form>
+      </div>
     </div>
   );
 }
