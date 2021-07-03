@@ -2,6 +2,7 @@ const { Drinks } = require("../models");
 
 const getAllRestaurantDrinks = (req, res) => {
   const { restaurantName } = req.params;
+  if(req.user.name !== restaurantName) return res.sendStatus(403);
   Drinks.findAll({
     where: { restaurant_name: restaurantName },
   }).then((drinks) => {
@@ -22,6 +23,7 @@ const getAllRestaurantDrinks = (req, res) => {
 
 const createNewDrink = (req, res) => {
   const { body } = req;
+  if(req.user.name !== body.restaurant_name) return res.sendStatus(403);
   Drinks.create(body).then(() => res.send("new drink created"));
 };
 
