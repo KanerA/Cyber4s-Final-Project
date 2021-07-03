@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Stand from "./Stand";
 import { useDispatch } from "react-redux";
-import { changeRestaurant, changeRestaurantUser } from "../action";
+import changeRestaurant from "../action/changeRestaurant";
+import changeRestaurantUser from "../action/changeUser";
 import "./styles/StandCreator/StandCreator.css";
 
 export default function StandCreator({ user, restaurant, restaurantUser }) {
@@ -51,7 +52,7 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
   };
   const loginToStand = async (username, restaurant) => {
     const body = {
-      user_name: username.current,
+      user_name: username,
       password: passwordRef.current,
     };
     try {
@@ -59,7 +60,9 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
-      console.log(res.data.user_name);
+      dispatch(changeRestaurantUser(username));
+      dispatch(changeRestaurant(restaurant));
+      console.log(username);
     } catch (err) {
       console.log(err);
     }

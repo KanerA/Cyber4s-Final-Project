@@ -34,9 +34,8 @@ function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
         <button
           className="stand-login"
           onClick={() => {
-            loginToStand(userNameRef.current);
-            dispatch(changeRestaurant(stand.name));
-            dispatch(changeRestaurantUser(userNameRef.current));
+            loginToStand(userNameRef.current, stand.name);
+
             setRedirect(true);
           }}
         >
