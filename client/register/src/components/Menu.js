@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Prompt } from "react-router-dom";
 import axios from "axios";
 import Dish from "./Dish";
 import Drink from "./Drink";
@@ -17,11 +18,12 @@ function Menu({ restaurant }) {
 
   useEffect(() => {
     axios
-      .get(`/dishes/${restaurant}`)
+      .get(`/dishes/${restaurant}`) // need to send username
       .then((newDishes) => setDishes(newDishes.data))
       .catch(() => console.log("no new dishes!"));
+
     axios
-      .get(`/drinks/${restaurant}`)
+      .get(`/drinks/${restaurant}`) // need to send username
       .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
@@ -38,7 +40,7 @@ function Menu({ restaurant }) {
 
     setDrinkOrders([]);
     setDishOrders([]);
-    e.target.parentElement.children[1].value = "";
+    e.target.parentElement.children[2].value = "";
     setTotalPrice(0);
     itemNumber.current = 0;
   };
@@ -141,6 +143,10 @@ function Menu({ restaurant }) {
           <div></div>
         </div>
       )}
+      <Prompt
+        when={customerName.current === ""}
+        message="Are you sure you want to leave?"
+      />
     </div>
   );
 }

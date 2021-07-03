@@ -23,9 +23,9 @@ function CurrentOrder({
   };
   return (
     <div className="item">
-      {dishOrders.map((orderedDish) => {
+      {dishOrders.map((orderedDish, i) => {
         return (
-          <div className="item-props">
+          <div className="item-props" key={`dishOrder ${i}`}>
             <p>
               {orderedDish.amount}X {orderedDish.name}
             </p>
@@ -42,9 +42,9 @@ function CurrentOrder({
           </div>
         );
       })}
-      {drinkOrders.map((orderedDrink) => {
+      {drinkOrders.map((orderedDrink, i) => {
         return (
-          <div>
+          <div className="item-props" key={`drinkOrder ${i}`}>
             <p>
               {orderedDrink.amount}X {orderedDrink.name}
             </p>

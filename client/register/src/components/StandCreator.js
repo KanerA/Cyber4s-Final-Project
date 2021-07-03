@@ -31,7 +31,8 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
         password: passwordRef.current,
         email,
       });
-      if (res.status === 200) return;
+      // if (res.status === 200) return;
+      console.log(restaurantUser);
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
@@ -42,29 +43,30 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
       console.log(err);
     }
   };
-  const loginToStand = async (username) => {
+  const loginToStand = async (username, restaurant) => {
     const body = {
       user_name: username.current,
       password: passwordRef.current,
     };
     try {
-      const res = await axios.post(`/stands/login/${username.current}`, body, {
-        headers: {
-          authorization: "Bearer " + localStorage.accessToken,
-        },
-      });
+      const res = await axios.post(`/stands/login/`, body);
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
       dispatch(changeRestaurant(nameRef.current));
     } catch (err) {
       console.log(err);
-      // setLoginError(true);
     }
   };
   const deleteStand = async (username) => {
+    console.log(username.current, passwordRef.current);
     await axios.delete(
-      `/stands/remove?u=${username.current}&p=${passwordRef.current}`
+      `/stands/remove?u=${username.current}&p=${passwordRef.current}`,
+      {
+        headers: {
+          authorization: "Bearer " + localStorage.accessToken,
+        },
+      }
     );
     const filtered = stands.filter((stand) => stand.name !== restaurant);
     setStands(filtered);

@@ -31,9 +31,9 @@ function MenuCreator({ restaurant }) {
         restaurant_name: itemRef.current.restaurantName,
       });
     }
+    e.target.parentElement.children[0].value = "";
+    e.target.parentElement.children[1].value = "";
     e.target.parentElement.children[2].value = "";
-    e.target.parentElement.children[3].value = "";
-    e.target.parentElement.children[4].value = "";
   };
   const dishOrDrink = (e) => {
     setItem(e.target.value);
@@ -97,12 +97,11 @@ function MenuCreator({ restaurant }) {
             itemRef.current.description = e.target.value;
           }}
         />
+        <br />
+        <button id="save-new-item" onClick={(e) => saveItem(e)}>
+          save {item}
+        </button>
       </div>
-
-      <br></br>
-      <button id="save-new-item" onClick={(e) => saveItem(e)}>
-        save {item}
-      </button>
     </div>
   );
 }
