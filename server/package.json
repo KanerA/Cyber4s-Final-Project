@@ -20,7 +20,8 @@
     "mongoose": "^5.12.14",
     "mysql2": "^2.2.5",
     "randomstring": "^1.2.1",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "socket.io": "^4.1.2"
   },
   "devDependencies": {
     "jest": "^27.0.4",

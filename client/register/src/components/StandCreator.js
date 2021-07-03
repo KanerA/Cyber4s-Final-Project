@@ -25,23 +25,29 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
   }, []);
   const openStand = async () => {
     const { email } = user;
-    try {
-      const res = await axios.post("/stands/create", {
+    // try {
+    const res = await axios
+      .post("/stands/create", {
         restaurant_name: nameRef.current,
         password: passwordRef.current,
         email,
+      })
+      .then((res) => {
+        // if (res.status === 200) return;
+        console.log(restaurantUser);
+        localStorage.setItem("userId", res.data.id);
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        dispatch(changeRestaurantUser(res.data.user_name));
+        dispatch(changeRestaurant(nameRef.current));
+
+        alert(`username: ${res.data.user_name}`);
+        console.log(res.data.user_name);
+      })
+      // }
+      .catch((err) => {
+        console.log(err);
       });
-      // if (res.status === 200) return;
-      console.log(restaurantUser);
-      localStorage.setItem("userId", res.data.id);
-      localStorage.setItem("accessToken", res.data.accessToken);
-      localStorage.setItem("refreshToken", res.data.refreshToken);
-      alert(`username: ${res.data.user_name}`);
-      dispatch(changeRestaurantUser(res.data.user_name));
-      dispatch(changeRestaurant(nameRef.current));
-    } catch (err) {
-      console.log(err);
-    }
   };
   const loginToStand = async (username, restaurant) => {
     const body = {
@@ -53,7 +59,7 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
-      dispatch(changeRestaurant(nameRef.current));
+      console.log(res.data.user_name);
     } catch (err) {
       console.log(err);
     }
@@ -66,7 +72,7 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
         headers: {
           authorization: "Bearer " + localStorage.accessToken,
         },
-      }
+      },
     );
     const filtered = stands.filter((stand) => stand.name !== restaurant);
     setStands(filtered);

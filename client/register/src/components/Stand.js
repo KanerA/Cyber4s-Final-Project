@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeRestaurant } from "../action";
+import { changeRestaurant, changeRestaurantUser } from "../action";
 
 function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
   const dispatch = useDispatch();
@@ -34,8 +34,9 @@ function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
         <button
           className="stand-login"
           onClick={() => {
-            loginToStand(userNameRef);
+            loginToStand(userNameRef.current);
             dispatch(changeRestaurant(stand.name));
+            dispatch(changeRestaurantUser(userNameRef.current));
             setRedirect(true);
           }}
         >
