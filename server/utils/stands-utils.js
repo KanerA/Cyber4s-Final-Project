@@ -46,7 +46,6 @@ const standLogin = async (req, res) => {
     expiresIn: "10m",
   });
   const { id, user_name, name } = stand;
-  console.log(name);
   res.status(201).json({ accessToken, refreshToken, id, user_name, name });
 };
 
@@ -69,14 +68,11 @@ const deleteStand = async (req, res) => {
 };
 
 const getStandData = async (req, res) => {
-  // console.log(req.user);
   const stand = await Stands.findOne({
     where: {
       user_name: req.user.user_name
     }
   });
-  // if()
-  console.log(stand);
   res.json({});
 };
 
