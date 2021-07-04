@@ -5,9 +5,10 @@ const getAllRestaurantDishes = (req, res) => {
   if(req.user.user_name !== user_name) return res.sendStatus(403); // compares the token to the wanted restaurant
   Dishes.findAll({
     where: { restaurant_name: user_name },
-  }).then((dishes) => {
+  })
+    .then((dishes) => {
     const allDishes = dishes.map((dish) => dish.toJSON());
-    res.send(
+    res.json(
       allDishes.map((dish) => {
         return {
           name: dish.name,
@@ -17,13 +18,22 @@ const getAllRestaurantDishes = (req, res) => {
         };
       }),
     );
-  });
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ error: err })
+    })
 };
 
 const createNewDish = (req, res) => {
-  const { body } = req;
-  if(body.user_name !== req.user.user_name) return res.sendStatus(403);
-  Dishes.create(body).then(() => res.send("new dish created"));
+  const { body: { name, description, user_name, price, alcoholic }} = req;
+  if(user_name !== req.user.user_name) return res.sendStatus(403);
+  Dishes.create({
+    name,
+    description,
+    restaurant_name: user_name,
+    price,
+  }).then(() => res.send("new dish created"));
 };
 
 module.exports = { getAllRestaurantDishes, createNewDish };
