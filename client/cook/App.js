@@ -21,7 +21,9 @@ export default function App() {
       contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
     >
       <View style={styles.container}>
-        {restaurant ? null : <Login setRestaurant={setRestaurant} />}
+        {restaurant ? null : (
+          <Login setRestaurant={setRestaurant} restaurant={restaurant} />
+        )}
         {restaurant && <OrderHandler restaurant={restaurant} />}
       </View>
     </ScrollView>

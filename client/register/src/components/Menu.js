@@ -154,7 +154,7 @@ function Menu({ restaurant, restaurantUser }) {
         </div>
       )}
       <Prompt
-        when={customerName.current === ""}
+        when={customerName.current === "" || (dishOrders && drinkOrders)}
         message="Are you sure you want to leave?"
       />
     </div>
