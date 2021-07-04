@@ -30,16 +30,17 @@ const createNewStand = async (req, res) => {
 
 const standLogin = async (req, res) => {
   const stand = req.stand;
+  const { id, user_name, name, password } = stand;
   const payload = {
-    name: stand.name,
-    password: stand.password,
-    user_name: stand.user_name,
+    name: name,
+    password: password,
+    user_name: user_name,
   };
   const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET);
   const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
     expiresIn: "10m",
   });
-  const { id, user_name, name } = stand;
+  getStandData(user_name);
   res.status(201).json({ accessToken, refreshToken, id, user_name, name });
 };
 
@@ -59,15 +60,6 @@ const deleteStand = async (req, res) => {
       console.log(err.message);
       res.status(500).json(err.message);
     });
-};
-
-const getStandData = async (req, res) => {
-  const stand = await Stands.findOne({
-    where: {
-      user_name: req.user.user_name
-    }
-  });
-  res.json({});
 };
 
 module.exports = { createNewStand, deleteStand, standLogin, getStandData };
