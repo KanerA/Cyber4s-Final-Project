@@ -16,19 +16,29 @@ function MenuCreator({ restaurant, restaurantUser }) {
   const saveItem = async (e) => {
     // e.preventDefault();
     if (item === "dish") {
-      await axios.post("/dishes", {
+      const body = {
         name: itemRef.current.name,
         price: itemRef.current.price,
         description: itemRef.current.description,
         user_name: itemRef.current.restaurantName,
+      };
+      await axios.post("/dishes", body, {
+        headers: {
+          authorization: "Bearer " + localStorage.accessToken,
+        },
       });
     } else if (item === "drink") {
-      await axios.post("/drinks", {
+      const body = {
         name: itemRef.current.name,
         price: itemRef.current.price,
         description: itemRef.current.description,
         alcoholic: itemRef.current.alcoholic,
         user_name: itemRef.current.restaurantName,
+      };
+      await axios.post("/drinks", body, {
+        headers: {
+          authorization: "Bearer " + localStorage.accessToken,
+        },
       });
     }
     e.target.parentElement.children[0].value = "";

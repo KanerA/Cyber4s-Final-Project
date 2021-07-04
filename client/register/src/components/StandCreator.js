@@ -118,6 +118,11 @@ export default function StandCreator({ restaurant, restaurantUser }) {
           onChange={(e) => (nameRef.current = e.target.value)}
         />
         <input
+          className="create-stand login-prop"
+          placeholder="stand's username"
+          onChange={(e) => (usernameRef.current = e.target.value)}
+        />
+        <input
           style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
           className="create-stand login-prop password"
           placeholder="password"
