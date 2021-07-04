@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
-export default function OrderHandler({ restaurant }) {
+export default function OrderHandler({ restaurant, restaurantUser }) {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://10.0.0.13:8080/orders/${restaurant}`)
+      .get(`http://10.0.0.13:8080/orders/${restaurantUser}`)
       .then((res) => {
         const ordersToDo = res.data.filter((order) => !order.done);
         setOrders(ordersToDo);

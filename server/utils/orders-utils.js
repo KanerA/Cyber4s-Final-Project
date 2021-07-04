@@ -1,7 +1,7 @@
-const OrderModel = 
-  process.env.NODE_ENV === 'test' 
-  ? require('../mongoModel/testMongoModel') 
-  : require("../mongoModel/mongoModel");
+const OrderModel =
+  process.env.NODE_ENV === "test"
+    ? require("../mongoModel/testMongoModel")
+    : require("../mongoModel/mongoModel");
 
 const newOrder = async (req, res) => {
   const { body } = req;
@@ -9,13 +9,13 @@ const newOrder = async (req, res) => {
     customerName: body.customerName,
     dish: body.dish,
     drink: body.drink,
-    restaurantName: body.restaurantName,
+    username: body.username,
     totalPrice: body.totalPrice,
   });
 
   newOrder.save().then((data, err) => {
     if (!err) {
-      res.send(data.customerName + "\'s order accepted!");
+      res.send(data.customerName + "'s order accepted!");
     } else {
       console.log(err);
     }
@@ -23,8 +23,8 @@ const newOrder = async (req, res) => {
 };
 
 const getOrders = async (req, res) => {
-  const { restaurantName } = req.params;
-  OrderModel.find({ restaurantName: restaurantName }, (err, ordersArr) => {
+  const { username } = req.params;
+  OrderModel.find({ username: username }, (err, ordersArr) => {
     if (!err) {
       res.json(ordersArr);
     } else {
@@ -34,11 +34,11 @@ const getOrders = async (req, res) => {
 };
 
 const getOrderHistory = async (req, res) => {
-  const { restaurantName } = req.params;
+  const { username } = req.params;
   const limit = +req.query.h; // turn to Number
   console.log(limit);
   const orderHistory = await OrderModel.find({
-    restaurantName: restaurantName,
+    username: username,
   });
   if (!limit) res.json(orderHistory);
   const wantedOrderHistory = orderHistory.splice(0, limit);
@@ -46,10 +46,10 @@ const getOrderHistory = async (req, res) => {
 };
 
 const getDone = async (req, res) => {
-  const { done, restaurantName } = req.query;
+  const { done, username } = req.query;
   const orderList = await OrderModel.find({
     done,
-    restaurantName: restaurantName,
+    username: username,
   });
   console.log(orderList);
   res.json(orderList);
@@ -64,31 +64,31 @@ const orderDoneCancel = async (req, res) => {
     updated = await OrderModel.findOneAndUpdate(
       { _id: id },
       { done: isDone },
-      { new: true },
+      { new: true }
     );
   if (c)
     updated = await OrderModel.findOneAndUpdate(
       { _id: id },
       { canceled: isCanceled },
-      { new: true },
+      { new: true }
     );
   console.log(d, c, id);
   res.json(updated);
 };
 
 const getNonCanceled = async (req, res) => {
-  const { restaurantName } = req.params;
+  const { username } = req.params;
   const nonCanceledOrders = await OrderModel.find({
-    restaurantName,
+    username,
     canceled: false,
   });
   res.json(nonCanceledOrders);
 };
 
 const getCanceled = async (req, res) => {
-  const { restaurantName } = req.params;
+  const { username } = req.params;
   const canceledOrders = await OrderModel.find({
-    restaurantName,
+    username,
     canceled: true,
   });
   res.json(canceledOrders);
