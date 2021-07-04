@@ -28,7 +28,7 @@ function Menu({ restaurant, restaurantUser }) {
       .catch(() => console.log("no new dishes!"));
 
     axios
-      .get(`/drinks/${restaurant}`, {
+      .get(`/drinks/${restaurantUser}`, {
         headers: {
           Authorization: `bearer ${accessToken}`,
         },

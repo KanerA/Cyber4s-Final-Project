@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Order from "./Order";
 
-function OrderHandler({ restaurant }) {
+function OrderHandler({ restaurant, restaurantUser }) {
   const [orders, setOrders] = useState();
 
   useEffect(() => {
     axios
-      .get(`/orders/${restaurant}`)
+      .get(`/orders/${restaurantUser}`)
       .then((res) => {
         setOrders(res.data);
       })
@@ -18,7 +18,7 @@ function OrderHandler({ restaurant }) {
     <div className="orders">
       {orders?.map((order, i) => {
         if (order.canceled === false) {
-          return <Order order={order} key={i} />;
+          return <Order order={order} key={`order ${i}`} />;
         }
       })}
     </div>
