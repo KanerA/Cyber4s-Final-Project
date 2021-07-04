@@ -29,7 +29,10 @@ function App() {
           )}
           {restaurant && (
             <Route exact path="/orders">
-              <OrderHandler restaurant={restaurant} />
+              <OrderHandler
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+              />
             </Route>
           )}
           {restaurant && (

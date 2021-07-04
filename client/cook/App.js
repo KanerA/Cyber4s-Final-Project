@@ -16,15 +16,23 @@ import axios from "axios";
 
 export default function App() {
   const [restaurant, setRestaurant] = useState();
+  const [userName, setUserName] = useState();
   return (
     <ScrollView
       contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
     >
       <View style={styles.container}>
         {restaurant ? null : (
-          <Login setRestaurant={setRestaurant} restaurant={restaurant} />
+          <Login
+            setRestaurant={setRestaurant}
+            restaurant={restaurant}
+            userName={userName}
+            setUserName={setUserName}
+          />
         )}
-        {restaurant && <OrderHandler restaurant={restaurant} />}
+        {restaurant && (
+          <OrderHandler restaurant={restaurant} userName={userName} />
+        )}
       </View>
     </ScrollView>
   );
