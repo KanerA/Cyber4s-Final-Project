@@ -16,7 +16,7 @@ export default function StandCreator({ restaurant, restaurantUser }) {
 
   const openStand = async () => {
     // try {
-    const res = axios
+    axios
       .post("/stands/create", {
         restaurant_name: nameRef.current,
         user_name: usernameRef.current,
