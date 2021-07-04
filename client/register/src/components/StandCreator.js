@@ -16,14 +16,13 @@ export default function StandCreator({ restaurant, restaurantUser }) {
 
   const openStand = async () => {
     // try {
-    const res = await axios
+    const res = axios
       .post("/stands/create", {
         restaurant_name: nameRef.current,
         user_name: usernameRef.current,
         password: passwordRef.current,
       })
       .then((res) => {
-        // if (res.status === 200) return;
         console.log(restaurantUser);
         localStorage.setItem("userId", res.data.id);
         localStorage.setItem("accessToken", res.data.accessToken);

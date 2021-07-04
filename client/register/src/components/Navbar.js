@@ -5,6 +5,7 @@ import changeRestaurant from "../action/changeRestaurant";
 import firebase from "firebase";
 import StandDetails from "./StandDetails";
 import "./styles/NavBar/NavBar.css";
+import changeRestaurantUser from "../action/changeUser";
 function Navbar({ restaurant, restaurantUser }) {
   const [standDetails, setStandDetails] = useState(false);
   const dispatch = useDispatch();
@@ -39,7 +40,10 @@ function Navbar({ restaurant, restaurantUser }) {
         <span id="buttons">
           <button
             className="link-button"
-            onClick={() => dispatch(changeRestaurant(null))}
+            onClick={() => {
+              dispatch(changeRestaurant(null));
+              dispatch(changeRestaurantUser(null));
+            }}
           >
             log out of stand
           </button>
