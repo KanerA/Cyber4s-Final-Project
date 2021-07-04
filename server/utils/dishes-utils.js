@@ -1,10 +1,10 @@
 const { Dishes } = require("../models");
 
 const getAllRestaurantDishes = (req, res) => {
-  const { restaurantName } = req.params;
-  if(req.user.name !== restaurantName) return res.sendStatus(403); // compares the token to the wanted restaurant
+  const { user_name } = req.params;
+  if(req.user.user_name !== user_name) return res.sendStatus(403); // compares the token to the wanted restaurant
   Dishes.findAll({
-    where: { restaurant_name: restaurantName },
+    where: { restaurant_name: user_name },
   }).then((dishes) => {
     const allDishes = dishes.map((dish) => dish.toJSON());
     res.send(
@@ -12,7 +12,7 @@ const getAllRestaurantDishes = (req, res) => {
         return {
           name: dish.name,
           description: dish.description,
-          restaurantName: dish.restaurantName,
+          user_name: dish.user_name,
           price: dish.price,
         };
       }),
@@ -22,7 +22,7 @@ const getAllRestaurantDishes = (req, res) => {
 
 const createNewDish = (req, res) => {
   const { body } = req;
-  if(body.restaurant_name !== req.user.name) return res.sendStatus(403);
+  if(body.user_name !== req.user.user_name) return res.sendStatus(403);
   Dishes.create(body).then(() => res.send("new dish created"));
 };
 

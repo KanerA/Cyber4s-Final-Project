@@ -6,7 +6,7 @@ const {
   createNewDish,
 } = require("../utils/dishes-utils");
 
-dishes.get("/:restaurantName", validateToken, getAllRestaurantDishes);
+dishes.get("/:user_name", validateToken, getAllRestaurantDishes);
 dishes.post("/", validateToken, createNewDish);
 
 module.exports = dishes;
