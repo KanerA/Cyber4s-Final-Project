@@ -6,7 +6,7 @@ const {
   createNewDrink,
 } = require("../utils/drinks-utils");
 
-routeDrinks.get("/:restaurantName", validateToken, getAllRestaurantDrinks);
+routeDrinks.get("/:user_name", validateToken, getAllRestaurantDrinks);
 routeDrinks.post("/", validateToken, createNewDrink);
 
 module.exports = routeDrinks;

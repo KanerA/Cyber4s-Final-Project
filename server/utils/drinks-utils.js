@@ -1,10 +1,10 @@
 const { Drinks } = require("../models");
 
 const getAllRestaurantDrinks = (req, res) => {
-  const { restaurantName } = req.params;
-  if(req.user.name !== restaurantName) return res.sendStatus(403);
+  const { user_name } = req.params;
+  if(req.user.user_name !== user_name) return res.sendStatus(403);
   Drinks.findAll({
-    where: { restaurant_name: restaurantName },
+    where: { restaurant_name: user_name },
   }).then((drinks) => {
     const allDrinks = drinks.map((drink) => drink.toJSON());
     res.send(
@@ -12,7 +12,7 @@ const getAllRestaurantDrinks = (req, res) => {
         return {
           name: drink.name,
           description: drink.description,
-          restaurantName: drink.restaurantName,
+          restaurantName: drink.user_name,
           price: drink.price,
           alcoholic: drink.alcoholic,
         };
@@ -23,7 +23,7 @@ const getAllRestaurantDrinks = (req, res) => {
 
 const createNewDrink = (req, res) => {
   const { body } = req;
-  if(req.user.name !== body.restaurant_name) return res.sendStatus(403);
+  if(req.user.user_name !== body.user_name) return res.sendStatus(403);
   Drinks.create(body).then(() => res.send("new drink created"));
 };
 
