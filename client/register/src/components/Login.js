@@ -7,16 +7,13 @@ function Login() {
     firebase.auth().signInWithPopup(provider);
   };
   return (
-    <div>
-      <button
-        id="google-login"
-        onClick={() => {
-          signUpWithGoogle();
-        }}
-      >
-        sign up with google
-      </button>
-    </div>
+    <div
+      id="google-login"
+      onClick={() => {
+        signUpWithGoogle();
+      }}
+      alt="sign in with google"
+    ></div>
   );
 }
 

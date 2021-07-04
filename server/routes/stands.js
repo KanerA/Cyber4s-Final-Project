@@ -6,12 +6,11 @@ const {
     getAllStands,
     deleteStand,
     standLogin,
-    getStandData
 } = require("../utils/stands-utils");
 
 stands.get("/:uid", getAllStands);
 stands.post("/create", validatePassword, createNewStand);
-stands.delete('/remove', validateToken, validatePassword, deleteStand);
-stands.post('/login', validatePassword, standLogin);
+stands.delete("/remove", validateToken, validatePassword, deleteStand);
+stands.post("/login", validatePassword, standLogin);
 
 module.exports = stands;

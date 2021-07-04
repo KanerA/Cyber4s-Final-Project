@@ -15,8 +15,8 @@ export default function Order({ order }) {
     <div className="register-order">
       <div className="items">
         <div className="order-details">
+          <h2 className="customer-name"> {order.customerName}</h2>
           <p className="order-time">
-            <h2 className="customer-name"> {order.customerName}</h2>
             {new Date(order.createdAt).toLocaleString("en-gb").toString()}
           </p>
           <p className="total-price">

@@ -1,28 +1,16 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeRestaurant } from "../action";
-import Login from "./Login";
+import { changeRestaurant, changeRestaurantUser } from "../action";
 
 function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
   const dispatch = useDispatch();
   const userNameRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
-  const chooseRestaurant = (name) => {
-    dispatch(changeRestaurant(name));
-  };
 
   return (
     <div>
-      <label
-        className="stand-name"
-        onClick={() => {
-          chooseRestaurant(stand.name);
-          setRedirect(true);
-        }}
-      >
-        {stand.name}
-      </label>
+      <label className="stand-name">{stand.name}</label>
       <input
         className="login-prop"
         placeholder="user name"
@@ -45,7 +33,11 @@ function Stand({ stand, setRedirect, deleteStand, loginToStand, passwordRef }) {
       <div className="stand-controls">
         <button
           className="stand-login"
-          onClick={() => loginToStand(userNameRef)}
+          onClick={() => {
+            loginToStand(userNameRef.current, stand.name);
+
+            setRedirect(true);
+          }}
         >
           log in
         </button>

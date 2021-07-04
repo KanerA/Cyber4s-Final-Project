@@ -1,6 +1,6 @@
 import React from "react";
 
-function StandDetails({ restaurant, setStandDetails }) {
+function StandDetails({ restaurant, setStandDetails, restaurantUser }) {
   return (
     <div id="stand-details">
       <button
@@ -10,7 +10,8 @@ function StandDetails({ restaurant, setStandDetails }) {
       >
         X
       </button>
-      <p>{restaurant}</p>
+      <p>stand: {restaurant}</p>
+      <p>userName: {restaurantUser}</p>
     </div>
   );
 }

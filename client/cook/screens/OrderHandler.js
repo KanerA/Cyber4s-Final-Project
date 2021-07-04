@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
 // require("dotenv").config();
-export default function Orders() {
+export default function OrderHandler({ restaurant }) {
   const [orders, setOrders] = useState([]);
-  let restaurant = "b"; // to be- res_name
   useEffect(() => {
     axios
       .get(
@@ -13,17 +12,38 @@ export default function Orders() {
         `http://10.0.0.13:8080/orders/${restaurant}`
       )
       .then((res) => {
-        setOrders(res.data);
+        const ordersToDo = res.data.filter((order) => !order.done);
+        setOrders(ordersToDo);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
-
+  const orderDone = (order) => {
+    axios
+      .patch(`http://10.0.0.13:8080/orders/done/?id=${order._id}&d=true`)
+      .then((res) => {
+        // console.log(res.data); // set background color of done orders to green to show it work
+      });
+    console.log(order);
+    const ordersToDo = orders.filter(
+      (invite) =>
+        invite.customerName !== order.customerName &&
+        invite.createdAt !== order.createdAt
+    );
+    setOrders(ordersToDo);
+  };
   return (
     <View>
       <Text>Orders</Text>
-      {orders.map((order, i) => {
-        return <Order order={order} />;
+      {orders.reverse().map((order, i) => {
+        return (
+          <Order
+            order={order}
+            restaurant={restaurant}
+            orderDone={orderDone}
+            key={`order ${i}`}
+          />
+        );
       })}
     </View>
   );

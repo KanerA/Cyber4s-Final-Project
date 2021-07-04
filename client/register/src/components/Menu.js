@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Prompt } from "react-router-dom";
 import axios from "axios";
 import Dish from "./Dish";
 import Drink from "./Drink";
 import CurrentOrder from "./CurrentOrder";
 import "./styles/Menu/Menu.css";
 
-function Menu({ restaurant }) {
+function Menu({ restaurant, restaurantUser }) {
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, setDishOrders] = useState([]);
@@ -16,18 +17,29 @@ function Menu({ restaurant }) {
   const itemNumber = useRef(0);
 
   useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
     axios
-      .get(`/dishes/${restaurant}`)
+      .get(`/dishes/${restaurant}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      })
       .then((newDishes) => setDishes(newDishes.data))
       .catch(() => console.log("no new dishes!"));
+
     axios
-      .get(`/drinks/${restaurant}`)
+      .get(`/drinks/${restaurant}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      })
       .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
 
   const placeOrder = (e) => {
-    axios.post(`/orders/${restaurant}`, {
+    axios.post(`/orders/${restaurantUser}`, {
       customerName: customerName.current,
       dish: dishOrders,
       drink: drinkOrders,
@@ -38,7 +50,7 @@ function Menu({ restaurant }) {
 
     setDrinkOrders([]);
     setDishOrders([]);
-    e.target.parentElement.children[1].value = "";
+    e.target.parentElement.children[2].value = "";
     setTotalPrice(0);
     itemNumber.current = 0;
   };
@@ -141,6 +153,10 @@ function Menu({ restaurant }) {
           <div></div>
         </div>
       )}
+      <Prompt
+        when={customerName.current === "" || (dishOrders && drinkOrders)}
+        message="Are you sure you want to leave?"
+      />
     </div>
   );
 }
