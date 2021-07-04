@@ -28,12 +28,6 @@ const createNewStand = async (req, res) => {
   res.status(201).json({ accessToken, refreshToken, id, user_name });
 };
 
-const getAllStands = async (req, res) => {
-  // only with JWT authentication
-  const stands = await Stands.findAll({});
-  res.json(stands);
-};
-
 const standLogin = async (req, res) => {
   const stand = req.stand;
   const payload = {
@@ -76,4 +70,4 @@ const getStandData = async (req, res) => {
   res.json({});
 };
 
-module.exports = { createNewStand, getAllStands, deleteStand, standLogin, getStandData };
+module.exports = { createNewStand, deleteStand, standLogin, getStandData };
