@@ -6,7 +6,7 @@ import Drink from "./Drink";
 import CurrentOrder from "./CurrentOrder";
 import "./styles/Menu/Menu.css";
 
-function Menu({ restaurant }) {
+function Menu({ restaurant, restaurantUser }) {
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, setDishOrders] = useState([]);
@@ -17,19 +17,29 @@ function Menu({ restaurant }) {
   const itemNumber = useRef(0);
 
   useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
     axios
-      .get(`/dishes/${restaurant}`) // need to send username
+      .get(`/dishes/${restaurant}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      })
       .then((newDishes) => setDishes(newDishes.data))
       .catch(() => console.log("no new dishes!"));
 
     axios
-      .get(`/drinks/${restaurant}`) // need to send username
+      .get(`/drinks/${restaurant}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      })
       .then((newDrinks) => setDrinks(newDrinks.data))
       .catch(() => console.log("no new drinks!"));
   }, []);
 
   const placeOrder = (e) => {
-    axios.post(`/orders/${restaurant}`, {
+    axios.post(`/orders/${restaurantUser}`, {
       customerName: customerName.current,
       dish: dishOrders,
       drink: drinkOrders,

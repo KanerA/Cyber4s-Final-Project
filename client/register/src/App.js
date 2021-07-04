@@ -16,16 +16,24 @@ import "./components/styles/App/App.css";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
   const restaurantUser = useSelector((state) => state.restaurantUser);
+  console.log("restaurantUser", restaurantUser);
   const [user] = useAuthState(auth);
 
   return (
     <div className="App">
       <Router>
-        <Navbar user={user} restaurant={restaurant} />
+        <Navbar
+          user={user}
+          restaurant={restaurant}
+          restaurantUser={restaurantUser}
+        />
         <Switch>
           {restaurant && (
             <Route exact path="/create">
-              <MenuCreator restaurant={restaurant} />
+              <MenuCreator
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+              />
             </Route>
           )}
           {restaurant && (
@@ -35,7 +43,7 @@ function App() {
           )}
           {restaurant && (
             <Route exact path="/menu">
-              <Menu restaurant={restaurant} />
+              <Menu restaurant={restaurant} restaurantUser={restaurantUser} />
             </Route>
           )}
           <Route exact path="/">

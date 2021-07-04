@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import "./styles/MenuCreator/MenuCreator.css";
 
-function MenuCreator({ restaurant }) {
+function MenuCreator({ restaurant, restaurantUser }) {
   const itemRef = useRef({
     name: "name",
     price: "price",

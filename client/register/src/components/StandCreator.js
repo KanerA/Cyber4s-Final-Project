@@ -62,7 +62,7 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
       localStorage.setItem("refreshToken", res.data.refreshToken);
       dispatch(changeRestaurantUser(username));
       dispatch(changeRestaurant(restaurant));
-      console.log(username);
+      // console.log(username, restaurantUser);
     } catch (err) {
       console.log(err);
     }
@@ -75,11 +75,12 @@ export default function StandCreator({ user, restaurant, restaurantUser }) {
         headers: {
           authorization: "Bearer " + localStorage.accessToken,
         },
-      },
+      }
     );
     const filtered = stands.filter((stand) => stand.name !== restaurant);
     setStands(filtered);
     dispatch(changeRestaurant());
+    dispatch(changeRestaurantUser());
     alert("deleted");
   };
   return (
