@@ -62,4 +62,4 @@ const deleteStand = async (req, res) => {
     });
 };
 
-module.exports = { createNewStand, deleteStand, standLogin, getStandData };
+module.exports = { createNewStand, deleteStand, standLogin };
