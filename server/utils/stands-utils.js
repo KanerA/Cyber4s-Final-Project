@@ -1,23 +1,17 @@
 const { Stands } = require("../models");
-const jwt = require("jsonwebtoken");
-const { hashSync, compare } = require("bcrypt");
-const randomString = require("randomString");
+const jwt = require('jsonwebtoken');
+const { hashSync } = require('bcrypt');
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
 const createNewStand = async (req, res) => {
-  if (req.stand !== undefined)
-    return res.json({ message: "Restaurant already registered!" });
-  const password = req.body.password;
-  if (password.length < 6)
-    return res.json({
-      message: "Password is too short, please choose another",
-    }); // validating length of password
+  if(req.stand !== undefined) return res.json({ message: 'Restaurant already registered!' });
+  const { password, user_name, restaurant_name } = req.body;
+  if(password.length < 6) return res.json({ message: 'Password is too short, please choose another' }); // validating length of password
   const hashedPW = hashSync(password, 10); // hashing the password for DB
-  const user_name = randomString.generate(6); // creating the restaurant's user name
   const stand = await Stands.create({
     user_name,
-    name: req.body.restaurant_name,
+    name: restaurant_name,
     password: hashedPW,
   });
 
@@ -74,4 +68,16 @@ const deleteStand = async (req, res) => {
     });
 };
 
-module.exports = { createNewStand, getAllStands, deleteStand, standLogin };
+const getStandData = async (req, res) => {
+  // console.log(req.user);
+  const stand = await Stands.findOne({
+    where: {
+      user_name: req.user.user_name
+    }
+  });
+  // if()
+  console.log(stand);
+  res.json({});
+};
+
+module.exports = { createNewStand, getAllStands, deleteStand, standLogin, getStandData };
