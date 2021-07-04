@@ -17,8 +17,8 @@ export default function Order({ order, orderDone }) {
   return (
     <GestureRecognizer
       // style={styles.order}
-      onSwipeLeft={() => console.log("left")}
-      onSwipeRight={() => console.log("right")}
+      onSwipeLeft={() => cancel()}
+      onSwipeRight={() => cancel()}
       style={
         Date.now() - Date.parse(date) <= 1000 * 5 * 60
           ? { backgroundColor: "green" }

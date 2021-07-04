@@ -8,7 +8,7 @@ function MenuCreator({ restaurant, restaurantUser }) {
     price: "price",
     description: "description",
     alcoholic: false,
-    restaurantName: restaurant,
+    restaurantName: restaurantUser,
   });
 
   const [item, setItem] = useState("dish"); // default will be as UI -- dish
@@ -20,7 +20,7 @@ function MenuCreator({ restaurant, restaurantUser }) {
         name: itemRef.current.name,
         price: itemRef.current.price,
         description: itemRef.current.description,
-        restaurant_name: itemRef.current.restaurantName,
+        user_name: itemRef.current.restaurantName,
       });
     } else if (item === "drink") {
       await axios.post("/drinks", {
@@ -28,7 +28,7 @@ function MenuCreator({ restaurant, restaurantUser }) {
         price: itemRef.current.price,
         description: itemRef.current.description,
         alcoholic: itemRef.current.alcoholic,
-        restaurant_name: itemRef.current.restaurantName,
+        user_name: itemRef.current.restaurantName,
       });
     }
     e.target.parentElement.children[0].value = "";

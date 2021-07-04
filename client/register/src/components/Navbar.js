@@ -5,7 +5,7 @@ import changeRestaurant from "../action/changeRestaurant";
 import firebase from "firebase";
 import StandDetails from "./StandDetails";
 import "./styles/NavBar/NavBar.css";
-function Navbar({ restaurant, user, restaurantUser }) {
+function Navbar({ restaurant, restaurantUser }) {
   const [standDetails, setStandDetails] = useState(false);
   const dispatch = useDispatch();
 
@@ -43,17 +43,6 @@ function Navbar({ restaurant, user, restaurantUser }) {
           >
             log out of stand
           </button>
-          {user && (
-            <button
-              className="link-button"
-              onClick={() => {
-                dispatch(changeRestaurant(null));
-                firebase.auth().signOut();
-              }}
-            >
-              Sign out of google
-            </button>
-          )}
         </span>
       </nav>
     </div>

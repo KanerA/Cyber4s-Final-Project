@@ -1,10 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "./firebaseConfig";
 import Menu from "./components/Menu";
 import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
-import Login from "./components/Login";
 import OrderHandler from "./components/OrderHandler";
 import StandCreator from "./components/StandCreator";
 import { useState } from "react";
@@ -16,17 +13,11 @@ import "./components/styles/App/App.css";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
   const restaurantUser = useSelector((state) => state.restaurantUser);
-  console.log("restaurantUser", restaurantUser);
-  const [user] = useAuthState(auth);
 
   return (
     <div className="App">
       <Router>
-        <Navbar
-          user={user}
-          restaurant={restaurant}
-          restaurantUser={restaurantUser}
-        />
+        <Navbar restaurant={restaurant} restaurantUser={restaurantUser} />
         <Switch>
           {restaurant && (
             <Route exact path="/create">
@@ -47,15 +38,7 @@ function App() {
             </Route>
           )}
           <Route exact path="/">
-            {user ? (
-              <Stand
-                user={user}
-                restaurant={restaurant}
-                restaurantUser={restaurantUser}
-              />
-            ) : (
-              <Login />
-            )}
+            <StandCreator />
           </Route>
         </Switch>
       </Router>

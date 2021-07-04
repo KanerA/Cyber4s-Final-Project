@@ -67,12 +67,4 @@ nav {
   color: black;
   border: 1px solid black;
 }
-
-#google-login {
-  position: relative;
-  top: 35vh;
-  left: 40vw;
-  content: url("../../../images/googleSignUp.png");
-  cursor: pointer;
-}
 /*# sourceMappingURL=NavBar.css.map */

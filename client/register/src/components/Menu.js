@@ -12,15 +12,14 @@ function Menu({ restaurant, restaurantUser }) {
   const [dishOrders, setDishOrders] = useState([]);
   const [drinkOrders, setDrinkOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-
+  console.log(dishOrders, drinkOrders);
   const customerName = useRef();
   const itemNumber = useRef(0);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-
     axios
-      .get(`/dishes/${restaurant}`, {
+      .get(`/dishes/${restaurantUser}`, {
         headers: {
           Authorization: `bearer ${accessToken}`,
         },
@@ -154,7 +153,11 @@ function Menu({ restaurant, restaurantUser }) {
         </div>
       )}
       <Prompt
-        when={customerName.current === "" || (dishOrders && drinkOrders)}
+        when={
+          customerName.current === "" ||
+          dishOrders.length > 0 ||
+          drinkOrders > 0
+        }
         message="Are you sure you want to leave?"
       />
     </div>
