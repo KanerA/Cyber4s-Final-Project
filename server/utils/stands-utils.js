@@ -40,7 +40,6 @@ const standLogin = async (req, res) => {
   const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
     expiresIn: "10m",
   });
-  getStandData(user_name);
   res.status(201).json({ accessToken, refreshToken, id, user_name, name });
 };
 
