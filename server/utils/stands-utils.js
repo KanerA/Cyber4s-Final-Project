@@ -51,9 +51,9 @@ const standLogin = async (req, res) => {
   const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
     expiresIn: "10m",
   });
-  const { id, user_name } = stand;
-  console.log(user_name);
-  res.status(201).json({ accessToken, refreshToken, id, user_name });
+  const { id, user_name, name } = stand;
+  console.log(name);
+  res.status(201).json({ accessToken, refreshToken, id, user_name, name });
 };
 
 const deleteStand = async (req, res) => {
