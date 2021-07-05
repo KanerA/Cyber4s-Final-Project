@@ -8,6 +8,7 @@ import "./styles/Menu/Menu.css";
 import socketIOClient from "socket.io-client";
 
 function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
+  const [change, setChange] = useState(false);
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, setDishOrders] = useState([]);
@@ -22,6 +23,20 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   const itemNumber = useRef(0);
 
   useEffect(() => {
+    socket.on("connect", () => {
+      console.log("added order");
+
+      socket.emit("sendOrders", restaurantUser);
+    });
+  }, [change]);
+
+  useEffect(() => {
+    // socket.on("connect", () => {
+    //   console.log("added order");
+    //   socket.on("sendOrder", () => {
+    //     socket.emit("sendOrders", restaurantUser);
+    //   });
+    // });
     const accessToken = localStorage.getItem("accessToken");
     axios
       .get(`/dishes/${restaurantUser}`, {
@@ -63,6 +78,15 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   }, []);
 
   const placeOrder = (e) => {
+    socket.on("connect", () => {
+      console.log("connected");
+      alert("order succeeded");
+      socket.emit("sendOrders", restaurantUser);
+      socket.on("receiveOrders", (newOrders) => {
+        // setOrders(newOrders);
+        // console.log("new orders");
+      });
+    });
     axios.post(`/orders/${restaurantUser}`, {
       customerName: customerName.current,
       dish: dishOrders,
@@ -71,8 +95,8 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
       username: restaurantUser,
       totalPrice: totalPrice,
     });
-    socket.emit("sendOrders", restaurantUser);
-
+    // socket.emit("sendOrder");
+    setChange((prev) => !prev);
     setDrinkOrders([]);
     setDishOrders([]);
     e.target.parentElement.children[2].value = "";
