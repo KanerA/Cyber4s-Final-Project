@@ -5,6 +5,7 @@ import Dish from "./Dish";
 import Drink from "./Drink";
 import CurrentOrder from "./CurrentOrder";
 import "./styles/Menu/Menu.css";
+import socketIOClient from "socket.io-client";
 
 function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   const [dishes, setDishes] = useState([]);
@@ -12,6 +13,10 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   const [dishOrders, setDishOrders] = useState([]);
   const [drinkOrders, setDrinkOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const endPoint = "http://localhost:8080";
+  const socket = socketIOClient(endPoint, {
+    transports: ["websocket"],
+  });
 
   const customerName = useRef();
   const itemNumber = useRef(0);
@@ -66,6 +71,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
       username: restaurantUser,
       totalPrice: totalPrice,
     });
+    socket.emit("sendOrders", restaurantUser);
 
     setDrinkOrders([]);
     setDishOrders([]);

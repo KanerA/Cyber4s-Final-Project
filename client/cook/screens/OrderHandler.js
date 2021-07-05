@@ -2,16 +2,29 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
+import socketIOClient from "socket.io-client";
+
 export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
+  const endPoint = "http://10.0.0.5:8080";
+  const socket = socketIOClient(endPoint, {
+    transports: ["websocket"],
+  });
   useEffect(() => {
-    axios
-      .get(`http://10.0.0.13:8080/orders/${userName}`)
-      .then((res) => {
-        const ordersToDo = res.data.filter((order) => !order.done);
-        setOrders(ordersToDo.reverse());
-      })
-      .catch((err) => console.log(err));
+    socket.on("connect", () => {
+      console.log("connected");
+      socket.emit("sendOrders", userName);
+      socket.on("receiveOrders", (newOrders) => {
+        setOrders(newOrders);
+      });
+    });
+    // axios
+    //   .get(`http://10.0.0.13:8080/orders/${userName}`)
+    //   .then((res) => {
+    //     const ordersToDo = res.data.filter((order) => !order.done);
+    //     setOrders(ordersToDo.reverse());
+    //   })
+    //   .catch((err) => console.log(err));
   }, []);
   const orderDone = (order) => {
     axios
@@ -21,7 +34,7 @@ export default function OrderHandler({ restaurant, userName }) {
     const ordersToDo = orders.filter(
       (invite) =>
         invite.customerName !== order.customerName &&
-        invite.createdAt !== order.createdAt
+        invite.createdAt !== order.createdAt,
     );
     setOrders(ordersToDo);
   };
