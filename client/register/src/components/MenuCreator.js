@@ -11,7 +11,7 @@ function MenuCreator({ restaurant, restaurantUser }) {
     restaurantName: restaurantUser,
   });
 
-  const [item, setItem] = useState("dish"); // default will be as UI -- dish
+  const [item, setItem] = useState("dish");
 
   const saveItem = async (e) => {
     // e.preventDefault();

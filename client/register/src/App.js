@@ -8,12 +8,28 @@ import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRestaurant } from "./action";
+import axios from "axios";
 
 import "./components/styles/App/App.css";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
   const restaurantUser = useSelector((state) => state.restaurantUser);
+  const [refresh, setRefresh] = useState(false);
 
+  const refreshFunction = () => {
+    const body = {
+      refreshToken: localStorage.getItem("refreshToken"),
+    };
+    console.log(body);
+    axios
+      .post(`/auth/refresh`, body)
+      .then(({ data }) => {
+        console.log(data);
+        localStorage.setItem("accessToken", data.accessToken);
+        setRefresh(!refresh);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="App">
       <Router>
@@ -24,6 +40,7 @@ function App() {
               <MenuCreator
                 restaurant={restaurant}
                 restaurantUser={restaurantUser}
+                refreshFunction={refreshFunction}
               />
             </Route>
           )}
@@ -32,12 +49,17 @@ function App() {
               <OrderHandler
                 restaurant={restaurant}
                 restaurantUser={restaurantUser}
+                refreshFunction={refreshFunction}
               />
             </Route>
           )}
           {restaurant && (
             <Route exact path="/menu">
-              <Menu restaurant={restaurant} restaurantUser={restaurantUser} />
+              <Menu
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+                refreshFunction={refreshFunction}
+              />
             </Route>
           )}
           <Route exact path="/">

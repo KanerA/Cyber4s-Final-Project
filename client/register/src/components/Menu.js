@@ -6,13 +6,13 @@ import Drink from "./Drink";
 import CurrentOrder from "./CurrentOrder";
 import "./styles/Menu/Menu.css";
 
-function Menu({ restaurant, restaurantUser }) {
+function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, setDishOrders] = useState([]);
   const [drinkOrders, setDrinkOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  console.log(dishOrders, drinkOrders);
+
   const customerName = useRef();
   const itemNumber = useRef(0);
 
@@ -24,8 +24,18 @@ function Menu({ restaurant, restaurantUser }) {
           Authorization: `bearer ${accessToken}`,
         },
       })
-      .then((newDishes) => setDishes(newDishes.data))
-      .catch(() => console.log("no new dishes!"));
+      .then((newDishes) => {
+        if (newDishes.data.expired) {
+          refreshFunction();
+        } else {
+          newDishes.data.length > 0
+            ? setDishes(newDishes.data)
+            : console.log(newDishes.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     axios
       .get(`/drinks/${restaurantUser}`, {
@@ -33,8 +43,18 @@ function Menu({ restaurant, restaurantUser }) {
           Authorization: `bearer ${accessToken}`,
         },
       })
-      .then((newDrinks) => setDrinks(newDrinks.data))
-      .catch(() => console.log("no new drinks!"));
+      .then((newDrinks) => {
+        if (newDrinks.data.expired) {
+          refreshFunction();
+        } else {
+          newDrinks.data.length > 0
+            ? setDrinks(newDrinks.data)
+            : console.log(newDrinks.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const placeOrder = (e) => {
@@ -43,7 +63,7 @@ function Menu({ restaurant, restaurantUser }) {
       dish: dishOrders,
       drink: drinkOrders,
       createdAt: Date.now(),
-      restaurantName: restaurant,
+      username: restaurantUser,
       totalPrice: totalPrice,
     });
 
@@ -63,7 +83,7 @@ function Menu({ restaurant, restaurantUser }) {
             <h2 className="main-header">Dishes</h2>
             <h3 className="secondary-header">All Dishes</h3>
             <div id="dishes">
-              {dishes?.map((dish, i) => {
+              {dishes.map((dish, i) => {
                 return (
                   <Dish
                     dish={dish}
@@ -83,39 +103,41 @@ function Menu({ restaurant, restaurantUser }) {
             <div id="drinks">
               <div className="drinks-secondary">
                 <h3 className="secondary-header">Alcohol</h3>
-                {drinks
-                  ?.filter((drink) => drink.alcoholic)
-                  .map((drink, i) => {
-                    return (
-                      <Drink
-                        drink={drink}
-                        key={`drink ${i}`}
-                        setDrinkOrders={setDrinkOrders}
-                        drinkOrders={drinkOrders}
-                        totalPrice={totalPrice}
-                        setTotalPrice={setTotalPrice}
-                        itemNumber={itemNumber}
-                      />
-                    );
-                  })}
+                {drinks &&
+                  drinks
+                    .filter((drink) => drink.alcoholic)
+                    .map((drink, i) => {
+                      return (
+                        <Drink
+                          drink={drink}
+                          key={`drink ${i}`}
+                          setDrinkOrders={setDrinkOrders}
+                          drinkOrders={drinkOrders}
+                          totalPrice={totalPrice}
+                          setTotalPrice={setTotalPrice}
+                          itemNumber={itemNumber}
+                        />
+                      );
+                    })}
               </div>
               <div className="drinks-secondary">
                 <h3 className="secondary-header">Light Drinks</h3>
-                {drinks
-                  ?.filter((drink) => !drink.alcoholic)
-                  .map((drink, i) => {
-                    return (
-                      <Drink
-                        drink={drink}
-                        key={`drink ${i}`}
-                        setDrinkOrders={setDrinkOrders}
-                        drinkOrders={drinkOrders}
-                        totalPrice={totalPrice}
-                        setTotalPrice={setTotalPrice}
-                        itemNumber={itemNumber}
-                      />
-                    );
-                  })}
+                {drinks &&
+                  drinks
+                    .filter((drink) => !drink.alcoholic)
+                    .map((drink, i) => {
+                      return (
+                        <Drink
+                          drink={drink}
+                          key={`drink ${i}`}
+                          setDrinkOrders={setDrinkOrders}
+                          drinkOrders={drinkOrders}
+                          totalPrice={totalPrice}
+                          setTotalPrice={setTotalPrice}
+                          itemNumber={itemNumber}
+                        />
+                      );
+                    })}
               </div>
             </div>
           </div>
