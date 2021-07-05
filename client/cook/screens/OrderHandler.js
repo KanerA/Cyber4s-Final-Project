@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
-export default function OrderHandler({ restaurant, restaurantUser }) {
+export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://10.0.0.13:8080/orders/${restaurantUser}`)
+      .get(`http://10.0.0.13:8080/orders/${userName}`)
       .then((res) => {
         const ordersToDo = res.data.filter((order) => !order.done);
         setOrders(ordersToDo.reverse());
@@ -25,6 +25,7 @@ export default function OrderHandler({ restaurant, restaurantUser }) {
     );
     setOrders(ordersToDo);
   };
+  console.log("username orders", userName);
   return (
     <View>
       <Text>Orders</Text>

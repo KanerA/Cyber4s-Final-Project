@@ -4,7 +4,6 @@ import Order from "./Order";
 
 function OrderHandler({ restaurant, restaurantUser }) {
   const [orders, setOrders] = useState();
-
   useEffect(() => {
     axios
       .get(`/orders/${restaurantUser}`)

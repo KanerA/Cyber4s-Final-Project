@@ -6,7 +6,6 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 
 export default function Order({ order, orderDone }) {
-  const [isDone, setIsDone] = useState(order.done);
   const [notes, setNotes] = useState(false);
   const date = new Date(order.createdAt).toLocaleString("en-GB").toString();
 

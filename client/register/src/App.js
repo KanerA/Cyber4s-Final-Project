@@ -1,3 +1,4 @@
+import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Menu from "./components/Menu";
 import MenuCreator from "./components/MenuCreator";
@@ -75,4 +76,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(App);
