@@ -9,8 +9,7 @@ export default function OrderHandler({ restaurant, restaurantUser }) {
       .get(`http://10.0.0.13:8080/orders/${restaurantUser}`)
       .then((res) => {
         const ordersToDo = res.data.filter((order) => !order.done);
-        setOrders(ordersToDo);
-        // console.log(ordersToDo);
+        setOrders(ordersToDo.reverse());
       })
       .catch((err) => console.log(err));
   }, []);

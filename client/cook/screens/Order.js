@@ -16,13 +16,20 @@ export default function Order({ order, orderDone }) {
       ? 60 * 60 * 1000
       : 0;
 
-  const cancel = () => {
-    axios.patch(`http://10.0.0.13:8080/orders/done/?id=${order._id}&c=true`);
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80,
   };
   return (
     <GestureRecognizer
-      onSwipeLeft={() => cancel()}
-      onSwipeRight={() => cancel()}
+      onSwipeLeft={() => {
+        orderDone(order);
+        console.log("swipe");
+      }}
+      onSwipeRight={() => {
+        orderDone(order);
+        console.log("swipe");
+      }}
       style={[
         Date.now() - Date.parse(date) + dayLightSavings <= 5 * 60000
           ? { backgroundColor: "green" }
@@ -32,6 +39,7 @@ export default function Order({ order, orderDone }) {
         styles.order,
         { width: width },
       ]}
+      config={config}
     >
       <Text className="name" style={{ fontSize: 20, alignSelf: "center" }}>
         {order.customerName}

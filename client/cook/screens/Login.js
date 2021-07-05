@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
 export default function Login({
   setRestaurant,
   restaurant,
@@ -18,6 +17,7 @@ export default function Login({
 }) {
   const usernameRef = useRef();
   const passwordRef = useRef();
+  const [secure, setSecure] = useState(true);
 
   const logIntoStandOrders = async () => {
     try {
@@ -50,16 +50,21 @@ export default function Login({
           placeholder={"Stand Name"}
           onChangeText={(text) => {
             usernameRef.current = text;
-            // console.log(userRef.current);
           }}
         />
         <TextInput
           style={styles.input}
           placeholder={"Password"}
+          secureTextEntry={secure}
           onChangeText={(text) => {
             passwordRef.current = text;
-            // console.log(passwordRef.current);
           }}
+        />
+        <Button
+          onPress={() => {
+            setSecure(!secure);
+          }}
+          title={`${secure ? "show" : "hide"} password`}
         />
       </View>
       <Button title={"Log In"} onPress={logIntoStandOrders} />
