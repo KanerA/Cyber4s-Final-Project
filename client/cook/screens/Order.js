@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Button, Dimensions } from "react-native";
 import axios from "axios";
 import GestureRecognizer, {
   swipeDirections,
@@ -10,22 +10,28 @@ export default function Order({ order, orderDone }) {
   const [notes, setNotes] = useState(false);
   const date = new Date(order.createdAt).toLocaleString("en-GB").toString();
 
+  const width = Dimensions.get("window").width;
+  const dayLightSavings =
+    new Date().getMonth() <= 9 || new Date().getMonth() >= 3
+      ? 60 * 60 * 1000
+      : 0;
+
   const cancel = () => {
     axios.patch(`http://10.0.0.13:8080/orders/done/?id=${order._id}&c=true`);
   };
-
   return (
     <GestureRecognizer
-      // style={styles.order}
       onSwipeLeft={() => cancel()}
       onSwipeRight={() => cancel()}
-      style={
-        Date.now() - Date.parse(date) <= 1000 * 5 * 60
+      style={[
+        Date.now() - Date.parse(date) + dayLightSavings <= 5 * 60000
           ? { backgroundColor: "green" }
-          : Date.now() - Date.parse(date) <= 1000 * 10 * 60
+          : Date.now() - Date.parse(date) + dayLightSavings <= 10 * 60000
           ? { backgroundColor: "orange" }
-          : { backgroundColor: "red" }
-      }
+          : { backgroundColor: "red" },
+        styles.order,
+        { width: width },
+      ]}
     >
       <Text className="name" style={{ fontSize: 20, alignSelf: "center" }}>
         {order.customerName}
@@ -45,7 +51,9 @@ export default function Order({ order, orderDone }) {
                   {dish.name}
                 </Text>
               </Text>
-              {notes && <Text className="item-notes">{dish.notes}</Text>}
+              {notes && dish.notes.length > 0 && (
+                <Text className="item-notes">{dish.notes}</Text>
+              )}
             </View>
           );
         })}
@@ -64,7 +72,9 @@ export default function Order({ order, orderDone }) {
                   {drink.name}
                 </Text>
               </Text>
-              {notes && <Text className="item-notes">{drink.notes}</Text>}
+              {notes && drink.notes.length > 0 && (
+                <Text className="item-notes">{drink.notes}</Text>
+              )}
             </View>
           );
         })}
@@ -86,6 +96,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderStyle: "solid",
     borderColor: "black",
+    marginTop: 2,
   },
   orderDetails: {
     position: "relative",

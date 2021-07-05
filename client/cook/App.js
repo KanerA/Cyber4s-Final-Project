@@ -12,8 +12,6 @@ import {
 import Login from "./screens/Login";
 import OrderHandler from "./screens/OrderHandler";
 
-import axios from "axios";
-
 export default function App() {
   const [restaurant, setRestaurant] = useState();
   const [userName, setUserName] = useState();
@@ -30,7 +28,7 @@ export default function App() {
             setUserName={setUserName}
           />
         )}
-        {restaurant && (
+        {userName && (
           <OrderHandler restaurant={restaurant} userName={userName} />
         )}
       </View>

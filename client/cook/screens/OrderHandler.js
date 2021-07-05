@@ -10,6 +10,7 @@ export default function OrderHandler({ restaurant, restaurantUser }) {
       .then((res) => {
         const ordersToDo = res.data.filter((order) => !order.done);
         setOrders(ordersToDo);
+        // console.log(ordersToDo);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -28,7 +29,7 @@ export default function OrderHandler({ restaurant, restaurantUser }) {
   return (
     <View>
       <Text>Orders</Text>
-      {orders.reverse().map((order, i) => {
+      {orders.map((order, i) => {
         return (
           <Order
             order={order}

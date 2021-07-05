@@ -16,31 +16,30 @@ export default function Login({
   userName,
   setUserName,
 }) {
-  const standNameInput = useRef();
-  const passwordInput = useRef();
+  const usernameRef = useRef();
+  const passwordRef = useRef();
 
   const logIntoStandOrders = async () => {
     try {
       const proxy = "http://10.0.0.13:8080";
       const body = {
-        user_name: standNameInput.current,
-        password: standNameInput.current,
+        user_name: usernameRef.current,
+        password: passwordRef.current,
       };
       const res = await axios.post(`${proxy}/stands/login`, body);
       console.log(body);
       try {
-        await AsyncStorage.setItem("userId", res.data.id);
         await AsyncStorage.setItem("accessToken", res.data.accessToken);
         await AsyncStorage.setItem("refreshToken", res.data.refreshToken);
+        setUserName(usernameRef.current);
         setRestaurant(res.data.name);
-        set;
       } catch (err) {
         console.log(err);
       }
     } catch (err) {
       console.log(err);
     }
-    setRestaurant("b");
+    // setRestaurant("b");
   };
   return (
     <SafeAreaView>
@@ -50,16 +49,16 @@ export default function Login({
           style={styles.input}
           placeholder={"Stand Name"}
           onChangeText={(text) => {
-            standNameInput.current = text;
-            console.log(standNameInput.current);
+            usernameRef.current = text;
+            // console.log(userRef.current);
           }}
         />
         <TextInput
           style={styles.input}
           placeholder={"Password"}
           onChangeText={(text) => {
-            passwordInput.current = text;
-            console.log(passwordInput.current);
+            passwordRef.current = text;
+            // console.log(passwordRef.current);
           }}
         />
       </View>

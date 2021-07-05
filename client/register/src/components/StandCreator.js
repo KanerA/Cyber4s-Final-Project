@@ -15,8 +15,7 @@ export default function StandCreator({ restaurant, restaurantUser }) {
   const usernameRef = useRef();
 
   const openStand = async () => {
-    // try {
-    axios
+    const res = axios
       .post("/stands/create", {
         restaurant_name: nameRef.current,
         user_name: usernameRef.current,
@@ -33,7 +32,6 @@ export default function StandCreator({ restaurant, restaurantUser }) {
         alert(`username: ${res.data.user_name}`);
         console.log(res.data.user_name);
       })
-      // }
       .catch((err) => {
         console.log(err);
       });
