@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -9,38 +9,37 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
 export default function Login({
   setRestaurant,
   restaurant,
   userName,
   setUserName,
 }) {
-  const standNameInput = useRef();
-  const passwordInput = useRef();
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+  const [secure, setSecure] = useState(true);
 
   const logIntoStandOrders = async () => {
     try {
       const proxy = "http://10.0.0.13:8080";
       const body = {
-        user_name: standNameInput.current,
-        password: standNameInput.current,
+        user_name: usernameRef.current,
+        password: passwordRef.current,
       };
       const res = await axios.post(`${proxy}/stands/login`, body);
       console.log(body);
       try {
-        await AsyncStorage.setItem("userId", res.data.id);
         await AsyncStorage.setItem("accessToken", res.data.accessToken);
         await AsyncStorage.setItem("refreshToken", res.data.refreshToken);
+        setUserName(usernameRef.current);
         setRestaurant(res.data.name);
-        set;
       } catch (err) {
         console.log(err);
       }
     } catch (err) {
       console.log(err);
     }
-    setRestaurant("b");
+    // setRestaurant("b");
   };
   return (
     <SafeAreaView>
@@ -50,17 +49,22 @@ export default function Login({
           style={styles.input}
           placeholder={"Stand Name"}
           onChangeText={(text) => {
-            standNameInput.current = text;
-            console.log(standNameInput.current);
+            usernameRef.current = text;
           }}
         />
         <TextInput
           style={styles.input}
           placeholder={"Password"}
+          secureTextEntry={secure}
           onChangeText={(text) => {
-            passwordInput.current = text;
-            console.log(passwordInput.current);
+            passwordRef.current = text;
           }}
+        />
+        <Button
+          onPress={() => {
+            setSecure(!secure);
+          }}
+          title={`${secure ? "show" : "hide"} password`}
         />
       </View>
       <Button title={"Log In"} onPress={logIntoStandOrders} />

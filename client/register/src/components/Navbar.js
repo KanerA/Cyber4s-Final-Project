@@ -13,7 +13,11 @@ function Navbar({ restaurant, restaurantUser }) {
   return (
     <div>
       <nav>
-        <span id="restaurant-name" onMouseEnter={() => setStandDetails(true)}>
+        <span
+          id="restaurant-name"
+          onMouseEnter={() => setStandDetails(true)}
+          onMouseLeave={() => setStandDetails(false)}
+        >
           {restaurant ? restaurant : "no restaurant"}
           {standDetails && (
             <StandDetails
@@ -43,6 +47,7 @@ function Navbar({ restaurant, restaurantUser }) {
             onClick={() => {
               dispatch(changeRestaurant(null));
               dispatch(changeRestaurantUser(null));
+              setStandDetails(false);
             }}
           >
             log out of stand
