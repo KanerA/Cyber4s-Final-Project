@@ -10,7 +10,7 @@ const validateRefreshToken = (req, res) => {
             if(err) return res.json({ message: 'Invalid Token' });
             console.log(token);
             const accessToken = jwt.sign(token, ACCESS_TOKEN_SECRET, {
-                expiresIn: '30s',
+                expiresIn: '5m',
             });
             res.json({ accessToken });
         });
