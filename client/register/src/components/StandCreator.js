@@ -6,7 +6,11 @@ import changeRestaurant from "../action/changeRestaurant";
 import changeRestaurantUser from "../action/changeUser";
 import "./styles/StandCreator/StandCreator.css";
 
-export default function StandCreator({ restaurant, restaurantUser }) {
+export default function StandCreator({
+  restaurant,
+  restaurantUser,
+  refreshFunction,
+}) {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -54,14 +58,26 @@ export default function StandCreator({ restaurant, restaurantUser }) {
   };
   const deleteStand = async (e) => {
     console.log(usernameRef.current, passwordRef.current);
-    const res = await axios.delete(
-      `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
-      {
-        headers: {
-          authorization: "Bearer " + localStorage.accessToken,
-        },
-      }
-    );
+    try {
+      await axios.delete(
+        `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
+        {
+          headers: {
+            authorization: "Bearer " + localStorage.accessToken,
+          },
+        }
+      );
+    } catch (err) {
+      refreshFunction();
+      await axios.delete(
+        `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
+        {
+          headers: {
+            authorization: "Bearer " + localStorage.accessToken,
+          },
+        }
+      );
+    }
     dispatch(changeRestaurant());
     dispatch(changeRestaurantUser());
     alert("deleted");

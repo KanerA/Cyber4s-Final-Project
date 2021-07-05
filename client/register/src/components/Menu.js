@@ -6,7 +6,7 @@ import Drink from "./Drink";
 import CurrentOrder from "./CurrentOrder";
 import "./styles/Menu/Menu.css";
 
-function Menu({ restaurant, restaurantUser, refreshFunction }) {
+function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   const [dishes, setDishes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [dishOrders, setDishOrders] = useState([]);

@@ -20,11 +20,11 @@ function App() {
     const body = {
       refreshToken: localStorage.getItem("refreshToken"),
     };
-    console.log(body);
+
     axios
       .post(`/auth/refresh`, body)
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         localStorage.setItem("accessToken", data.accessToken);
         setRefresh(!refresh);
       })
@@ -63,7 +63,11 @@ function App() {
             </Route>
           )}
           <Route exact path="/">
-            <StandCreator />
+            <StandCreator
+              refreshFunction={refreshFunction}
+              restaurant={restaurant}
+              restaurantUser={restaurantUser}
+            />
           </Route>
         </Switch>
       </Router>

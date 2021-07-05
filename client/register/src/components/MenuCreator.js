@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import "./styles/MenuCreator/MenuCreator.css";
 
-function MenuCreator({ restaurant, restaurantUser }) {
+function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
   const itemRef = useRef({
     name: "name",
     price: "price",
@@ -14,7 +14,6 @@ function MenuCreator({ restaurant, restaurantUser }) {
   const [item, setItem] = useState("dish");
 
   const saveItem = async (e) => {
-    // e.preventDefault();
     if (item === "dish") {
       const body = {
         name: itemRef.current.name,
@@ -22,11 +21,20 @@ function MenuCreator({ restaurant, restaurantUser }) {
         description: itemRef.current.description,
         user_name: itemRef.current.restaurantName,
       };
-      await axios.post("/dishes", body, {
-        headers: {
-          authorization: "Bearer " + localStorage.accessToken,
-        },
-      });
+      try {
+        await axios.post("/dishes", body, {
+          headers: {
+            authorization: "Bearer " + localStorage.accessToken,
+          },
+        });
+      } catch (err) {
+        refreshFunction();
+        await axios.post("/dishes", body, {
+          headers: {
+            authorization: "Bearer " + localStorage.accessToken,
+          },
+        });
+      }
     } else if (item === "drink") {
       const body = {
         name: itemRef.current.name,
@@ -35,12 +43,22 @@ function MenuCreator({ restaurant, restaurantUser }) {
         alcoholic: itemRef.current.alcoholic,
         user_name: itemRef.current.restaurantName,
       };
-      await axios.post("/drinks", body, {
-        headers: {
-          authorization: "Bearer " + localStorage.accessToken,
-        },
-      });
+      try {
+        await axios.post("/drinks", body, {
+          headers: {
+            authorization: "Bearer " + localStorage.accessToken,
+          },
+        });
+      } catch (err) {
+        refreshFunction();
+        await axios.post("/drinks", body, {
+          headers: {
+            authorization: "Bearer " + localStorage.accessToken,
+          },
+        });
+      }
     }
+
     e.target.parentElement.children[0].value = "";
     e.target.parentElement.children[1].value = "";
     e.target.parentElement.children[2].value = "";
