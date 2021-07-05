@@ -11,7 +11,7 @@ const validateToken = (req, res, next) => {
     req.token = bearerToken.slice(7); // trim the 'bearer' from token
     return jwt.verify(req.token, ACCESS_TOKEN_SECRET, (err, decoded) => { // verify the token with the SECRET
         if(err){
-            if(err.message === 'jwt expired') return res.json({ message: 'Token Expired' })
+            if(err.message === 'jwt expired') return res.json({ expired: true })
             return res.status(403).json({ message: 'Invalid Access Token' });
         }
         req.user = decoded;
