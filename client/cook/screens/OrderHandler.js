@@ -17,6 +17,15 @@ export default function OrderHandler({ restaurant, userName }) {
       socket.on("getNewOrder", (newOrder) => {
         setOrders((prev) => [...prev, newOrder]);
       });
+      socket.on("getCanceledOrder", (canceledOrder) => {
+        const updatedOrders = orders?.map((order) => {
+          if (order._id === canceledOrder._id) {
+            order = canceledOrder;
+          }
+        });
+        console.log(updatedOrders);
+        setOrders(updatedOrders);
+      });
     });
     axios
       .get(`http://10.0.0.5:8080/orders/${userName}`)
