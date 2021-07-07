@@ -1,6 +1,6 @@
-export const changeRestaurant = (restaurant) => {
-  return {
-    type: "Change",
-    payload: restaurant,
-  };
-};
+// export const changeRestaurant = (restaurant) => {
+//   return {
+//     type: "ChangeRestaurant",
+//     payload: restaurant,
+//   };
+// };

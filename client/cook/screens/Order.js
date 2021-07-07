@@ -1,59 +1,141 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Dimensions,
+  Animated,
+} from "react-native";
 import axios from "axios";
+import GestureRecognizer, {
+  swipeDirections,
+} from "react-native-swipe-gestures";
 
-export default function Order({ order }) {
-  const [isDone, setIsDone] = useState(order.done);
-  const cancel = () => {
-    axios.patch(`http://10.0.0.13:8080/orders/done/?id=${order._id}&c=true`);
-  };
-  const orderDone = () => {
-    axios
-      .patch(`http://10.0.0.13:8080/orders/done/?id=${order._id}&d=true`)
-      .then((res) => {
-        // console.log(res.data); // set background color of done orders to green to show it work
-      });
+export default function Order({ order, orderDone }) {
+  const [notes, setNotes] = useState(false);
+  const date = new Date(order.createdAt).toLocaleString("en-GB").toString();
+
+  const width = Dimensions.get("window").width;
+  const dayLightSavings =
+    new Date().getMonth() <= 9 || new Date().getMonth() >= 3
+      ? 60 * 60 * 1000
+      : 0;
+
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80,
   };
   return (
-    <View style={{ backgroundColor: isDone ? "green" : "white" }}>
-      <Text className="name"> {order.customerName}</Text>
+    <GestureRecognizer
+      onSwipeLeft={() => {
+        orderDone(order);
+        // Animated.event([
+        //   {
+        //     nativeEvent: {
+        //       contentOffset: {
+        //         x: scrollX,
+        //       },
+        //     },
+        //   },
+        // ]);
+      }}
+      onSwipeRight={() => {
+        orderDone(order);
+        // Animated.event([
+        //   {
+        //     nativeEvent: {
+        //       contentOffset: {
+        //         x: scrollX,
+        //       },
+        //     },
+        //   },
+        // ]);
+      }}
+      style={[
+        Date.now() - Date.parse(date) + dayLightSavings <= 5 * 60000
+          ? { backgroundColor: "green" }
+          : Date.now() - Date.parse(date) + dayLightSavings <= 10 * 60000
+          ? { backgroundColor: "orange" }
+          : { backgroundColor: "red" },
+        styles.order,
+        { width: width },
+      ]}
+      config={config}
+    >
+      <Text className="name" style={{ fontSize: 20, alignSelf: "center" }}>
+        {order.customerName}
+      </Text>
+
       <View>
-        {order.dish?.map((dish) => {
+        {order.dish?.map((dish, i) => {
           return (
-            <View className="dish-invites">
-              <Text className="item-amount">{dish.amount}</Text>
-              <Text className="item-name">{dish.name}</Text>
-              <Text className="item-notes">{dish.notes}</Text>
+            <View
+              className="dish-invites"
+              key={`dish ${i}`}
+              style={styles.item}
+            >
+              <Text className="item-amount-and-name">
+                {dish.amount}X
+                <Text className="item-name" style={{ fontWeight: "bold" }}>
+                  {dish.name}
+                </Text>
+              </Text>
+              {notes && dish.notes.length > 0 && (
+                <Text className="item-notes">{dish.notes}</Text>
+              )}
             </View>
           );
         })}
       </View>
       <View className="drink-invites">
-        {order.drink?.map((drink) => {
+        {order.drink?.map((drink, i) => {
           return (
-            <View className="drink-invites">
-              <Text className="item-amount">{drink.amount}</Text>
-              <Text className="item-name">{drink.name}</Text>
-              <Text className="item-notes">{drink.notes}</Text>
+            <View
+              className="drink-invites"
+              key={`drink ${i}`}
+              style={styles.item}
+            >
+              <Text className="item-amount-and-name">
+                {drink.amount}X
+                <Text className="item-name" style={{ fontWeight: "bold" }}>
+                  {drink.name}
+                </Text>
+              </Text>
+              {notes && drink.notes.length > 0 && (
+                <Text className="item-notes">{drink.notes}</Text>
+              )}
             </View>
           );
         })}
+        <Button
+          onPress={notes ? () => setNotes(false) : () => setNotes(true)}
+          title={`${notes ? "hide" : "show"} notes`}
+        />
       </View>
-      <Text className="order-time">
-        {new Date(order.createdAt).toLocaleString("en-gb").toString()}
+      <Text className="order-time" style={{ fontSize: 15 }}>
+        {date}
       </Text>
-      <Text className="total-price">
-        <Text>total price: {order.totalPrice}</Text>
-      </Text>
-      <Button className="cancel-button" title="cancel" />
-      <Button
-        className="cancel-button"
-        title="done"
-        color={"green"}
-        onPress={orderDone}
-      />
-    </View>
+    </GestureRecognizer>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  order: {
+    position: "relative",
+    alignItems: "center",
+    borderStyle: "solid",
+    borderColor: "black",
+    marginTop: 2,
+  },
+  orderDetails: {
+    position: "relative",
+    fontSize: 20,
+    alignItems: "center",
+  },
+  item: {
+    justifyContent: "center",
+    textAlign: "center",
+    alignSelf: "center",
+  },
+});

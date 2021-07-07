@@ -1,5 +1,36 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c8dad), to(#125d98));
+  background-image: linear-gradient(180deg, #3c8dad, #125d98);
+  min-height: 100vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  text-shadow: 1px 1px 1px black;
+  font-family: cursive;
+  color: tomato;
+}
+
+button {
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+}
+
 .customer-name {
-  color: white;
+  color: black;
 }
 
 .items {
@@ -12,8 +43,9 @@
           flex-direction: column;
   margin: 7px;
   font-size: 1rem;
-  color: white;
+  color: black;
   padding-bottom: 15px;
+  min-height: 40vh;
 }
 
 .drink-invites,
@@ -31,6 +63,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .order-details {
@@ -46,19 +80,11 @@
   margin: 7px;
   margin-top: 0;
   font-size: 1rem;
-  color: white;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-  -ms-flex-line-pack: end;
-      align-content: flex-end;
-  justify-items: flex-end;
-  justify-self: flex-end;
+  color: black;
+}
+
+.order-details .total-price::after {
+  content: "₪";
 }
 
 .register-order {
@@ -85,12 +111,41 @@
   position: absolute;
   width: 100%;
   font-weight: 800;
-  background-color: #ffa459;
+  background-color: #f58c91;
   font-size: 1rem;
   padding: 5px;
-  -webkit-box-shadow: 1px 1px 1px #ad5c1a;
-          box-shadow: 1px 1px 1px #ad5c1a;
+  -webkit-box-shadow: 1px 1px 1px #125d98;
+          box-shadow: 1px 1px 1px #125d98;
   color: white;
   border-radius: 0.5rem;
+}
+
+.invite {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  border: 2px solid grey;
+  border-radius: 0.5rem;
+  margin-bottom: 5px;
+}
+
+.invite .item-details {
+  display: flexbox;
+}
+
+.invite .item-amount {
+  left: 0;
+  position: absolute;
+}
+
+.invite .total-item-price::after {
+  content: "₪";
 }
 /*# sourceMappingURL=OrderHandler.css.map */

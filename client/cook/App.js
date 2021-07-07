@@ -1,4 +1,5 @@
-// import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -9,16 +10,16 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
+import env from "./env";
 import Login from "./screens/Login";
 import OrderHandler from "./screens/OrderHandler";
-
-import axios from "axios";
 
 export default function App() {
   const [restaurant, setRestaurant] = useState();
   const [userName, setUserName] = useState();
   console.log("username", userName);
   const logIntoStandOrders = async (username, password) => {
+
     const proxy = `http://${env.IP}:${env.PORT}`;
     const body = {
       user_name: username,
@@ -44,8 +45,10 @@ export default function App() {
       contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
     >
       <View style={styles.container}>
-        {restaurant ? null : <Login setRestaurant={setRestaurant} />}
-        {restaurant && <OrderHandler restaurant={restaurant} />}
+        {restaurant ? null : <Login logIntoStandOrders={logIntoStandOrders} />}
+        {userName && (
+          <OrderHandler restaurant={restaurant} userName={userName} />
+        )}
       </View>
     </ScrollView>
   );

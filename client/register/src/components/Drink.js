@@ -31,15 +31,17 @@ function Drink({
     <div className="item">
       <span>
         <button
-          className="count-button"
+          className="count-button positive"
           onClick={() => setDrinkCount(drinkCount + 1)}
         >
           +
         </button>
         {drinkCount}
         <button
-          className="count-button"
-          onClick={() => setDrinkCount(drinkCount - 1)}
+          className="count-button negative"
+          onClick={() => {
+            if (drinkCount >= 2) setDrinkCount(drinkCount - 1);
+          }}
         >
           -
         </button>
