@@ -20,7 +20,7 @@ export default function StandCreator({
   const usernameRef = useRef();
 
   const openStand = async () => {
-    const res = axios
+    axios
       .post("/stands/create", {
         restaurant_name: nameRef.current,
         user_name: usernameRef.current,
@@ -101,9 +101,8 @@ export default function StandCreator({
           />
           <button
             className="show-password"
-            onClick={(e) => {
-              setShowPassword(showPassword ? false : true);
-            }}
+            onMouseOver={() => setShowPassword(true)}
+            onMouseLeave={() => setShowPassword(false)}
           >
             {showPassword ? "Hide" : "Show"} Password
           </button>
@@ -145,9 +144,8 @@ export default function StandCreator({
           />
           <button
             className="show-password"
-            onClick={(e) => {
-              setShowPassword(showPassword ? false : true);
-            }}
+            onMouseOver={() => setShowPassword(true)}
+            onMouseLeave={() => setShowPassword(false)}
           >
             {showPassword ? "Hide" : "Show"} Password
           </button>
