@@ -24,7 +24,7 @@ function App() {
 
   const [login, setLogin] = useState(true);
 
-  const refreshFunction = (func) => {
+  const refreshFunction = () => {
     const body = {
       refreshToken: localStorage.getItem("refreshToken"),
     };
@@ -36,7 +36,6 @@ function App() {
         localStorage.setItem("accessToken", data.accessToken);
       })
       .catch((err) => console.log(err));
-    func && func();
   };
 
   return (

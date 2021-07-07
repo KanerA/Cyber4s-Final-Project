@@ -44,7 +44,8 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
           const dishRes = responses[0];
           const drinkRes = responses[1];
           if (drinkRes.data.expired || dishRes.data.expired) {
-            refreshFunction(fetchData);
+            refreshFunction();
+            fetchData();
           }
           console.log(drinkRes, dishRes);
 

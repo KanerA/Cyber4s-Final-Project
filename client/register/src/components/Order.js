@@ -16,24 +16,23 @@ export default function Order({ order, cancelOrder }) {
           </p>
         </div>
         <div className="dish-invites">
-          {order.dish?.map((dish) => {
+          {order.dish?.map((dish, i) => {
             return (
-              <div className="invite">
+              <div className="invite" key={`dish ${i}`}>
                 <p className="item-amount">{dish.amount}X</p>
                 <div className="item-details">
                   <p className="item-name">{dish.name}</p>
                   <p className="item-note">{dish.notes}</p>
                   <p className="total-item-price">{dish.amount * dish.price}</p>
                 </div>
-
               </div>
             );
           })}
         </div>
         <div className="drink-invites">
-          {order.drink?.map((drink) => {
+          {order.drink?.map((drink, i) => {
             return (
-              <div className="invite">
+              <div className="invite" key={`drink ${i}`}>
                 <p className="item-amount">{drink.amount}X</p>
                 <div className="item-details">
                   <p className="item-name">{drink.name}</p>

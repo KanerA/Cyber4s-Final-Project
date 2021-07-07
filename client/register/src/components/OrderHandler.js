@@ -7,20 +7,20 @@ function OrderHandler({ restaurant, restaurantUser }) {
   const [orders, setOrders] = useState([]);
   const [canceled, setCanceled] = useState(false);
 
-  socket.on("connect", () => {
-    console.log("connected");
-    socket.on("getNewOrder", (newOrder) => {
-      setOrders((prev) => [...prev, newOrder]);
-    });
-  });
   useEffect(() => {
+    socket.on("connect", () => {
+      console.log("connected");
+      socket.on("getNewOrder", (newOrder) => {
+        setOrders((prev) => [...prev, newOrder]);
+      });
+    });
     axios
       .get(`/orders/${restaurantUser}`)
       .then((res) => {
         setOrders(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [, orders]);
   const cancelOrder = (order) => {
     alert(`${order.customerName}'s order is canceled!`);
     axios
