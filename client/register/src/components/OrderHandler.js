@@ -27,6 +27,9 @@ function OrderHandler({ restaurant, restaurantUser }) {
       .patch(`/orders/done/?c=true&id=${order._id}`)
       .then((res) => setCanceled(true))
       .catch((err) => console.log(err));
+    // console.log(order);
+    const canceled = orders.filter((canceled) => canceled._id !== order._id);
+    setOrders(canceled);
   };
   return (
     <div className="orders">
