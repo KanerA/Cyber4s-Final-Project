@@ -30,27 +30,27 @@ export default function Order({ order, orderDone }) {
     <GestureRecognizer
       onSwipeLeft={() => {
         orderDone(order);
-        Animated.event([
-          {
-            nativeEvent: {
-              contentOffset: {
-                x: scrollX,
-              },
-            },
-          },
-        ]);
+        // Animated.event([
+        //   {
+        //     nativeEvent: {
+        //       contentOffset: {
+        //         x: scrollX,
+        //       },
+        //     },
+        //   },
+        // ]);
       }}
       onSwipeRight={() => {
         orderDone(order);
-        Animated.event([
-          {
-            nativeEvent: {
-              contentOffset: {
-                x: scrollX,
-              },
-            },
-          },
-        ]);
+        // Animated.event([
+        //   {
+        //     nativeEvent: {
+        //       contentOffset: {
+        //         x: scrollX,
+        //       },
+        //     },
+        //   },
+        // ]);
       }}
       style={[
         Date.now() - Date.parse(date) + dayLightSavings <= 5 * 60000

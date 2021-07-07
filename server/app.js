@@ -5,7 +5,7 @@ const io = require("socket.io")(6789, {
     origin: "*",
   },
 });
-// const io = require("socket.io")(server,);
+
 const dishes = require("./routes/dishes");
 const drinks = require("./routes/drinks");
 const orders = require("./routes/orders");

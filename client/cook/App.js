@@ -10,6 +10,7 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
+import env from "./env";
 import Login from "./screens/Login";
 import OrderHandler from "./screens/OrderHandler";
 
@@ -18,7 +19,7 @@ export default function App() {
   const [userName, setUserName] = useState();
   console.log("username", userName);
   const logIntoStandOrders = async (username, password) => {
-    const proxy = "http://10.0.0.5:8080";
+    const proxy = `${env.IP}:${env.PORT}`;
     const body = {
       user_name: username,
       password: password,

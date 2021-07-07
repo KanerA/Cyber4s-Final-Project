@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./styles/OrderHandler/OrderHandler.css";
 
-export default function Order({ order }) {
-  const [canceled, setCanceled] = useState(order.canceled);
-  const cancelOrder = (e) => {
-    // patch {cancel: true}
-    axios
-      .patch(`/orders/done/?c=true&id=${order._id}`)
-      .then((res) => setCanceled(res.data.canceled));
-  };
-
+export default function Order({ order, cancelOrder }) {
   return (
     <div className="register-order">
       <div className="items">
@@ -57,7 +49,7 @@ export default function Order({ order }) {
       <button
         className="cancel-button"
         onClick={() => {
-          cancelOrder();
+          cancelOrder(order);
         }}
       >
         cancel

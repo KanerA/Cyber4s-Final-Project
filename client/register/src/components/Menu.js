@@ -14,7 +14,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   const [dishOrders, setDishOrders] = useState([]);
   const [drinkOrders, setDrinkOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const endPoint = "http://localhost:8080";
+  const endPoint = "http://localhost:6789";
   const socket = socketIOClient(endPoint, {
     transports: ["websocket"],
   });
@@ -47,6 +47,20 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
       .then((newDishes) => {
         if (newDishes.data.expired) {
           refreshFunction();
+          axios
+            .get(`/dishes/${restaurantUser}`, {
+              headers: {
+                Authorization: `bearer ${accessToken}`,
+              },
+            })
+            .then((newDishes) => {
+              newDishes.data.length > 0
+                ? setDishes(newDishes.data)
+                : console.log(newDishes.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         } else {
           newDishes.data.length > 0
             ? setDishes(newDishes.data)
@@ -66,6 +80,20 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
       .then((newDrinks) => {
         if (newDrinks.data.expired) {
           refreshFunction();
+          axios
+            .get(`/drinks/${restaurantUser}`, {
+              headers: {
+                Authorization: `bearer ${accessToken}`,
+              },
+            })
+            .then((newDrinks) => {
+              newDrinks.data.length > 0
+                ? setDrinks(newDrinks.data)
+                : console.log(newDrinks.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         } else {
           newDrinks.data.length > 0
             ? setDrinks(newDrinks.data)

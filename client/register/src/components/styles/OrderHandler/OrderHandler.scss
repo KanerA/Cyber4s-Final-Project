@@ -14,6 +14,7 @@ $secondaryBrightColor: #7fcbf5;
   font-size: 1rem;
   color: black;
   padding-bottom: 15px;
+  min-height: 40vh;
 }
 .drink-invites,
 .dish-invites {
@@ -22,6 +23,7 @@ $secondaryBrightColor: #7fcbf5;
 }
 .orders {
   display: flex;
+  flex-wrap: wrap;
 }
 .order-details {
   padding-top: 5px;
