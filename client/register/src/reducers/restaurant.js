@@ -1,6 +1,6 @@
 const restaurantReducer = (state = null, action) => {
   switch (action.type) {
-    case "Change":
+    case "ChangeRestaurant":
       return action.payload;
     default:
       return state;

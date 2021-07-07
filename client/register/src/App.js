@@ -1,43 +1,73 @@
+import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "./firebaseConfig";
 import Menu from "./components/Menu";
 import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
-import Login from "./components/Login";
 import OrderHandler from "./components/OrderHandler";
+import StandCreator from "./components/StandCreator";
 import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRestaurant } from "./action";
+import axios from "axios";
 
 import "./components/styles/App/App.css";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
-  const [user] = useAuthState(auth);
+  const restaurantUser = useSelector((state) => state.restaurantUser);
+  const [refresh, setRefresh] = useState(false);
 
+  const refreshFunction = () => {
+    const body = {
+      refreshToken: localStorage.getItem("refreshToken"),
+    };
+
+    axios
+      .post(`/auth/refresh`, body)
+      .then(({ data }) => {
+        localStorage.setItem("accessToken", data.accessToken);
+        setRefresh(!refresh);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
-    <div className="App">
+    <div className="app">
       <Router>
-        <Navbar user={user} restaurant={restaurant} />
+        <Navbar restaurant={restaurant} restaurantUser={restaurantUser} />
         <Switch>
           {restaurant && (
             <Route exact path="/create">
-              <MenuCreator restaurant={restaurant} />
+              <MenuCreator
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+                refreshFunction={refreshFunction}
+              />
             </Route>
           )}
           {restaurant && (
             <Route exact path="/orders">
-              <OrderHandler restaurant={restaurant} />
+              <OrderHandler
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+                refreshFunction={refreshFunction}
+              />
             </Route>
           )}
           {restaurant && (
             <Route exact path="/menu">
-              <Menu restaurant={restaurant} />
+              <Menu
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+                refreshFunction={refreshFunction}
+              />
             </Route>
           )}
           <Route exact path="/">
-            {user ? <Stand user={user} restaurant={restaurant} /> : <Login />}
+            <StandCreator
+              refreshFunction={refreshFunction}
+              restaurant={restaurant}
+              restaurantUser={restaurantUser}
+            />
           </Route>
         </Switch>
       </Router>
@@ -45,4 +75,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(App);

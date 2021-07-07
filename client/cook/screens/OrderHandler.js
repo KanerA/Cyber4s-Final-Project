@@ -2,28 +2,64 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
-// require("dotenv").config();
-export default function Orders() {
+import { socket } from "../socket";
+
+export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
-  let restaurant = "b"; // to be- res_name
+
   useEffect(() => {
+    socket.on("connect", () => {
+      console.log("connected");
+      // socket.emit("sendOrders", userName);
+      socket.on("getNewOrder", (newOrder) => {
+        setOrders((prev) => [...prev, newOrder]);
+        alert("new order"); //change to notifications
+      });
+      // socket.on("getCanceledOrder", (canceledOrder) => {
+      //   const updatedOrders = orders?.map((order) => {
+      //     if (order._id === canceledOrder._id) {
+      //       order = canceledOrder;
+      //     }
+      //   });
+      //   console.log(updatedOrders);
+      //   setOrders(updatedOrders);
+      // });
+    });
     axios
-      .get(
-        // `http://${process.env.LOCAL_IP}:${process.env.PORT}/orders/${restaurant}`
-        `http://10.0.0.13:8080/orders/${restaurant}`
-      )
+      .get(`http://${env.IP}:${env.PORT}/orders/${userName}`)
       .then((res) => {
-        setOrders(res.data);
-        console.log(res.data);
+        const ordersToDo = res.data.filter(
+          (order) => !order.done && !order.canceled,
+        );
+        setOrders(ordersToDo.reverse());
       })
       .catch((err) => console.log(err));
   }, []);
+  const orderDone = (order) => {
+    axios
+      .patch(`http://${env.IP}:${env.PORT}/orders/done/?id=${order._id}&d=true`)
+      .then((res) => {});
 
+    const ordersToDo = orders.filter(
+      (invite) =>
+        invite.customerName !== order.customerName &&
+        invite.createdAt !== order.createdAt,
+    );
+    setOrders(ordersToDo);
+  };
+  console.log("username orders", userName);
   return (
     <View>
       <Text>Orders</Text>
       {orders.map((order, i) => {
-        return <Order order={order} />;
+        return (
+          <Order
+            order={order}
+            restaurant={restaurant}
+            orderDone={orderDone}
+            key={`order ${i}`}
+          />
+        );
       })}
     </View>
   );

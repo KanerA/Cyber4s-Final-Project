@@ -2,22 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./styles/OrderHandler/OrderHandler.css";
 
-export default function Order({ order }) {
-  const [canceled, setCanceled] = useState(order.canceled);
-  const cancelOrder = (e) => {
-    // patch {cancel: true}
-    axios
-      .patch(`/orders/done/?c=true&id=${order._id}`)
-      .then((res) => setCanceled(res.data.canceled));
-  };
-  console.log(order._id);
-
+export default function Order({ order, cancelOrder }) {
   return (
     <div className="register-order">
       <div className="items">
         <div className="order-details">
+          <h2 className="customer-name"> {order.customerName}</h2>
           <p className="order-time">
-            <h2 className="customer-name"> {order.customerName}</h2>
             {new Date(order.createdAt).toLocaleString("en-gb").toString()}
           </p>
           <p className="total-price">
@@ -28,10 +19,13 @@ export default function Order({ order }) {
           {order.dish?.map((dish) => {
             return (
               <div className="invite">
-                <aside className="item-amount">{dish.amount}</aside>
-                <p className="item-name">{dish.name}</p>
-                <p className="item-note">{dish.notes}</p>
-                <p className="total-item-price">{dish.amount * dish.price}</p>
+                <p className="item-amount">{dish.amount}X</p>
+                <div className="item-details">
+                  <p className="item-name">{dish.name}</p>
+                  <p className="item-note">{dish.notes}</p>
+                  <p className="total-item-price">{dish.amount * dish.price}</p>
+                </div>
+
               </div>
             );
           })}
@@ -40,10 +34,14 @@ export default function Order({ order }) {
           {order.drink?.map((drink) => {
             return (
               <div className="invite">
-                <aside className="item-amount">{drink.amount}</aside>
-                <p className="item-name">{drink.name}</p>
-                <p className="item-note">{drink.notes}</p>
-                <p className="total-item-price">{drink.amount * drink.price}</p>
+                <p className="item-amount">{drink.amount}X</p>
+                <div className="item-details">
+                  <p className="item-name">{drink.name}</p>
+                  <p className="item-note">{drink.notes}</p>
+                  <p className="total-item-price">
+                    {drink.amount * drink.price}
+                  </p>
+                </div>
               </div>
             );
           })}
@@ -52,7 +50,7 @@ export default function Order({ order }) {
       <button
         className="cancel-button"
         onClick={() => {
-          cancelOrder();
+          cancelOrder(order);
         }}
       >
         cancel

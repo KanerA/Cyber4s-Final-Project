@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeRestaurant } from "../action";
+import changeRestaurant from "../action/changeRestaurant";
 import firebase from "firebase";
+import StandDetails from "./StandDetails";
 import "./styles/NavBar/NavBar.css";
-function Navbar({ restaurant, user }) {
+import changeRestaurantUser from "../action/changeUser";
+function Navbar({ restaurant, restaurantUser }) {
+  const [standDetails, setStandDetails] = useState(false);
   const dispatch = useDispatch();
+
   return (
     <div>
       <nav>
-        <span id="restaurant-name">
+        <span
+          id="restaurant-name"
+          onMouseEnter={() => setStandDetails(true)}
+          onMouseLeave={() => setStandDetails(false)}
+        >
           {restaurant ? restaurant : "no restaurant"}
+          {standDetails && (
+            <StandDetails
+              restaurant={restaurant}
+              setStandDetails={setStandDetails}
+              restaurantUser={restaurantUser}
+            />
+          )}
         </span>
         <span id="links">
           <Link className="nav-link" to="/">
@@ -29,21 +44,14 @@ function Navbar({ restaurant, user }) {
         <span id="buttons">
           <button
             className="link-button"
-            onClick={() => dispatch(changeRestaurant(null))}
+            onClick={() => {
+              dispatch(changeRestaurant(null));
+              dispatch(changeRestaurantUser(null));
+              setStandDetails(false);
+            }}
           >
             log out of stand
           </button>
-          {user && (
-            <button
-              className="link-button"
-              onClick={() => {
-                dispatch(changeRestaurant(null));
-                firebase.auth().signOut();
-              }}
-            >
-              Sign out of google
-            </button>
-          )}
         </span>
       </nav>
     </div>

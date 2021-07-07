@@ -1,0 +1,41 @@
+@import "../App/App.scss";
+
+@mixin button-props {
+  border-radius: 0.5rem;
+  padding: 2px;
+  font-weight: 550;
+  color: white;
+}
+.login-prop {
+  margin: 2px;
+  padding: 2px;
+  color: black;
+  font-weight: 700;
+  background-color: $secondaryColor;
+  box-shadow: 1px 1px 1px $mainDarkColor;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.stand-name {
+  color: black;
+  font-size: 2rem;
+  text-shadow: 1px 1px 1px white;
+}
+.show-password {
+  background-color: $mainDarkColor;
+  @include button-props();
+}
+.stand-login {
+  background-color: $positiveColor;
+  @include button-props();
+}
+.stand-delete {
+  background-color: $negativeColor;
+  @include button-props();
+}
+#open-stand {
+  @include button-props();
+  font-size: 1.5rem;
+  background-color: $positiveColor;
+  margin-top: 5px;
+}

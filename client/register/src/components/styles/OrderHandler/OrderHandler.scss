@@ -1,19 +1,16 @@
-$mainColor: #fa923f;
-$secondaryColor: #0995ad;
-$mainBrightColor: #ffa459;
-$mainDarkColor: #ad5c1a;
-$secondaryBrightColor: #75e7fa;
+@import "../App/App.scss";
 
 .customer-name {
-  color: white;
+  color: black;
 }
 .items {
   display: flex;
   flex-direction: column;
   margin: 7px;
   font-size: 1rem;
-  color: white;
+  color: black;
   padding-bottom: 15px;
+  min-height: 40vh;
 }
 .drink-invites,
 .dish-invites {
@@ -22,6 +19,7 @@ $secondaryBrightColor: #75e7fa;
 }
 .orders {
   display: flex;
+  flex-wrap: wrap;
 }
 .order-details {
   padding-top: 5px;
@@ -31,16 +29,10 @@ $secondaryBrightColor: #75e7fa;
   margin: 7px;
   margin-top: 0;
   font-size: 1rem;
-  color: white;
-  justify-content: flex-end;
-  align-items: flex-end;
-  align-self: flex-end;
-  align-content: flex-end;
-  justify-items: flex-end;
-  justify-self: flex-end;
-
-  //   position: absolute;
-  //   display: inline-flex;
+  color: black;
+  .total-price::after {
+    content: "₪";
+  }
 }
 .register-order {
   border: 2px solid white;
@@ -58,7 +50,9 @@ $secondaryBrightColor: #75e7fa;
   position: absolute;
   width: 100%;
   font-weight: 800;
-  background-color: $mainBrightColor;
+
+  background-color: $negativeColor;
+
   font-size: 1rem;
   padding: 5px;
   box-shadow: 1px 1px 1px $mainDarkColor;
@@ -66,6 +60,22 @@ $secondaryBrightColor: #75e7fa;
   border-radius: 0.5rem;
 }
 .invite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid grey;
+  border-radius: 0.5rem;
+  margin-bottom: 5px;
+  .item-details {
+    display: flexbox;
+  }
   .item-amount {
+    left: 0;
+    position: absolute;
+  }
+  .total-item-price::after {
+    content: "₪";
+
   }
 }

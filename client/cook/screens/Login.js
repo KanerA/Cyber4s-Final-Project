@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -7,20 +7,12 @@ import {
   Button,
   TextInput,
 } from "react-native";
-// import firebase from "firebase";
-import auth from "../firebaseConfig";
-import axios from "axios";
 
-export default function Login({ setRestaurant }) {
-  const standNameInput = useRef();
-  const passwordInput = useRef();
+export default function Login({ logIntoStandOrders }) {
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+  const [secure, setSecure] = useState(true);
 
-  const logIntoStandOrders = () => {
-    // check the password and stand name input in the sql database
-    // axios.get(`http://10.0.0.5:8080/stands/${standNameInput.current}`); // NEED TO CREATE ROUTE IN SERVER
-    const response = "b"; // the axios response (standNameInput)
-    setRestaurant(response);
-  };
   return (
     <SafeAreaView>
       <Text>Login</Text>
@@ -28,15 +20,31 @@ export default function Login({ setRestaurant }) {
         <TextInput
           style={styles.input}
           placeholder={"Stand Name"}
-          onChangeText={(text) => (standNameInput.current = text)}
+          onChangeText={(text) => {
+            usernameRef.current = text;
+          }}
         />
         <TextInput
           style={styles.input}
           placeholder={"Password"}
-          onChangeText={(text) => (passwordInput.current = text)}
+          secureTextEntry={secure}
+          onChangeText={(text) => {
+            passwordRef.current = text;
+          }}
+        />
+        <Button
+          onPress={() => {
+            setSecure(!secure);
+          }}
+          title={`${secure ? "show" : "hide"} password`}
         />
       </View>
-      <Button title={"Enter Orders"} onPress={logIntoStandOrders} />
+      <Button
+        title={"Log In"}
+        onPress={() =>
+          logIntoStandOrders(usernameRef.current, passwordRef.current)
+        }
+      />
     </SafeAreaView>
   );
 }
