@@ -1,15 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Order from "./Order";
-import socketIOClient from "socket.io-client";
+import { socket } from "../socket";
 
 function OrderHandler({ restaurant, restaurantUser }) {
   const [orders, setOrders] = useState([]);
   const [canceled, setCanceled] = useState(false);
-  const endPoint = "http://localhost:6789";
-  const socket = socketIOClient(endPoint, {
-    transports: ["websocket"],
-  });
+
   useEffect(() => {
     socket.on("connect", () => {
       console.log("connected");
