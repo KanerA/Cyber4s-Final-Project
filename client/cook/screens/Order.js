@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Dimensions,
+  Animated,
+} from "react-native";
 import axios from "axios";
 import GestureRecognizer, {
   swipeDirections,
@@ -23,11 +30,27 @@ export default function Order({ order, orderDone }) {
     <GestureRecognizer
       onSwipeLeft={() => {
         orderDone(order);
-        console.log("swipe");
+        Animated.event([
+          {
+            nativeEvent: {
+              contentOffset: {
+                x: scrollX,
+              },
+            },
+          },
+        ]);
       }}
       onSwipeRight={() => {
         orderDone(order);
-        console.log("swipe");
+        Animated.event([
+          {
+            nativeEvent: {
+              contentOffset: {
+                x: scrollX,
+              },
+            },
+          },
+        ]);
       }}
       style={[
         Date.now() - Date.parse(date) + dayLightSavings <= 5 * 60000
