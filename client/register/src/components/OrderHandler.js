@@ -20,10 +20,9 @@ function OrderHandler({ restaurant, restaurantUser }) {
         setOrders(res.data);
       })
       .catch((err) => console.log(err));
-  }, [, orders]);
+  }, []);
   const cancelOrder = (order) => {
     alert(`${order.customerName}'s order is canceled!`);
-
     axios
       .patch(`/orders/done/?c=true&id=${order._id}`)
       .then((res) => setCanceled(true))

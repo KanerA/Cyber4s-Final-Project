@@ -83,30 +83,31 @@ export default function StandCreator({
     alert("deleted");
   };
   return (
-    <div>
+    <div className="stand-creator">
       {redirect && <Redirect to="/create" />}
       <div className="existing-stands">
         <h1 className="header">Existing Stands</h1>
-
-        <input
-          className="create-stand login-prop"
-          placeholder="stand's username"
-          onChange={(e) => (usernameRef.current = e.target.value)}
-        />
-        <input
-          style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
-          className="create-stand login-prop password"
-          placeholder="password"
-          onChange={(e) => (passwordRef.current = e.target.value)}
-        />
-        <button
-          className="show-password"
-          onClick={(e) => {
-            setShowPassword(showPassword ? false : true);
-          }}
-        >
-          {showPassword ? "Hide" : "Show"} Password
-        </button>
+        <div className="stand-inputs">
+          <input
+            className="create-stand login-prop"
+            placeholder="stand's username"
+            onChange={(e) => (usernameRef.current = e.target.value)}
+          />
+          <input
+            style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
+            className="create-stand login-prop password"
+            placeholder="password"
+            onChange={(e) => (passwordRef.current = e.target.value)}
+          />
+          <button
+            className="show-password"
+            onClick={(e) => {
+              setShowPassword(showPassword ? false : true);
+            }}
+          >
+            {showPassword ? "Hide" : "Show"} Password
+          </button>
+        </div>
         <div className="stand-controls">
           <button
             className="stand-login"
@@ -123,42 +124,44 @@ export default function StandCreator({
           </button>
         </div>
       </div>
-      <div className="create-stand">
+      <div className="create-stands">
         <h1 className="header">Create new stand</h1>
-        <input
-          className="create-stand login-prop"
-          placeholder="stand name"
-          onChange={(e) => (nameRef.current = e.target.value)}
-        />
-        <input
-          className="create-stand login-prop"
-          placeholder="stand's username"
-          onChange={(e) => (usernameRef.current = e.target.value)}
-        />
-        <input
-          style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
-          className="create-stand login-prop password"
-          placeholder="password"
-          onChange={(e) => (passwordRef.current = e.target.value)}
-        />
-        <button
-          className="show-password"
-          onClick={(e) => {
-            setShowPassword(showPassword ? false : true);
-          }}
-        >
-          {showPassword ? "Hide" : "Show"} Password
-        </button>
-        <br />
-        <button
-          id="open-stand"
-          onClick={() => {
-            openStand();
-            setRedirect(true);
-          }}
-        >
-          open a new stand
-        </button>
+        <div className="stand-inputs">
+          <input
+            className="create-stand login-prop"
+            placeholder="stand name"
+            onChange={(e) => (nameRef.current = e.target.value)}
+          />
+          <input
+            className="create-stand login-prop"
+            placeholder="stand's username"
+            onChange={(e) => (usernameRef.current = e.target.value)}
+          />
+          <input
+            style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
+            className="create-stand login-prop password"
+            placeholder="password"
+            onChange={(e) => (passwordRef.current = e.target.value)}
+          />
+          <button
+            className="show-password"
+            onClick={(e) => {
+              setShowPassword(showPassword ? false : true);
+            }}
+          >
+            {showPassword ? "Hide" : "Show"} Password
+          </button>
+          <br />
+          <button
+            id="open-stand"
+            onClick={() => {
+              openStand();
+              setRedirect(true);
+            }}
+          >
+            open a new stand
+          </button>
+        </div>
       </div>
     </div>
   );

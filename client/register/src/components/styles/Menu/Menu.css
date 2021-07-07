@@ -1,4 +1,8 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -11,17 +15,19 @@
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
+  font-family: "Tienne", "Heebo", serif;
 }
 
 h1 {
   font-size: 3rem;
   text-shadow: 1px 1px 1px black;
-  font-family: cursive;
-  color: tomato;
+  font-family: "Montserrat", "Heebo", sans-serif;
+  color: #f5a962;
 }
 
 button {
   cursor: pointer;
+  font-family: #f5a962;
 }
 
 input[type="radio"] {
@@ -94,7 +100,7 @@ input[type="radio"] {
 }
 
 .item-name {
-  font-weight: 800;
+  text-decoration: underline;
 }
 
 .item-price::after {

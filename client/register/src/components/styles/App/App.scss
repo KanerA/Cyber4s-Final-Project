@@ -1,9 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
+
 $background: #dddddd;
 $positiveColor: #03b42c;
 $negativeColor: #f58c91;
 $mainDarkColor: #125d98;
 $mainBrightColor: #3c8dad;
 $secondaryColor: #f5a962;
+
+$headlineFontFamily: "Montserrat", "Heebo", sans-serif;
+$contentFontFamily: "Tienne", "Heebo", serif;
+$buttonFontFamily: "Paytone One", sans-serif;
+
 * {
   margin: 0;
   padding: 0;
@@ -13,15 +23,17 @@ $secondaryColor: #f5a962;
   min-height: 100vh;
   align-items: center;
   text-align: center;
+  font-family: $contentFontFamily;
 }
 h1 {
   font-size: 3rem;
   text-shadow: 1px 1px 1px black;
-  font-family: cursive;
-  color: tomato;
+  font-family: $headlineFontFamily;
+  color: $secondaryColor;
 }
 button {
   cursor: pointer;
+  font-family: $secondaryColor;
 }
 input[type="radio"] {
   cursor: pointer;

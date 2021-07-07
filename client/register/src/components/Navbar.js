@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import changeRestaurant from "../action/changeRestaurant";
 import firebase from "firebase";
 import StandDetails from "./StandDetails";
 import "./styles/NavBar/NavBar.css";
 import changeRestaurantUser from "../action/changeUser";
-function Navbar({ restaurant, restaurantUser }) {
+function Navbar({ restaurant, restaurantUser, login, setLogin }) {
   const [standDetails, setStandDetails] = useState(false);
+
   const dispatch = useDispatch();
 
   return (
@@ -28,9 +29,11 @@ function Navbar({ restaurant, restaurantUser }) {
           )}
         </span>
         <span id="links">
-          <Link className="nav-link" to="/">
-            Home Page
-          </Link>
+          {login && (
+            <Link className="nav-link" to="/">
+              Log-In
+            </Link>
+          )}
           <Link className="nav-link" to="/menu">
             Menu
           </Link>
@@ -38,20 +41,24 @@ function Navbar({ restaurant, restaurantUser }) {
             create menu
           </Link>
           <Link className="nav-link" to="/orders">
-            order handler
+            orders
           </Link>
         </span>
         <span id="buttons">
-          <button
-            className="link-button"
-            onClick={() => {
-              dispatch(changeRestaurant(null));
-              dispatch(changeRestaurantUser(null));
-              setStandDetails(false);
-            }}
-          >
-            log out of stand
-          </button>
+          {login || (
+            <button
+              className="link-button"
+              onClick={() => {
+                dispatch(changeRestaurant(null));
+                dispatch(changeRestaurantUser(null));
+                setStandDetails(false);
+                setLogin(false);
+              }}
+            >
+              log out
+            </button>
+          )}
+          {/* {login || <Redirect to="/" />} */}
         </span>
       </nav>
     </div>

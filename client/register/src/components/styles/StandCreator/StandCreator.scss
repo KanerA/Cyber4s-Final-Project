@@ -5,6 +5,29 @@
   padding: 2px;
   font-weight: 550;
   color: white;
+  font-family: $buttonFontFamily;
+}
+.stand-creator {
+  display: flex;
+  justify-content: space-evenly;
+}
+.create-stands {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10vh;
+  align-self: flex-end;
+}
+.existing-stands {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10vh;
+}
+.stand-inputs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  font-family: $contentFontFamily;
 }
 .login-prop {
   margin: 2px;

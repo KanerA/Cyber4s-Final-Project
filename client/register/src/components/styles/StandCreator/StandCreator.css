@@ -1,11 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
 * {
   margin: 0;
   padding: 0;
 }
 
-.App {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c8dad), to(#125d98));
-  background-image: linear-gradient(180deg, #3c8dad, #125d98);
+.app {
+  background-color: #dddddd;
   min-height: 100vh;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -16,8 +19,8 @@
 h1 {
   font-size: 3rem;
   text-shadow: 1px 1px 1px black;
-  font-family: cursive;
-  color: tomato;
+  font-family: "Montserrat", "Heebo", sans-serif;
+  color: #f5a962;
 }
 
 button {
@@ -26,6 +29,54 @@ button {
 
 input[type="radio"] {
   cursor: pointer;
+}
+
+.stand-creator {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.create-stands {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 10vh;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.existing-stands {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 10vh;
+}
+
+.stand-inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  font-family: "Tienne", "Heebo", serif;
 }
 
 .login-prop {
@@ -52,6 +103,7 @@ input[type="radio"] {
   padding: 2px;
   font-weight: 550;
   color: white;
+  font-family: "Paytone One", sans-serif;
 }
 
 .stand-login {
@@ -60,6 +112,7 @@ input[type="radio"] {
   padding: 2px;
   font-weight: 550;
   color: white;
+  font-family: "Paytone One", sans-serif;
 }
 
 .stand-delete {
@@ -68,6 +121,7 @@ input[type="radio"] {
   padding: 2px;
   font-weight: 550;
   color: white;
+  font-family: "Paytone One", sans-serif;
 }
 
 #open-stand {
@@ -75,6 +129,7 @@ input[type="radio"] {
   padding: 2px;
   font-weight: 550;
   color: white;
+  font-family: "Paytone One", sans-serif;
   font-size: 1.5rem;
   background-color: #03b42c;
   margin-top: 5px;
