@@ -16,6 +16,29 @@ import axios from "axios";
 
 export default function App() {
   const [restaurant, setRestaurant] = useState();
+  const [userName, setUserName] = useState();
+  console.log("username", userName);
+  const logIntoStandOrders = async (username, password) => {
+    const proxy = `http://${env.IP}:${env.PORT}`;
+    const body = {
+      user_name: username,
+      password: password,
+    };
+    setUserName(body.user_name);
+    try {
+      const res = await axios.post(`${proxy}/stands/login`, body);
+      setRestaurant(res.data.name);
+
+      try {
+        await AsyncStorage.setItem("accessToken", res.data.accessToken);
+        await AsyncStorage.setItem("refreshToken", res.data.refreshToken);
+      } catch (err) {
+        console.log(err);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <ScrollView
       contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
