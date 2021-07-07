@@ -51,14 +51,21 @@
 .stand-login {
   background-color: $positiveColor;
   @include button-props();
+  font-size: 1.5rem;
+  margin-top: 5px;
 }
 .stand-delete {
   background-color: $negativeColor;
   @include button-props();
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+.stand-controls {
+  margin-top: 15px;
 }
 #open-stand {
   @include button-props();
   font-size: 1.5rem;
-  background-color: $positiveColor;
   margin-top: 5px;
+  background-color: $positiveColor;
 }

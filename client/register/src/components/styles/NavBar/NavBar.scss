@@ -23,10 +23,7 @@ nav {
   font-size: 2rem;
   text-decoration: none;
 }
-.nav-link::before,
-.nav-link::after {
-  content: "|";
-}
+
 .nav-link:hover {
   transform: scaleY(1.5); //need to fix
   color: #198ac7;
@@ -49,6 +46,7 @@ nav {
 }
 #stand-details {
   background-color: $mainBrightColor;
+  font-weight: 500;
   color: black;
   border: 1px solid black;
 }

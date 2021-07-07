@@ -69,13 +69,16 @@
   margin-bottom: 5px;
   .item-details {
     display: flexbox;
+    width: 80%;
   }
   .item-amount {
     left: 0;
     position: absolute;
   }
+  .item-note {
+    // max-width: 80%;
+  }
   .total-item-price::after {
     content: "₪";
-
   }
 }

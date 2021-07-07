@@ -14,6 +14,7 @@
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
+  font-family: "Tienne", "Heebo", serif;
 }
 
 h1 {
@@ -25,6 +26,7 @@ h1 {
 
 button {
   cursor: pointer;
+  font-family: #f5a962;
 }
 
 input[type="radio"] {
@@ -113,6 +115,8 @@ input[type="radio"] {
   font-weight: 550;
   color: white;
   font-family: "Paytone One", sans-serif;
+  font-size: 1.5rem;
+  margin-top: 5px;
 }
 
 .stand-delete {
@@ -122,6 +126,12 @@ input[type="radio"] {
   font-weight: 550;
   color: white;
   font-family: "Paytone One", sans-serif;
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+
+.stand-controls {
+  margin-top: 15px;
 }
 
 #open-stand {
@@ -131,7 +141,7 @@ input[type="radio"] {
   color: white;
   font-family: "Paytone One", sans-serif;
   font-size: 1.5rem;
-  background-color: #03b42c;
   margin-top: 5px;
+  background-color: #03b42c;
 }
 /*# sourceMappingURL=StandCreator.css.map */

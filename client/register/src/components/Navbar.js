@@ -52,7 +52,7 @@ function Navbar({ restaurant, restaurantUser, login, setLogin }) {
                 dispatch(changeRestaurant(null));
                 dispatch(changeRestaurantUser(null));
                 setStandDetails(false);
-                setLogin(false);
+                setLogin(true);
               }}
             >
               log out
