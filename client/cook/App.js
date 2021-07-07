@@ -19,7 +19,8 @@ export default function App() {
   const [userName, setUserName] = useState();
   console.log("username", userName);
   const logIntoStandOrders = async (username, password) => {
-    const proxy = `${env.IP}:${env.PORT}`;
+
+    const proxy = `http://${env.IP}:${env.PORT}`;
     const body = {
       user_name: username,
       password: password,

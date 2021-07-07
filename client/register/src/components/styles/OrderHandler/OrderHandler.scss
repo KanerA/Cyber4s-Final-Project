@@ -50,7 +50,9 @@
   position: absolute;
   width: 100%;
   font-weight: 800;
+
   background-color: $negativeColor;
+
   font-size: 1rem;
   padding: 5px;
   box-shadow: 1px 1px 1px $mainDarkColor;
@@ -74,5 +76,6 @@
   }
   .total-item-price::after {
     content: "₪";
+
   }
 }

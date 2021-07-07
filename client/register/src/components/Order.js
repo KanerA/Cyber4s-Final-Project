@@ -25,6 +25,7 @@ export default function Order({ order, cancelOrder }) {
                   <p className="item-note">{dish.notes}</p>
                   <p className="total-item-price">{dish.amount * dish.price}</p>
                 </div>
+
               </div>
             );
           })}
