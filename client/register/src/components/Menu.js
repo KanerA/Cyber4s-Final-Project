@@ -22,6 +22,35 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   const customerName = useRef();
   const itemNumber = useRef(0);
 
+  const fetchData = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const dishes = axios.get(`/dishes/${restaurantUser}`, {
+      headers: {
+        Authorization: `bearer ${accessToken}`,
+      },
+    });
+    const drinks = axios.get(`/drinks/${restaurantUser}`, {
+      headers: {
+        Authorization: `bearer ${accessToken}`,
+      },
+    });
+    axios
+      .all([dishes, drinks])
+      .then(
+        axios.spread((...responses) => {
+          const dishRes = responses[0];
+          const drinkRes = responses[1];
+          if (drinkRes.data.expired || dishRes.data.expired) {
+            refreshFunction();
+            return fetchData();
+          }
+          dishRes.data && setDishes(dishRes.data);
+          drinkRes.data && setDrinks(drinkRes.data);
+        })
+      )
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     socket.on("connect", () => {
       console.log("added order");
@@ -31,78 +60,13 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
   }, [change]);
 
   useEffect(() => {
-    // socket.on("connect", () => {
-    //   console.log("added order");
-    //   socket.on("sendOrder", () => {
-    //     socket.emit("sendOrders", restaurantUser);
-    //   });
-    // });
-    const accessToken = localStorage.getItem("accessToken");
-    axios
-      .get(`/dishes/${restaurantUser}`, {
-        headers: {
-          Authorization: `bearer ${accessToken}`,
-        },
-      })
-      .then((newDishes) => {
-        if (newDishes.data.expired) {
-          refreshFunction();
-          axios
-            .get(`/dishes/${restaurantUser}`, {
-              headers: {
-                Authorization: `bearer ${localStorage.getItem("accessToken")}`,
-              },
-            })
-            .then((newDishes) => {
-              newDishes.data.length > 0
-                ? setDishes(newDishes.data)
-                : console.log(newDishes.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        } else {
-          newDishes.data.length > 0
-            ? setDishes(newDishes.data)
-            : console.log(newDishes.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+    socket.on("connect", () => {
+      console.log("added order");
+      socket.on("sendOrder", () => {
+        socket.emit("sendOrders", restaurantUser);
       });
-
-    axios
-      .get(`/drinks/${restaurantUser}`, {
-        headers: {
-          Authorization: `bearer ${accessToken}`,
-        },
-      })
-      .then((newDrinks) => {
-        if (newDrinks.data.expired) {
-          refreshFunction();
-          axios
-            .get(`/drinks/${restaurantUser}`, {
-              headers: {
-                Authorization: `bearer ${localStorage.getItem("accessToken")}`,
-              },
-            })
-            .then((newDrinks) => {
-              newDrinks.data.length > 0
-                ? setDrinks(newDrinks.data)
-                : console.log(newDrinks.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        } else {
-          newDrinks.data.length > 0
-            ? setDrinks(newDrinks.data)
-            : console.log(newDrinks.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    });
+    fetchData();
   }, []);
 
   const placeOrder = (e) => {
