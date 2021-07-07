@@ -21,8 +21,8 @@ function App() {
   const restaurant = useSelector((state) => state.restaurant);
   const restaurantUser = useSelector((state) => state.restaurantUser);
   // const [refresh, setRefresh] = useState(false);
-  const [spinner, setSpinner] = useState(false);
-  const [login, setLogin] = useState(false);
+
+  const [login, setLogin] = useState(true);
 
   const refreshFunction = (func) => {
     const body = {
@@ -38,7 +38,7 @@ function App() {
       .catch((err) => console.log(err));
     func && func();
   };
-  console.log(login);
+
   return (
     <div className="app">
       <Router>
@@ -69,26 +69,20 @@ function App() {
           )}
           {restaurant && (
             <Route exact path="/menu">
-              {spinner ? (
-                <h1>loading...</h1>
-              ) : (
-                <Menu
-                  setSpinner={setSpinner}
-                  restaurant={restaurant}
-                  restaurantUser={restaurantUser}
-                  refreshFunction={refreshFunction}
-                />
-              )}
+              <Menu
+                restaurant={restaurant}
+                restaurantUser={restaurantUser}
+                refreshFunction={refreshFunction}
+              />
             </Route>
           )}
           <Route exact path="/">
-            {login || (
-              <StandCreator
-                refreshFunction={refreshFunction}
-                restaurant={restaurant}
-                restaurantUser={restaurantUser}
-              />
-            )}
+            <StandCreator
+              refreshFunction={refreshFunction}
+              restaurant={restaurant}
+              restaurantUser={restaurantUser}
+              setLogin={setLogin}
+            />
           </Route>
         </Switch>
       </Router>

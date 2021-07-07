@@ -10,6 +10,7 @@ export default function StandCreator({
   restaurant,
   restaurantUser,
   refreshFunction,
+  setLogin,
 }) {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = useState(false);
@@ -32,9 +33,7 @@ export default function StandCreator({
         localStorage.setItem("refreshToken", res.data.refreshToken);
         dispatch(changeRestaurantUser(res.data.user_name));
         dispatch(changeRestaurant(nameRef.current));
-
-        alert(`username: ${res.data.user_name}`);
-        console.log(res.data.user_name);
+        setLogin(false);
       })
       .catch((err) => {
         console.log(err);
@@ -52,6 +51,7 @@ export default function StandCreator({
       localStorage.setItem("refreshToken", res.data.refreshToken);
       dispatch(changeRestaurantUser(usernameRef.current));
       dispatch(changeRestaurant(res.data.name));
+      setLogin(false);
     } catch (err) {
       console.log(err);
     }
