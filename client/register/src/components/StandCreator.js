@@ -65,7 +65,7 @@ export default function StandCreator({
           headers: {
             authorization: "Bearer " + localStorage.accessToken,
           },
-        }
+        },
       );
     } catch (err) {
       refreshFunction();
@@ -75,11 +75,10 @@ export default function StandCreator({
           headers: {
             authorization: "Bearer " + localStorage.accessToken,
           },
-        }
+        },
       );
     }
-    dispatch(changeRestaurant());
-    dispatch(changeRestaurantUser());
+
     alert("deleted");
   };
   return (
