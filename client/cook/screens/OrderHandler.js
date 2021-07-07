@@ -7,24 +7,15 @@ import { socket } from "../socket";
 export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("connected");
-      // socket.emit("sendOrders", userName);
-      socket.on("getNewOrder", (newOrder) => {
-        setOrders((prev) => [...prev, newOrder]);
-        alert("new order"); //change to notifications
-      });
-      // socket.on("getCanceledOrder", (canceledOrder) => {
-      //   const updatedOrders = orders?.map((order) => {
-      //     if (order._id === canceledOrder._id) {
-      //       order = canceledOrder;
-      //     }
-      //   });
-      //   console.log(updatedOrders);
-      //   setOrders(updatedOrders);
-      // });
+  socket.on("connect", () => {
+    console.log("connected");
+    // socket.emit("sendOrders", userName);
+    socket.on("getNewOrder", (newOrder) => {
+      setOrders((prev) => [...prev, newOrder]);
+      alert("new order"); //change to notifications
     });
+  });
+  useEffect(() => {
     axios
       .get(`http://${env.IP}:${env.PORT}/orders/${userName}`)
       .then((res) => {

@@ -7,13 +7,13 @@ function OrderHandler({ restaurant, restaurantUser }) {
   const [orders, setOrders] = useState([]);
   const [canceled, setCanceled] = useState(false);
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("connected");
-      socket.on("getNewOrder", (newOrder) => {
-        setOrders((prev) => [...prev, newOrder]);
-      });
+  socket.on("connect", () => {
+    console.log("connected");
+    socket.on("getNewOrder", (newOrder) => {
+      setOrders((prev) => [...prev, newOrder]);
     });
+  });
+  useEffect(() => {
     axios
       .get(`/orders/${restaurantUser}`)
       .then((res) => {
