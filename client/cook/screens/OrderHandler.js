@@ -2,15 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
-import socketIOClient from "socket.io-client";
-import env from "../env";
+import { socket } from "../socket";
 
 export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
-  const endPoint = `http://${env.IP}:6789`;
-  const socket = socketIOClient(endPoint, {
-    transports: ["websocket"],
-  });
+
   useEffect(() => {
     socket.on("connect", () => {
       console.log("connected");
@@ -33,7 +29,7 @@ export default function OrderHandler({ restaurant, userName }) {
       .get(`http://${env.IP}:${env.PORT}/orders/${userName}`)
       .then((res) => {
         const ordersToDo = res.data.filter(
-          (order) => !order.done && !order.canceled
+          (order) => !order.done && !order.canceled,
         );
         setOrders(ordersToDo.reverse());
       })
@@ -47,7 +43,7 @@ export default function OrderHandler({ restaurant, userName }) {
     const ordersToDo = orders.filter(
       (invite) =>
         invite.customerName !== order.customerName &&
-        invite.createdAt !== order.createdAt
+        invite.createdAt !== order.createdAt,
     );
     setOrders(ordersToDo);
   };
