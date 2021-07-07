@@ -1,8 +1,4 @@
-$backgroundColor: #5abdab;
-$positiveColor: #36c95b;
-$negativeColor: #f58c91;
-$mainDarkColor: #f5b25b;
-$secondaryBrightColor: #7fcbf5;
+@import "../App/App.scss";
 
 nav {
   background-color: $mainDarkColor;

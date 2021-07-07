@@ -1,8 +1,5 @@
-$backgroundColor: #5abdab;
-$positiveColor: #36c95b;
-$negativeColor: #f58c91;
-$mainDarkColor: #f5b25b;
-$secondaryBrightColor: #7fcbf5;
+@import "../App/App.scss";
+
 @mixin inputs {
   margin-top: 2px;
   margin-bottom: 2px;
