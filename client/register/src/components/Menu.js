@@ -97,6 +97,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       totalPrice: totalPrice,
     });
     // socket.emit("sendOrder");
+    console.log("work work work work work");
     setChange((prev) => !prev);
     setDrinkOrders([]);
     setDishOrders([]);
