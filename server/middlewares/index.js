@@ -26,15 +26,11 @@ const validatePassword = async (req, res, next) => {
         path === '/create' || path === '/login' ? req.body.password : req.query.p;
     // the value we want to compare
     const checkFieldValue = 
-        path === '/create' ? req.body.restaurant_name
-        : path === '/login' ? req.body.user_name
-        : req.query.u;
-    // the MySQL attribute
-    const checkField =  
-        path === '/create' ? 'name' : 'user_name';
+        path === '/create' || path === '/login' ? req.body.user_name : req.query.u;
+
     const stand = await Stands.findOne({
         where: {
-          [checkField]: checkFieldValue,
+          user_name: checkFieldValue,
         }
       });
       if(path === '/create' && !stand) return next(); // for creating a new stand - the stand will be undefined
