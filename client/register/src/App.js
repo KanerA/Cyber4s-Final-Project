@@ -25,14 +25,13 @@ function App() {
     axios
       .post(`/auth/refresh`, body)
       .then(({ data }) => {
-        // console.log(data);
         localStorage.setItem("accessToken", data.accessToken);
         setRefresh(!refresh);
       })
       .catch((err) => console.log(err));
   };
   return (
-    <div className="App">
+    <div className="app">
       <Router>
         <Navbar restaurant={restaurant} restaurantUser={restaurantUser} />
         <Switch>

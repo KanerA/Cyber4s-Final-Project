@@ -50,7 +50,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
           axios
             .get(`/dishes/${restaurantUser}`, {
               headers: {
-                Authorization: `bearer ${accessToken}`,
+                Authorization: `bearer ${localStorage.getItem("accessToken")}`,
               },
             })
             .then((newDishes) => {
@@ -83,7 +83,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction, refresh }) {
           axios
             .get(`/drinks/${restaurantUser}`, {
               headers: {
-                Authorization: `bearer ${accessToken}`,
+                Authorization: `bearer ${localStorage.getItem("accessToken")}`,
               },
             })
             .then((newDrinks) => {

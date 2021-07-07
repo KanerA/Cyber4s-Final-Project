@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-.App {
+.app {
   background-color: #dddddd;
   min-height: 100vh;
   -webkit-box-align: center;
@@ -14,7 +14,6 @@
 
 h1 {
   font-size: 3rem;
-  color: white;
   text-shadow: 1px 1px 1px black;
   font-family: cursive;
   color: tomato;

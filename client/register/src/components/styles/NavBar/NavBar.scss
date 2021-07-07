@@ -4,7 +4,7 @@ nav {
   background-color: $mainDarkColor;
   justify-content: center;
   position: relative;
-  color: $secondaryBrightColor;
+  color: $secondaryColor;
   height: 2.5rem;
   padding-top: 10px;
   top: 0;
@@ -19,7 +19,7 @@ nav {
 }
 .nav-link {
   margin-right: 3px;
-  color: $secondaryBrightColor;
+  color: $secondaryColor;
   font-size: 2rem;
   text-decoration: none;
 }
@@ -48,7 +48,7 @@ nav {
   right: 10px;
 }
 #stand-details {
-  background-color: $backgroundColor;
+  background-color: $mainBrightColor;
   color: black;
   border: 1px solid black;
 }

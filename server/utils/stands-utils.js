@@ -1,13 +1,17 @@
 const { Stands } = require("../models");
-const jwt = require('jsonwebtoken');
-const { hashSync } = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const { hashSync } = require("bcrypt");
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
 const createNewStand = async (req, res) => {
-  if(req.stand !== undefined) return res.json({ message: 'Restaurant already registered!' });
+  if (req.stand !== undefined)
+    return res.json({ message: "Restaurant already registered!" });
   const { password, user_name, restaurant_name } = req.body;
-  if(password.length < 6) return res.json({ message: 'Password is too short, please choose another' }); // validating length of password
+  if (password.length < 6)
+    return res.json({
+      message: "Password is too short, please choose another",
+    }); // validating length of password
   const hashedPW = hashSync(password, 10); // hashing the password for DB
   const stand = await Stands.create({
     user_name,
@@ -38,7 +42,7 @@ const standLogin = async (req, res) => {
   };
   const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET);
   const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
-    expiresIn: "10m",
+    expiresIn: "10s",
   });
   res.status(201).json({ accessToken, refreshToken, id, user_name, name });
 };

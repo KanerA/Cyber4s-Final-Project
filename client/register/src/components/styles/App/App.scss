@@ -1,23 +1,21 @@
-$backgroundColor: #dddddd;
-$positiveColor: #36c95b;
+$background: #dddddd;
+$positiveColor: #03b42c;
 $negativeColor: #f58c91;
 $mainDarkColor: #125d98;
 $mainBrightColor: #3c8dad;
 $secondaryColor: #f5a962;
-$mix: mix($backgroundColor, $mainBrightColor, 20%);
 * {
   margin: 0;
   padding: 0;
 }
-.App {
-  background-color: $backgroundColor;
+.app {
+  background-color: $background;
   min-height: 100vh;
   align-items: center;
   text-align: center;
 }
 h1 {
   font-size: 3rem;
-  color: white;
   text-shadow: 1px 1px 1px black;
   font-family: cursive;
   color: tomato;

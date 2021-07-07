@@ -4,9 +4,8 @@
   padding: 0;
 }
 
-.App {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#7fcbf5), color-stop(#78c8e6), to(#5abdab));
-  background-image: linear-gradient(0deg, #7fcbf5, #78c8e6, #5abdab);
+.app {
+  background-color: #dddddd;
   min-height: 100vh;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -16,7 +15,6 @@
 
 h1 {
   font-size: 3rem;
-  color: white;
   text-shadow: 1px 1px 1px black;
   font-family: cursive;
   color: tomato;
@@ -36,7 +34,7 @@ input[type="radio"] {
   border-radius: 0.5rem;
   margin: 7px;
   font-size: 2rem;
-  color: white;
+  color: black;
 }
 
 .item-info {
@@ -47,7 +45,7 @@ input[type="radio"] {
   margin-top: 2px;
   margin-bottom: 2px;
   color: white;
-  background-color: #7fcbf5;
+  background-color: #f5a962;
   -webkit-box-shadow: 1px 1px 1px #416d85;
           box-shadow: 1px 1px 1px #416d85;
   border-radius: 0.5rem;
@@ -84,10 +82,10 @@ input[type="radio"] {
   font-size: 1rem;
   margin: 10px;
   padding: 10px;
-  background-color: #36c95b;
+  background-color: #03b42c;
   font-weight: 600;
-  -webkit-box-shadow: 1px 1px 1px #f5b25b;
-          box-shadow: 1px 1px 1px #f5b25b;
+  -webkit-box-shadow: 1px 1px 1px #125d98;
+          box-shadow: 1px 1px 1px #125d98;
   color: black;
   border-radius: 0.5rem;
   width: 80%;
@@ -114,7 +112,7 @@ input[type="radio"] {
 }
 
 .positive {
-  background-color: #36c95b;
+  background-color: #03b42c;
 }
 
 .negative {
@@ -152,8 +150,8 @@ input[type="radio"] {
 .cancel {
   background-color: #f58c91;
   font-weight: 600;
-  -webkit-box-shadow: 1px 1px 1px #f5b25b;
-          box-shadow: 1px 1px 1px #f5b25b;
+  -webkit-box-shadow: 1px 1px 1px #125d98;
+          box-shadow: 1px 1px 1px #125d98;
   color: black;
   border-radius: 0.5rem;
   width: 80%;
@@ -192,7 +190,7 @@ input[type="radio"] {
   margin-top: 2px;
   margin-bottom: 2px;
   color: white;
-  background-color: #7fcbf5;
+  background-color: #f5a962;
   -webkit-box-shadow: 1px 1px 1px #416d85;
           box-shadow: 1px 1px 1px #416d85;
   border-radius: 0.5rem;
@@ -227,10 +225,10 @@ input[type="radio"] {
 }
 
 #set-order {
-  background-color: #36c95b;
+  background-color: #03b42c;
   font-weight: 600;
-  -webkit-box-shadow: 1px 1px 1px #f5b25b;
-          box-shadow: 1px 1px 1px #f5b25b;
+  -webkit-box-shadow: 1px 1px 1px #125d98;
+          box-shadow: 1px 1px 1px #125d98;
   color: black;
   border-radius: 0.5rem;
   width: 80%;
