@@ -33,11 +33,11 @@ const validatePassword = async (req, res, next) => {
           user_name: checkFieldValue,
         }
       });
+      req.stand = stand;
       if(path === '/create' && !stand) return next(); // for creating a new stand - the stand will be undefined
       if(!stand) return res.status(201).json({message: 'Restaurant doesn\'t exist, please sign up'}); // check if the stand exists
       const isPWCorrect = await compare(PW, stand.password);
       if(!isPWCorrect) return res.sendStatus(403); // check if the password matches
-      req.stand = stand;
       next();
 };
 

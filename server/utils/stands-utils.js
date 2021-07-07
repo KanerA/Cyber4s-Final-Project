@@ -5,8 +5,7 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
 const createNewStand = async (req, res) => {
-  if (req.stand !== undefined)
-    return res.json({ message: "Restaurant already registered!" });
+  if (!req.stand) return res.json({ message: "Restaurant already registered!" });
   if(req.stand.name === req.body.restaurant_name) return res.json({ message: "Restaurant already registered!" });
   const { password, user_name, restaurant_name } = req.body;
   if (password.length < 6)
