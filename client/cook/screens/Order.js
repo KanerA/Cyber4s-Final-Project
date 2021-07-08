@@ -15,12 +15,11 @@ import GestureRecognizer, {
 export default function Order({ order, orderDone }) {
   const [notes, setNotes] = useState(false);
   const date = new Date(order.createdAt).toLocaleString("en-GB").toString();
-
   const width = Dimensions.get("window").width;
-  const dayLightSavings =
+  const currentTimeZone =
     new Date().getMonth() <= 9 || new Date().getMonth() >= 3
-      ? 60 * 60 * 1000
-      : 0;
+      ? 60 * 60 * 3000
+      : 60 * 60 * 2000;
 
   const config = {
     velocityThreshold: 0.3,
@@ -30,36 +29,18 @@ export default function Order({ order, orderDone }) {
     <GestureRecognizer
       onSwipeLeft={() => {
         orderDone(order);
-        // Animated.event([
-        //   {
-        //     nativeEvent: {
-        //       contentOffset: {
-        //         x: scrollX,
-        //       },
-        //     },
-        //   },
-        // ]);
       }}
       onSwipeRight={() => {
         orderDone(order);
-        // Animated.event([
-        //   {
-        //     nativeEvent: {
-        //       contentOffset: {
-        //         x: scrollX,
-        //       },
-        //     },
-        //   },
-        // ]);
       }}
       style={[
-        Date.now() - Date.parse(date) + dayLightSavings <= 5 * 60000
+        Date.now() - Date.parse(date) + currentTimeZone <= 5 * 60000
           ? { backgroundColor: "green" }
-          : Date.now() - Date.parse(date) + dayLightSavings <= 10 * 60000
+          : Date.now() - Date.parse(date) + currentTimeZone <= 10 * 60000
           ? { backgroundColor: "orange" }
           : { backgroundColor: "red" },
         styles.order,
-        { width: width },
+        { width: width * 0.9 },
       ]}
       config={config}
     >
@@ -127,6 +108,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "black",
     marginTop: 2,
+    borderRadius: 9,
   },
   orderDetails: {
     position: "relative",

@@ -43,7 +43,8 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
         axios.spread((...responses) => {
           const dishRes = responses[0];
           const drinkRes = responses[1];
-          if (drinkRes.data.expired || dishRes.data.expired) {
+          if (drinkRes.data.expired) {
+            setTimeout(() => console.log("timeOut"), 200);
             refreshFunction();
             fetchData();
           }

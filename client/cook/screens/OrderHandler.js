@@ -6,6 +6,7 @@ import { socket } from "../socket";
 
 export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
+  const [bool, setBool] = useState(false);
 
   socket.on("connect", () => {
     console.log("connected");
@@ -21,11 +22,13 @@ export default function OrderHandler({ restaurant, userName }) {
         const ordersToDo = res.data.filter(
           (order) => !order.done && !order.canceled
         );
+        if (orders.length != ordersToDo.length) setBool(!bool);
         setOrders(ordersToDo.reverse());
       })
       .catch((err) => console.log(err));
+
     // console.log(`http://${env.IP}:${env.PORT}/orders/${userName}`);
-  }, []);
+  }, [, bool]);
   const orderDone = (order) => {
     axios
       .patch(`http://${env.IP}:${env.PORT}/orders/done/?id=${order._id}&d=true`)
