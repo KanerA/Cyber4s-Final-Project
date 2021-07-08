@@ -85,15 +85,13 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       alert("order succeeded");
       socket.emit("sendOrders", restaurantUser);
       socket.on("receiveOrders", (newOrders) => {
-        // setOrders(newOrders);
-        // console.log("new orders");
       });
     });
     axios.post(`/orders/${restaurantUser}`, {
       customerName: customerName.current,
       dish: dishOrders,
       drink: drinkOrders,
-      createdAt: Date.now(),
+      createdAt: Date.parse(new Date()),
       username: restaurantUser,
       totalPrice: totalPrice,
     });
