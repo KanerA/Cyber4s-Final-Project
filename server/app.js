@@ -34,6 +34,4 @@ app.use("/orders", orders);
 app.use("/stands", stands);
 app.use("/auth", auth);
 
-// app.post('/token', )
-
 module.exports = app;

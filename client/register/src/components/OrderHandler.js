@@ -17,17 +17,19 @@ function OrderHandler({ restaurant, restaurantUser }) {
     axios
       .get(`/orders/${restaurantUser}`)
       .then((res) => {
-        setOrders(res.data);
+        const doneNoneCanceled = res.data?.filter((order) => {
+          if (!order.done && !order.canceled) return order;
+        });
+        setOrders(doneNoneCanceled);
       })
       .catch((err) => console.log(err));
-  }, [, orders]);
+  }, []);
   const cancelOrder = (order) => {
     alert(`${order.customerName}'s order is canceled!`);
     axios
       .patch(`/orders/done/?c=true&id=${order._id}`)
       .then((res) => setCanceled(true))
       .catch((err) => console.log(err));
-    // console.log(order);
     const canceled = orders.filter((canceled) => canceled._id !== order._id);
     setOrders(canceled);
   };
