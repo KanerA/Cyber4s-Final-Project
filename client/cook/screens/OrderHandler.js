@@ -4,18 +4,10 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
 import { socket } from "../socket";
 
-socket.on("connect", () => {
-  console.log("connected");
-});
-
 export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
   const [bool, setBool] = useState(false);
 
-  socket.on("getNewOrder", (newOrder) => {
-    setOrders((prev) => [...prev, newOrder]);
-    // console.log(orders);
-  });
   useEffect(() => {
     axios
       .get(`http://${env.IP}:${env.PORT}/orders/${userName}`)
@@ -28,8 +20,16 @@ export default function OrderHandler({ restaurant, userName }) {
       })
       .catch((err) => console.log(err));
 
+    socket.on("connect", () => {
+      console.log("connected");
+    });
     // console.log(`http://${env.IP}:${env.PORT}/orders/${userName}`);
   }, [, bool]);
+  socket.on("getNewOrder", (newOrder) => {
+    const newOrders = [...orders, newOrder];
+    setOrders(newOrders);
+    // console.log(orders);
+  });
   const orderDone = (order) => {
     axios
       .patch(`http://${env.IP}:${env.PORT}/orders/done/?id=${order._id}&d=true`)
