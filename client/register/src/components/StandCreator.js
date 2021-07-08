@@ -19,6 +19,19 @@ export default function StandCreator({
   const passwordRef = useRef();
   const usernameRef = useRef();
 
+  function createCookie(name, value, days) {
+    var expires;
+
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+}
+
   const openStand = async () => {
     axios
       .post("/stands/create", {
@@ -28,8 +41,11 @@ export default function StandCreator({
       })
       .then((res) => {
         console.log(restaurantUser);
-        localStorage.setItem("userId", res.data.id);
-        localStorage.setItem("accessToken", res.data.accessToken);
+        createCookie("userId", res.data.id, 0.5);
+        createCookie("accessToken", res.data.accessToken, 0.5);
+        createCookie("refreshToken", res.data.refreshToken, 0.5);
+        // localStorage.setItem("userId", res.data.id);
+        // localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
         dispatch(changeRestaurantUser(res.data.user_name));
         dispatch(changeRestaurant(nameRef.current));
@@ -46,6 +62,9 @@ export default function StandCreator({
     };
     try {
       const res = await axios.post(`/stands/login/`, body);
+      createCookie("userId", res.data.id, 0.5);
+      createCookie("accessToken", res.data.accessToken, 0.5);
+      createCookie("refreshToken", res.data.refreshToken, 0.5);
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
