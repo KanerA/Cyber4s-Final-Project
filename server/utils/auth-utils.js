@@ -12,7 +12,7 @@ const validateRefreshToken = (req, res) => {
             const accessToken = jwt.sign(token, ACCESS_TOKEN_SECRET, {
                 expiresIn: '5m',
             });
-            res.json({ accessToken });
+            res.status(304).json({ accessToken });
         });
     } catch (error) {
         console.log(error);
