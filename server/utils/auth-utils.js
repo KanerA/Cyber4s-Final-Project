@@ -7,7 +7,11 @@ const validateRefreshToken = (req, res) => {
     const { refreshToken } = req.body;
     if (!refreshToken) throw new Error("Bad request");
     jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, token) => {
-      if (err) return res.status(500).json({ expired: true });
+      if (err){
+        console.log(refreshToken)
+        console.log(err.message);
+        return res.status(500).json({ expired: true });
+      }
       console.log(token);
       const accessToken = jwt.sign(token, ACCESS_TOKEN_SECRET, {
         expiresIn: "5m",

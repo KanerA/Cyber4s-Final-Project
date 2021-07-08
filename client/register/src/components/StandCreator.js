@@ -11,6 +11,7 @@ export default function StandCreator({
   restaurantUser,
   refreshFunction,
   setLogin,
+  createCookie
 }) {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = useState(false);
@@ -18,19 +19,6 @@ export default function StandCreator({
   const nameRef = useRef();
   const passwordRef = useRef();
   const usernameRef = useRef();
-
-  function createCookie(name, value, days) {
-    var expires;
-
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
-    } else {
-        expires = "";
-    }
-    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
-}
 
   const openStand = async () => {
     axios
@@ -44,9 +32,6 @@ export default function StandCreator({
         createCookie("userId", res.data.id, 0.5);
         createCookie("accessToken", res.data.accessToken, 0.5);
         createCookie("refreshToken", res.data.refreshToken, 0.5);
-        // localStorage.setItem("userId", res.data.id);
-        // localStorage.setItem("accessToken", res.data.accessToken);
-        localStorage.setItem("refreshToken", res.data.refreshToken);
         dispatch(changeRestaurantUser(res.data.user_name));
         dispatch(changeRestaurant(nameRef.current));
         setLogin(false);
@@ -65,9 +50,6 @@ export default function StandCreator({
       createCookie("userId", res.data.id, 0.5);
       createCookie("accessToken", res.data.accessToken, 0.5);
       createCookie("refreshToken", res.data.refreshToken, 0.5);
-      localStorage.setItem("userId", res.data.id);
-      localStorage.setItem("accessToken", res.data.accessToken);
-      localStorage.setItem("refreshToken", res.data.refreshToken);
       dispatch(changeRestaurantUser(usernameRef.current));
       dispatch(changeRestaurant(res.data.name));
       setLogin(false);
@@ -77,12 +59,15 @@ export default function StandCreator({
   };
   const deleteStand = async (e) => {
     console.log(usernameRef.current, passwordRef.current);
+    const cookie = document.cookie.split('; ');
+    const accessTokenCookie = cookie.find(cookieItem => cookieItem.includes('accessToken'));
+    const accessToken = accessTokenCookie.slice(12, accessTokenCookie.length);
     try {
       await axios.delete(
         `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
         {
           headers: {
-            authorization: "Bearer " + localStorage.accessToken,
+            authorization: "Bearer " + accessToken,
           },
         },
       );
@@ -92,7 +77,7 @@ export default function StandCreator({
         `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
         {
           headers: {
-            authorization: "Bearer " + localStorage.accessToken,
+            authorization: "Bearer " + accessToken,
           },
         },
       );

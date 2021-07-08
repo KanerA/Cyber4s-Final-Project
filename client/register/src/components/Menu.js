@@ -24,34 +24,33 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const customerName = useRef();
   const itemNumber = useRef(0);
 
-  const fetchData = async (givenAccessToken) => {
-    const accessToken = givenAccessToken
-      ? givenAccessToken
-      : localStorage.getItem("accessToken");
+  const fetchData = async () => {
+    // get the access token from the cookies
+    const cookie = document.cookie.split('; ');
+    const accessTokenCookie = cookie.find(cookieItem => cookieItem.includes('accessToken'));
+    const accessToken = accessTokenCookie.slice(12, accessTokenCookie.length);
+    console.log(accessToken);
     try {
-      const res = await axios.all([
-        axios.get(`/dishes/${restaurantUser}`, {
-          headers: {
-            Authorization: `bearer ${accessToken}`,
-          },
-        }),
-        axios.get(`/drinks/${restaurantUser}`, {
-          headers: {
-            Authorization: `bearer ${accessToken}`,
-          },
-        }),
-      ]);
-      const dishRes = res[0];
-      const drinkRes = res[1];
-      console.log(drinkRes.status);
-
+      // GEt request for all the stand's dishes
+      const dishRes = await axios.get(`/dishes/${restaurantUser}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      });
+      // GET request for all the stand's drinks
+      const drinkRes = await axios.get(`/drink/${restaurantUser}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      }); 
+      console.log(dishRes)
+      console.log(drinkRes)
+      // check if the data we got is an array with entries for the react component
       dishRes.data.length > 0 && setDishes(dishRes.data);
       drinkRes.data.length > 0 && setDrinks(drinkRes.data);
-      console.log(drinkRes, dishRes);
     } catch (err) {
       refreshFunction();
-      setTimeout(() => console.log("timeOut"), 2000);
-      fetchData();
+      // fetchData();
     }
   };
 
