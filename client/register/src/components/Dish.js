@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
 
 function Dish({
   dish,
@@ -30,21 +32,18 @@ function Dish({
   return (
     <div className="item">
       <span>
-        <button
+        <AiOutlinePlus
           className="count-button positive"
           onClick={() => setDishCount(dishCount + 1)}
-        >
-          +
-        </button>
+        />
+
         {dishCount}
-        <button
-          className="count-button negative"
+        <AiOutlineMinus
+          className="count-button negative "
           onClick={() => {
             if (dishCount >= 2) setDishCount(dishCount - 1);
           }}
-        >
-          -
-        </button>
+        />
       </span>
       <div className="item-info">
         <p className="item-name">{dish.name}</p>

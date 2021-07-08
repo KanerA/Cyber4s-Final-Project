@@ -53,23 +53,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       setTimeout(() => console.log("timeOut"), 2000);
       fetchData();
     }
-
-    // .then(
-    //   axios.spread((...responses) => {
-    //     const dishRes = responses[0];
-    //     const drinkRes = responses[1];
-    //     if (drinkRes.data.expired) {
-    //       setTimeout(() => console.log("timeOut"), 200);
-    //       refreshFunction();
-    //       fetchData();
-    //     }
-    //     console.log(drinkRes, dishRes);
-
-    //     dishRes.data.length > 0 && setDishes(dishRes.data);
-    //     drinkRes.data.length > 0 && setDrinks(drinkRes.data);
-    //   })
-    // )
-    // .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -99,10 +82,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       console.log("connected");
       alert("order succeeded");
       socket.emit("sendOrders", restaurantUser);
-      socket.on("receiveOrders", (newOrders) => {
-        // setOrders(newOrders);
-        // console.log("new orders");
-      });
+      socket.on("receiveOrders", (newOrders) => {});
     });
     axios.post(`/orders/${restaurantUser}`, {
       customerName: customerName.current,
@@ -112,7 +92,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       username: restaurantUser,
       totalPrice: totalPrice,
     });
-    // socket.emit("sendOrder");
+
     console.log("work work work work work");
     setChange((prev) => !prev);
     setDrinkOrders([]);

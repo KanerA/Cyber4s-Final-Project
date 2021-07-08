@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +11,7 @@
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
-  font-family: "Tienne", "Heebo", serif;
+  font-family: "Archivo Black", "Heebo", serif;
 }
 
 h1 {
@@ -78,7 +75,7 @@ input[type="radio"] {
       flex-wrap: wrap;
   -ms-flex-line-pack: center;
       align-content: center;
-  font-family: "Tienne", "Heebo", serif;
+  font-family: "Archivo Black", "Heebo", serif;
 }
 
 .login-prop {
