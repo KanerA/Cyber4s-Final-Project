@@ -13,6 +13,7 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 
 export default function Order({ order, orderDone }) {
+  console.log(swipeDirections);
   const [notes, setNotes] = useState(false);
   const date = new Date(order.createdAt).toLocaleString("en-GB").toString();
   const width = Dimensions.get("window").width;

@@ -6,7 +6,6 @@ import { socket } from "../socket";
 
 export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
-  const [bool, setBool] = useState(false);
 
   useEffect(() => {
     axios
@@ -15,7 +14,7 @@ export default function OrderHandler({ restaurant, userName }) {
         const ordersToDo = res.data.filter(
           (order) => !order.done && !order.canceled
         );
-        if (orders.length != ordersToDo.length) setBool(!bool);
+
         setOrders(ordersToDo.reverse());
       })
       .catch((err) => console.log(err));
@@ -23,12 +22,10 @@ export default function OrderHandler({ restaurant, userName }) {
     socket.on("connect", () => {
       console.log("connected");
     });
-    // console.log(`http://${env.IP}:${env.PORT}/orders/${userName}`);
-  }, [, bool]);
+  }, []);
   socket.on("getNewOrder", (newOrder) => {
     const newOrders = [...orders, newOrder];
     setOrders(newOrders);
-    // console.log(orders);
   });
   const orderDone = (order) => {
     axios
@@ -40,8 +37,10 @@ export default function OrderHandler({ restaurant, userName }) {
   };
   console.log("username orders", userName);
   return (
-    <View>
-      <Text>Orders</Text>
+    <View style={{ backgroundColor: "#dddddd" }}>
+      <Text style={{ alignSelf: "center", fontSize: 20 }}>
+        {restaurant}'s Orders
+      </Text>
       {orders.map((order, i) => {
         return (
           <Order

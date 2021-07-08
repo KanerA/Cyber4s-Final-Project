@@ -24,10 +24,12 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const customerName = useRef();
   const itemNumber = useRef(0);
 
-  const fetchData = () => {
-    const accessToken = localStorage.getItem("accessToken");
-    axios
-      .all([
+  const fetchData = async (givenAccessToken) => {
+    const accessToken = givenAccessToken
+      ? givenAccessToken
+      : localStorage.getItem("accessToken");
+    try {
+      const res = await axios.all([
         axios.get(`/dishes/${restaurantUser}`, {
           headers: {
             Authorization: `bearer ${accessToken}`,
@@ -38,23 +40,36 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
             Authorization: `bearer ${accessToken}`,
           },
         }),
-      ])
-      .then(
-        axios.spread((...responses) => {
-          const dishRes = responses[0];
-          const drinkRes = responses[1];
-          if (drinkRes.data.expired) {
-            setTimeout(() => console.log("timeOut"), 200);
-            refreshFunction();
-            fetchData();
-          }
-          console.log(drinkRes, dishRes);
+      ]);
+      const dishRes = res[0];
+      const drinkRes = res[1];
+      console.log(drinkRes.status);
 
-          dishRes.data.length > 0 && setDishes(dishRes.data);
-          drinkRes.data.length > 0 && setDrinks(drinkRes.data);
-        })
-      )
-      .catch((err) => console.log(err));
+      dishRes.data.length > 0 && setDishes(dishRes.data);
+      drinkRes.data.length > 0 && setDrinks(drinkRes.data);
+      console.log(drinkRes, dishRes);
+    } catch (err) {
+      refreshFunction();
+      setTimeout(() => console.log("timeOut"), 2000);
+      fetchData();
+    }
+
+    // .then(
+    //   axios.spread((...responses) => {
+    //     const dishRes = responses[0];
+    //     const drinkRes = responses[1];
+    //     if (drinkRes.data.expired) {
+    //       setTimeout(() => console.log("timeOut"), 200);
+    //       refreshFunction();
+    //       fetchData();
+    //     }
+    //     console.log(drinkRes, dishRes);
+
+    //     dishRes.data.length > 0 && setDishes(dishRes.data);
+    //     drinkRes.data.length > 0 && setDrinks(drinkRes.data);
+    //   })
+    // )
+    // .catch((err) => console.log(err));
   };
 
   useEffect(() => {
