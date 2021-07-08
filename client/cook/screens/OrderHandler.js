@@ -4,16 +4,17 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import Order from "./Order";
 import { socket } from "../socket";
 
+socket.on("connect", () => {
+  console.log("connected");
+});
+
 export default function OrderHandler({ restaurant, userName }) {
   const [orders, setOrders] = useState([]);
   const [bool, setBool] = useState(false);
 
-  socket.on("connect", () => {
-    console.log("connected");
-    socket.on("getNewOrder", (newOrder) => {
-      setOrders((prev) => [...prev, newOrder]);
-      // console.log(orders);
-    });
+  socket.on("getNewOrder", (newOrder) => {
+    setOrders((prev) => [...prev, newOrder]);
+    // console.log(orders);
   });
   useEffect(() => {
     axios
