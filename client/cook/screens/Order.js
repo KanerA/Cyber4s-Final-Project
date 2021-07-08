@@ -6,15 +6,15 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 
 export default function Order({ order, orderDone }) {
-  console.log(swipeDirections);
   const [notes, setNotes] = useState(false);
-  const date = new Date(order.createdAt).toLocaleString("en-GB").toString();
+  const date = new Date(order.createdAt).toLocaleString("he-IL").toString();
   const width = Dimensions.get("window").width;
-  const currentTimeZone =
-    new Date().getMonth() <= 9 || new Date().getMonth() >= 3
-      ? 60 * 60 * 3000
-      : 60 * 60 * 2000;
-
+  const backgroundColor =
+    Date.now() - Date.parse(date) <= 7 * 60000
+      ? "#03b42c"
+      : Date.now() - Date.parse(date) <= 15 * 60000
+      ? "#f5a962"
+      : "#f58c91";
   const config = {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80,
@@ -28,13 +28,8 @@ export default function Order({ order, orderDone }) {
         orderDone(order);
       }}
       style={[
-        Date.now() - Date.parse(date) + currentTimeZone <= 35 * 60000
-          ? { backgroundColor: "green" }
-          : Date.now() - Date.parse(date) + currentTimeZone <= 40 * 60000
-          ? { backgroundColor: "orange" }
-          : { backgroundColor: "red" },
         styles.order,
-        { width: width * 0.9 },
+        { width: width * 0.9, backgroundColor: backgroundColor },
       ]}
       config={config}
     >

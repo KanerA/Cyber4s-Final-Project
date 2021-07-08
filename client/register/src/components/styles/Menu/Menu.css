@@ -58,25 +58,25 @@ input[type="radio"] {
 }
 
 .item-notes::-webkit-input-placeholder {
-  color: rgba(0, 0, 0, 0.438);
+  color: #dddddd;
   font-weight: 800;
   text-align: center;
 }
 
 .item-notes:-ms-input-placeholder {
-  color: rgba(0, 0, 0, 0.438);
+  color: #dddddd;
   font-weight: 800;
   text-align: center;
 }
 
 .item-notes::-ms-input-placeholder {
-  color: rgba(0, 0, 0, 0.438);
+  color: #dddddd;
   font-weight: 800;
   text-align: center;
 }
 
 .item-notes::placeholder {
-  color: rgba(0, 0, 0, 0.438);
+  color: #dddddd;
   font-weight: 800;
   text-align: center;
 }

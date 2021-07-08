@@ -33,31 +33,47 @@ export default function Login({ logIntoStandOrders }) {
             passwordRef.current = text;
           }}
         />
+      </View>
+      <View style={styles.buttons}>
+        <Button
+          style={styles.button}
+          title={"Log In"}
+          onPress={() =>
+            logIntoStandOrders(usernameRef.current, passwordRef.current)
+          }
+        />
         <Button
           onPress={() => {
             setSecure(!secure);
           }}
+          color={"#f5a962"}
           title={`${secure ? "show" : "hide"} password`}
         />
       </View>
-      <Button
-        title={"Log In"}
-        onPress={() =>
-          logIntoStandOrders(usernameRef.current, passwordRef.current)
-        }
-      />
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   input: {
+    margin: 10,
     borderWidth: 1,
     backgroundColor: "#125d98",
     width: width * 0.95,
+    borderRadius: 2,
+    fontSize: 20,
   },
   text: {
-    fontSize: 20,
+    fontSize: 35,
     alignSelf: "center",
-    margin: 20,
+    marginBottom: 20,
+    color: "#3c8dad",
+  },
+  buttons: {
+    marginTop: 10,
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderRadius: 0.3,
   },
 });

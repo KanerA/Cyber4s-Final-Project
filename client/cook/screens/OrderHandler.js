@@ -15,7 +15,7 @@ export default function OrderHandler({ restaurant, userName }) {
           (order) => !order.done && !order.canceled
         );
 
-        setOrders(ordersToDo.reverse());
+        setOrders(ordersToDo);
       })
       .catch((err) => console.log(err));
 

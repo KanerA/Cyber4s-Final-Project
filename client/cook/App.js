@@ -3,18 +3,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  Button,
   ScrollView,
   Platform,
   StatusBar,
+  Dimensions,
 } from "react-native";
 import env from "./env";
 import Login from "./screens/Login";
 import OrderHandler from "./screens/OrderHandler";
 
 export default function App() {
+  const height = Dimensions.get("window").height;
   const [restaurant, setRestaurant] = useState();
   const [userName, setUserName] = useState();
   console.log("username", userName);
@@ -41,7 +41,11 @@ export default function App() {
   };
   return (
     <ScrollView
-      contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
+      contentContainerStyle={{
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: height,
+      }}
     >
       <View style={styles.container}>
         {restaurant ? null : <Login logIntoStandOrders={logIntoStandOrders} />}

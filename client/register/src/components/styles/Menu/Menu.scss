@@ -35,7 +35,7 @@
   font-size: 1rem;
 }
 .item-notes::placeholder {
-  color: rgba(0, 0, 0, 0.438);
+  color: $background;
   font-weight: 800;
   text-align: center;
 }
