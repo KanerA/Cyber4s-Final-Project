@@ -7,6 +7,8 @@ import CurrentOrder from "./CurrentOrder";
 import "./styles/Menu/Menu.css";
 import { socket } from "../socket";
 import RingLoader from "react-spinners/RingLoader";
+import { intercept } from "../utils/networkWrapper";
+import { readCookie } from "../utils/cookies";
 
 function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const [change, setChange] = useState(false);
@@ -26,10 +28,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
 
   const fetchData = async () => {
     // get the access token from the cookies
-    const cookie = document.cookie.split('; ');
-    const accessTokenCookie = cookie.find(cookieItem => cookieItem.includes('accessToken'));
-    const accessToken = accessTokenCookie.slice(12, accessTokenCookie.length);
-    console.log(accessToken);
+    const accessToken = readCookie("accessToken");
     try {
       // GEt request for all the stand's dishes
       const dishRes = await axios.get(`/dishes/${restaurantUser}`, {
@@ -38,13 +37,13 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
         },
       });
       // GET request for all the stand's drinks
-      const drinkRes = await axios.get(`/drink/${restaurantUser}`, {
+      const drinkRes = await axios.get(`/drinks/${restaurantUser}`, {
         headers: {
           Authorization: `bearer ${accessToken}`,
         },
-      }); 
-      console.log(dishRes)
-      console.log(drinkRes)
+      });
+      console.log(dishRes);
+      console.log(drinkRes);
       // check if the data we got is an array with entries for the react component
       dishRes.data.length > 0 && setDishes(dishRes.data);
       drinkRes.data.length > 0 && setDrinks(drinkRes.data);
@@ -63,6 +62,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
   }, [change]);
 
   useEffect(() => {
+    intercept();
     setSpinner(true);
     console.log("spinner true");
     socket.on("connect", () => {

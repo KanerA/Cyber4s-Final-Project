@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import { readCookie } from "../utils/cookies";
 import "./styles/MenuCreator/MenuCreator.css";
 
 function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
@@ -24,14 +25,14 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
       try {
         await axios.post("/dishes", body, {
           headers: {
-            authorization: "Bearer " + localStorage.accessToken,
+            authorization: "Bearer " + readCookie("accessToken"),
           },
         });
       } catch (err) {
         refreshFunction();
         await axios.post("/dishes", body, {
           headers: {
-            authorization: "Bearer " + localStorage.accessToken,
+            authorization: "Bearer " + readCookie("accessToken"),
           },
         });
       }
@@ -46,14 +47,14 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
       try {
         await axios.post("/drinks", body, {
           headers: {
-            authorization: "Bearer " + localStorage.accessToken,
+            authorization: "Bearer " + readCookie("accessToken"),
           },
         });
       } catch (err) {
         refreshFunction();
         await axios.post("/drinks", body, {
           headers: {
-            authorization: "Bearer " + localStorage.accessToken,
+            authorization: "Bearer " + readCookie("accessToken"),
           },
         });
       }

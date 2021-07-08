@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import changeRestaurant from "../action/changeRestaurant";
 import changeRestaurantUser from "../action/changeUser";
 import "./styles/StandCreator/StandCreator.css";
+import { createCookie, readCookie } from "../utils/cookies";
 
 export default function StandCreator({
   restaurant,
   restaurantUser,
   refreshFunction,
   setLogin,
-  createCookie
 }) {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = useState(false);
@@ -59,8 +59,10 @@ export default function StandCreator({
   };
   const deleteStand = async (e) => {
     console.log(usernameRef.current, passwordRef.current);
-    const cookie = document.cookie.split('; ');
-    const accessTokenCookie = cookie.find(cookieItem => cookieItem.includes('accessToken'));
+    const cookie = document.cookie.split("; ");
+    const accessTokenCookie = cookie.find((cookieItem) =>
+      cookieItem.includes("accessToken"),
+    );
     const accessToken = accessTokenCookie.slice(12, accessTokenCookie.length);
     try {
       await axios.delete(
