@@ -22,7 +22,7 @@ const OrderSchema = new mongoose.Schema({
   totalPrice: Number,
   done: { type: Boolean, default: false },
   canceled: { type: Boolean, default: false },
-  createdAt: { type: Date, default: new Date() },
+  createdAt: { type: Date, default: Date.parse(new Date()) },
 });
 
 const OrderModel = new mongoose.model("order", OrderSchema);
