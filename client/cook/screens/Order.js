@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Dimensions,
-  Animated,
-} from "react-native";
+import { StyleSheet, Text, View, Button, Dimensions } from "react-native";
 import axios from "axios";
 import GestureRecognizer, {
   swipeDirections,
 } from "react-native-swipe-gestures";
 
 export default function Order({ order, orderDone }) {
+  console.log(swipeDirections);
   const [notes, setNotes] = useState(false);
   const date = new Date(order.createdAt).toLocaleString("en-GB").toString();
   const width = Dimensions.get("window").width;
@@ -34,9 +28,9 @@ export default function Order({ order, orderDone }) {
         orderDone(order);
       }}
       style={[
-        Date.now() - Date.parse(date) + currentTimeZone <= 5 * 60000
+        Date.now() - Date.parse(date) + currentTimeZone <= 35 * 60000
           ? { backgroundColor: "green" }
-          : Date.now() - Date.parse(date) + currentTimeZone <= 10 * 60000
+          : Date.now() - Date.parse(date) + currentTimeZone <= 40 * 60000
           ? { backgroundColor: "orange" }
           : { backgroundColor: "red" },
         styles.order,

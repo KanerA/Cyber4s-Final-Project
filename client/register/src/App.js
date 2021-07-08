@@ -28,12 +28,15 @@ function App() {
     const body = {
       refreshToken: localStorage.getItem("refreshToken"),
     };
-
     axios
       .post(`/auth/refresh`, body)
-      .then(({ data }) => {
-        console.log(data);
-        localStorage.setItem("accessToken", data.accessToken);
+      .then((res) => {
+        if (res.status === 202) {
+          console.log(
+            res.data.accessToken === localStorage.getItem("accessToken")
+          );
+          localStorage.setItem("accessToken", res.data.accessToken);
+        }
       })
       .catch((err) => console.log(err));
   };
