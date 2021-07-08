@@ -8,7 +8,6 @@ nav {
   height: 2.5rem;
   padding-top: 10px;
   top: 0;
-  // width: 100%;
 }
 .link-button {
   background-color: $negativeColor;
@@ -28,6 +27,10 @@ nav {
   transform: scaleY(1.5); //need to fix
   color: #198ac7;
 }
+.bullet {
+  font-size: 2rem;
+  cursor: default;
+}
 #restaurant-name {
   align-self: flex-start;
   position: absolute;
@@ -36,6 +39,7 @@ nav {
   left: 10px;
   font-size: 1.5rem;
   font-weight: 800;
+  cursor: zoom-in;
 }
 #buttons {
   align-self: flex-start;
@@ -49,4 +53,5 @@ nav {
   font-weight: 500;
   color: black;
   border: 1px solid black;
+  cursor: text;
 }

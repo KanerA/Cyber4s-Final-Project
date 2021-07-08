@@ -33,6 +33,7 @@
 .item-notes {
   @include inputs();
   font-size: 1rem;
+  font-family: $contentFontFamily;
 }
 .item-notes::placeholder {
   color: $background;
@@ -54,6 +55,9 @@
 }
 .item-props {
   display: flexbox;
+}
+.item-description {
+  font-weight: 100;
 }
 svg.count-button {
   font-size: 1.5rem;
@@ -82,12 +86,12 @@ svg.count-button {
 }
 .main-header {
   display: block;
-  color: white;
+  color: $mainDarkColor;
   font-size: 2.5rem;
-  text-shadow: 1px 1px 1px salmon;
+  text-shadow: 1px 1px 1px white;
 }
 .secondary-header {
-  color: white;
+  color: $mainBrightColor;
   text-shadow: 1px 1px 1px black;
   font-size: 2rem;
 }

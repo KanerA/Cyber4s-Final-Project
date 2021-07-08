@@ -63,6 +63,11 @@ nav {
   color: #198ac7;
 }
 
+.bullet {
+  font-size: 2rem;
+  cursor: default;
+}
+
 #restaurant-name {
   -ms-flex-item-align: start;
       align-self: flex-start;
@@ -75,6 +80,8 @@ nav {
   left: 10px;
   font-size: 1.5rem;
   font-weight: 800;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
 #buttons {
@@ -94,5 +101,6 @@ nav {
   font-weight: 500;
   color: black;
   border: 1px solid black;
+  cursor: text;
 }
 /*# sourceMappingURL=NavBar.css.map */

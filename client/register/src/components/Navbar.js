@@ -30,16 +30,21 @@ function Navbar({ restaurant, restaurantUser, login, setLogin }) {
         </span>
         <span id="links">
           {login && (
-            <Link className="nav-link" to="/">
-              Log-In
-            </Link>
+            <span>
+              <Link className="nav-link" to="/">
+                Log-In
+              </Link>
+              <span className="bullet"> • </span>
+            </span>
           )}
           <Link className="nav-link" to="/menu">
             Menu
           </Link>
+          <span className="bullet"> • </span>
           <Link className="nav-link" to="/create">
             create menu
           </Link>
+          <span className="bullet"> • </span>
           <Link className="nav-link" to="/orders">
             orders
           </Link>
