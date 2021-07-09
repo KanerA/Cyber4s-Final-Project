@@ -48,8 +48,9 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       dishRes.data.length > 0 && setDishes(dishRes.data);
       drinkRes.data.length > 0 && setDrinks(drinkRes.data);
     } catch (err) {
-      refreshFunction();
+      // refreshFunction();
       // fetchData();
+      console.log(err);
     }
   };
 

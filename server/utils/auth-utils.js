@@ -2,17 +2,34 @@ const jwt = require("jsonwebtoken");
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
-const validateRefreshToken = (req, res) => {
+const REFRESH_TOKENS = [];
+let counter = 0;
+
+const refreshingAccessToken = (req, res) => {
   try {
+    counter ++;
+    console.log(counter)
     const { refreshToken } = req.body;
     if (!refreshToken) throw new Error("Bad request");
+    console.log('----------------- REFRESH ----------------')
+    console.log('here')
+    console.log(REFRESH_TOKENS)
+    console.log(refreshToken)
+    console.log('----------------- REFRESH ----------------')
+    if(REFRESH_TOKENS.includes(refreshToken)){
+      console.log('already refreshed')
+      return res.status(304).json({ message: 'Token already generated' });
+    }
+    console.log('not refreshed yet')
+    REFRESH_TOKENS.push(refreshToken);
     jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, token) => {
       if (err) return res.sendStatus(403);
-      console.log(token);
+      // console.log(token);
       const accessToken = jwt.sign(token, ACCESS_TOKEN_SECRET, {
-        expiresIn: "5m",
+        expiresIn: "30s",
       });
-      res.status(202).json({ accessToken });
+      const refreshToken = jwt.sign(token, REFRESH_TOKEN_SECRET);
+      res.status(202).json({ accessToken, refreshToken });
     });
   } catch (error) {
     console.log(error);
@@ -20,4 +37,5 @@ const validateRefreshToken = (req, res) => {
   }
 };
 
-module.exports = { validateRefreshToken };
+
+module.exports = { refreshingAccessToken };

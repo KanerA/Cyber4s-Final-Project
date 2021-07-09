@@ -59,11 +59,7 @@ export default function StandCreator({
   };
   const deleteStand = async (e) => {
     console.log(usernameRef.current, passwordRef.current);
-    const cookie = document.cookie.split("; ");
-    const accessTokenCookie = cookie.find((cookieItem) =>
-      cookieItem.includes("accessToken"),
-    );
-    const accessToken = accessTokenCookie.slice(12, accessTokenCookie.length);
+    const accessToken = readCookie('accessToken');
     try {
       await axios.delete(
         `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
