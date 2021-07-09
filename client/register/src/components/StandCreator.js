@@ -1,4 +1,4 @@
-import axios from "axios";
+import { network } from "../utils/networkWrapper";
 import React, { useEffect, useRef, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -21,7 +21,7 @@ export default function StandCreator({
   const usernameRef = useRef();
 
   const openStand = async () => {
-    axios
+    network
       .post("/stands/create", {
         restaurant_name: nameRef.current,
         user_name: usernameRef.current,
@@ -46,7 +46,7 @@ export default function StandCreator({
       password: passwordRef.current,
     };
     try {
-      const res = await axios.post(`/stands/login/`, body);
+      const res = await network.post(`/stands/login/`, body);
       createCookie("userId", res.data.id, 0.5);
       createCookie("accessToken", res.data.accessToken, 0.5);
       createCookie("refreshToken", res.data.refreshToken, 0.5);
@@ -59,9 +59,9 @@ export default function StandCreator({
   };
   const deleteStand = async (e) => {
     console.log(usernameRef.current, passwordRef.current);
-    const accessToken = readCookie('accessToken');
+    const accessToken = readCookie("accessToken");
     try {
-      await axios.delete(
+      await network.delete(
         `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
         {
           headers: {
@@ -71,7 +71,7 @@ export default function StandCreator({
       );
     } catch (err) {
       refreshFunction();
-      await axios.delete(
+      await network.delete(
         `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
         {
           headers: {

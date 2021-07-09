@@ -1,4 +1,4 @@
-import axios from "axios";
+import { network } from "../utils/networkWrapper";
 import React, { useRef, useState } from "react";
 import { readCookie } from "../utils/cookies";
 import "./styles/MenuCreator/MenuCreator.css";
@@ -23,14 +23,14 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
         user_name: itemRef.current.restaurantName,
       };
       try {
-        await axios.post("/dishes", body, {
+        await network.post("/dishes", body, {
           headers: {
             authorization: "Bearer " + readCookie("accessToken"),
           },
         });
       } catch (err) {
         refreshFunction();
-        await axios.post("/dishes", body, {
+        await network.post("/dishes", body, {
           headers: {
             authorization: "Bearer " + readCookie("accessToken"),
           },
@@ -45,14 +45,14 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
         user_name: itemRef.current.restaurantName,
       };
       try {
-        await axios.post("/drinks", body, {
+        await network.post("/drinks", body, {
           headers: {
             authorization: "Bearer " + readCookie("accessToken"),
           },
         });
       } catch (err) {
         refreshFunction();
-        await axios.post("/drinks", body, {
+        await network.post("/drinks", body, {
           headers: {
             authorization: "Bearer " + readCookie("accessToken"),
           },

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { network } from "../utils/networkWrapper";
 import React, { useEffect, useState } from "react";
 import Order from "./Order";
 import { socket } from "../socket";
@@ -14,7 +14,7 @@ function OrderHandler({ restaurant, restaurantUser }) {
         setOrders((prev) => [...prev, newOrder]);
       });
     });
-    axios
+    network
       .get(`/orders/${restaurantUser}`)
       .then((res) => {
         const doneNoneCanceled = res.data?.filter((order) => {
@@ -26,7 +26,7 @@ function OrderHandler({ restaurant, restaurantUser }) {
   }, []);
   const cancelOrder = (order) => {
     alert(`${order.customerName}'s order is canceled!`);
-    axios
+    network
       .patch(`/orders/done/?c=true&id=${order._id}`)
       .then((res) => setCanceled(true))
       .catch((err) => console.log(err));

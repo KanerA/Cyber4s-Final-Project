@@ -1,8 +1,8 @@
-require('dotenv').config();
-const { Router } = require('express');
+require("dotenv").config();
+const { Router } = require("express");
 const auth = Router();
-const { refreshingAccessToken } = require('../utils/auth-utils');
+const { refreshingAccessToken, refreshToken } = require("../utils/auth-utils");
 
-auth.post('/refresh', refreshingAccessToken);
+auth.post("/refresh", refreshToken);
 
 module.exports = auth;
