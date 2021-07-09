@@ -13,7 +13,6 @@ const intercept = () => {
   axios.interceptors.response.use(
     (response) => response,
     (err) => {
-      console.log("fuck boys");
       const refreshToken = readCookie("refreshToken");
       if (err.message.slice(-3) === "401" && refreshToken) {
         const accessToken = readCookie("accessToken");
