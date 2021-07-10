@@ -23,7 +23,7 @@ const refreshToken = (req, res) => {
         const data = { ...decoded };
         delete data.iat;
         const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {
-          expiresIn: "30s",
+          expiresIn: "10m",
         });
         res.json(accessToken);
       },
