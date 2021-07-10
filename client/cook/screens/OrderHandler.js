@@ -12,7 +12,7 @@ export default function OrderHandler({ restaurant, userName }) {
       .get(`http://${env.IP}:${env.PORT}/orders/${userName}`)
       .then((res) => {
         const ordersToDo = res.data.filter(
-          (order) => !order.done && !order.canceled
+          (order) => !order.done && !order.canceled,
         );
 
         setOrders(ordersToDo);
@@ -26,6 +26,12 @@ export default function OrderHandler({ restaurant, userName }) {
   socket.on("getNewOrder", (newOrder) => {
     const newOrders = [...orders, newOrder];
     setOrders(newOrders);
+  });
+  socket.on("getCanceledOrder", (canceledOrder) => {
+    const canceled = orders.filter(
+      (canceled) => canceled._id !== canceledOrder._id,
+    );
+    setOrders(canceled);
   });
   const orderDone = (order) => {
     axios
