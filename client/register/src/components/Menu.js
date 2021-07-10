@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Prompt } from "react-router-dom";
-import axios from "axios";
 import Dish from "./Dish";
 import Drink from "./Drink";
 import CurrentOrder from "./CurrentOrder";
 import "./styles/Menu/Menu.css";
 import { socket } from "../socket";
 import RingLoader from "react-spinners/RingLoader";
+import { network, intercept } from "../utils/networkWrapper";
+import { readCookie } from "../utils/cookies";
 
 function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const [change, setChange] = useState(false);
@@ -24,34 +25,23 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const customerName = useRef();
   const itemNumber = useRef(0);
 
-  const fetchData = async (givenAccessToken) => {
-    const accessToken = givenAccessToken
-      ? givenAccessToken
-      : localStorage.getItem("accessToken");
+  const fetchData = async () => {
+    // get the access token from the cookies
     try {
-      const res = await axios.all([
-        axios.get(`/dishes/${restaurantUser}`, {
-          headers: {
-            Authorization: `bearer ${accessToken}`,
-          },
-        }),
-        axios.get(`/drinks/${restaurantUser}`, {
-          headers: {
-            Authorization: `bearer ${accessToken}`,
-          },
-        }),
-      ]);
-      const dishRes = res[0];
-      const drinkRes = res[1];
-      console.log(drinkRes.status);
-
+      // GEt request for all the stand's dishes
+      const dishRes = await network(`/dishes/${restaurantUser}`);
+      // const dishRes=network
+      // GET request for all the stand's drinks
+      const drinkRes = await network(`/drinks/${restaurantUser}`);
+      console.log(dishRes);
+      console.log(drinkRes);
+      // check if the data we got is an array with entries for the react component
       dishRes.data.length > 0 && setDishes(dishRes.data);
       drinkRes.data.length > 0 && setDrinks(drinkRes.data);
-      console.log(drinkRes, dishRes);
     } catch (err) {
-      refreshFunction();
-      setTimeout(() => console.log("timeOut"), 2000);
-      fetchData();
+      // refreshFunction();
+      // fetchData();
+      console.log(err.message);
     }
   };
 
@@ -84,7 +74,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       socket.emit("sendOrders", restaurantUser);
       socket.on("receiveOrders", (newOrders) => {});
     });
-    axios.post(`/orders/${restaurantUser}`, {
+    network.post(`/orders/${restaurantUser}`, {
       customerName: customerName.current,
       dish: dishOrders,
       drink: drinkOrders,

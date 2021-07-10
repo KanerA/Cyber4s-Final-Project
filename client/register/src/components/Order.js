@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { network } from "../utils/networkWrapper";
 import "./styles/OrderHandler/OrderHandler.css";
 
 export default function Order({ order, cancelOrder }) {

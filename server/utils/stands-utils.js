@@ -28,7 +28,7 @@ const createNewStand = async (req, res) => {
   };
   const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET);
   const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
-    expiresIn: "10m",
+    expiresIn: "30s",
   });
   const id = stand.id;
   res.status(201).json({ accessToken, refreshToken, id, user_name });
@@ -44,7 +44,7 @@ const standLogin = async (req, res) => {
   };
   const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET);
   const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
-    expiresIn: "10s",
+    expiresIn: "30s",
   });
   res.status(201).json({ accessToken, refreshToken, id, user_name, name });
 };

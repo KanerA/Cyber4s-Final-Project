@@ -14,9 +14,10 @@ import { useState } from "react";
 import Stand from "./components/StandCreator";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRestaurant } from "./action";
-import axios from "axios";
+import { network } from "./utils/networkWrapper";
 
 import "./components/styles/App/App.css";
+import { readCookie } from "./utils/cookies";
 function App() {
   const restaurant = useSelector((state) => state.restaurant);
   const restaurantUser = useSelector((state) => state.restaurantUser);
@@ -24,18 +25,34 @@ function App() {
 
   const [login, setLogin] = useState(true);
 
+  function createCookie(name, value, days) {
+    let expires;
+    if (days) {
+      let date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toGMTString();
+    } else {
+      expires = "";
+    }
+    document.cookie =
+      encodeURIComponent(name) +
+      "=" +
+      encodeURIComponent(value) +
+      expires +
+      "; path=/";
+  }
+
   const refreshFunction = () => {
+    const refreshToken = readCookie("refreshToken");
     const body = {
-      refreshToken: localStorage.getItem("refreshToken"),
+      refreshToken,
     };
-    axios
+    network
       .post(`/auth/refresh`, body)
       .then((res) => {
+        console.log(res);
         if (res.status === 202) {
-          console.log(
-            res.data.accessToken === localStorage.getItem("accessToken")
-          );
-          localStorage.setItem("accessToken", res.data.accessToken);
+          createCookie("accessToken", res.data.accessToken);
         }
       })
       .catch((err) => console.log(err));
@@ -84,6 +101,7 @@ function App() {
               restaurant={restaurant}
               restaurantUser={restaurantUser}
               setLogin={setLogin}
+              createCookie={createCookie}
             />
           </Route>
         </Switch>
