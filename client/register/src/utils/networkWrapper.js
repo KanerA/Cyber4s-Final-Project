@@ -1,52 +1,6 @@
 import axios from "axios";
 import { readCookie, createCookie, eraseCookie } from "./cookies";
 
-// const getHttp = (url, tokenName) => {
-//   return axios.get(url, {
-//     headers: {
-//       authorization: "Bearer " + readCookie(tokenName),
-//     },
-//   });
-// };
-
-// const intercept = () => {
-//   axios.interceptors.response.use(
-//     (response) => response,
-//     async (err) => {
-//       const refreshToken = readCookie("refreshToken");
-//       console.log(refreshToken);
-//       //   if (err.message.slice(-3) === "304") return console.log(err.data);
-//       if (err.message.slice(-3) === "403" && refreshToken) {
-//         const accessToken = readCookie("accessToken");
-//         // if (!accessToken)
-//         console.log("intercept");
-//         try {
-//           const res = await axios.post("/auth/refresh", {
-//             refreshToken,
-//           });
-//           console.log("wait");
-//           console.log("------------ NEW ACCESS TOKEN -----------------");
-//           console.log(res);
-//           console.log(accessToken === res.data.accessToken);
-//           createCookie("accessToken", res.data.accessToken, 10000);
-//           createCookie("refreshToken", res.data.refreshTokenNew, 10000);
-//           console.log(res.data.refreshTokenNew);
-//           err.config.headers["Authorization"] =
-//             "Bearer " + res.data.accessToken;
-//           return axios.request(err.config);
-//         } catch (error) {
-//           throw error;
-//         }
-//       } else {
-//         throw err;
-//       }
-//       return Promise.reject(err);
-//     },
-//   );
-// };
-
-// export { intercept, getHttp };
-
 const network = axios.create();
 
 const getAccessToken = () => readCookie("accessToken");
