@@ -47,16 +47,20 @@ export default function OrderHandler({ restaurant, userName }) {
       <Text style={{ alignSelf: "center", fontSize: 20 }}>
         {restaurant}'s Orders
       </Text>
-      {orders.map((order, i) => {
-        return (
-          <Order
-            order={order}
-            restaurant={restaurant}
-            orderDone={orderDone}
-            key={`order ${i}`}
-          />
-        );
-      })}
+      {orders ? (
+        orders.map((order, i) => {
+          return (
+            <Order
+              order={order}
+              restaurant={restaurant}
+              orderDone={orderDone}
+              key={`order ${i}`}
+            />
+          );
+        })
+      ) : (
+        <Text> No Orders!</Text>
+      )}
     </View>
   );
 }

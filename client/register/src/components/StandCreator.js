@@ -28,13 +28,13 @@ export default function StandCreator({
         password: passwordRef.current,
       })
       .then((res) => {
+        setLogin(false);
         console.log(restaurantUser);
         createCookie("userId", res.data.id, 0.5);
         createCookie("accessToken", res.data.accessToken, 0.5);
         createCookie("refreshToken", res.data.refreshToken, 0.5);
         dispatch(changeRestaurantUser(res.data.user_name));
         dispatch(changeRestaurant(nameRef.current));
-        setLogin(false);
       })
       .catch((err) => {
         console.log(err);
@@ -47,12 +47,12 @@ export default function StandCreator({
     };
     try {
       const res = await network.post(`/stands/login/`, body);
+      setLogin(false);
       createCookie("userId", res.data.id, 0.5);
       createCookie("accessToken", res.data.accessToken, 0.5);
       createCookie("refreshToken", res.data.refreshToken, 0.5);
       dispatch(changeRestaurantUser(usernameRef.current));
       dispatch(changeRestaurant(res.data.name));
-      setLogin(false);
     } catch (err) {
       console.log(err);
     }
@@ -67,7 +67,7 @@ export default function StandCreator({
           headers: {
             authorization: "Bearer " + accessToken,
           },
-        },
+        }
       );
     } catch (err) {
       refreshFunction();
@@ -77,7 +77,7 @@ export default function StandCreator({
           headers: {
             authorization: "Bearer " + accessToken,
           },
-        },
+        }
       );
     }
 

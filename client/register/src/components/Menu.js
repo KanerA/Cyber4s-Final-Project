@@ -17,6 +17,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const [drinkOrders, setDrinkOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [spinner, setSpinner] = useState(false);
+  const [date, setDate] = useState(Date.parse(new Date()));
   // const endPoint = "http://localhost:6789";
   // const socket = socketIOClient(endPoint, {
   //   transports: ["websocket"],
@@ -52,6 +53,9 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       socket.emit("sendOrders", restaurantUser);
     });
   }, [change]);
+  useEffect(() => {
+    setDate(Date.parse(new Date()));
+  }, [CurrentOrder]);
 
   useEffect(() => {
     setSpinner(true);
@@ -78,7 +82,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       customerName: customerName.current,
       dish: dishOrders,
       drink: drinkOrders,
-      createdAt: Date.parse(new Date()),
+      createdAt: date,
       username: restaurantUser,
       totalPrice: totalPrice,
     });
