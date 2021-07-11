@@ -41,4 +41,22 @@ const createNewDish = (req, res) => {
   }).then(() => res.send("new dish created"));
 };
 
-module.exports = { getAllRestaurantDishes, createNewDish };
+const deleteDish = (req, res) => {
+  const { user_name, drink_name } = req.params;
+  Dishes.destroy({
+    where: {
+      restaurant_name: user_name,
+      name: drink_name,
+    }
+  })
+  .then(_ => {
+    console.log('Dish deleted')
+    res.json({ message: 'Dish deleted successfully' });
+  })
+  .catch(err => {
+    console.log(err.message);
+    res.status(500).json({ message: err.message , error: err })
+  })
+};
+
+module.exports = { getAllRestaurantDishes, createNewDish, deleteDish };

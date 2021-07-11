@@ -32,7 +32,28 @@ const createNewDrink = (req, res) => {
     restaurant_name: user_name,
     price,
     alcoholic,
-  }).then(() => res.send("new drink created"));
+  }).then((_) => {
+    console.log(_)
+    res.send("new drink created")
+  });
 };
 
-module.exports = { getAllRestaurantDrinks, createNewDrink };
+const deleteDrink = (req, res) => {
+  const { user_name, drink_name } = req.params;
+  Drinks.destroy({
+    where: {
+      restaurant_name: user_name,
+      name: drink_name,
+    }
+  })
+  .then(_ => {
+    console.log('Drink deleted')
+    res.json({ message: 'Drink deleted successfully' });
+  })
+  .catch(err => {
+    console.log(err.message);
+    res.status(500).json({ message: err.message , error: err })
+  })
+};
+
+module.exports = { getAllRestaurantDrinks, createNewDrink, deleteDrink };
