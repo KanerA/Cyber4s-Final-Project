@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
-import { network } from "../utils/networkWrapper";
 
 function Dish({
   dish,
@@ -14,6 +13,8 @@ function Dish({
 }) {
   const [dishCount, setDishCount] = useState(1);
   const [dishNotes, setDishNotes] = useState("");
+  const [checkboxPrice, setCheckboxPrice] = useState(0);
+  const [checkboxes, setCheckboxes] = useState([]);
   const addDish = (e) => {
     e.target.parentElement.children[0].value = "";
     const orders = [...dishOrders];
@@ -23,24 +24,32 @@ function Dish({
       notes: dishNotes,
       amount: dishCount,
       count: itemNumber.current,
+      options: checkboxes,
     });
-    setTotalPrice(totalPrice + Number(dish.price) * Number(dishCount));
+    setTotalPrice(
+      totalPrice +
+        Number(dish.price) * Number(dishCount) +
+        Number(checkboxPrice)
+    );
     setDishOrders(orders);
     setDishNotes("");
     setDishCount(1);
     itemNumber.current++;
+    setCheckboxes([]);
+    setCheckboxPrice(0);
     console.log(itemNumber.current);
   };
 
   return (
     <div className="item">
-      <button onClick={() => deleteDish(dish)}>delete</button>
+      <button className="delete-button" onClick={() => deleteDish(dish)}>
+        delete
+      </button>
       <span>
         <AiOutlinePlus
           className="count-button positive"
           onClick={() => setDishCount(dishCount + 1)}
         />
-
         {dishCount}
         <AiOutlineMinus
           className="count-button negative "
@@ -55,6 +64,24 @@ function Dish({
         <p className="item-price">{dish.price}</p>
       </div>
       <div className="item-assign">
+        <div className="checkboxes">
+          {dish.options?.map((option) => {
+            return (
+              <span>
+                <input
+                  type="checkbox"
+                  className="checkbox"
+                  onChange={() => {
+                    setCheckboxPrice((prev) => prev + Number(option.price));
+                    setCheckboxes((prev) => [option, ...prev]);
+                    console.log(checkboxes, checkboxPrice);
+                  }}
+                />
+                {option.name} {option.price ? option.price : ""}
+              </span>
+            );
+          })}
+        </div>
         <input
           className="item-notes"
           placeholder="add notes"

@@ -32,6 +32,7 @@ input[type="radio"] {
 }
 
 .item {
+  position: relative;
   display: flexbox;
   border: 2px solid white;
   border-radius: 0.5rem;
@@ -42,6 +43,7 @@ input[type="radio"] {
 
 .item-info {
   display: flexbox;
+  max-width: 15vw;
 }
 
 .item-notes {
@@ -168,6 +170,32 @@ svg.count-button {
   width: 80%;
   padding: 3px;
   font-size: 1rem;
+}
+
+.delete-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 600;
+  -webkit-box-shadow: 1px 1px 1px #125d98;
+          box-shadow: 1px 1px 1px #125d98;
+  color: black;
+  border-radius: 0.5rem;
+  width: 80%;
+  padding: 3px;
+  font-size: 1rem;
+  width: auto;
+  background-color: #f58c91;
+}
+
+.checkbox {
+  cursor: pointer;
+}
+
+.checkboxes {
+  text-align: start;
+  margin-left: 3px;
+  font-size: 1.5rem;
 }
 
 #menu-items {

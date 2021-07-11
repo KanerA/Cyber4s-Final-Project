@@ -13,6 +13,8 @@ function Drink({
 }) {
   const [drinkCount, setDrinkCount] = useState(1);
   const [drinkNotes, setDrinkNotes] = useState("");
+  const [checkboxPrice, setCheckboxPrice] = useState(0);
+  const [checkboxes, setCheckboxes] = useState([]);
   const addDrink = (e) => {
     e.target.parentElement.children[0].value = "";
     const orders = [...drinkOrders];
@@ -22,23 +24,32 @@ function Drink({
       notes: drinkNotes,
       amount: drinkCount,
       count: itemNumber.current,
+      options: checkboxes,
     });
-    setTotalPrice(totalPrice + Number(drink.price) * Number(drinkCount));
+    setTotalPrice(
+      totalPrice +
+        Number(drink.price) * Number(drinkCount) +
+        Number(checkboxPrice)
+    );
     setDrinkOrders(orders);
     setDrinkNotes("");
     setDrinkCount(1);
     itemNumber.current++;
+    setCheckboxes([]);
+    setCheckboxPrice(0);
     console.log(itemNumber.current);
   };
   return (
     <div className="item">
-      <button onClick={() => deleteDrink(drink)}> delete</button>
+      <button className="delete-button" onClick={() => deleteDrink(drink)}>
+        {" "}
+        delete
+      </button>
       <span>
         <AiOutlinePlus
           className="count-button positive"
           onClick={() => setDrinkCount(drinkCount + 1)}
         />
-
         {drinkCount}
         <AiOutlineMinus
           className="count-button negative"
@@ -53,6 +64,24 @@ function Drink({
         <p className="item-price">{drink.price}</p>
       </div>
       <div className="item-assign">
+        <div className="checkboxes">
+          {drink.options?.map((option) => {
+            return (
+              <span>
+                <input
+                  type="checkbox"
+                  className="checkbox"
+                  onChange={() => {
+                    setCheckboxPrice((prev) => prev + Number(option.price));
+                    setCheckboxes((prev) => [option, ...prev]);
+                    console.log(checkboxes, checkboxPrice);
+                  }}
+                />
+                {option.name} {option.price ? option.price : ""}
+              </span>
+            );
+          })}
+        </div>
         <input
           className="item-notes"
           placeholder="add notes"

@@ -20,6 +20,7 @@
   font-size: 1rem;
 }
 .item {
+  position: relative;
   display: flexbox;
   border: 2px solid white;
   border-radius: 0.5rem;
@@ -29,6 +30,7 @@
 }
 .item-info {
   display: flexbox;
+  max-width: 15vw;
 }
 .item-notes {
   @include inputs();
@@ -100,7 +102,22 @@ svg.count-button {
 
   @include buttons();
 }
-
+.delete-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include buttons();
+  width: auto;
+  background-color: $negativeColor;
+}
+.checkbox {
+  cursor: pointer;
+}
+.checkboxes {
+  text-align: start;
+  margin-left: 3px;
+  font-size: 1.5rem;
+}
 #menu-items {
   display: flex;
   flex-direction: row;

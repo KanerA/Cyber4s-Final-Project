@@ -10,8 +10,10 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
     description: "description",
     alcoholic: false,
     restaurantName: restaurantUser,
+    checkbox: "",
+    checkboxPrice: "",
   });
-
+  const [checkboxes, setCheckboxes] = useState([]);
   const [item, setItem] = useState("dish");
 
   const saveItem = async (e) => {
@@ -21,6 +23,7 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
         price: itemRef.current.price,
         description: itemRef.current.description,
         user_name: itemRef.current.restaurantName,
+        options: checkboxes,
       };
       try {
         await network.post("/dishes", body, {
@@ -43,6 +46,7 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
         description: itemRef.current.description,
         alcoholic: itemRef.current.alcoholic,
         user_name: itemRef.current.restaurantName,
+        options: checkboxes,
       };
       try {
         await network.post("/drinks", body, {
@@ -63,9 +67,23 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
     e.target.parentElement.children[0].value = "";
     e.target.parentElement.children[1].value = "";
     e.target.parentElement.children[2].value = "";
+    setCheckboxes([]);
   };
   const dishOrDrink = (e) => {
     setItem(e.target.value);
+  };
+  const addCheckbox = (e) => {
+    const checkbox = {
+      name: itemRef.current.checkbox,
+      price: itemRef.current.checkboxPrice,
+    };
+    const allChex = [checkbox, ...checkboxes];
+    setCheckboxes(allChex);
+    console.log(checkboxes);
+    itemRef.current.checkbox = "";
+    itemRef.current.checkboxPrice = "";
+    e.target.parentElement.children[0].value = "";
+    e.target.parentElement.children[1].value = 0;
   };
   return (
     <div className="menu-creator">
@@ -127,6 +145,31 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
           }}
         />
         <br />
+        <div id="checkbox">
+          <input
+            className="item-property checkbox"
+            placeholder="checkbox name"
+            onChange={(e) => (itemRef.current.checkbox = e.target.value)}
+          />
+          <input
+            className=" item-property checkbox"
+            placeholder="checkbox price"
+            onChange={(e) => {
+              itemRef.current.checkboxPrice = e.target.value;
+            }}
+            defaultValue={0}
+          />
+          <button onClick={(e) => addCheckbox(e)}>add</button>
+          {checkboxes.length > 0 &&
+            checkboxes.map((checkbox) => {
+              return (
+                <div>
+                  <span>{checkbox.name}</span> <span>{checkbox.price}</span>
+                </div>
+              );
+            })}
+        </div>
+
         <button id="save-new-item" onClick={(e) => saveItem(e)}>
           save {item}
         </button>
