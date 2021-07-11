@@ -30,7 +30,7 @@ const getAllRestaurantDishes = (req, res) => {
 
 const createNewDish = (req, res) => {
   const {
-    body: { name, description, user_name, price, alcoholic },
+    body: { name, description, user_name, price },
   } = req;
   if (user_name !== req.user.user_name) return res.sendStatus(403);
   Dishes.create({
