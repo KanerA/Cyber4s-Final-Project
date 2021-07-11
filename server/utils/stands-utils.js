@@ -1,4 +1,4 @@
-const { Stands } = require("../models");
+const { Stands, Dishes, Drinks } = require("../models");
 const jwt = require("jsonwebtoken");
 const { hashSync } = require("bcrypt");
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
@@ -51,10 +51,36 @@ const standLogin = async (req, res) => {
 
 const deleteStand = async (req, res) => {
   // only with JWT authentication
-  const stand = req.stand;
+  const { user_name } = req.stand;
+  Dishes.destroy({ // delete all stand's dishes
+    where: {
+      restaurant_name: user_name,
+    }
+  })
+  .then(_ => {
+    console.log('Deleted Stand\'s Dishes')
+  })
+  .catch(err => {
+    console.log(err.message)
+    res.status(500).json(err.message);
+  })
+
+  Drinks.destroy({ // delete all stand's drinks
+    where: {
+      restaurant_name: user_name,
+    }
+  })
+  .then(_ => {
+    console.log('Deleted Stand\'s Drinks')
+  })
+  .catch(err => {
+    console.log(err.message)
+    res.status(500).json(err.message);
+  })
+
   Stands.destroy({
     where: {
-      user_name: stand.user_name,
+      user_name,
     },
   })
     .then((_) => {
