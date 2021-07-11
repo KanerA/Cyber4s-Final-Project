@@ -16,6 +16,7 @@ const getAllRestaurantDrinks = (req, res) => {
             restaurantName: drink.user_name,
             price: drink.price,
             alcoholic: drink.alcoholic,
+            options: JSON.parse(drink.options),
           };
         })
       )
@@ -24,7 +25,7 @@ const getAllRestaurantDrinks = (req, res) => {
 };
 
 const createNewDrink = (req, res) => {
-  const { body: { name, description, user_name, price, alcoholic }} = req;
+  const { body: { name, description, user_name, price, alcoholic, options }} = req;
   if(req.user.user_name !== user_name) return res.sendStatus(403);
   Drinks.create({
     name,
@@ -32,6 +33,7 @@ const createNewDrink = (req, res) => {
     restaurant_name: user_name,
     price,
     alcoholic,
+    options: JSON.stringify(options),
   }).then((_) => {
     console.log(_)
     res.send("new drink created")
