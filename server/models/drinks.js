@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class drinks extends Model {
 
@@ -12,19 +14,20 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "user_name",
       });
     }
-  }
+  };
   drinks.init(
     {
       name: DataTypes.STRING,
       description: DataTypes.STRING,
-      restaurant_name: DataTypes.STRING,
-      alcoholic: DataTypes.BOOLEAN,
       price: DataTypes.INTEGER,
+      alcoholic: DataTypes.BOOLEAN,
+      options: DataTypes.STRING,
+      restaurant_name: DataTypes.STRING
     },
     {
       sequelize,
-      modelName: "Drinks",
-      tableName: "drinks",
+      modelName: 'Drinks',
+      tableName: 'drinks',
       underscored: true,
     },
   );
