@@ -4,26 +4,35 @@ import axios from "axios";
 import GestureRecognizer, {
   swipeDirections,
 } from "react-native-swipe-gestures";
+import { Pressable } from "react-native";
+const width = Dimensions.get("window").width;
 
 export default function Order({ order, orderDone }) {
   const [notes, setNotes] = useState(false);
-  console.log(order);
+  const [areNotes, setAreNotes] = useState(false);
+  useEffect(() => {
+    order.drink?.forEach((drink) => {
+      drink.notes && setAreNotes(true);
+    });
+    order.dish?.forEach((dish) => {
+      dish.notes && setAreNotes(true);
+    });
+  }, []);
   const date = useRef(
     new Date(order.createdAt).toLocaleString("he-IL").toString()
   );
-  const width = Dimensions.get("window").width;
   const backgroundColor =
     Date.now() - Date.parse(date.current) <= 7 * 60000
-      ? "#03b42c"
+      ? "#40C292"
       : Date.now() - Date.parse(date.current) <= 15 * 60000
-      ? "#f5a962"
-      : "#f58c91";
+      ? "#DB990E"
+      : "#DB2F00";
 
-  console.log(Date.now() - Date.parse(date.current));
   const config = {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80,
   };
+
   return (
     <GestureRecognizer
       onSwipeLeft={() => {
@@ -32,15 +41,24 @@ export default function Order({ order, orderDone }) {
       onSwipeRight={() => {
         orderDone(order);
       }}
-      style={[
-        styles.order,
-        { width: width * 0.9, backgroundColor: backgroundColor },
-      ]}
+      style={[styles.order, { backgroundColor: backgroundColor }]}
       config={config}
     >
-      <Text className="name" style={{ fontSize: 20, alignSelf: "center" }}>
+      <Text className="name" style={{ fontSize: 30, alignSelf: "center" }}>
         {order.customerName}
       </Text>
+
+      {areNotes && (
+        <Pressable
+          onPress={notes ? () => setNotes(false) : () => setNotes(true)}
+          style={styles.button}
+        >
+          <Text style={{ fontSize: 20, padding: 5 }}>
+            {notes ? "hide" : "show"}
+            {`\n`}notes
+          </Text>
+        </Pressable>
+      )}
 
       <View>
         {order.dish?.map((dish, i) => {
@@ -50,14 +68,19 @@ export default function Order({ order, orderDone }) {
               key={`dish ${i}`}
               style={styles.item}
             >
-              <Text className="item-amount-and-name">
+              <Text className="item-amount-and-name" style={styles.orderText}>
                 {dish.amount}X
-                <Text className="item-name" style={{ fontWeight: "bold" }}>
+                <Text
+                  className="item-name"
+                  style={[{ fontWeight: "bold" }, styles.orderText]}
+                >
                   {dish.name}
                 </Text>
               </Text>
               {notes && dish.notes.length > 0 && (
-                <Text className="item-notes">{dish.notes}</Text>
+                <Text style={styles.orderText} className="item-notes">
+                  {dish.notes}
+                </Text>
               )}
             </View>
           );
@@ -71,22 +94,23 @@ export default function Order({ order, orderDone }) {
               key={`drink ${i}`}
               style={styles.item}
             >
-              <Text className="item-amount-and-name">
+              <Text style={styles.orderText} className="item-amount-and-name">
                 {drink.amount}X
-                <Text className="item-name" style={{ fontWeight: "bold" }}>
+                <Text
+                  className="item-name"
+                  style={[{ fontWeight: "bold" }, styles.orderText]}
+                >
                   {drink.name}
                 </Text>
               </Text>
               {notes && drink.notes.length > 0 && (
-                <Text className="item-notes">{drink.notes}</Text>
+                <Text style={styles.orderText} className="item-notes">
+                  {drink.notes}
+                </Text>
               )}
             </View>
           );
         })}
-        <Button
-          onPress={notes ? () => setNotes(false) : () => setNotes(true)}
-          title={`${notes ? "hide" : "show"} notes`}
-        />
       </View>
       <Text className="order-time" style={{ fontSize: 15 }}>
         {date.current}
@@ -97,12 +121,14 @@ export default function Order({ order, orderDone }) {
 
 const styles = StyleSheet.create({
   order: {
+    width: width * 0.9,
     position: "relative",
     alignItems: "center",
-    borderStyle: "solid",
     borderColor: "black",
     marginTop: 2,
+    borderWidth: 2,
     borderRadius: 9,
+    marginBottom: 5,
   },
   orderDetails: {
     position: "relative",
@@ -113,5 +139,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     alignSelf: "center",
+    alignContent: "center",
+    alignItems: "center",
+    fontSize: 25,
+  },
+  button: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    right: 0,
+    top: 0,
+    paddingVertical: 7,
+    borderRadius: 9,
+    borderColor: "white",
+    borderWidth: 1,
+    backgroundColor: "dodgerblue",
+    height: "99%",
+
+    // minHeight: "fit-content",
+  },
+  orderText: {
+    fontSize: 20,
   },
 });

@@ -45,6 +45,7 @@ export default function App() {
         alignItems: "center",
         justifyContent: "center",
         minHeight: height,
+        backgroundColor: "#dddddd",
       }}
     >
       <View style={styles.container}>
@@ -60,9 +61,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#dddddd",
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    // fontSize: 50,
   },
 });
