@@ -10,12 +10,13 @@ const width = Dimensions.get("window").width;
 export default function Order({ order, orderDone }) {
   const [notes, setNotes] = useState(false);
   const [areNotes, setAreNotes] = useState(false);
+  console.log(order);
   useEffect(() => {
     order.drink?.forEach((drink) => {
-      drink.notes && setAreNotes(true);
+      (drink.notes || drink.options.length > 0) && setAreNotes(true);
     });
     order.dish?.forEach((dish) => {
-      dish.notes && setAreNotes(true);
+      (dish.notes || dish.options.length > 0) && setAreNotes(true);
     });
   }, []);
   const date = useRef(
@@ -32,7 +33,7 @@ export default function Order({ order, orderDone }) {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80,
   };
-
+  console.log(order);
   return (
     <GestureRecognizer
       onSwipeLeft={() => {
@@ -78,9 +79,14 @@ export default function Order({ order, orderDone }) {
                 </Text>
               </Text>
               {notes && dish.notes.length > 0 && (
-                <Text style={styles.orderText} className="item-notes">
-                  {dish.notes}
-                </Text>
+                <View>
+                  <Text style={styles.orderText} className="item-notes">
+                    {dish.notes}
+                  </Text>
+                  {dish.options?.map((option) => {
+                    return <Text style={styles.orderText}>{option.name}</Text>;
+                  })}
+                </View>
               )}
             </View>
           );
@@ -104,9 +110,14 @@ export default function Order({ order, orderDone }) {
                 </Text>
               </Text>
               {notes && drink.notes.length > 0 && (
-                <Text style={styles.orderText} className="item-notes">
-                  {drink.notes}
-                </Text>
+                <View>
+                  <Text style={styles.orderText} className="item-notes">
+                    {drink.notes}
+                  </Text>
+                  {drink.options?.map((option) => {
+                    return <Text style={styles.orderText}>{option.name}</Text>;
+                  })}
+                </View>
               )}
             </View>
           );
@@ -130,11 +141,7 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     marginBottom: 5,
   },
-  orderDetails: {
-    position: "relative",
-    fontSize: 20,
-    alignItems: "center",
-  },
+
   item: {
     justifyContent: "center",
     textAlign: "center",
@@ -154,10 +161,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "dodgerblue",
     height: "99%",
-
-    // minHeight: "fit-content",
+    textAlignVertical: "center",
   },
   orderText: {
     fontSize: 20,
+  },
+  orderItem: {
+    fontSize: 25,
   },
 });

@@ -17,6 +17,9 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const [drinkOrders, setDrinkOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [spinner, setSpinner] = useState(false);
+
+  console.log(dishOrders, drinkOrders);
+
   // const [date, setDate] = useState();
   // const endPoint = "http://localhost:6789";
   // const socket = socketIOClient(endPoint, {
@@ -34,8 +37,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       // const dishRes=network
       // GET request for all the stand's drinks
       const drinkRes = await network(`/drinks/${restaurantUser}`);
-      console.log(dishRes);
-      console.log(drinkRes);
+
       // check if the data we got is an array with entries for the react component
       dishRes.data.length > 0 && setDishes(dishRes.data);
       drinkRes.data.length > 0 && setDrinks(drinkRes.data);
