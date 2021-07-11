@@ -42,11 +42,11 @@ const createNewDish = (req, res) => {
 };
 
 const deleteDish = (req, res) => {
-  const { user_name, drink_name } = req.params;
+  const { user_name, dish_name } = req.params;
   Dishes.destroy({
     where: {
       restaurant_name: user_name,
-      name: drink_name,
+      name: dish_name,
     }
   })
   .then(_ => {
