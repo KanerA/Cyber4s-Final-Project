@@ -70,7 +70,6 @@ export default function StandCreator({
         }
       );
     } catch (err) {
-      refreshFunction();
       await network.delete(
         `/stands/remove?u=${usernameRef.current}&p=${passwordRef.current}`,
         {
