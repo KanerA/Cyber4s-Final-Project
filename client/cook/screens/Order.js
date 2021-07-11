@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: "dodgerblue",
     height: "99%",
     textAlignVertical: "center",
+    justifyContent: "center",
   },
   orderText: {
     fontSize: 20,

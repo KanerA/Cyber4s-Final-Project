@@ -7,6 +7,7 @@ import {
   ScrollView,
   Button,
   Dimensions,
+  Pressable,
 } from "react-native";
 import Order from "./Order";
 import { socket } from "../socket";
@@ -14,7 +15,7 @@ import { _ScrollView } from "react-native";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-export default function OrderHandler({ restaurant, userName }) {
+export default function OrderHandler({ restaurant, userName, setUserName }) {
   const [orders, setOrders] = useState([]);
   const [newOrder, SetNewOrders] = useState(false);
   const scrollRef = useRef();
@@ -63,10 +64,20 @@ export default function OrderHandler({ restaurant, userName }) {
         scrollRef.current.scrollTo({ y: 800, animated: true });
       }}
     >
-      <Text style={styles.text}>
-        <Text style={{ color: "white", fontSize: 40 }}>{restaurant}</Text>'s
-        Orders
-      </Text>
+      <View style={styles.nav}>
+        <Text style={styles.text}>
+          <Text style={{ color: "white", fontSize: 40 }}>{restaurant}</Text>'s
+          Orders
+        </Text>
+        <Pressable
+          onPress={() => {
+            setUserName(null);
+          }}
+          style={styles.button}
+        >
+          <Text>log out</Text>
+        </Pressable>
+      </View>
       {newOrder && (
         <Button
           onPress={() => {
@@ -108,11 +119,27 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 30,
     fontWeight: "900",
-    backgroundColor: "#356FDB",
-    width: width,
+
     alignContent: "center",
     textAlign: "center",
     paddingVertical: 5,
     color: "black",
+  },
+  button: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    right: 0,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderRadius: 9,
+    borderColor: "white",
+    borderWidth: 1,
+    backgroundColor: "#DB8A4B",
+    textAlignVertical: "center",
+  },
+  nav: {
+    position: "relative",
+    backgroundColor: "#356FDB",
+    width: width,
   },
 });

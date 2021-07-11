@@ -49,9 +49,15 @@ export default function App() {
       }}
     >
       <View style={styles.container}>
-        {restaurant ? null : <Login logIntoStandOrders={logIntoStandOrders} />}
-        {userName && (
-          <OrderHandler restaurant={restaurant} userName={userName} />
+        {/* {restaurant ? null : } */}
+        {userName ? (
+          <OrderHandler
+            restaurant={restaurant}
+            userName={userName}
+            setUserName={setUserName}
+          />
+        ) : (
+          <Login logIntoStandOrders={logIntoStandOrders} />
         )}
       </View>
     </ScrollView>
@@ -64,6 +70,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    // fontSize: 50,
   },
 });
