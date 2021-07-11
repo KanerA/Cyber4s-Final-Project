@@ -84,7 +84,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       totalPrice: totalPrice,
     });
 
-    console.log("work work work work work");
     setChange((prev) => !prev);
     setDrinkOrders([]);
     setDishOrders([]);
@@ -92,7 +91,16 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
     setTotalPrice(0);
     itemNumber.current = 0;
   };
-
+  const deleteDish = async (dish) => {
+    await network.delete(`/dishes/${restaurantUser}/${dish.name}`);
+    const newDishes = dishes.filter((item) => item.name !== dish.name);
+    setDishes(newDishes);
+  };
+  const deleteDrink = async (drink) => {
+    await network.delete(`/drinks/${restaurantUser}/${drink.name}`);
+    const newDrinks = dishes.filter((item) => item.name !== drink.name);
+    setDishes(newDrinks);
+  };
   return (
     <div id="menu">
       <div id="content">
@@ -108,6 +116,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
                 dishes?.map((dish, i) => {
                   return (
                     <Dish
+                      deleteDish={deleteDish}
                       dish={dish}
                       key={`dish ${i}`}
                       dishOrders={dishOrders}
@@ -134,6 +143,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
                     .map((drink, i) => {
                       return (
                         <Drink
+                          deleteDrink={deleteDrink}
                           drink={drink}
                           key={`drink ${i}`}
                           setDrinkOrders={setDrinkOrders}
@@ -156,6 +166,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
                     .map((drink, i) => {
                       return (
                         <Drink
+                          deleteDrink={deleteDrink}
                           drink={drink}
                           key={`drink ${i}`}
                           setDrinkOrders={setDrinkOrders}
