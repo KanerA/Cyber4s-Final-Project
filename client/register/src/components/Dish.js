@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
+import { network } from "../utils/networkWrapper";
 
 function Dish({
   dish,
@@ -9,6 +10,7 @@ function Dish({
   setTotalPrice,
   totalPrice,
   itemNumber,
+  deleteDish,
 }) {
   const [dishCount, setDishCount] = useState(1);
   const [dishNotes, setDishNotes] = useState("");
@@ -29,8 +31,10 @@ function Dish({
     itemNumber.current++;
     console.log(itemNumber.current);
   };
+
   return (
     <div className="item">
+      <button onClick={() => deleteDish(dish)}>delete</button>
       <span>
         <AiOutlinePlus
           className="count-button positive"

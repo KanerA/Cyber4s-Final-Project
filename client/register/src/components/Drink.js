@@ -9,6 +9,7 @@ function Drink({
   setTotalPrice,
   totalPrice,
   itemNumber,
+  deleteDrink,
 }) {
   const [drinkCount, setDrinkCount] = useState(1);
   const [drinkNotes, setDrinkNotes] = useState("");
@@ -31,6 +32,7 @@ function Drink({
   };
   return (
     <div className="item">
+      <button onClick={() => deleteDrink(drink)}> delete</button>
       <span>
         <AiOutlinePlus
           className="count-button positive"
