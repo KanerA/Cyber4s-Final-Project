@@ -2,16 +2,14 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class drinks extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
       this.belongsTo(models.Stands, {
-        foreignKey: "restaurant_name",
-        targetKey: "name",
+        foreignKey: {
+          name: "restaurant_name",
+          allowNull: true,
+        },
+        sourceKey: "user_name",
       });
     }
   }
