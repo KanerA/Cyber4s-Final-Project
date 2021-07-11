@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Text, View, Button, Dimensions } from "react-native";
 import axios from "axios";
 import GestureRecognizer, {
@@ -7,14 +7,19 @@ import GestureRecognizer, {
 
 export default function Order({ order, orderDone }) {
   const [notes, setNotes] = useState(false);
-  const date = new Date(order.createdAt).toLocaleString("he-IL").toString();
+  console.log(order);
+  const date = useRef(
+    new Date(order.createdAt).toLocaleString("he-IL").toString()
+  );
   const width = Dimensions.get("window").width;
   const backgroundColor =
-    Date.now() - Date.parse(date) <= 7 * 60000
+    Date.now() - Date.parse(date.current) <= 7 * 60000
       ? "#03b42c"
-      : Date.now() - Date.parse(date) <= 15 * 60000
+      : Date.now() - Date.parse(date.current) <= 15 * 60000
       ? "#f5a962"
       : "#f58c91";
+
+  console.log(Date.now() - Date.parse(date.current));
   const config = {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80,
@@ -84,7 +89,7 @@ export default function Order({ order, orderDone }) {
         />
       </View>
       <Text className="order-time" style={{ fontSize: 15 }}>
-        {date}
+        {date.current}
       </Text>
     </GestureRecognizer>
   );

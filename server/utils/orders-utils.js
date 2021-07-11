@@ -11,6 +11,7 @@ const newOrder = async (req, res) => {
     drink: body.drink,
     username: body.username,
     totalPrice: body.totalPrice,
+    createdAt: body.createdAt,
   });
 
   newOrder.save().then((data, err) => {
