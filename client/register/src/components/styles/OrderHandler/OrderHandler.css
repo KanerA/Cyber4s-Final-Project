@@ -151,4 +151,16 @@ input[type="radio"] {
 .invite .total-item-price::after {
   content: "₪";
 }
+
+.small-price {
+  font-size: 0.7rem;
+}
+
+.small-price::after {
+  content: "₪)";
+}
+
+.small-price::before {
+  content: "(";
+}
 /*# sourceMappingURL=OrderHandler.css.map */

@@ -195,6 +195,10 @@ svg.count-button {
   font-size: 1.5rem;
 }
 
+.small {
+  font-size: 1rem;
+}
+
 #menu-items {
   display: -webkit-box;
   display: -ms-flexbox;

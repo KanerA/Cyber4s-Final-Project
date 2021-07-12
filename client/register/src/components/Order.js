@@ -22,6 +22,16 @@ export default function Order({ order, cancelOrder }) {
                 <p className="item-amount">{dish.amount}X</p>
                 <div className="item-details">
                   <p className="item-name">{dish.name}</p>
+                  {dish.options?.map((option, i) => {
+                    return (
+                      <p className="item-checkboxes">
+                        {option.name}
+                        {option.price > 0 && (
+                          <span className="small-price">{option.price}</span>
+                        )}
+                      </p>
+                    );
+                  })}
                   <p className="item-note">{dish.notes}</p>
                   <p className="total-item-price">{dish.amount * dish.price}</p>
                 </div>
@@ -36,6 +46,16 @@ export default function Order({ order, cancelOrder }) {
                 <p className="item-amount">{drink.amount}X</p>
                 <div className="item-details">
                   <p className="item-name">{drink.name}</p>
+                  {drink.options?.map((option, i) => {
+                    return (
+                      <p className="item-checkboxes">
+                        {option.name}
+                        {option.price > 0 && (
+                          <span className="small-price">{option.price}</span>
+                        )}
+                      </p>
+                    );
+                  })}
                   <p className="item-note">{drink.notes}</p>
                   <p className="total-item-price">
                     {drink.amount * drink.price}

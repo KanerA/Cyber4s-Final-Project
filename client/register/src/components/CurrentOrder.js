@@ -35,8 +35,8 @@ function CurrentOrder({
         return (
           <div className="item-props" key={`dishOrder ${i}`}>
             <p>
-              {orderedDish.amount}X {orderedDish.name}(
-              <span className="item-price">{orderedDish.price}</span>)
+              {orderedDish.amount}X {orderedDish.name}
+              <span className="item-price small">{orderedDish.price}</span>
             </p>
             <p>{orderedDish.notes}</p>
             {orderedDish.options?.map((option) => {
@@ -69,8 +69,8 @@ function CurrentOrder({
         return (
           <div className="item-props" key={`drinkOrder ${i}`}>
             <p>
-              {orderedDrink.amount}X {orderedDrink.name} (
-              <span className="item-price">{orderedDrink.price}</span>)
+              {orderedDrink.amount}X {orderedDrink.name}
+              <span className="item-price small"> {orderedDrink.price}</span>
             </p>
             <p className="order-notes">{orderedDrink.notes}</p>
             {orderedDrink.options?.map((option) => {

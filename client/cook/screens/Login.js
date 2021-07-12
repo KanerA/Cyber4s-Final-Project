@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+
 import {
   StyleSheet,
   View,
@@ -7,6 +8,7 @@ import {
   Button,
   TextInput,
   Dimensions,
+  Image,
 } from "react-native";
 const width = Dimensions.get("window").width;
 
@@ -15,9 +17,18 @@ export default function Login({ logIntoStandOrders }) {
   const passwordRef = useRef();
   const [secure, setSecure] = useState(true);
   return (
-    <SafeAreaView>
-      <Text style={styles.text}>Login</Text>
-      <View>
+    <SafeAreaView style={{ position: "relative" }}>
+      <Text style={styles.header}>Bon Appetit</Text>
+      <Image
+        style={styles.image}
+        source={require("../assets/standc.jpg")}
+      ></Image>
+      <View
+        style={{
+          top: 300,
+        }}
+      >
+        <Text style={styles.text}>Login</Text>
         <TextInput
           style={styles.input}
           placeholder={"Stand Name"}
@@ -33,22 +44,22 @@ export default function Login({ logIntoStandOrders }) {
             passwordRef.current = text;
           }}
         />
-      </View>
-      <View style={styles.buttons}>
-        <Button
-          style={styles.button}
-          title={"Log In"}
-          onPress={() =>
-            logIntoStandOrders(usernameRef.current, passwordRef.current)
-          }
-        />
-        <Button
-          onPress={() => {
-            setSecure(!secure);
-          }}
-          color={"#f5a962"}
-          title={`${secure ? "show" : "hide"} password`}
-        />
+        <View style={styles.buttons}>
+          <Button
+            style={styles.button}
+            title={"Log In"}
+            onPress={() =>
+              logIntoStandOrders(usernameRef.current, passwordRef.current)
+            }
+          />
+          <Button
+            onPress={() => {
+              setSecure(!secure);
+            }}
+            color={"#f5a962"}
+            title={`${secure ? "show" : "hide"} password`}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -65,6 +76,22 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 35,
     alignSelf: "center",
+    marginBottom: 20,
+    color: "#3c8dad",
+  },
+  image: {
+    position: "absolute",
+    top: 75,
+    height: 200,
+    width: 200,
+    alignSelf: "center",
+  },
+  header: {
+    position: "absolute",
+    top: 0,
+    fontSize: 45,
+    alignSelf: "center",
+
     marginBottom: 20,
     color: "#3c8dad",
   },

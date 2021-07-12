@@ -62,14 +62,7 @@ export default function OrderHandler({
     scrollRef.current.scrollToEnd();
   };
   return (
-    <ScrollView
-      scrollsToTop={true}
-      contentContainerStyle={styles.scroll}
-      // ref={scrollRef}
-      // onContentSizeChange={() => {
-      //   scrollRef.current.scrollTo({ y: 800, animated: true });
-      // }}
-    >
+    <ScrollView scrollsToTop={true} contentContainerStyle={styles.scroll}>
       <View style={styles.nav}>
         <Text style={styles.text}>
           <Text style={{ color: "white", fontSize: 40 }}>{restaurant}</Text>'s
@@ -85,13 +78,20 @@ export default function OrderHandler({
         </Pressable>
       </View>
       {newOrder && (
-        <Button
-          onPress={() => {
-            scroll();
-            SetNewOrders(false);
-          }}
-          title="new orders"
-        />
+        <View>
+          <Pressable
+            onPress={() => {
+              scroll();
+              SetNewOrders(false);
+            }}
+            style={styles.newOrders}
+          >
+            <Text style={{ alignSelf: "center", fontSize: 30 }}>
+              new orders
+              <Text>▼</Text>
+            </Text>
+          </Pressable>
+        </View>
       )}
       <View style={{ marginTop: 15 }}>
         {orders ? (
@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 30,
     fontWeight: "900",
-
     alignContent: "center",
     textAlign: "center",
     paddingVertical: 5,
@@ -148,5 +147,11 @@ const styles = StyleSheet.create({
     top: 0,
     backgroundColor: "#356FDB",
     width: width,
+  },
+  newOrders: {
+    width: width,
+    backgroundColor: "#40C292",
+    textAlign: "center",
+    justifyContent: "center",
   },
 });

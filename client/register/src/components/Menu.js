@@ -83,7 +83,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       username: restaurantUser,
       totalPrice: totalPrice,
     });
-    console.lof(e.target.parentElement);
     e.target.parentElement.children[2].value = "";
 
     setChange((prev) => !prev);
