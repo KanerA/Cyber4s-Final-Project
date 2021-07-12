@@ -1,0 +1,15 @@
+# syntax=docker/dockerfile:1
+
+FROM node:14
+ENV NODE_ENV=development
+ENV DATABASE=
+ENV PASSWORD=
+ENV ACCESS_TOKEN_SECRET=
+ENV REFRESH_TOKEN_SECRET=
+ENV MONGO_URI=
+WORKDIR /app
+COPY package*.json ./
+RUN npm i
+COPY . .
+EXPOSE 8080
+CMD [ "npm", "start" ]
