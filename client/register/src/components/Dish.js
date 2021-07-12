@@ -17,7 +17,7 @@ function Dish({
   const [checkboxes, setCheckboxes] = useState([]);
   console.log(checkboxes);
   const addDish = (e) => {
-    e.target.parentElement.children[0].value = "";
+    e.target.parentElement.children[1].value = "";
     const orders = [...dishOrders];
     orders.push({
       name: dish.name,

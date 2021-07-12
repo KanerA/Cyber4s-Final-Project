@@ -43,7 +43,6 @@ input[type="radio"] {
 
 .item-info {
   display: flexbox;
-  max-width: 15vw;
 }
 
 .item-notes {
@@ -138,9 +137,7 @@ svg.count-button {
   top: 3rem;
   overflow: auto;
   height: 95%;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  max-width: 20vw;
 }
 
 .order .order-info {

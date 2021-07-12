@@ -42,8 +42,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       dishRes.data.length > 0 && setDishes(dishRes.data);
       drinkRes.data.length > 0 && setDrinks(drinkRes.data);
     } catch (err) {
-      // refreshFunction();
-      // fetchData();
       console.log(err.message);
     }
   };
@@ -85,11 +83,12 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
       username: restaurantUser,
       totalPrice: totalPrice,
     });
+    console.lof(e.target.parentElement);
+    e.target.parentElement.children[2].value = "";
 
     setChange((prev) => !prev);
     setDrinkOrders([]);
     setDishOrders([]);
-    e.target.parentElement.children[2].value = "";
     setTotalPrice(0);
     itemNumber.current = 0;
   };

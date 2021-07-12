@@ -72,7 +72,7 @@ function CurrentOrder({
               {orderedDrink.amount}X {orderedDrink.name} (
               <span className="item-price">{orderedDrink.price}</span>)
             </p>
-            <p>{orderedDrink.notes}</p>
+            <p className="order-notes">{orderedDrink.notes}</p>
             {orderedDrink.options?.map((option) => {
               return (
                 <p>

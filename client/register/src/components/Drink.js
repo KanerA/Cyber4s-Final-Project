@@ -16,7 +16,8 @@ function Drink({
   const [checkboxPrice, setCheckboxPrice] = useState(0);
   const [checkboxes, setCheckboxes] = useState([]);
   const addDrink = (e) => {
-    e.target.parentElement.children[0].value = "";
+    console.log(e.target.parentElement.children);
+    e.target.parentElement.children[1].value = "";
     const orders = [...drinkOrders];
     orders.push({
       name: drink.name,
