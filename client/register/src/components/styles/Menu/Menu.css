@@ -39,6 +39,7 @@ input[type="radio"] {
   margin: 7px;
   font-size: 2rem;
   color: black;
+  max-width: 20vw;
 }
 
 .item-info {
@@ -102,12 +103,18 @@ input[type="radio"] {
   text-decoration: underline;
 }
 
+.item-price {
+  font-size: 1.5rem;
+}
+
 .item-price::after {
   content: "₪";
 }
 
 .item-props {
-  display: flexbox;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  max-width: 20vw;
 }
 
 .item-description {
@@ -137,7 +144,7 @@ svg.count-button {
   top: 3rem;
   overflow: auto;
   height: 95%;
-  max-width: 20vw;
+  max-width: 15vw;
 }
 
 .order .order-info {
@@ -212,6 +219,17 @@ svg.count-button {
           justify-content: center;
 }
 
+@media only screen and (max-width: 1300px) {
+  #menu-items {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  .order {
+    max-width: 25vw;
+  }
+}
+
 #drinks {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -274,5 +292,11 @@ svg.count-button {
   width: 80%;
   padding: 3px;
   font-size: 1rem;
+}
+
+#this-order {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=Menu.css.map */

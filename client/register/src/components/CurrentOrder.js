@@ -26,7 +26,7 @@ function CurrentOrder({
     setTotalPrice(newPrice);
   };
   return (
-    <div className="item">
+    <div className="item" id="this-order">
       {dishOrders.map((orderedDish, i) => {
         let itemOptionsPrice = 0;
         orderedDish.options?.map((option) => {

@@ -28,6 +28,7 @@
   margin: 7px;
   font-size: 2rem;
   color: black;
+  max-width: 20vw;
 }
 .item-info {
   display: flexbox;
@@ -52,11 +53,15 @@
 .item-name {
   text-decoration: underline;
 }
+.item-price {
+  font-size: 1.5rem;
+}
 .item-price::after {
   content: "₪";
 }
 .item-props {
-  display: flexbox;
+  justify-self: center;
+  max-width: 20vw;
 }
 .item-description {
   font-weight: 100;
@@ -77,14 +82,13 @@ svg.count-button {
 }
 
 .order {
-  // background-color: black;
   position: fixed;
   left: 5px;
   top: 3rem;
   overflow: auto;
   height: 95%;
   // width: fit-content;
-  max-width: 20vw;
+  max-width: 15vw;
   .order-info {
     color: white;
   }
@@ -130,6 +134,14 @@ svg.count-button {
   flex-direction: row;
   justify-content: center;
 }
+@media only screen and (max-width: 1300px) {
+  #menu-items {
+    justify-content: flex-end;
+  }
+  .order {
+    max-width: 25vw;
+  }
+}
 #drinks {
   display: flex;
   flex-direction: row;
@@ -140,7 +152,6 @@ svg.count-button {
 #order-name {
   @include inputs();
   font-size: 1rem;
-  // padding: 5px;
   margin-bottom: 5px;
 }
 #order-name::placeholder {
@@ -151,4 +162,7 @@ svg.count-button {
 #set-order {
   background-color: $positiveColor;
   @include buttons();
+}
+#this-order {
+  justify-content: center;
 }
