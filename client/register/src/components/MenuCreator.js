@@ -132,7 +132,7 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
         />
         <input
           id="item-price"
-          className="item-property"
+          className="item-property price"
           placeholder={`enter ${item} price`}
           onChange={(e) => (itemRef.current.price = e.target.value)}
         />
@@ -157,9 +157,10 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
             onChange={(e) => {
               itemRef.current.checkboxPrice = e.target.value;
             }}
-            defaultValue={0}
           />
-          <button onClick={(e) => addCheckbox(e)}>add</button>
+          <button id="chex-adder" onClick={(e) => addCheckbox(e)}>
+            add
+          </button>
           {checkboxes.length > 0 &&
             checkboxes.map((checkbox) => {
               return (

@@ -87,8 +87,6 @@ export default function OrderHandler({
       {newOrder && (
         <Button
           onPress={() => {
-            // scrollRef.current.scrollToEnd({ duration: 500 });
-            // scrollRef.current.scrollTo({ y: 800, animated: true });
             scroll();
             SetNewOrders(false);
           }}
@@ -120,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 5,
     backgroundColor: "#dddddd",
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
   },
@@ -148,6 +146,7 @@ const styles = StyleSheet.create({
   },
   nav: {
     position: "relative",
+    top: 0,
     backgroundColor: "#356FDB",
     width: width,
   },

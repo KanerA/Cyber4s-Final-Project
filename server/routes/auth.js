@@ -4,6 +4,6 @@ const auth = Router();
 const { refreshToken } = require("../utils/auth-utils");
 
 auth.post("/refresh", refreshToken);
-auth.use('*', sendNotFound);
+// auth.use('*', sendNotFound);
 
 module.exports = auth;

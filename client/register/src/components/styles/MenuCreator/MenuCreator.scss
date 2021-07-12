@@ -84,6 +84,9 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+.price::after {
+  content: "₪";
+}
 
 #save-new-item {
   background-color: $positiveColor;
@@ -108,4 +111,14 @@ input:checked + .slider:before {
 }
 #props {
   margin-top: 2rem;
+}
+#chex-adder {
+  background-color: $positiveColor;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 1.5rem;
+  padding: 5px;
+  box-shadow: 1px 1px 1px black;
+  color: white;
+  border-radius: 0.5rem;
 }
