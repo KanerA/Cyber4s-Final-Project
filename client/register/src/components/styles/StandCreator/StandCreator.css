@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Heebo:wght@600&family=Montserrat:wght@900&family=Paytone+One&family=Tienne&family=Vesper+Libre:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -28,15 +29,6 @@ button {
 
 input[type="radio"] {
   cursor: pointer;
-}
-
-.stand-creator {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
 }
 
 .create-stands {
@@ -140,5 +132,25 @@ input[type="radio"] {
   font-size: 1.5rem;
   margin-top: 5px;
   background-color: #03b42c;
+}
+
+#logo {
+  height: 300px;
+  width: 300px;
+}
+
+#stands {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+#header {
+  font-size: 8rem;
+  color: #125d98;
+  font-family: "Lobster Two", cursive;
 }
 /*# sourceMappingURL=StandCreator.css.map */

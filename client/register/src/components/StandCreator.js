@@ -6,6 +6,7 @@ import changeRestaurant from "../action/changeRestaurant";
 import changeRestaurantUser from "../action/changeUser";
 import "./styles/StandCreator/StandCreator.css";
 import { createCookie, readCookie } from "../utils/cookies";
+import logo from "../standc.jpg";
 
 export default function StandCreator({
   restaurant,
@@ -85,80 +86,84 @@ export default function StandCreator({
   return (
     <div className="stand-creator">
       {redirect && <Redirect to="/create" />}
-      <div className="existing-stands">
-        <h1 className="header">Existing Stands</h1>
-        <div className="stand-inputs">
-          <input
-            className="create-stand login-prop"
-            placeholder="stand's username"
-            onChange={(e) => (usernameRef.current = e.target.value)}
-          />
-          <input
-            style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
-            className="create-stand login-prop password"
-            placeholder="password"
-            onChange={(e) => (passwordRef.current = e.target.value)}
-          />
-          <button
-            className="show-password"
-            onMouseOver={() => setShowPassword(true)}
-            onMouseLeave={() => setShowPassword(false)}
-          >
-            {showPassword ? "Hide" : "Show"} Password
-          </button>
-        </div>
-        <div className="stand-controls">
-          <button
-            className="stand-login"
-            onClick={() => {
-              loginToStand(usernameRef.current, nameRef.current);
+      <h1 id="header">Bon Appetit</h1>
+      <img id="logo" src={logo} alt="logo" />
+      <div id="stands">
+        <div className="existing-stands">
+          <h1 className="header">Existing Stands</h1>
+          <div className="stand-inputs">
+            <input
+              className="create-stand login-prop"
+              placeholder="stand's username"
+              onChange={(e) => (usernameRef.current = e.target.value)}
+            />
+            <input
+              style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
+              className="create-stand login-prop password"
+              placeholder="password"
+              onChange={(e) => (passwordRef.current = e.target.value)}
+            />
+            <button
+              className="show-password"
+              onMouseOver={() => setShowPassword(true)}
+              onMouseLeave={() => setShowPassword(false)}
+            >
+              {showPassword ? "Hide" : "Show"} Password
+            </button>
+          </div>
+          <div className="stand-controls">
+            <button
+              className="stand-login"
+              onClick={() => {
+                loginToStand(usernameRef.current, nameRef.current);
 
-              setRedirect(true);
-            }}
-          >
-            log in
-          </button>
-          <button className="stand-delete" onClick={(e) => deleteStand(e)}>
-            delete stand
-          </button>
+                setRedirect(true);
+              }}
+            >
+              log in
+            </button>
+            <button className="stand-delete" onClick={(e) => deleteStand(e)}>
+              delete stand
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="create-stands">
-        <h1 className="header">Create new stand</h1>
-        <div className="stand-inputs">
-          <input
-            className="create-stand login-prop"
-            placeholder="stand name"
-            onChange={(e) => (nameRef.current = e.target.value)}
-          />
-          <input
-            className="create-stand login-prop"
-            placeholder="stand's username"
-            onChange={(e) => (usernameRef.current = e.target.value)}
-          />
-          <input
-            style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
-            className="create-stand login-prop password"
-            placeholder="password"
-            onChange={(e) => (passwordRef.current = e.target.value)}
-          />
-          <button
-            className="show-password"
-            onMouseOver={() => setShowPassword(true)}
-            onMouseLeave={() => setShowPassword(false)}
-          >
-            {showPassword ? "Hide" : "Show"} Password
-          </button>
-          <br />
-          <button
-            id="open-stand"
-            onClick={() => {
-              openStand();
-              setRedirect(true);
-            }}
-          >
-            open a new stand
-          </button>
+        <div className="create-stands">
+          <h1 className="header">Create new stand</h1>
+          <div className="stand-inputs">
+            <input
+              className="create-stand login-prop"
+              placeholder="stand name"
+              onChange={(e) => (nameRef.current = e.target.value)}
+            />
+            <input
+              className="create-stand login-prop"
+              placeholder="stand's username"
+              onChange={(e) => (usernameRef.current = e.target.value)}
+            />
+            <input
+              style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
+              className="create-stand login-prop password"
+              placeholder="password"
+              onChange={(e) => (passwordRef.current = e.target.value)}
+            />
+            <button
+              className="show-password"
+              onMouseOver={() => setShowPassword(true)}
+              onMouseLeave={() => setShowPassword(false)}
+            >
+              {showPassword ? "Hide" : "Show"} Password
+            </button>
+            <br />
+            <button
+              id="open-stand"
+              onClick={() => {
+                openStand();
+                setRedirect(true);
+              }}
+            >
+              open a new stand
+            </button>
+          </div>
         </div>
       </div>
     </div>

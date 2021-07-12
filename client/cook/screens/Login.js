@@ -31,7 +31,7 @@ export default function Login({ logIntoStandOrders }) {
         <Text style={styles.text}>Login</Text>
         <TextInput
           style={styles.input}
-          placeholder={"Stand Name"}
+          placeholder={"Stand's username"}
           onChangeText={(text) => {
             usernameRef.current = text;
           }}
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     width: width * 0.95,
     borderRadius: 2,
     fontSize: 20,
+    color: "white",
   },
   text: {
     fontSize: 35,
@@ -91,7 +92,6 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 45,
     alignSelf: "center",
-
     marginBottom: 20,
     color: "#3c8dad",
   },
