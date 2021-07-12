@@ -16,7 +16,9 @@ const newOrder = async (req, res) => {
 
   newOrder.save().then((data, err) => {
     if (!err) {
-      req.io.emit("getNewOrder", data);
+      console.log(req);
+      const io = req.app.get("socketio");
+      io.emit("getNewOrder", data);
       res.send(data.customerName + "'s order accepted!");
     } else {
       console.log(err);
@@ -69,13 +71,13 @@ const orderDoneCancel = async (req, res) => {
     updated = await OrderModel.findOneAndUpdate(
       { _id: id },
       { done: isDone },
-      { new: true }
+      { new: true },
     );
   if (c)
     updated = await OrderModel.findOneAndUpdate(
       { _id: id },
       { canceled: isCanceled },
-      { new: true }
+      { new: true },
     );
   console.log(d, c, id);
   req.io.emit("getCanceledOrder", updated);
