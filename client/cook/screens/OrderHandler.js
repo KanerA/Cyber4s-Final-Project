@@ -15,10 +15,14 @@ import { _ScrollView } from "react-native";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-export default function OrderHandler({ restaurant, userName, setUserName }) {
+export default function OrderHandler({
+  restaurant,
+  userName,
+  setUserName,
+  scrollRef,
+}) {
   const [orders, setOrders] = useState([]);
   const [newOrder, SetNewOrders] = useState(false);
-  const scrollRef = useRef();
   useEffect(() => {
     axios
       .get(`http://${env.IP}:${env.PORT}/orders/${userName}`)
@@ -54,15 +58,17 @@ export default function OrderHandler({ restaurant, userName, setUserName }) {
     const ordersToDo = orders.filter((invite) => invite._id !== order._id);
     setOrders(ordersToDo);
   };
-  console.log("username orders", userName);
+  const scroll = () => {
+    scrollRef.current.scrollToEnd();
+  };
   return (
     <ScrollView
       scrollsToTop={true}
       contentContainerStyle={styles.scroll}
-      ref={scrollRef}
-      onContentSizeChange={() => {
-        scrollRef.current.scrollTo({ y: 800, animated: true });
-      }}
+      // ref={scrollRef}
+      // onContentSizeChange={() => {
+      //   scrollRef.current.scrollTo({ y: 800, animated: true });
+      // }}
     >
       <View style={styles.nav}>
         <Text style={styles.text}>
@@ -81,7 +87,9 @@ export default function OrderHandler({ restaurant, userName, setUserName }) {
       {newOrder && (
         <Button
           onPress={() => {
-            scrollRef.current.scrollToEnd();
+            // scrollRef.current.scrollToEnd({ duration: 500 });
+            // scrollRef.current.scrollTo({ y: 800, animated: true });
+            scroll();
             SetNewOrders(false);
           }}
           title="new orders"
@@ -109,6 +117,7 @@ export default function OrderHandler({ restaurant, userName, setUserName }) {
 
 const styles = StyleSheet.create({
   scroll: {
+    flex: 1,
     marginTop: 5,
     backgroundColor: "#dddddd",
     justifyContent: "center",

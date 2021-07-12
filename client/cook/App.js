@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -17,7 +17,7 @@ export default function App() {
   const height = Dimensions.get("window").height;
   const [restaurant, setRestaurant] = useState();
   const [userName, setUserName] = useState();
-  console.log("username", userName);
+  const scrollRef = useRef();
   const logIntoStandOrders = async (username, password) => {
     const proxy = `http://${env.IP}:${env.PORT}`;
     const body = {
@@ -41,6 +41,7 @@ export default function App() {
   };
   return (
     <ScrollView
+      ref={scrollRef}
       contentContainerStyle={{
         alignItems: "center",
         justifyContent: "center",
@@ -52,6 +53,7 @@ export default function App() {
         {/* {restaurant ? null : } */}
         {userName ? (
           <OrderHandler
+            scrollRef={scrollRef}
             restaurant={restaurant}
             userName={userName}
             setUserName={setUserName}
