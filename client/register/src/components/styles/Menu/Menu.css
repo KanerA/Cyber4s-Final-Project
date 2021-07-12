@@ -7,6 +7,7 @@
 
 .app {
   background-color: #dddddd;
+  background: url("../../../logo.png") no-repeat center center/85vh 85vh fixed;
   min-height: 100vh;
   -webkit-box-align: center;
       -ms-flex-align: center;

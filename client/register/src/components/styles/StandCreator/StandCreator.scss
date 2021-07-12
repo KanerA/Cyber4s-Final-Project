@@ -7,7 +7,10 @@
   color: white;
   font-family: $buttonFontFamily;
 }
-
+.stand-creator {
+  min-height: 100vh;
+  background: url("../../../logo.png") no-repeat center center/60vh 60vh fixed;
+}
 .create-stands {
   display: flex;
   flex-direction: column;
@@ -71,8 +74,10 @@
   width: 300px;
 }
 #stands {
+  // margin-top: 300px;
+  align-content: center;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 #header {
   font-size: 8rem;

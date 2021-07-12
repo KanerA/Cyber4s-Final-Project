@@ -5,7 +5,7 @@
   padding: 0;
 }
 
-.app {
+.stand-app {
   background-color: #dddddd;
   min-height: 100vh;
   -webkit-box-align: center;
@@ -29,6 +29,11 @@ button {
 
 input[type="radio"] {
   cursor: pointer;
+}
+
+.stand-creator {
+  min-height: 100vh;
+  background: url("../../../logo.png") no-repeat center center/60vh 60vh fixed;
 }
 
 .create-stands {
@@ -140,12 +145,14 @@ input[type="radio"] {
 }
 
 #stands {
+  -ms-flex-line-pack: center;
+      align-content: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 #header {

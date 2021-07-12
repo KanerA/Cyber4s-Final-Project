@@ -18,10 +18,9 @@ export default function Login({ logIntoStandOrders }) {
   const [secure, setSecure] = useState(true);
   return (
     <SafeAreaView style={{ position: "relative" }}>
-      <Text style={styles.header}>Bon Appetit</Text>
       <Image
         style={styles.image}
-        source={require("../assets/standc.jpg")}
+        source={require("../assets/logo.png")}
       ></Image>
       <View
         style={{

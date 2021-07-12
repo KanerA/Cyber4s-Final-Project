@@ -6,7 +6,7 @@ import changeRestaurant from "../action/changeRestaurant";
 import changeRestaurantUser from "../action/changeUser";
 import "./styles/StandCreator/StandCreator.css";
 import { createCookie, readCookie } from "../utils/cookies";
-import logo from "../standc.jpg";
+import logo from "../logo.png";
 
 export default function StandCreator({
   restaurant,
@@ -86,8 +86,8 @@ export default function StandCreator({
   return (
     <div className="stand-creator">
       {redirect && <Redirect to="/create" />}
-      <h1 id="header">Bon Appetit</h1>
-      <img id="logo" src={logo} alt="logo" />
+      {/* <h1 id="header">Bon Appetit</h1> */}
+      {/* <img id="logo" src={logo} alt="logo" /> */}
       <div id="stands">
         <div className="existing-stands">
           <h1 className="header">Existing Stands</h1>

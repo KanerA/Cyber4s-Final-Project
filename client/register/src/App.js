@@ -19,10 +19,10 @@ import { network } from "./utils/networkWrapper";
 import "./components/styles/App/App.css";
 import { readCookie } from "./utils/cookies";
 function App() {
+  document.title = "Bon Appetit";
   const restaurant = useSelector((state) => state.restaurant);
   const restaurantUser = useSelector((state) => state.restaurantUser);
   // const [refresh, setRefresh] = useState(false);
-
   const [login, setLogin] = useState(true);
 
   function createCookie(name, value, days) {
@@ -59,7 +59,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className="stand-app">
       <Router>
         <Navbar
           restaurant={restaurant}
