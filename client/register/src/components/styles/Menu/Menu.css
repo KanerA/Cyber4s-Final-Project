@@ -19,12 +19,13 @@ h1 {
   font-size: 3rem;
   text-shadow: 1px 1px 1px black;
   font-family: "Montserrat", "Heebo", sans-serif;
-  color: #f5a962;
+  color: #F08B6C;
+  margin-bottom: 10px;
 }
 
 button {
   cursor: pointer;
-  font-family: #f5a962;
+  font-family: #F08B6C;
 }
 
 input[type="radio"] {
@@ -50,7 +51,7 @@ input[type="radio"] {
   margin-top: 2px;
   margin-bottom: 2px;
   color: white;
-  background-color: #f5a962;
+  background-color: #F08B6C;
   -webkit-box-shadow: 1px 1px 1px #416d85;
           box-shadow: 1px 1px 1px #416d85;
   border-radius: 0.5rem;
@@ -248,7 +249,7 @@ svg.count-button {
   margin-top: 2px;
   margin-bottom: 2px;
   color: white;
-  background-color: #f5a962;
+  background-color: #F08B6C;
   -webkit-box-shadow: 1px 1px 1px #416d85;
           box-shadow: 1px 1px 1px #416d85;
   border-radius: 0.5rem;

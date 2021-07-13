@@ -5,7 +5,7 @@ $positiveColor: #03b42c;
 $negativeColor: #f58c91;
 $mainDarkColor: #125d98;
 $mainBrightColor: #3c8dad;
-$secondaryColor: #f5a962;
+$secondaryColor: #f08b6c;
 
 $headlineFontFamily: "Montserrat", "Heebo", sans-serif;
 $contentFontFamily: "Archivo Black", "Heebo", serif;
@@ -28,6 +28,7 @@ h1 {
   text-shadow: 1px 1px 1px black;
   font-family: $headlineFontFamily;
   color: $secondaryColor;
+  margin-bottom: 10px;
 }
 button {
   cursor: pointer;

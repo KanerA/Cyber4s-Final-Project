@@ -23,9 +23,9 @@ export default function Order({ order, orderDone }) {
     new Date(order.createdAt).toLocaleString("he-IL").toString()
   );
   const backgroundColor =
-    Date.now() - Date.parse(date.current) <= 7 * 60000
+    Date.now() - Date.parse(date.current) <= 3 * 60000
       ? "#40C292"
-      : Date.now() - Date.parse(date.current) <= 15 * 60000
+      : Date.now() - Date.parse(date.current) <= 25 * 60000
       ? "#DB990E"
       : "#DB2F00";
 
@@ -78,7 +78,7 @@ export default function Order({ order, orderDone }) {
                   {dish.name}
                 </Text>
               </Text>
-              {notes && dish.notes.length > 0 && (
+              {notes && dish.options.length > 0 && (
                 <View>
                   <Text style={styles.orderText} className="item-notes">
                     {dish.notes}

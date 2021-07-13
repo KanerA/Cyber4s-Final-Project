@@ -19,12 +19,13 @@ h1 {
   font-size: 3rem;
   text-shadow: 1px 1px 1px black;
   font-family: "Montserrat", "Heebo", sans-serif;
-  color: #f5a962;
+  color: #F08B6C;
+  margin-bottom: 10px;
 }
 
 button {
   cursor: pointer;
-  font-family: #f5a962;
+  font-family: #F08B6C;
 }
 
 input[type="radio"] {
@@ -80,7 +81,7 @@ input[type="radio"] {
   padding: 2px;
   color: black;
   font-weight: 700;
-  background-color: #f5a962;
+  background-color: #F08B6C;
   -webkit-box-shadow: 1px 1px 1px #125d98;
           box-shadow: 1px 1px 1px #125d98;
   border-radius: 0.5rem;

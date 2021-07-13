@@ -19,7 +19,7 @@ function Navbar({ restaurant, restaurantUser, login, setLogin }) {
           onMouseEnter={() => setStandDetails(true)}
           onMouseLeave={() => setStandDetails(false)}
         >
-          {restaurant ? restaurant : "no restaurant"}
+          {restaurant ? restaurant : "no stand"}
           {standDetails && restaurantUser && (
             <StandDetails
               restaurant={restaurant}
