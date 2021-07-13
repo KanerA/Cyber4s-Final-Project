@@ -30,7 +30,7 @@ function Drink({
     setTotalPrice(
       totalPrice +
         Number(drink.price) * Number(drinkCount) +
-        Number(checkboxPrice)
+        Number(checkboxPrice) * Number(drinkCount)
     );
     setDrinkOrders(orders);
     setDrinkNotes("");

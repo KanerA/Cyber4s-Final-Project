@@ -93,11 +93,13 @@ export default function StandCreator({
           <h1 className="header">Existing Stands</h1>
           <div className="stand-inputs">
             <input
+              autoComplete="off"
               className="create-stand login-prop"
               placeholder="stand's username"
               onChange={(e) => (usernameRef.current = e.target.value)}
             />
             <input
+              autoComplete="off"
               style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
               className="create-stand login-prop password"
               placeholder="password"
@@ -131,16 +133,19 @@ export default function StandCreator({
           <h1 className="header">Create new stand</h1>
           <div className="stand-inputs">
             <input
+              autoComplete="off"
               className="create-stand login-prop"
               placeholder="stand name"
               onChange={(e) => (nameRef.current = e.target.value)}
             />
             <input
+              autoComplete="off"
               className="create-stand login-prop"
               placeholder="stand's username"
               onChange={(e) => (usernameRef.current = e.target.value)}
             />
             <input
+              autoComplete="off"
               style={showPassword ? {} : { WebkitTextSecurity: "disc" }}
               className="create-stand login-prop password"
               placeholder="password"

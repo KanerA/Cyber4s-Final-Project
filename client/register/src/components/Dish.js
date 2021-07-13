@@ -30,7 +30,7 @@ function Dish({
     setTotalPrice(
       totalPrice +
         Number(dish.price) * Number(dishCount) +
-        Number(checkboxPrice)
+        Number(checkboxPrice) * Number(dishCount)
     );
     setDishOrders(orders);
     setDishNotes("");

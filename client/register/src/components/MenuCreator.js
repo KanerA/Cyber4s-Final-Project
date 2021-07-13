@@ -125,18 +125,21 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
       )}
       <div id="props">
         <input
+          autoComplete="off"
           id="item-name"
           className="item-property"
           placeholder={`enter ${item} name`}
           onChange={(e) => (itemRef.current.name = e.target.value)}
         />
         <input
+          autoComplete="off"
           id="item-price"
           className="item-property price"
           placeholder={`enter ${item} price`}
           onChange={(e) => (itemRef.current.price = e.target.value)}
         />
         <input
+          autoComplete="off"
           id="item-description"
           className="item-property"
           placeholder={`enter ${item} description`}
@@ -147,11 +150,13 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
         <br />
         <div id="checkbox">
           <input
+            autoComplete="off"
             className="item-property checkbox"
             placeholder="checkbox name"
             onChange={(e) => (itemRef.current.checkbox = e.target.value)}
           />
           <input
+            autoComplete="off"
             className=" item-property checkbox"
             placeholder="checkbox price"
             onChange={(e) => {

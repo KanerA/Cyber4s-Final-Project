@@ -182,6 +182,7 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
               <h3 className="secondary-header">this order</h3>
               <p className="item-price">total price: {totalPrice}</p>
               <input
+                autoComplete="off"
                 onChange={(e) => (customerName.current = e.target.value)}
                 id="order-name"
                 placeholder="Enter Name"
