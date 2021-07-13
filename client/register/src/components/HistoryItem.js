@@ -2,18 +2,18 @@ import React from "react";
 
 function HistoryItem({ order }) {
   return (
-    <div className="register-order">
-      <div className="items">
-        <div className="order-details">
-          <h2 className="customer-name"> {order.customerName}</h2>
-          <p className="order-time">
+    <div className="history-order">
+      <div className="history-items">
+        <div className="history-order-details">
+          <h2 className="history-customer-name"> {order.customerName}</h2>
+          <p className="history-order-time">
             {new Date(order.createdAt).toLocaleString("en-gb").toString()}
           </p>
-          <p className="total-price">
+          <p className="history-total-price">
             total price: <span>{order.totalPrice}</span>
           </p>
         </div>
-        <div className="dish-invites">
+        <div className="history-dish-invites">
           {order.dish?.map((dish, i) => {
             return (
               <div className="invite" key={`dish ${i}`}>

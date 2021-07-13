@@ -5,9 +5,8 @@
   padding: 0;
 }
 
-.app {
+.stand-app {
   background-color: #dddddd;
-  background: url("../../../logo.png") no-repeat center center/85vh 85vh fixed;
   min-height: 100vh;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -157,6 +156,8 @@ svg.count-button {
   color: #125d98;
   font-size: 2.5rem;
   text-shadow: 1px 1px 1px white;
+  -ms-grid-column-align: center;
+      justify-self: center;
 }
 
 .secondary-header {
