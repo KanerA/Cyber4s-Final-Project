@@ -50,7 +50,9 @@ function CurrentOrder({
               );
             })}
             <p className="item-price">
-              Total: {orderedDish.amount * orderedDish.price + itemOptionsPrice}
+              Total:{" "}
+              {orderedDish.amount * orderedDish.price +
+                itemOptionsPrice * orderedDish.amount}
             </p>
             <button
               className="cancel"
