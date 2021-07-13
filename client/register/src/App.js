@@ -10,8 +10,9 @@ import MenuCreator from "./components/MenuCreator";
 import Navbar from "./components/Navbar";
 import OrderHandler from "./components/OrderHandler";
 import StandCreator from "./components/StandCreator";
-import { useState } from "react";
 import Stand from "./components/StandCreator";
+import History from "./components/History";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRestaurant } from "./action";
 import { network } from "./utils/networkWrapper";
@@ -93,6 +94,11 @@ function App() {
                 restaurantUser={restaurantUser}
                 refreshFunction={refreshFunction}
               />
+            </Route>
+          )}
+          {restaurant && (
+            <Route exact path="/history">
+              <History restaurantUser={restaurantUser} />
             </Route>
           )}
           <Route exact path="/">

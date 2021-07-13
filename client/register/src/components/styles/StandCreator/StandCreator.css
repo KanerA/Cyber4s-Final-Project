@@ -44,7 +44,7 @@ input[type="radio"] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-left: 10vh;
+  margin-right: 10vh;
   -ms-flex-item-align: end;
       align-self: flex-end;
 }

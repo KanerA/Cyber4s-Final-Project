@@ -42,11 +42,15 @@ function Navbar({ restaurant, restaurantUser, login, setLogin }) {
           </Link>
           <span className="bullet"> • </span>
           <Link className="nav-link" to="/create">
-            create menu
+            Create Menu
           </Link>
           <span className="bullet"> • </span>
           <Link className="nav-link" to="/orders">
-            orders
+            Orders
+          </Link>
+          <span className="bullet"> • </span>
+          <Link className="nav-link" to="/history">
+            History
           </Link>
         </span>
         <span id="buttons">
@@ -60,10 +64,9 @@ function Navbar({ restaurant, restaurantUser, login, setLogin }) {
                 setLogin(true);
               }}
             >
-              log out
+              Log Out
             </button>
           )}
-          {/* {login || <Redirect to="/" />} */}
         </span>
       </nav>
     </div>

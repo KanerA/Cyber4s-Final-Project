@@ -20,12 +20,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
 
   console.log(dishOrders, drinkOrders);
 
-  // const [date, setDate] = useState();
-  // const endPoint = "http://localhost:6789";
-  // const socket = socketIOClient(endPoint, {
-  //   transports: ["websocket"],
-  // });
-
   const customerName = useRef();
   const itemNumber = useRef(0);
 
@@ -34,7 +28,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
     try {
       // GEt request for all the stand's dishes
       const dishRes = await network(`/dishes/${restaurantUser}`);
-      // const dishRes=network
       // GET request for all the stand's drinks
       const drinkRes = await network(`/drinks/${restaurantUser}`);
 
