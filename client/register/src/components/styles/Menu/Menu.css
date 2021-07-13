@@ -156,8 +156,6 @@ svg.count-button {
   color: #125d98;
   font-size: 2.5rem;
   text-shadow: 1px 1px 1px white;
-  -ms-grid-column-align: center;
-      justify-self: center;
 }
 
 .secondary-header {

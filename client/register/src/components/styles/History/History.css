@@ -10,6 +10,7 @@
   display: flexbox;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin: 10px;
 }
 
 .history-orders {
