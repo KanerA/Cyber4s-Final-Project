@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
 
@@ -15,7 +15,17 @@ function Dish({
   const [dishNotes, setDishNotes] = useState("");
   const [checkboxPrice, setCheckboxPrice] = useState(0);
   const [checkboxes, setCheckboxes] = useState([]);
-  console.log(checkboxes);
+  const [checked, setChecked] = useState([]);
+  useEffect(() => {
+    if (dish.options.length >= 1) {
+      const newCheck = [];
+      for (let i = 0; i < dish.options.length; i++) {
+        newCheck[i] = false;
+      }
+      setChecked(newCheck);
+    }
+  }, [, dishOrders]);
+
   const addDish = (e) => {
     e.target.parentElement.children[1].value = "";
     const orders = [...dishOrders];
@@ -29,16 +39,17 @@ function Dish({
     });
     setTotalPrice(
       totalPrice +
-        Number(dish.price) * Number(dishCount) +
+        Number(dish.price) * Number(dishCount) -
         Number(checkboxPrice) * Number(dishCount)
     );
+
+    setChecked(checked.map((check) => false));
     setDishOrders(orders);
     setDishNotes("");
     setDishCount(1);
     itemNumber.current++;
     setCheckboxes([]);
     setCheckboxPrice(0);
-    console.log(itemNumber.current);
   };
 
   return (
@@ -66,17 +77,29 @@ function Dish({
       </div>
       <div className="item-assign">
         <div className="checkboxes">
-          {dish.options?.map((option) => {
+          {dish.options?.map((option, i) => {
             return (
               <span>
                 <input
                   type="checkbox"
                   className="checkbox"
-                  onChange={() => {
-                    setCheckboxPrice((prev) => prev + Number(option.price));
-                    setCheckboxes((prev) => [option, ...prev]);
-                    console.log(checkboxes, checkboxPrice);
+                  onClick={() => {
+                    if (checked[i]) {
+                      setCheckboxPrice((prev) => prev - Number(option.price));
+                      const filtered = checkboxes.filter(
+                        (checkbox) => checkbox.name !== option.name
+                      );
+                      setCheckboxes(filtered);
+                      checked[i] = false;
+                      setChecked(checked);
+                    } else {
+                      setCheckboxPrice((prev) => prev - Number(option.price));
+                      setCheckboxes((prev) => [option, ...prev]);
+                      checked[i] = true;
+                      setChecked(checked);
+                    }
                   }}
+                  checked={checked[i]}
                 />
                 {option.name} {option.price ? option.price : ""}
               </span>

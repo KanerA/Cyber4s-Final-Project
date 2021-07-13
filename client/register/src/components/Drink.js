@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
 
@@ -15,8 +15,19 @@ function Drink({
   const [drinkNotes, setDrinkNotes] = useState("");
   const [checkboxPrice, setCheckboxPrice] = useState(0);
   const [checkboxes, setCheckboxes] = useState([]);
+  const [checked, setChecked] = useState([]);
+  useEffect(() => {
+    if (drink.options.length >= 1) {
+      const newCheck = [];
+      for (let i = 0; i < drink.options.length; i++) {
+        newCheck[i] = false;
+      }
+      setChecked(newCheck);
+    }
+  }, [, drinkOrders]);
+
   const addDrink = (e) => {
-    console.log(e.target.parentElement.children);
+    console.log(e.target.parentElement.children[0].children);
     e.target.parentElement.children[1].value = "";
     const orders = [...drinkOrders];
     orders.push({
@@ -32,13 +43,14 @@ function Drink({
         Number(drink.price) * Number(drinkCount) +
         Number(checkboxPrice) * Number(drinkCount)
     );
+    setChecked(checked.map((check) => false));
+    setChecked(false);
     setDrinkOrders(orders);
     setDrinkNotes("");
     setDrinkCount(1);
     itemNumber.current++;
     setCheckboxes([]);
     setCheckboxPrice(0);
-    console.log(itemNumber.current);
   };
   return (
     <div className="item">
@@ -66,17 +78,29 @@ function Drink({
       </div>
       <div className="item-assign">
         <div className="checkboxes">
-          {drink.options?.map((option) => {
+          {drink.options?.map((option, i) => {
             return (
               <span>
                 <input
                   type="checkbox"
                   className="checkbox"
-                  onChange={() => {
-                    setCheckboxPrice((prev) => prev + Number(option.price));
-                    setCheckboxes((prev) => [option, ...prev]);
-                    console.log(checkboxes, checkboxPrice);
+                  onClick={() => {
+                    if (checked[i]) {
+                      setCheckboxPrice((prev) => prev - Number(option.price));
+                      const filtered = checkboxes.filter(
+                        (checkbox) => checkbox.name !== option.name
+                      );
+                      setCheckboxes(filtered);
+                      checked[i] = false;
+                      setChecked(checked);
+                    } else {
+                      setCheckboxPrice((prev) => prev - Number(option.price));
+                      setCheckboxes((prev) => [option, ...prev]);
+                      checked[i] = true;
+                      setChecked(checked);
+                    }
                   }}
+                  checked={checked[i]}
                 />
                 {option.name} {option.price ? option.price : ""}
               </span>

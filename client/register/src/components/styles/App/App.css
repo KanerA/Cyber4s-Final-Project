@@ -18,13 +18,13 @@ h1 {
   font-size: 3rem;
   text-shadow: 1px 1px 1px black;
   font-family: "Montserrat", "Heebo", sans-serif;
-  color: #f08b6c;
+  color: #f5a962;
   margin-bottom: 10px;
 }
 
 button {
   cursor: pointer;
-  font-family: #f08b6c;
+  font-family: #f5a962;
 }
 
 input[type="radio"] {
