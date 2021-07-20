@@ -25,8 +25,10 @@ This is a finel project of [cyber4s](https://www.timesofisrael.com/progam-arms-d
 - - ACCESS_TOKEN_SECRET
 - - REFRESH_TOKEN_SECRET
 - **Cook**: create a file called `env.js` in `cook` dir
-- - IP:[check your computer IP by typing `ipconfig` in a terminal of your choise]
-- - PORT: 8080
+- - `export default env = {
+     IP: `[check your computer IP by typing `ipconfig` in a terminal of your choise],
+     `PORT: 8080,
+};`
 - Start the server through terminal
  `cd server
  npm start`
