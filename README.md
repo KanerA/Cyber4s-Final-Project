@@ -4,11 +4,16 @@
 
 This is a finel project of [cyber4s](https://www.timesofisrael.com/progam-arms-discharged-fighters-with-cyberskills-wins-idf-chief-of-staff-award/) 2021 course.
 
+## About the project
+- This project has came to life after an intensive mobth of hard work.
+- The project was effected by clients and their requests and suggestions.
+- This app is sutable for running 1-day stands and helps to communicate between the kitchen and the register.
+
 ## Example Gifs
 ![web-gif](readmeFiles/bonGif.gif)
 ![mobile-gif](readmeFiles/mobileGif.gif)
 
-## usage
+## Usage
 
 1. **Sign in or register** to our system with both your register machine (PC) and your cooks phones.
 2. **Edit your menu:** Add dishes and drinks and add name, price, description and permanent options
@@ -58,4 +63,3 @@ This is a finel project of [cyber4s](https://www.timesofisrael.com/progam-arms-d
  
   <br/>  
 </p>
-<!-- https://drawsql.app/yuvalnakav/diagrams/restaurantdb# - sql format -->
