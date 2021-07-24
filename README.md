@@ -2,12 +2,12 @@
 
 ## Cyber4s 2021 Final Project
 
-This is a finel project of [cyber4s](https://www.timesofisrael.com/progam-arms-discharged-fighters-with-cyberskills-wins-idf-chief-of-staff-award/) 2021 course.
+This is a final project of [cyber4s](https://www.timesofisrael.com/progam-arms-discharged-fighters-with-cyberskills-wins-idf-chief-of-staff-award/) 2021 course.
 
 ## About the project
-- This project has came to life after an intensive mobth of hard work.
+- This project has come to life after an intensive month of hard work.
 - The project was effected by clients and their requests and suggestions.
-- This app is sutable for running 1-day stands and helps to communicate between the kitchen and the register.
+- This app is suitable for running 1-day stands and helps to communicate between the kitchen and the register.
 
 ## Example Gifs
 ![web-gif](readmeFiles/bonGif.gif)
@@ -35,18 +35,18 @@ This is a finel project of [cyber4s](https://www.timesofisrael.com/progam-arms-d
      `PORT: 8080,
 };`
 - Start the server through terminal
- `cd server
+ `cd server &&
  npm start`
  - Start the register web app through terminal
- `cd client/register
+ `cd client/register &&
  npm start`
 - Start the cook mobile app through terminal
- `cd client/cook
+ `cd client/cook &&
  expo start`
  - Download [Expo Go](https://expo.io/client) on your mobile device and scan the QR code that will apper in http://localhost:19002/
  - **You're good to go!** 
 
-## Technologies that were in use in this project:
+## Technologies we used in this project:
 
 <p align="left"> 
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="js" width="40" height="40" />
