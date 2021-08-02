@@ -5,11 +5,13 @@
 This is a final project of [cyber4s](https://www.timesofisrael.com/progam-arms-discharged-fighters-with-cyberskills-wins-idf-chief-of-staff-award/) 2021 course.
 
 ## About the project
+
 - This project has come to life after an intensive month of hard work.
 - The project was effected by clients and their requests and suggestions.
 - This app is suitable for running 1-day stands and helps to communicate between the kitchen and the register.
 
 ## Example Gifs
+
 ![web-gif](readmeFiles/bonGif.gif)
 ![mobile-gif](readmeFiles/mobileGif.gif)
 
@@ -20,8 +22,8 @@ This is a final project of [cyber4s](https://www.timesofisrael.com/progam-arms-d
 3. **Order** through menu tab
 4. **Control your orders** in orders and history tabs
 
-
 # Running locally:
+
 - Create .env files with the following information:
 - **Server**:
 - - DATABASE="final-db"
@@ -30,21 +32,16 @@ This is a final project of [cyber4s](https://www.timesofisrael.com/progam-arms-d
 - - ACCESS_TOKEN_SECRET
 - - REFRESH_TOKEN_SECRET
 - **Cook**: create a file called `env.js` in `cook` dir
-- - `export default env = {
-     IP: `[check your computer IP by typing `ipconfig` in a terminal of your choise],
-     `PORT: 8080,
-};`
+- - `export default env = { IP: `[check your computer IP by typing `ipconfig` in a terminal of your choise],
+    `PORT: 8080, };`
 - Start the server through terminal
- `cd server &&
- npm start`
- - Start the register web app through terminal
- `cd client/register &&
- npm start`
+  `cd server && npm start`
+- Start the register web app through terminal
+  `cd client/register && npm start`
 - Start the cook mobile app through terminal
- `cd client/cook &&
- expo start`
- - Download [Expo Go](https://expo.io/client) on your mobile device and scan the QR code that will apper in http://localhost:19002/
- - **You're good to go!** 
+  `cd client/cook && expo start`
+- Download [Expo Go](https://expo.io/client) on your mobile device and scan the QR code that will appear in http://localhost:19002/
+- **You're good to go!**
 
 ## Technologies we used in this project:
 
