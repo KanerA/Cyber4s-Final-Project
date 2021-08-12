@@ -1,5 +1,7 @@
 1. Run command - docker-compose up -d
 2. Run command - docker exec -it bon-appetite-database bash -- so you can log in to the data base and create tables
 3. Now you should see the command line path something like this: root@7ba9c10bac96:/#
-4. Run command - mysql -u root -p<your_password> -- make sure there isn't a space between the -p flag and the password.
+4. Run command - mysql -u root -p<db_password> -- make sure there isn't a space between the -p flag and the password.
 5. Your inside the mysql database now and can run mysql commands such as SELECT, CREATE TABLE etc.
+
+* db_password is defined in the docker-compose file in the database service environment variables
