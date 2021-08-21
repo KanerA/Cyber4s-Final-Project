@@ -1,6 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { Stands } = require("../models");
+const { stands } = require("../models");
 const { compare } = require("bcrypt");
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
@@ -36,7 +36,7 @@ const validatePassword = async (req, res, next) => {
   const checkFieldValue =
     path === "/create" || path === "/login" ? req.body.user_name : req.query.u;
 
-  const stand = await Stands.findOne({
+  const stand = await stands.findOne({
     where: {
       user_name: checkFieldValue,
     },

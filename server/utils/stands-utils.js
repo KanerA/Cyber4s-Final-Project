@@ -1,4 +1,4 @@
-const { Stands, Dishes, Drinks } = require("../models");
+const { stands, Dishes, Drinks } = require("../models");
 const jwt = require("jsonwebtoken");
 const { hashSync } = require("bcrypt");
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
@@ -15,7 +15,7 @@ const createNewStand = async (req, res) => {
       message: "Password is too short, please choose another",
     }); // validating length of password
   const hashedPW = hashSync(password, 10); // hashing the password for DB
-  const stand = await Stands.create({
+  const stand = await stands.create({
     user_name,
     name: restaurant_name,
     password: hashedPW,
@@ -78,7 +78,7 @@ const deleteStand = async (req, res) => {
     res.status(500).json(err.message);
   })
 
-  Stands.destroy({
+  stands.destroy({
     where: {
       user_name,
     },

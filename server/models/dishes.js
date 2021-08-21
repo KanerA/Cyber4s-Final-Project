@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class dishes extends Model {
 
     static associate(models) {
-      this.belongsTo(models.Stands, {
+      this.belongsTo(models.stands, {
         foreignKey: {
           name: "restaurant_name",
           allowNull: true,

@@ -86,7 +86,7 @@ export default function StandCreator({
     <div className="stand-creator">
       {redirect && <Redirect to="/create" />}
       <div className="existing-stands">
-        <h1 className="header">Existing Stands</h1>
+        <h1 className="header">Existing stands</h1>
         <div className="stand-inputs">
           <input
             className="create-stand login-prop"
