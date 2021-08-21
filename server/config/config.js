@@ -17,9 +17,9 @@ module.exports = {
   },
   production: {
     username: "root",
-    password: null,
+    password: "password",
     database: "database_production",
-    host: "127.0.0.1",
+    host: "bon-appetite-database",
     dialect: "mysql",
   },
 };
