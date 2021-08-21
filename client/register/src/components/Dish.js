@@ -15,7 +15,6 @@ function Dish({
   const [dishNotes, setDishNotes] = useState("");
   const [checkboxPrice, setCheckboxPrice] = useState(0);
   const [checkboxes, setCheckboxes] = useState([]);
-  console.log(checkboxes);
   const addDish = (e) => {
     e.target.parentElement.children[0].value = "";
     const orders = [...dishOrders];
@@ -38,7 +37,6 @@ function Dish({
     itemNumber.current++;
     setCheckboxes([]);
     setCheckboxPrice(0);
-    console.log(itemNumber.current);
   };
 
   return (
@@ -75,7 +73,6 @@ function Dish({
                   onChange={() => {
                     setCheckboxPrice((prev) => prev + Number(option.price));
                     setCheckboxes((prev) => [option, ...prev]);
-                    console.log(checkboxes, checkboxPrice);
                   }}
                 />
                 {option.name} {option.price ? option.price : ""}

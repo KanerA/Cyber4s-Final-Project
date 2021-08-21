@@ -79,7 +79,6 @@ function MenuCreator({ restaurant, restaurantUser, refreshFunction }) {
     };
     const allChex = [checkbox, ...checkboxes];
     setCheckboxes(allChex);
-    console.log(checkboxes);
     itemRef.current.checkbox = "";
     itemRef.current.checkboxPrice = "";
     e.target.parentElement.children[0].value = "";

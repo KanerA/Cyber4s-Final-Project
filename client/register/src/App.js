@@ -50,7 +50,6 @@ function App() {
     network
       .post(`/auth/refresh`, body)
       .then((res) => {
-        console.log(res);
         if (res.status === 202) {
           createCookie("accessToken", res.data.accessToken);
         }

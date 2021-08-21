@@ -16,7 +16,6 @@ const newOrder = async (req, res) => {
 
   newOrder.save().then((data, err) => {
     if (!err) {
-      console.log(req);
       const io = req.app.get("socketio");
       io.emit("getNewOrder", data);
       res.send(data.customerName + "'s order accepted!");
@@ -43,7 +42,6 @@ const getOrders = async (req, res) => {
 const getOrderHistory = async (req, res) => {
   const { username } = req.params;
   const limit = +req.query.h; // turn to Number
-  console.log(limit);
   const orderHistory = await OrderModel.find({
     username: username,
   });
@@ -58,7 +56,6 @@ const getDone = async (req, res) => {
     done,
     username: username,
   });
-  console.log(orderList);
   res.json(orderList);
 };
 
@@ -79,7 +76,6 @@ const orderDoneCancel = async (req, res) => {
       { canceled: isCanceled },
       { new: true },
     );
-  console.log(d, c, id);
   req.io.emit("getCanceledOrder", updated);
   res.json(updated);
 };

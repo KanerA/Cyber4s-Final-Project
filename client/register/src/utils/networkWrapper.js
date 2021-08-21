@@ -15,14 +15,11 @@ network.interceptors.response.use(
   async (error) => {
     const status = error.response ? error.response.status : null;
     const originalRequest = error.config;
-    console.log(readCookie("refreshToken"));
     if (status === 403) {
       try {
         const res = await network.post("auth/refresh", {
           refreshToken: readCookie("refreshToken"),
         });
-        console.log("access: ", res.data);
-        console.log("refresh: ", res.data.refreshTokenNew);
 
         createCookie("accessToken", res.data, 10000);
         const data = await network(originalRequest);

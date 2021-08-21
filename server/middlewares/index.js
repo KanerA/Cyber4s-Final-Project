@@ -5,13 +5,9 @@ const { compare } = require("bcrypt");
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 const validateToken = (req, res, next) => {
-  console.log("validate");
   const bearerToken = req.headers["authorization"]; // get the token from the request
-  // console.log(bearerToken);
   if (!bearerToken) return res.sendStatus(403);
   const token = bearerToken.slice(7); // trim the 'bearer' from token
-  console.log(bearerToken);
-  console.log(token);
   return jwt.verify(token, ACCESS_TOKEN_SECRET, (err, decoded) => {
     // verify the token with the SECRET
     if (err) {

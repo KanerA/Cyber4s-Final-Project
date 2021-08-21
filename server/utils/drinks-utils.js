@@ -35,7 +35,6 @@ const createNewDrink = (req, res) => {
     alcoholic,
     options: JSON.stringify(options),
   }).then((_) => {
-    console.log(_)
     res.send("new drink created")
   });
 };

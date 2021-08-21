@@ -37,7 +37,6 @@ function Drink({
     itemNumber.current++;
     setCheckboxes([]);
     setCheckboxPrice(0);
-    console.log(itemNumber.current);
   };
   return (
     <div className="item">
@@ -74,7 +73,6 @@ function Drink({
                   onChange={() => {
                     setCheckboxPrice((prev) => prev + Number(option.price));
                     setCheckboxes((prev) => [option, ...prev]);
-                    console.log(checkboxes, checkboxPrice);
                   }}
                 />
                 {option.name} {option.price ? option.price : ""}

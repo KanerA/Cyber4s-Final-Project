@@ -4,7 +4,6 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 const refreshToken = (req, res) => {
   const { refreshToken } = req.body;
-  console.log("refresh: ", refreshToken);
   if (!refreshToken) return res.status(400).json({ error: "No refresh token" });
   try {
     // if (!REFRESH_TOKENS.includes(refreshToken))

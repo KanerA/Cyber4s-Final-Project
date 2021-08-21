@@ -10,7 +10,6 @@ const width = Dimensions.get("window").width;
 export default function Order({ order, orderDone }) {
   const [notes, setNotes] = useState(false);
   const [areNotes, setAreNotes] = useState(false);
-  console.log(order);
   useEffect(() => {
     order.drink?.forEach((drink) => {
       (drink.notes || drink.options.length > 0) && setAreNotes(true);
@@ -33,7 +32,7 @@ export default function Order({ order, orderDone }) {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80,
   };
-  console.log(order);
+
   return (
     <GestureRecognizer
       onSwipeLeft={() => {

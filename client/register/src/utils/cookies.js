@@ -14,8 +14,6 @@ function createCookie(name, value, days) {
     encodeURIComponent(value) +
     expires +
     "; path=/";
-    console.log('------- COOKIE ----------')
-  console.log(document.cookie)
 }
 
 function readCookie(name) {

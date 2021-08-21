@@ -29,7 +29,6 @@ export default function StandCreator({
       })
       .then((res) => {
         setLogin(false);
-        console.log(restaurantUser);
         createCookie("userId", res.data.id, 0.5);
         createCookie("accessToken", res.data.accessToken, 0.5);
         createCookie("refreshToken", res.data.refreshToken, 0.5);
@@ -58,7 +57,6 @@ export default function StandCreator({
     }
   };
   const deleteStand = async (e) => {
-    console.log(usernameRef.current, passwordRef.current);
     const accessToken = readCookie("accessToken");
     try {
       await network.delete(

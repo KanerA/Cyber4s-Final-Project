@@ -18,8 +18,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [spinner, setSpinner] = useState(false);
 
-  console.log(dishOrders, drinkOrders);
-
   // const [date, setDate] = useState();
   // const endPoint = "http://localhost:6789";
   // const socket = socketIOClient(endPoint, {
@@ -58,7 +56,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
 
   useEffect(() => {
     setSpinner(true);
-    console.log("spinner true");
     socket.on("connect", () => {
       console.log("added order");
       socket.on("sendOrder", () => {
@@ -67,7 +64,6 @@ function Menu({ restaurant, restaurantUser, refreshFunction }) {
     });
     fetchData();
     setSpinner(false);
-    console.log("spinner false");
   }, []);
 
   const placeOrder = (e) => {
