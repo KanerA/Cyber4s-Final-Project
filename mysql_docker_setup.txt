@@ -1,7 +1,1 @@
-1. Run command - docker-compose up -d
-2. Run command - docker exec -it bon-appetite-node bash -- so you can log in to the server and run the migration command
-3. Now you should see the command line path something like this: root@7ba9c10bac96:/app#
-4. Run command `npx sequelize-cli db:migrate`
-5. Open localhost:80 on your machine.
-
-* make sure in the node service dockerfile that the NODE_ENV is production
+Just run `docker-compose up -d` and you're set
