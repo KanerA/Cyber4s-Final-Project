@@ -11,6 +11,7 @@ services:
       - "6789"
     depends_on: 
       - database
+    entrypoint: ['/bin/bash', './entrypoint.sh']
 
   client:
     container_name: bon-appetite-react
@@ -33,5 +34,4 @@ services:
       - "3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=database_production
-      
+      - MYSQL_DATABASE=database_production      
